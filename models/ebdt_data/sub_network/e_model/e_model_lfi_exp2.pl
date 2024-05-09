@@ -1,0 +1,3212 @@
+%%% entity classes %%%
+%% enzyme(E).
+enzyme("SRC").
+enzyme("PTK2").
+enzyme("HIPK2").
+enzyme("FYN").
+enzyme("PTPRG").
+enzyme("ABL1").
+%% phosphosite(P).
+phosphosite("PTK2(S722)").
+phosphosite("ABL1(S569)").
+phosphosite("SRC(S17)").
+phosphosite("ABL1(T735)").
+phosphosite("ABL1(S718)").
+phosphosite("PTPRG(S995)").
+phosphosite("PTK2(S29)").
+phosphosite("PTK2(S910)").
+phosphosite("SRC(S75)").
+phosphosite("PTK2(S843)").
+phosphosite("HIPK2(Y361)").
+%% drugs(D).
+drug("PF3758309").
+drug("LY2835219").
+drug("GDC0941").
+drug("Go6976").
+drug("Dabrafenib").
+drug("GF109203X").
+drug("CX4945").
+drug("Dasatinib").
+
+%%% relationship classes %%%
+%% p_regulates(P,E).
+p_regulates("ABL1(S569)", "ABL1").
+p_regulates("ABL1(S718)", "ABL1").
+p_regulates("ABL1(T735)", "ABL1").
+p_regulates("HIPK2(Y361)", "HIPK2").
+p_regulates("PTK2(S29)", "PTK2").
+p_regulates("PTK2(S722)", "PTK2").
+p_regulates("PTK2(S910)", "PTK2").
+p_regulates("PTPRG(S995)", "PTPRG").
+p_regulates("SRC(S17)", "SRC").
+p_regulates("SRC(S75)", "SRC").
+p_regulates("PTK2(S843)", "PTK2").
+%% dk_interaction(D,E).
+dk_interaction("Dabrafenib", "ABL1").
+dk_interaction("Dasatinib", "ABL1").
+dk_interaction("GDC0941", "ABL1").
+dk_interaction("Dabrafenib", "FYN").
+dk_interaction("Dasatinib", "FYN").
+dk_interaction("PF3758309", "FYN").
+dk_interaction("CX4945", "HIPK2").
+dk_interaction("GF109203X", "HIPK2").
+dk_interaction("Go6976", "HIPK2").
+dk_interaction("LY2835219", "HIPK2").
+
+%%% fixed attributes %%%
+%% e_function(E, _function). % value = _function = [kinase | phosphatase]
+%% p_function(P, _function).
+p_function("SRC(S17)", p_inc).
+p_function("ABL1(S569)", p_inc).
+p_function("SRC(S75)", p_inc).
+p_function("HIPK2(Y361)", p_inc).
+p_function("ABL1(T735)", p_dec).
+p_function("PTK2(S910)", p_inc).
+p_function("PTK2(S843)", p_inc).
+inhibits(D, E) :- dk_interaction(D, E).
+
+%%% probabilistic attributes (known) %%%
+% p::targets(E, P).
+%% p1::e_ksea(E, S, dec); p2::e_ksea(E, S, base); p3::e_ksea(E, S, inc) :- e_activity(E, S, _dA). % value = _ksea = [dec | base | inc] (cpd, E/S-level)
+0.6485357991::e_ksea("ABL1", "AC220", dec); 0.001::e_ksea("ABL1", "AC220", inc) :- e_activity("ABL1", "AC220", dec).
+0.001::e_ksea("ABL1", "AC220", dec); 0.6485357991::e_ksea("ABL1", "AC220", inc) :- e_activity("ABL1", "AC220", inc).
+0.5907946928::e_ksea("ABL1", "AT13148", dec); 0.001::e_ksea("ABL1", "AT13148", inc) :- e_activity("ABL1", "AT13148", dec).
+0.001::e_ksea("ABL1", "AT13148", dec); 0.5907946928::e_ksea("ABL1", "AT13148", inc) :- e_activity("ABL1", "AT13148", inc).
+0.6516967571::e_ksea("ABL1", "AZ20", dec); 0.001::e_ksea("ABL1", "AZ20", inc) :- e_activity("ABL1", "AZ20", dec).
+0.001::e_ksea("ABL1", "AZ20", dec); 0.6516967571::e_ksea("ABL1", "AZ20", inc) :- e_activity("ABL1", "AZ20", inc).
+0.5696596882::e_ksea("ABL1", "AZD1480", dec); 0.001::e_ksea("ABL1", "AZD1480", inc) :- e_activity("ABL1", "AZD1480", dec).
+0.001::e_ksea("ABL1", "AZD1480", dec); 0.5696596882::e_ksea("ABL1", "AZD1480", inc) :- e_activity("ABL1", "AZD1480", inc).
+0.8364156347::e_ksea("ABL1", "AZD3759", dec); 0.001::e_ksea("ABL1", "AZD3759", inc) :- e_activity("ABL1", "AZD3759", dec).
+0.001::e_ksea("ABL1", "AZD3759", dec); 0.8364156347::e_ksea("ABL1", "AZD3759", inc) :- e_activity("ABL1", "AZD3759", inc).
+0.7305696235::e_ksea("ABL1", "AZD5363", dec); 0.001::e_ksea("ABL1", "AZD5363", inc) :- e_activity("ABL1", "AZD5363", dec).
+0.001::e_ksea("ABL1", "AZD5363", dec); 0.7305696235::e_ksea("ABL1", "AZD5363", inc) :- e_activity("ABL1", "AZD5363", inc).
+0.6027315408::e_ksea("ABL1", "AZD5438", dec); 0.001::e_ksea("ABL1", "AZD5438", inc) :- e_activity("ABL1", "AZD5438", dec).
+0.001::e_ksea("ABL1", "AZD5438", dec); 0.6027315408::e_ksea("ABL1", "AZD5438", inc) :- e_activity("ABL1", "AZD5438", inc).
+0.810765732::e_ksea("ABL1", "AZD6482", dec); 0.001::e_ksea("ABL1", "AZD6482", inc) :- e_activity("ABL1", "AZD6482", dec).
+0.001::e_ksea("ABL1", "AZD6482", dec); 0.810765732::e_ksea("ABL1", "AZD6482", inc) :- e_activity("ABL1", "AZD6482", inc).
+0.5063468877::e_ksea("ABL1", "AZD6738", dec); 0.001::e_ksea("ABL1", "AZD6738", inc) :- e_activity("ABL1", "AZD6738", dec).
+0.001::e_ksea("ABL1", "AZD6738", dec); 0.5063468877::e_ksea("ABL1", "AZD6738", inc) :- e_activity("ABL1", "AZD6738", inc).
+0.6233519816::e_ksea("ABL1", "AZD8055", dec); 0.001::e_ksea("ABL1", "AZD8055", inc) :- e_activity("ABL1", "AZD8055", dec).
+0.001::e_ksea("ABL1", "AZD8055", dec); 0.6233519816::e_ksea("ABL1", "AZD8055", inc) :- e_activity("ABL1", "AZD8055", inc).
+0.7045614293::e_ksea("ABL1", "Amuvatinib", dec); 0.001::e_ksea("ABL1", "Amuvatinib", inc) :- e_activity("ABL1", "Amuvatinib", dec).
+0.001::e_ksea("ABL1", "Amuvatinib", dec); 0.7045614293::e_ksea("ABL1", "Amuvatinib", inc) :- e_activity("ABL1", "Amuvatinib", inc).
+0.6255774284::e_ksea("ABL1", "BX912", dec); 0.001::e_ksea("ABL1", "BX912", inc) :- e_activity("ABL1", "BX912", dec).
+0.001::e_ksea("ABL1", "BX912", dec); 0.6255774284::e_ksea("ABL1", "BX912", inc) :- e_activity("ABL1", "BX912", inc).
+0.98614926::e_ksea("ABL1", "Bosutinib", dec); 0.001::e_ksea("ABL1", "Bosutinib", inc) :- e_activity("ABL1", "Bosutinib", dec).
+0.001::e_ksea("ABL1", "Bosutinib", dec); 0.98614926::e_ksea("ABL1", "Bosutinib", inc) :- e_activity("ABL1", "Bosutinib", inc).
+0.5523133511::e_ksea("ABL1", "CAL101", dec); 0.001::e_ksea("ABL1", "CAL101", inc) :- e_activity("ABL1", "CAL101", dec).
+0.001::e_ksea("ABL1", "CAL101", dec); 0.5523133511::e_ksea("ABL1", "CAL101", inc) :- e_activity("ABL1", "CAL101", inc).
+0.7836236651::e_ksea("ABL1", "CHIR99021", dec); 0.001::e_ksea("ABL1", "CHIR99021", inc) :- e_activity("ABL1", "CHIR99021", dec).
+0.001::e_ksea("ABL1", "CHIR99021", dec); 0.7836236651::e_ksea("ABL1", "CHIR99021", inc) :- e_activity("ABL1", "CHIR99021", inc).
+0.7802654751::e_ksea("ABL1", "CX4945", dec); 0.001::e_ksea("ABL1", "CX4945", inc) :- e_activity("ABL1", "CX4945", dec).
+0.001::e_ksea("ABL1", "CX4945", dec); 0.7802654751::e_ksea("ABL1", "CX4945", inc) :- e_activity("ABL1", "CX4945", inc).
+0.7126127558::e_ksea("ABL1", "DNAPK", dec); 0.001::e_ksea("ABL1", "DNAPK", inc) :- e_activity("ABL1", "DNAPK", dec).
+0.001::e_ksea("ABL1", "DNAPK", dec); 0.7126127558::e_ksea("ABL1", "DNAPK", inc) :- e_activity("ABL1", "DNAPK", inc).
+0.7367697441::e_ksea("ABL1", "Dabrafenib", dec); 0.001::e_ksea("ABL1", "Dabrafenib", inc) :- e_activity("ABL1", "Dabrafenib", dec).
+0.001::e_ksea("ABL1", "Dabrafenib", dec); 0.7367697441::e_ksea("ABL1", "Dabrafenib", inc) :- e_activity("ABL1", "Dabrafenib", inc).
+0.9977612659::e_ksea("ABL1", "Dasatinib", dec); 0.001::e_ksea("ABL1", "Dasatinib", inc) :- e_activity("ABL1", "Dasatinib", dec).
+0.001::e_ksea("ABL1", "Dasatinib", dec); 0.9977612659::e_ksea("ABL1", "Dasatinib", inc) :- e_activity("ABL1", "Dasatinib", inc).
+0.5114778531::e_ksea("ABL1", "Edelfosine", dec); 0.001::e_ksea("ABL1", "Edelfosine", inc) :- e_activity("ABL1", "Edelfosine", dec).
+0.001::e_ksea("ABL1", "Edelfosine", dec); 0.5114778531::e_ksea("ABL1", "Edelfosine", inc) :- e_activity("ABL1", "Edelfosine", inc).
+0.9842877594::e_ksea("ABL1", "FRAX486", dec); 0.001::e_ksea("ABL1", "FRAX486", inc) :- e_activity("ABL1", "FRAX486", dec).
+0.001::e_ksea("ABL1", "FRAX486", dec); 0.9842877594::e_ksea("ABL1", "FRAX486", inc) :- e_activity("ABL1", "FRAX486", inc).
+0.7950011926::e_ksea("ABL1", "GDC0941", dec); 0.001::e_ksea("ABL1", "GDC0941", inc) :- e_activity("ABL1", "GDC0941", dec).
+0.001::e_ksea("ABL1", "GDC0941", dec); 0.7950011926::e_ksea("ABL1", "GDC0941", inc) :- e_activity("ABL1", "GDC0941", inc).
+0.8661377079::e_ksea("ABL1", "GDC0994", dec); 0.001::e_ksea("ABL1", "GDC0994", inc) :- e_activity("ABL1", "GDC0994", dec).
+0.001::e_ksea("ABL1", "GDC0994", dec); 0.8661377079::e_ksea("ABL1", "GDC0994", inc) :- e_activity("ABL1", "GDC0994", inc).
+0.6395069878::e_ksea("ABL1", "GF109203X", dec); 0.001::e_ksea("ABL1", "GF109203X", inc) :- e_activity("ABL1", "GF109203X", dec).
+0.001::e_ksea("ABL1", "GF109203X", dec); 0.6395069878::e_ksea("ABL1", "GF109203X", inc) :- e_activity("ABL1", "GF109203X", inc).
+0.5062410486::e_ksea("ABL1", "GO6983", dec); 0.001::e_ksea("ABL1", "GO6983", inc) :- e_activity("ABL1", "GO6983", dec).
+0.001::e_ksea("ABL1", "GO6983", dec); 0.5062410486::e_ksea("ABL1", "GO6983", inc) :- e_activity("ABL1", "GO6983", inc).
+0.5102090864::e_ksea("ABL1", "GSK2334470", dec); 0.001::e_ksea("ABL1", "GSK2334470", inc) :- e_activity("ABL1", "GSK2334470", dec).
+0.001::e_ksea("ABL1", "GSK2334470", dec); 0.5102090864::e_ksea("ABL1", "GSK2334470", inc) :- e_activity("ABL1", "GSK2334470", inc).
+0.5608116312::e_ksea("ABL1", "GSK690693", dec); 0.001::e_ksea("ABL1", "GSK690693", inc) :- e_activity("ABL1", "GSK690693", dec).
+0.001::e_ksea("ABL1", "GSK690693", dec); 0.5608116312::e_ksea("ABL1", "GSK690693", inc) :- e_activity("ABL1", "GSK690693", inc).
+0.6315805268::e_ksea("ABL1", "Go6976", dec); 0.001::e_ksea("ABL1", "Go6976", inc) :- e_activity("ABL1", "Go6976", dec).
+0.001::e_ksea("ABL1", "Go6976", dec); 0.6315805268::e_ksea("ABL1", "Go6976", inc) :- e_activity("ABL1", "Go6976", inc).
+0.5236682831::e_ksea("ABL1", "H89", dec); 0.001::e_ksea("ABL1", "H89", inc) :- e_activity("ABL1", "H89", dec).
+0.001::e_ksea("ABL1", "H89", dec); 0.5236682831::e_ksea("ABL1", "H89", inc) :- e_activity("ABL1", "H89", inc).
+0.6272139351::e_ksea("ABL1", "HS173", dec); 0.001::e_ksea("ABL1", "HS173", inc) :- e_activity("ABL1", "HS173", dec).
+0.001::e_ksea("ABL1", "HS173", dec); 0.6272139351::e_ksea("ABL1", "HS173", inc) :- e_activity("ABL1", "HS173", inc).
+0.7577481144::e_ksea("ABL1", "Ipatasertib", dec); 0.001::e_ksea("ABL1", "Ipatasertib", inc) :- e_activity("ABL1", "Ipatasertib", dec).
+0.001::e_ksea("ABL1", "Ipatasertib", dec); 0.7577481144::e_ksea("ABL1", "Ipatasertib", inc) :- e_activity("ABL1", "Ipatasertib", inc).
+0.736492792::e_ksea("ABL1", "JNJ", dec); 0.001::e_ksea("ABL1", "JNJ", inc) :- e_activity("ABL1", "JNJ", dec).
+0.001::e_ksea("ABL1", "JNJ", dec); 0.736492792::e_ksea("ABL1", "JNJ", inc) :- e_activity("ABL1", "JNJ", inc).
+0.5867910519::e_ksea("ABL1", "JNK", dec); 0.001::e_ksea("ABL1", "JNK", inc) :- e_activity("ABL1", "JNK", dec).
+0.001::e_ksea("ABL1", "JNK", dec); 0.5867910519::e_ksea("ABL1", "JNK", inc) :- e_activity("ABL1", "JNK", inc).
+0.6527214928::e_ksea("ABL1", "KD025", dec); 0.001::e_ksea("ABL1", "KD025", inc) :- e_activity("ABL1", "KD025", dec).
+0.001::e_ksea("ABL1", "KD025", dec); 0.6527214928::e_ksea("ABL1", "KD025", inc) :- e_activity("ABL1", "KD025", inc).
+0.8140577976::e_ksea("ABL1", "KN62", dec); 0.001::e_ksea("ABL1", "KN62", inc) :- e_activity("ABL1", "KN62", dec).
+0.001::e_ksea("ABL1", "KN62", dec); 0.8140577976::e_ksea("ABL1", "KN62", inc) :- e_activity("ABL1", "KN62", inc).
+0.7185886651::e_ksea("ABL1", "KN93", dec); 0.001::e_ksea("ABL1", "KN93", inc) :- e_activity("ABL1", "KN93", dec).
+0.001::e_ksea("ABL1", "KN93", dec); 0.7185886651::e_ksea("ABL1", "KN93", inc) :- e_activity("ABL1", "KN93", inc).
+0.5920970236::e_ksea("ABL1", "Ku0063794", dec); 0.001::e_ksea("ABL1", "Ku0063794", inc) :- e_activity("ABL1", "Ku0063794", dec).
+0.001::e_ksea("ABL1", "Ku0063794", dec); 0.5920970236::e_ksea("ABL1", "Ku0063794", inc) :- e_activity("ABL1", "Ku0063794", inc).
+0.5530528903::e_ksea("ABL1", "LY2090314", dec); 0.001::e_ksea("ABL1", "LY2090314", inc) :- e_activity("ABL1", "LY2090314", dec).
+0.001::e_ksea("ABL1", "LY2090314", dec); 0.5530528903::e_ksea("ABL1", "LY2090314", inc) :- e_activity("ABL1", "LY2090314", inc).
+0.8258720004::e_ksea("ABL1", "LY2584702", dec); 0.001::e_ksea("ABL1", "LY2584702", inc) :- e_activity("ABL1", "LY2584702", dec).
+0.001::e_ksea("ABL1", "LY2584702", dec); 0.8258720004::e_ksea("ABL1", "LY2584702", inc) :- e_activity("ABL1", "LY2584702", inc).
+0.6854132105::e_ksea("ABL1", "LY2835219", dec); 0.001::e_ksea("ABL1", "LY2835219", inc) :- e_activity("ABL1", "LY2835219", dec).
+0.001::e_ksea("ABL1", "LY2835219", dec); 0.6854132105::e_ksea("ABL1", "LY2835219", inc) :- e_activity("ABL1", "LY2835219", inc).
+0.7184060505::e_ksea("ABL1", "Linsitinib", dec); 0.001::e_ksea("ABL1", "Linsitinib", inc) :- e_activity("ABL1", "Linsitinib", dec).
+0.001::e_ksea("ABL1", "Linsitinib", dec); 0.7184060505::e_ksea("ABL1", "Linsitinib", inc) :- e_activity("ABL1", "Linsitinib", inc).
+0.658487624::e_ksea("ABL1", "MK2206", dec); 0.001::e_ksea("ABL1", "MK2206", inc) :- e_activity("ABL1", "MK2206", dec).
+0.001::e_ksea("ABL1", "MK2206", dec); 0.658487624::e_ksea("ABL1", "MK2206", inc) :- e_activity("ABL1", "MK2206", inc).
+0.5708635718::e_ksea("ABL1", "NU7441", dec); 0.001::e_ksea("ABL1", "NU7441", inc) :- e_activity("ABL1", "NU7441", dec).
+0.001::e_ksea("ABL1", "NU7441", dec); 0.5708635718::e_ksea("ABL1", "NU7441", inc) :- e_activity("ABL1", "NU7441", inc).
+0.6236073271::e_ksea("ABL1", "PD153035", dec); 0.001::e_ksea("ABL1", "PD153035", inc) :- e_activity("ABL1", "PD153035", dec).
+0.001::e_ksea("ABL1", "PD153035", dec); 0.6236073271::e_ksea("ABL1", "PD153035", inc) :- e_activity("ABL1", "PD153035", inc).
+0.5679247608::e_ksea("ABL1", "PF3758309", dec); 0.001::e_ksea("ABL1", "PF3758309", inc) :- e_activity("ABL1", "PF3758309", dec).
+0.001::e_ksea("ABL1", "PF3758309", dec); 0.5679247608::e_ksea("ABL1", "PF3758309", inc) :- e_activity("ABL1", "PF3758309", inc).
+0.5115498866::e_ksea("ABL1", "PF4708671", dec); 0.001::e_ksea("ABL1", "PF4708671", inc) :- e_activity("ABL1", "PF4708671", dec).
+0.001::e_ksea("ABL1", "PF4708671", dec); 0.5115498866::e_ksea("ABL1", "PF4708671", inc) :- e_activity("ABL1", "PF4708671", inc).
+0.5712907195::e_ksea("ABL1", "PH797804", dec); 0.001::e_ksea("ABL1", "PH797804", inc) :- e_activity("ABL1", "PH797804", dec).
+0.001::e_ksea("ABL1", "PH797804", dec); 0.5712907195::e_ksea("ABL1", "PH797804", inc) :- e_activity("ABL1", "PH797804", inc).
+0.6008008812::e_ksea("ABL1", "PIK294", dec); 0.001::e_ksea("ABL1", "PIK294", inc) :- e_activity("ABL1", "PIK294", dec).
+0.001::e_ksea("ABL1", "PIK294", dec); 0.6008008812::e_ksea("ABL1", "PIK294", inc) :- e_activity("ABL1", "PIK294", inc).
+0.751548373::e_ksea("ABL1", "Ribociclib", dec); 0.001::e_ksea("ABL1", "Ribociclib", inc) :- e_activity("ABL1", "Ribociclib", dec).
+0.001::e_ksea("ABL1", "Ribociclib", dec); 0.751548373::e_ksea("ABL1", "Ribociclib", inc) :- e_activity("ABL1", "Ribociclib", inc).
+0.6404439703::e_ksea("ABL1", "Ripasudil", dec); 0.001::e_ksea("ABL1", "Ripasudil", inc) :- e_activity("ABL1", "Ripasudil", dec).
+0.001::e_ksea("ABL1", "Ripasudil", dec); 0.6404439703::e_ksea("ABL1", "Ripasudil", inc) :- e_activity("ABL1", "Ripasudil", inc).
+0.5833516809::e_ksea("ABL1", "SP600125", dec); 0.001::e_ksea("ABL1", "SP600125", inc) :- e_activity("ABL1", "SP600125", dec).
+0.001::e_ksea("ABL1", "SP600125", dec); 0.5833516809::e_ksea("ABL1", "SP600125", inc) :- e_activity("ABL1", "SP600125", inc).
+0.4999811659::e_ksea("ABL1", "Selumetinib", dec); 0.001::e_ksea("ABL1", "Selumetinib", inc) :- e_activity("ABL1", "Selumetinib", dec).
+0.001::e_ksea("ABL1", "Selumetinib", dec); 0.4999811659::e_ksea("ABL1", "Selumetinib", inc) :- e_activity("ABL1", "Selumetinib", inc).
+0.6785272855::e_ksea("ABL1", "TAK715", dec); 0.001::e_ksea("ABL1", "TAK715", inc) :- e_activity("ABL1", "TAK715", dec).
+0.001::e_ksea("ABL1", "TAK715", dec); 0.6785272855::e_ksea("ABL1", "TAK715", inc) :- e_activity("ABL1", "TAK715", inc).
+0.532669282::e_ksea("ABL1", "TBCA", dec); 0.001::e_ksea("ABL1", "TBCA", inc) :- e_activity("ABL1", "TBCA", dec).
+0.001::e_ksea("ABL1", "TBCA", dec); 0.532669282::e_ksea("ABL1", "TBCA", inc) :- e_activity("ABL1", "TBCA", inc).
+0.5529183359::e_ksea("ABL1", "TGX221", dec); 0.001::e_ksea("ABL1", "TGX221", inc) :- e_activity("ABL1", "TGX221", dec).
+0.001::e_ksea("ABL1", "TGX221", dec); 0.5529183359::e_ksea("ABL1", "TGX221", inc) :- e_activity("ABL1", "TGX221", inc).
+0.7566025624::e_ksea("ABL1", "Tofacitinib", dec); 0.001::e_ksea("ABL1", "Tofacitinib", inc) :- e_activity("ABL1", "Tofacitinib", dec).
+0.001::e_ksea("ABL1", "Tofacitinib", dec); 0.7566025624::e_ksea("ABL1", "Tofacitinib", inc) :- e_activity("ABL1", "Tofacitinib", inc).
+0.6697977339::e_ksea("ABL1", "Torin", dec); 0.001::e_ksea("ABL1", "Torin", inc) :- e_activity("ABL1", "Torin", dec).
+0.001::e_ksea("ABL1", "Torin", dec); 0.6697977339::e_ksea("ABL1", "Torin", inc) :- e_activity("ABL1", "Torin", inc).
+0.5317146618::e_ksea("ABL1", "Trametinib", dec); 0.001::e_ksea("ABL1", "Trametinib", inc) :- e_activity("ABL1", "Trametinib", dec).
+0.001::e_ksea("ABL1", "Trametinib", dec); 0.5317146618::e_ksea("ABL1", "Trametinib", inc) :- e_activity("ABL1", "Trametinib", inc).
+0.5476799131::e_ksea("ABL1", "U73122", dec); 0.001::e_ksea("ABL1", "U73122", inc) :- e_activity("ABL1", "U73122", dec).
+0.001::e_ksea("ABL1", "U73122", dec); 0.5476799131::e_ksea("ABL1", "U73122", inc) :- e_activity("ABL1", "U73122", inc).
+0.60876657::e_ksea("ABL1", "Ulixertinib", dec); 0.001::e_ksea("ABL1", "Ulixertinib", inc) :- e_activity("ABL1", "Ulixertinib", dec).
+0.001::e_ksea("ABL1", "Ulixertinib", dec); 0.60876657::e_ksea("ABL1", "Ulixertinib", inc) :- e_activity("ABL1", "Ulixertinib", inc).
+0.508461097::e_ksea("ABL1", "Vemurafenib", dec); 0.001::e_ksea("ABL1", "Vemurafenib", inc) :- e_activity("ABL1", "Vemurafenib", dec).
+0.001::e_ksea("ABL1", "Vemurafenib", dec); 0.508461097::e_ksea("ABL1", "Vemurafenib", inc) :- e_activity("ABL1", "Vemurafenib", inc).
+0.5197971212::e_ksea("FYN", "AC220", dec); 0.001::e_ksea("FYN", "AC220", inc) :- e_activity("FYN", "AC220", dec).
+0.001::e_ksea("FYN", "AC220", dec); 0.5197971212::e_ksea("FYN", "AC220", inc) :- e_activity("FYN", "AC220", inc).
+0.5949742227::e_ksea("FYN", "AT13148", dec); 0.001::e_ksea("FYN", "AT13148", inc) :- e_activity("FYN", "AT13148", dec).
+0.001::e_ksea("FYN", "AT13148", dec); 0.5949742227::e_ksea("FYN", "AT13148", inc) :- e_activity("FYN", "AT13148", inc).
+0.5808854874::e_ksea("FYN", "AZ20", dec); 0.001::e_ksea("FYN", "AZ20", inc) :- e_activity("FYN", "AZ20", dec).
+0.001::e_ksea("FYN", "AZ20", dec); 0.5808854874::e_ksea("FYN", "AZ20", inc) :- e_activity("FYN", "AZ20", inc).
+0.5121780674::e_ksea("FYN", "AZD1480", dec); 0.001::e_ksea("FYN", "AZD1480", inc) :- e_activity("FYN", "AZD1480", dec).
+0.001::e_ksea("FYN", "AZD1480", dec); 0.5121780674::e_ksea("FYN", "AZD1480", inc) :- e_activity("FYN", "AZD1480", inc).
+0.6044154211::e_ksea("FYN", "AZD3759", dec); 0.001::e_ksea("FYN", "AZD3759", inc) :- e_activity("FYN", "AZD3759", dec).
+0.001::e_ksea("FYN", "AZD3759", dec); 0.6044154211::e_ksea("FYN", "AZD3759", inc) :- e_activity("FYN", "AZD3759", inc).
+0.5339072137::e_ksea("FYN", "AZD5363", dec); 0.001::e_ksea("FYN", "AZD5363", inc) :- e_activity("FYN", "AZD5363", dec).
+0.001::e_ksea("FYN", "AZD5363", dec); 0.5339072137::e_ksea("FYN", "AZD5363", inc) :- e_activity("FYN", "AZD5363", inc).
+0.5245574102::e_ksea("FYN", "AZD5438", dec); 0.001::e_ksea("FYN", "AZD5438", inc) :- e_activity("FYN", "AZD5438", dec).
+0.001::e_ksea("FYN", "AZD5438", dec); 0.5245574102::e_ksea("FYN", "AZD5438", inc) :- e_activity("FYN", "AZD5438", inc).
+0.6039822374::e_ksea("FYN", "AZD6482", dec); 0.001::e_ksea("FYN", "AZD6482", inc) :- e_activity("FYN", "AZD6482", dec).
+0.001::e_ksea("FYN", "AZD6482", dec); 0.6039822374::e_ksea("FYN", "AZD6482", inc) :- e_activity("FYN", "AZD6482", inc).
+0.5536381833::e_ksea("FYN", "AZD6738", dec); 0.001::e_ksea("FYN", "AZD6738", inc) :- e_activity("FYN", "AZD6738", dec).
+0.001::e_ksea("FYN", "AZD6738", dec); 0.5536381833::e_ksea("FYN", "AZD6738", inc) :- e_activity("FYN", "AZD6738", inc).
+0.5391816905::e_ksea("FYN", "AZD8055", dec); 0.001::e_ksea("FYN", "AZD8055", inc) :- e_activity("FYN", "AZD8055", dec).
+0.001::e_ksea("FYN", "AZD8055", dec); 0.5391816905::e_ksea("FYN", "AZD8055", inc) :- e_activity("FYN", "AZD8055", inc).
+0.5762424359::e_ksea("FYN", "Amuvatinib", dec); 0.001::e_ksea("FYN", "Amuvatinib", inc) :- e_activity("FYN", "Amuvatinib", dec).
+0.001::e_ksea("FYN", "Amuvatinib", dec); 0.5762424359::e_ksea("FYN", "Amuvatinib", inc) :- e_activity("FYN", "Amuvatinib", inc).
+0.5430942116::e_ksea("FYN", "BX912", dec); 0.001::e_ksea("FYN", "BX912", inc) :- e_activity("FYN", "BX912", dec).
+0.001::e_ksea("FYN", "BX912", dec); 0.5430942116::e_ksea("FYN", "BX912", inc) :- e_activity("FYN", "BX912", inc).
+0.5766080345::e_ksea("FYN", "Bosutinib", dec); 0.001::e_ksea("FYN", "Bosutinib", inc) :- e_activity("FYN", "Bosutinib", dec).
+0.001::e_ksea("FYN", "Bosutinib", dec); 0.5766080345::e_ksea("FYN", "Bosutinib", inc) :- e_activity("FYN", "Bosutinib", inc).
+0.5268481345::e_ksea("FYN", "CAL101", dec); 0.001::e_ksea("FYN", "CAL101", inc) :- e_activity("FYN", "CAL101", dec).
+0.001::e_ksea("FYN", "CAL101", dec); 0.5268481345::e_ksea("FYN", "CAL101", inc) :- e_activity("FYN", "CAL101", inc).
+0.5558367322::e_ksea("FYN", "CHIR99021", dec); 0.001::e_ksea("FYN", "CHIR99021", inc) :- e_activity("FYN", "CHIR99021", dec).
+0.001::e_ksea("FYN", "CHIR99021", dec); 0.5558367322::e_ksea("FYN", "CHIR99021", inc) :- e_activity("FYN", "CHIR99021", inc).
+0.6636288622::e_ksea("FYN", "CX4945", dec); 0.001::e_ksea("FYN", "CX4945", inc) :- e_activity("FYN", "CX4945", dec).
+0.001::e_ksea("FYN", "CX4945", dec); 0.6636288622::e_ksea("FYN", "CX4945", inc) :- e_activity("FYN", "CX4945", inc).
+0.512609335::e_ksea("FYN", "DNAPK", dec); 0.001::e_ksea("FYN", "DNAPK", inc) :- e_activity("FYN", "DNAPK", dec).
+0.001::e_ksea("FYN", "DNAPK", dec); 0.512609335::e_ksea("FYN", "DNAPK", inc) :- e_activity("FYN", "DNAPK", inc).
+0.5719408425::e_ksea("FYN", "Dabrafenib", dec); 0.001::e_ksea("FYN", "Dabrafenib", inc) :- e_activity("FYN", "Dabrafenib", dec).
+0.001::e_ksea("FYN", "Dabrafenib", dec); 0.5719408425::e_ksea("FYN", "Dabrafenib", inc) :- e_activity("FYN", "Dabrafenib", inc).
+0.5137716479::e_ksea("FYN", "Dasatinib", dec); 0.001::e_ksea("FYN", "Dasatinib", inc) :- e_activity("FYN", "Dasatinib", dec).
+0.001::e_ksea("FYN", "Dasatinib", dec); 0.5137716479::e_ksea("FYN", "Dasatinib", inc) :- e_activity("FYN", "Dasatinib", inc).
+0.5067660209::e_ksea("FYN", "Edelfosine", dec); 0.001::e_ksea("FYN", "Edelfosine", inc) :- e_activity("FYN", "Edelfosine", dec).
+0.001::e_ksea("FYN", "Edelfosine", dec); 0.5067660209::e_ksea("FYN", "Edelfosine", inc) :- e_activity("FYN", "Edelfosine", inc).
+0.5489492068::e_ksea("FYN", "FRAX486", dec); 0.001::e_ksea("FYN", "FRAX486", inc) :- e_activity("FYN", "FRAX486", dec).
+0.001::e_ksea("FYN", "FRAX486", dec); 0.5489492068::e_ksea("FYN", "FRAX486", inc) :- e_activity("FYN", "FRAX486", inc).
+0.5340297006::e_ksea("FYN", "GDC0941", dec); 0.001::e_ksea("FYN", "GDC0941", inc) :- e_activity("FYN", "GDC0941", dec).
+0.001::e_ksea("FYN", "GDC0941", dec); 0.5340297006::e_ksea("FYN", "GDC0941", inc) :- e_activity("FYN", "GDC0941", inc).
+0.5498879271::e_ksea("FYN", "GDC0994", dec); 0.001::e_ksea("FYN", "GDC0994", inc) :- e_activity("FYN", "GDC0994", dec).
+0.001::e_ksea("FYN", "GDC0994", dec); 0.5498879271::e_ksea("FYN", "GDC0994", inc) :- e_activity("FYN", "GDC0994", inc).
+0.5294638521::e_ksea("FYN", "GF109203X", dec); 0.001::e_ksea("FYN", "GF109203X", inc) :- e_activity("FYN", "GF109203X", dec).
+0.001::e_ksea("FYN", "GF109203X", dec); 0.5294638521::e_ksea("FYN", "GF109203X", inc) :- e_activity("FYN", "GF109203X", inc).
+0.5161651135::e_ksea("FYN", "GO6983", dec); 0.001::e_ksea("FYN", "GO6983", inc) :- e_activity("FYN", "GO6983", dec).
+0.001::e_ksea("FYN", "GO6983", dec); 0.5161651135::e_ksea("FYN", "GO6983", inc) :- e_activity("FYN", "GO6983", inc).
+0.582957175::e_ksea("FYN", "GSK2334470", dec); 0.001::e_ksea("FYN", "GSK2334470", inc) :- e_activity("FYN", "GSK2334470", dec).
+0.001::e_ksea("FYN", "GSK2334470", dec); 0.582957175::e_ksea("FYN", "GSK2334470", inc) :- e_activity("FYN", "GSK2334470", inc).
+0.6185150698::e_ksea("FYN", "GSK690693", dec); 0.001::e_ksea("FYN", "GSK690693", inc) :- e_activity("FYN", "GSK690693", dec).
+0.001::e_ksea("FYN", "GSK690693", dec); 0.6185150698::e_ksea("FYN", "GSK690693", inc) :- e_activity("FYN", "GSK690693", inc).
+0.5148596375::e_ksea("FYN", "Go6976", dec); 0.001::e_ksea("FYN", "Go6976", inc) :- e_activity("FYN", "Go6976", dec).
+0.001::e_ksea("FYN", "Go6976", dec); 0.5148596375::e_ksea("FYN", "Go6976", inc) :- e_activity("FYN", "Go6976", inc).
+0.5155195935::e_ksea("FYN", "H89", dec); 0.001::e_ksea("FYN", "H89", inc) :- e_activity("FYN", "H89", dec).
+0.001::e_ksea("FYN", "H89", dec); 0.5155195935::e_ksea("FYN", "H89", inc) :- e_activity("FYN", "H89", inc).
+0.5091614616::e_ksea("FYN", "HS173", dec); 0.001::e_ksea("FYN", "HS173", inc) :- e_activity("FYN", "HS173", dec).
+0.001::e_ksea("FYN", "HS173", dec); 0.5091614616::e_ksea("FYN", "HS173", inc) :- e_activity("FYN", "HS173", inc).
+0.5528533203::e_ksea("FYN", "Ipatasertib", dec); 0.001::e_ksea("FYN", "Ipatasertib", inc) :- e_activity("FYN", "Ipatasertib", dec).
+0.001::e_ksea("FYN", "Ipatasertib", dec); 0.5528533203::e_ksea("FYN", "Ipatasertib", inc) :- e_activity("FYN", "Ipatasertib", inc).
+0.512347828::e_ksea("FYN", "JNJ", dec); 0.001::e_ksea("FYN", "JNJ", inc) :- e_activity("FYN", "JNJ", dec).
+0.001::e_ksea("FYN", "JNJ", dec); 0.512347828::e_ksea("FYN", "JNJ", inc) :- e_activity("FYN", "JNJ", inc).
+0.6600339354::e_ksea("FYN", "JNK", dec); 0.001::e_ksea("FYN", "JNK", inc) :- e_activity("FYN", "JNK", dec).
+0.001::e_ksea("FYN", "JNK", dec); 0.6600339354::e_ksea("FYN", "JNK", inc) :- e_activity("FYN", "JNK", inc).
+0.5809598896::e_ksea("FYN", "KD025", dec); 0.001::e_ksea("FYN", "KD025", inc) :- e_activity("FYN", "KD025", dec).
+0.001::e_ksea("FYN", "KD025", dec); 0.5809598896::e_ksea("FYN", "KD025", inc) :- e_activity("FYN", "KD025", inc).
+0.640569638::e_ksea("FYN", "KN62", dec); 0.001::e_ksea("FYN", "KN62", inc) :- e_activity("FYN", "KN62", dec).
+0.001::e_ksea("FYN", "KN62", dec); 0.640569638::e_ksea("FYN", "KN62", inc) :- e_activity("FYN", "KN62", inc).
+0.649603364::e_ksea("FYN", "KN93", dec); 0.001::e_ksea("FYN", "KN93", inc) :- e_activity("FYN", "KN93", dec).
+0.001::e_ksea("FYN", "KN93", dec); 0.649603364::e_ksea("FYN", "KN93", inc) :- e_activity("FYN", "KN93", inc).
+0.5332106407::e_ksea("FYN", "Ku0063794", dec); 0.001::e_ksea("FYN", "Ku0063794", inc) :- e_activity("FYN", "Ku0063794", dec).
+0.001::e_ksea("FYN", "Ku0063794", dec); 0.5332106407::e_ksea("FYN", "Ku0063794", inc) :- e_activity("FYN", "Ku0063794", inc).
+0.5454247443::e_ksea("FYN", "LY2090314", dec); 0.001::e_ksea("FYN", "LY2090314", inc) :- e_activity("FYN", "LY2090314", dec).
+0.001::e_ksea("FYN", "LY2090314", dec); 0.5454247443::e_ksea("FYN", "LY2090314", inc) :- e_activity("FYN", "LY2090314", inc).
+0.5816241186::e_ksea("FYN", "LY2584702", dec); 0.001::e_ksea("FYN", "LY2584702", inc) :- e_activity("FYN", "LY2584702", dec).
+0.001::e_ksea("FYN", "LY2584702", dec); 0.5816241186::e_ksea("FYN", "LY2584702", inc) :- e_activity("FYN", "LY2584702", inc).
+0.5663051864::e_ksea("FYN", "LY2835219", dec); 0.001::e_ksea("FYN", "LY2835219", inc) :- e_activity("FYN", "LY2835219", dec).
+0.001::e_ksea("FYN", "LY2835219", dec); 0.5663051864::e_ksea("FYN", "LY2835219", inc) :- e_activity("FYN", "LY2835219", inc).
+0.6497083091::e_ksea("FYN", "Linsitinib", dec); 0.001::e_ksea("FYN", "Linsitinib", inc) :- e_activity("FYN", "Linsitinib", dec).
+0.001::e_ksea("FYN", "Linsitinib", dec); 0.6497083091::e_ksea("FYN", "Linsitinib", inc) :- e_activity("FYN", "Linsitinib", inc).
+0.5887517184::e_ksea("FYN", "MK2206", dec); 0.001::e_ksea("FYN", "MK2206", inc) :- e_activity("FYN", "MK2206", dec).
+0.001::e_ksea("FYN", "MK2206", dec); 0.5887517184::e_ksea("FYN", "MK2206", inc) :- e_activity("FYN", "MK2206", inc).
+0.52111586::e_ksea("FYN", "NU7441", dec); 0.001::e_ksea("FYN", "NU7441", inc) :- e_activity("FYN", "NU7441", dec).
+0.001::e_ksea("FYN", "NU7441", dec); 0.52111586::e_ksea("FYN", "NU7441", inc) :- e_activity("FYN", "NU7441", inc).
+0.5164392129::e_ksea("FYN", "PD153035", dec); 0.001::e_ksea("FYN", "PD153035", inc) :- e_activity("FYN", "PD153035", dec).
+0.001::e_ksea("FYN", "PD153035", dec); 0.5164392129::e_ksea("FYN", "PD153035", inc) :- e_activity("FYN", "PD153035", inc).
+0.5039027526::e_ksea("FYN", "PF3758309", dec); 0.001::e_ksea("FYN", "PF3758309", inc) :- e_activity("FYN", "PF3758309", dec).
+0.001::e_ksea("FYN", "PF3758309", dec); 0.5039027526::e_ksea("FYN", "PF3758309", inc) :- e_activity("FYN", "PF3758309", inc).
+0.6133953136::e_ksea("FYN", "PF4708671", dec); 0.001::e_ksea("FYN", "PF4708671", inc) :- e_activity("FYN", "PF4708671", dec).
+0.001::e_ksea("FYN", "PF4708671", dec); 0.6133953136::e_ksea("FYN", "PF4708671", inc) :- e_activity("FYN", "PF4708671", inc).
+0.5276258595::e_ksea("FYN", "PH797804", dec); 0.001::e_ksea("FYN", "PH797804", inc) :- e_activity("FYN", "PH797804", dec).
+0.001::e_ksea("FYN", "PH797804", dec); 0.5276258595::e_ksea("FYN", "PH797804", inc) :- e_activity("FYN", "PH797804", inc).
+0.5217717051::e_ksea("FYN", "PIK294", dec); 0.001::e_ksea("FYN", "PIK294", inc) :- e_activity("FYN", "PIK294", dec).
+0.001::e_ksea("FYN", "PIK294", dec); 0.5217717051::e_ksea("FYN", "PIK294", inc) :- e_activity("FYN", "PIK294", inc).
+0.5243122783::e_ksea("FYN", "Ribociclib", dec); 0.001::e_ksea("FYN", "Ribociclib", inc) :- e_activity("FYN", "Ribociclib", dec).
+0.001::e_ksea("FYN", "Ribociclib", dec); 0.5243122783::e_ksea("FYN", "Ribociclib", inc) :- e_activity("FYN", "Ribociclib", inc).
+0.5851462475::e_ksea("FYN", "Ripasudil", dec); 0.001::e_ksea("FYN", "Ripasudil", inc) :- e_activity("FYN", "Ripasudil", dec).
+0.001::e_ksea("FYN", "Ripasudil", dec); 0.5851462475::e_ksea("FYN", "Ripasudil", inc) :- e_activity("FYN", "Ripasudil", inc).
+0.5143566088::e_ksea("FYN", "SP600125", dec); 0.001::e_ksea("FYN", "SP600125", inc) :- e_activity("FYN", "SP600125", dec).
+0.001::e_ksea("FYN", "SP600125", dec); 0.5143566088::e_ksea("FYN", "SP600125", inc) :- e_activity("FYN", "SP600125", inc).
+0.5199914289::e_ksea("FYN", "Selumetinib", dec); 0.001::e_ksea("FYN", "Selumetinib", inc) :- e_activity("FYN", "Selumetinib", dec).
+0.001::e_ksea("FYN", "Selumetinib", dec); 0.5199914289::e_ksea("FYN", "Selumetinib", inc) :- e_activity("FYN", "Selumetinib", inc).
+0.5169965583::e_ksea("FYN", "TAK715", dec); 0.001::e_ksea("FYN", "TAK715", inc) :- e_activity("FYN", "TAK715", dec).
+0.001::e_ksea("FYN", "TAK715", dec); 0.5169965583::e_ksea("FYN", "TAK715", inc) :- e_activity("FYN", "TAK715", inc).
+0.5694160402::e_ksea("FYN", "TBCA", dec); 0.001::e_ksea("FYN", "TBCA", inc) :- e_activity("FYN", "TBCA", dec).
+0.001::e_ksea("FYN", "TBCA", dec); 0.5694160402::e_ksea("FYN", "TBCA", inc) :- e_activity("FYN", "TBCA", inc).
+0.513298009::e_ksea("FYN", "TGX221", dec); 0.001::e_ksea("FYN", "TGX221", inc) :- e_activity("FYN", "TGX221", dec).
+0.001::e_ksea("FYN", "TGX221", dec); 0.513298009::e_ksea("FYN", "TGX221", inc) :- e_activity("FYN", "TGX221", inc).
+0.5661347359::e_ksea("FYN", "Tofacitinib", dec); 0.001::e_ksea("FYN", "Tofacitinib", inc) :- e_activity("FYN", "Tofacitinib", dec).
+0.001::e_ksea("FYN", "Tofacitinib", dec); 0.5661347359::e_ksea("FYN", "Tofacitinib", inc) :- e_activity("FYN", "Tofacitinib", inc).
+0.5860966226::e_ksea("FYN", "Torin", dec); 0.001::e_ksea("FYN", "Torin", inc) :- e_activity("FYN", "Torin", dec).
+0.001::e_ksea("FYN", "Torin", dec); 0.5860966226::e_ksea("FYN", "Torin", inc) :- e_activity("FYN", "Torin", inc).
+0.5519381353::e_ksea("FYN", "Trametinib", dec); 0.001::e_ksea("FYN", "Trametinib", inc) :- e_activity("FYN", "Trametinib", dec).
+0.001::e_ksea("FYN", "Trametinib", dec); 0.5519381353::e_ksea("FYN", "Trametinib", inc) :- e_activity("FYN", "Trametinib", inc).
+0.5063235369::e_ksea("FYN", "U73122", dec); 0.001::e_ksea("FYN", "U73122", inc) :- e_activity("FYN", "U73122", dec).
+0.001::e_ksea("FYN", "U73122", dec); 0.5063235369::e_ksea("FYN", "U73122", inc) :- e_activity("FYN", "U73122", inc).
+0.5067795973::e_ksea("FYN", "Ulixertinib", dec); 0.001::e_ksea("FYN", "Ulixertinib", inc) :- e_activity("FYN", "Ulixertinib", dec).
+0.001::e_ksea("FYN", "Ulixertinib", dec); 0.5067795973::e_ksea("FYN", "Ulixertinib", inc) :- e_activity("FYN", "Ulixertinib", inc).
+0.5416674681::e_ksea("FYN", "Vemurafenib", dec); 0.001::e_ksea("FYN", "Vemurafenib", inc) :- e_activity("FYN", "Vemurafenib", dec).
+0.001::e_ksea("FYN", "Vemurafenib", dec); 0.5416674681::e_ksea("FYN", "Vemurafenib", inc) :- e_activity("FYN", "Vemurafenib", inc).
+0.6553190115::e_ksea("HIPK2", "AC220", dec); 0.001::e_ksea("HIPK2", "AC220", inc) :- e_activity("HIPK2", "AC220", dec).
+0.001::e_ksea("HIPK2", "AC220", dec); 0.6553190115::e_ksea("HIPK2", "AC220", inc) :- e_activity("HIPK2", "AC220", inc).
+0.6997085147::e_ksea("HIPK2", "AT13148", dec); 0.001::e_ksea("HIPK2", "AT13148", inc) :- e_activity("HIPK2", "AT13148", dec).
+0.001::e_ksea("HIPK2", "AT13148", dec); 0.6997085147::e_ksea("HIPK2", "AT13148", inc) :- e_activity("HIPK2", "AT13148", inc).
+0.6635592463::e_ksea("HIPK2", "AZ20", dec); 0.001::e_ksea("HIPK2", "AZ20", inc) :- e_activity("HIPK2", "AZ20", dec).
+0.001::e_ksea("HIPK2", "AZ20", dec); 0.6635592463::e_ksea("HIPK2", "AZ20", inc) :- e_activity("HIPK2", "AZ20", inc).
+0.9677231675::e_ksea("HIPK2", "AZD1480", dec); 0.001::e_ksea("HIPK2", "AZD1480", inc) :- e_activity("HIPK2", "AZD1480", dec).
+0.001::e_ksea("HIPK2", "AZD1480", dec); 0.9677231675::e_ksea("HIPK2", "AZD1480", inc) :- e_activity("HIPK2", "AZD1480", inc).
+0.8762329773::e_ksea("HIPK2", "AZD3759", dec); 0.001::e_ksea("HIPK2", "AZD3759", inc) :- e_activity("HIPK2", "AZD3759", dec).
+0.001::e_ksea("HIPK2", "AZD3759", dec); 0.8762329773::e_ksea("HIPK2", "AZD3759", inc) :- e_activity("HIPK2", "AZD3759", inc).
+0.9828710672::e_ksea("HIPK2", "AZD5363", dec); 0.001::e_ksea("HIPK2", "AZD5363", inc) :- e_activity("HIPK2", "AZD5363", dec).
+0.001::e_ksea("HIPK2", "AZD5363", dec); 0.9828710672::e_ksea("HIPK2", "AZD5363", inc) :- e_activity("HIPK2", "AZD5363", inc).
+0.9969426482::e_ksea("HIPK2", "AZD5438", dec); 0.001::e_ksea("HIPK2", "AZD5438", inc) :- e_activity("HIPK2", "AZD5438", dec).
+0.001::e_ksea("HIPK2", "AZD5438", dec); 0.9969426482::e_ksea("HIPK2", "AZD5438", inc) :- e_activity("HIPK2", "AZD5438", inc).
+0.7665624122::e_ksea("HIPK2", "AZD6482", dec); 0.001::e_ksea("HIPK2", "AZD6482", inc) :- e_activity("HIPK2", "AZD6482", dec).
+0.001::e_ksea("HIPK2", "AZD6482", dec); 0.7665624122::e_ksea("HIPK2", "AZD6482", inc) :- e_activity("HIPK2", "AZD6482", inc).
+0.800736786::e_ksea("HIPK2", "AZD6738", dec); 0.001::e_ksea("HIPK2", "AZD6738", inc) :- e_activity("HIPK2", "AZD6738", dec).
+0.001::e_ksea("HIPK2", "AZD6738", dec); 0.800736786::e_ksea("HIPK2", "AZD6738", inc) :- e_activity("HIPK2", "AZD6738", inc).
+0.7409364393::e_ksea("HIPK2", "AZD8055", dec); 0.001::e_ksea("HIPK2", "AZD8055", inc) :- e_activity("HIPK2", "AZD8055", dec).
+0.001::e_ksea("HIPK2", "AZD8055", dec); 0.7409364393::e_ksea("HIPK2", "AZD8055", inc) :- e_activity("HIPK2", "AZD8055", inc).
+0.538589258::e_ksea("HIPK2", "Amuvatinib", dec); 0.001::e_ksea("HIPK2", "Amuvatinib", inc) :- e_activity("HIPK2", "Amuvatinib", dec).
+0.001::e_ksea("HIPK2", "Amuvatinib", dec); 0.538589258::e_ksea("HIPK2", "Amuvatinib", inc) :- e_activity("HIPK2", "Amuvatinib", inc).
+0.9382765504::e_ksea("HIPK2", "BX912", dec); 0.001::e_ksea("HIPK2", "BX912", inc) :- e_activity("HIPK2", "BX912", dec).
+0.001::e_ksea("HIPK2", "BX912", dec); 0.9382765504::e_ksea("HIPK2", "BX912", inc) :- e_activity("HIPK2", "BX912", inc).
+0.6865094106::e_ksea("HIPK2", "Bosutinib", dec); 0.001::e_ksea("HIPK2", "Bosutinib", inc) :- e_activity("HIPK2", "Bosutinib", dec).
+0.001::e_ksea("HIPK2", "Bosutinib", dec); 0.6865094106::e_ksea("HIPK2", "Bosutinib", inc) :- e_activity("HIPK2", "Bosutinib", inc).
+0.6960164585::e_ksea("HIPK2", "CAL101", dec); 0.001::e_ksea("HIPK2", "CAL101", inc) :- e_activity("HIPK2", "CAL101", dec).
+0.001::e_ksea("HIPK2", "CAL101", dec); 0.6960164585::e_ksea("HIPK2", "CAL101", inc) :- e_activity("HIPK2", "CAL101", inc).
+0.9081403298::e_ksea("HIPK2", "CHIR99021", dec); 0.001::e_ksea("HIPK2", "CHIR99021", inc) :- e_activity("HIPK2", "CHIR99021", dec).
+0.001::e_ksea("HIPK2", "CHIR99021", dec); 0.9081403298::e_ksea("HIPK2", "CHIR99021", inc) :- e_activity("HIPK2", "CHIR99021", inc).
+0.9003559256::e_ksea("HIPK2", "CX4945", dec); 0.001::e_ksea("HIPK2", "CX4945", inc) :- e_activity("HIPK2", "CX4945", dec).
+0.001::e_ksea("HIPK2", "CX4945", dec); 0.9003559256::e_ksea("HIPK2", "CX4945", inc) :- e_activity("HIPK2", "CX4945", inc).
+0.5381890675::e_ksea("HIPK2", "DNAPK", dec); 0.001::e_ksea("HIPK2", "DNAPK", inc) :- e_activity("HIPK2", "DNAPK", dec).
+0.001::e_ksea("HIPK2", "DNAPK", dec); 0.5381890675::e_ksea("HIPK2", "DNAPK", inc) :- e_activity("HIPK2", "DNAPK", inc).
+0.6201157088::e_ksea("HIPK2", "Dabrafenib", dec); 0.001::e_ksea("HIPK2", "Dabrafenib", inc) :- e_activity("HIPK2", "Dabrafenib", dec).
+0.001::e_ksea("HIPK2", "Dabrafenib", dec); 0.6201157088::e_ksea("HIPK2", "Dabrafenib", inc) :- e_activity("HIPK2", "Dabrafenib", inc).
+0.6947195394::e_ksea("HIPK2", "Dasatinib", dec); 0.001::e_ksea("HIPK2", "Dasatinib", inc) :- e_activity("HIPK2", "Dasatinib", dec).
+0.001::e_ksea("HIPK2", "Dasatinib", dec); 0.6947195394::e_ksea("HIPK2", "Dasatinib", inc) :- e_activity("HIPK2", "Dasatinib", inc).
+0.6397120502::e_ksea("HIPK2", "Edelfosine", dec); 0.001::e_ksea("HIPK2", "Edelfosine", inc) :- e_activity("HIPK2", "Edelfosine", dec).
+0.001::e_ksea("HIPK2", "Edelfosine", dec); 0.6397120502::e_ksea("HIPK2", "Edelfosine", inc) :- e_activity("HIPK2", "Edelfosine", inc).
+0.9724415195::e_ksea("HIPK2", "FRAX486", dec); 0.001::e_ksea("HIPK2", "FRAX486", inc) :- e_activity("HIPK2", "FRAX486", dec).
+0.001::e_ksea("HIPK2", "FRAX486", dec); 0.9724415195::e_ksea("HIPK2", "FRAX486", inc) :- e_activity("HIPK2", "FRAX486", inc).
+0.9487606991::e_ksea("HIPK2", "GDC0941", dec); 0.001::e_ksea("HIPK2", "GDC0941", inc) :- e_activity("HIPK2", "GDC0941", dec).
+0.001::e_ksea("HIPK2", "GDC0941", dec); 0.9487606991::e_ksea("HIPK2", "GDC0941", inc) :- e_activity("HIPK2", "GDC0941", inc).
+0.9155674249::e_ksea("HIPK2", "GDC0994", dec); 0.001::e_ksea("HIPK2", "GDC0994", inc) :- e_activity("HIPK2", "GDC0994", dec).
+0.001::e_ksea("HIPK2", "GDC0994", dec); 0.9155674249::e_ksea("HIPK2", "GDC0994", inc) :- e_activity("HIPK2", "GDC0994", inc).
+0.8429374691::e_ksea("HIPK2", "GF109203X", dec); 0.001::e_ksea("HIPK2", "GF109203X", inc) :- e_activity("HIPK2", "GF109203X", dec).
+0.001::e_ksea("HIPK2", "GF109203X", dec); 0.8429374691::e_ksea("HIPK2", "GF109203X", inc) :- e_activity("HIPK2", "GF109203X", inc).
+0.8914446399::e_ksea("HIPK2", "GO6983", dec); 0.001::e_ksea("HIPK2", "GO6983", inc) :- e_activity("HIPK2", "GO6983", dec).
+0.001::e_ksea("HIPK2", "GO6983", dec); 0.8914446399::e_ksea("HIPK2", "GO6983", inc) :- e_activity("HIPK2", "GO6983", inc).
+0.8673607778::e_ksea("HIPK2", "GSK2334470", dec); 0.001::e_ksea("HIPK2", "GSK2334470", inc) :- e_activity("HIPK2", "GSK2334470", dec).
+0.001::e_ksea("HIPK2", "GSK2334470", dec); 0.8673607778::e_ksea("HIPK2", "GSK2334470", inc) :- e_activity("HIPK2", "GSK2334470", inc).
+0.6912901887::e_ksea("HIPK2", "GSK690693", dec); 0.001::e_ksea("HIPK2", "GSK690693", inc) :- e_activity("HIPK2", "GSK690693", dec).
+0.001::e_ksea("HIPK2", "GSK690693", dec); 0.6912901887::e_ksea("HIPK2", "GSK690693", inc) :- e_activity("HIPK2", "GSK690693", inc).
+0.7820057793::e_ksea("HIPK2", "Go6976", dec); 0.001::e_ksea("HIPK2", "Go6976", inc) :- e_activity("HIPK2", "Go6976", dec).
+0.001::e_ksea("HIPK2", "Go6976", dec); 0.7820057793::e_ksea("HIPK2", "Go6976", inc) :- e_activity("HIPK2", "Go6976", inc).
+0.748977283::e_ksea("HIPK2", "H89", dec); 0.001::e_ksea("HIPK2", "H89", inc) :- e_activity("HIPK2", "H89", dec).
+0.001::e_ksea("HIPK2", "H89", dec); 0.748977283::e_ksea("HIPK2", "H89", inc) :- e_activity("HIPK2", "H89", inc).
+0.7783728185::e_ksea("HIPK2", "HS173", dec); 0.001::e_ksea("HIPK2", "HS173", inc) :- e_activity("HIPK2", "HS173", dec).
+0.001::e_ksea("HIPK2", "HS173", dec); 0.7783728185::e_ksea("HIPK2", "HS173", inc) :- e_activity("HIPK2", "HS173", inc).
+0.894519261::e_ksea("HIPK2", "Ipatasertib", dec); 0.001::e_ksea("HIPK2", "Ipatasertib", inc) :- e_activity("HIPK2", "Ipatasertib", dec).
+0.001::e_ksea("HIPK2", "Ipatasertib", dec); 0.894519261::e_ksea("HIPK2", "Ipatasertib", inc) :- e_activity("HIPK2", "Ipatasertib", inc).
+0.8124943588::e_ksea("HIPK2", "JNJ", dec); 0.001::e_ksea("HIPK2", "JNJ", inc) :- e_activity("HIPK2", "JNJ", dec).
+0.001::e_ksea("HIPK2", "JNJ", dec); 0.8124943588::e_ksea("HIPK2", "JNJ", inc) :- e_activity("HIPK2", "JNJ", inc).
+0.6759710154::e_ksea("HIPK2", "JNK", dec); 0.001::e_ksea("HIPK2", "JNK", inc) :- e_activity("HIPK2", "JNK", dec).
+0.001::e_ksea("HIPK2", "JNK", dec); 0.6759710154::e_ksea("HIPK2", "JNK", inc) :- e_activity("HIPK2", "JNK", inc).
+0.8011783318::e_ksea("HIPK2", "KD025", dec); 0.001::e_ksea("HIPK2", "KD025", inc) :- e_activity("HIPK2", "KD025", dec).
+0.001::e_ksea("HIPK2", "KD025", dec); 0.8011783318::e_ksea("HIPK2", "KD025", inc) :- e_activity("HIPK2", "KD025", inc).
+0.9389679477::e_ksea("HIPK2", "KN62", dec); 0.001::e_ksea("HIPK2", "KN62", inc) :- e_activity("HIPK2", "KN62", dec).
+0.001::e_ksea("HIPK2", "KN62", dec); 0.9389679477::e_ksea("HIPK2", "KN62", inc) :- e_activity("HIPK2", "KN62", inc).
+0.7397988295::e_ksea("HIPK2", "KN93", dec); 0.001::e_ksea("HIPK2", "KN93", inc) :- e_activity("HIPK2", "KN93", dec).
+0.001::e_ksea("HIPK2", "KN93", dec); 0.7397988295::e_ksea("HIPK2", "KN93", inc) :- e_activity("HIPK2", "KN93", inc).
+0.741362278::e_ksea("HIPK2", "Ku0063794", dec); 0.001::e_ksea("HIPK2", "Ku0063794", inc) :- e_activity("HIPK2", "Ku0063794", dec).
+0.001::e_ksea("HIPK2", "Ku0063794", dec); 0.741362278::e_ksea("HIPK2", "Ku0063794", inc) :- e_activity("HIPK2", "Ku0063794", inc).
+0.9630966691::e_ksea("HIPK2", "LY2090314", dec); 0.001::e_ksea("HIPK2", "LY2090314", inc) :- e_activity("HIPK2", "LY2090314", dec).
+0.001::e_ksea("HIPK2", "LY2090314", dec); 0.9630966691::e_ksea("HIPK2", "LY2090314", inc) :- e_activity("HIPK2", "LY2090314", inc).
+0.89451467::e_ksea("HIPK2", "LY2584702", dec); 0.001::e_ksea("HIPK2", "LY2584702", inc) :- e_activity("HIPK2", "LY2584702", dec).
+0.001::e_ksea("HIPK2", "LY2584702", dec); 0.89451467::e_ksea("HIPK2", "LY2584702", inc) :- e_activity("HIPK2", "LY2584702", inc).
+0.5218748103::e_ksea("HIPK2", "LY2835219", dec); 0.001::e_ksea("HIPK2", "LY2835219", inc) :- e_activity("HIPK2", "LY2835219", dec).
+0.001::e_ksea("HIPK2", "LY2835219", dec); 0.5218748103::e_ksea("HIPK2", "LY2835219", inc) :- e_activity("HIPK2", "LY2835219", inc).
+0.5804494528::e_ksea("HIPK2", "Linsitinib", dec); 0.001::e_ksea("HIPK2", "Linsitinib", inc) :- e_activity("HIPK2", "Linsitinib", dec).
+0.001::e_ksea("HIPK2", "Linsitinib", dec); 0.5804494528::e_ksea("HIPK2", "Linsitinib", inc) :- e_activity("HIPK2", "Linsitinib", inc).
+0.5812803016::e_ksea("HIPK2", "MK2206", dec); 0.001::e_ksea("HIPK2", "MK2206", inc) :- e_activity("HIPK2", "MK2206", dec).
+0.001::e_ksea("HIPK2", "MK2206", dec); 0.5812803016::e_ksea("HIPK2", "MK2206", inc) :- e_activity("HIPK2", "MK2206", inc).
+0.5537785546::e_ksea("HIPK2", "NU7441", dec); 0.001::e_ksea("HIPK2", "NU7441", inc) :- e_activity("HIPK2", "NU7441", dec).
+0.001::e_ksea("HIPK2", "NU7441", dec); 0.5537785546::e_ksea("HIPK2", "NU7441", inc) :- e_activity("HIPK2", "NU7441", inc).
+0.6920539252::e_ksea("HIPK2", "PD153035", dec); 0.001::e_ksea("HIPK2", "PD153035", inc) :- e_activity("HIPK2", "PD153035", dec).
+0.001::e_ksea("HIPK2", "PD153035", dec); 0.6920539252::e_ksea("HIPK2", "PD153035", inc) :- e_activity("HIPK2", "PD153035", inc).
+0.9938242968::e_ksea("HIPK2", "PF3758309", dec); 0.001::e_ksea("HIPK2", "PF3758309", inc) :- e_activity("HIPK2", "PF3758309", dec).
+0.001::e_ksea("HIPK2", "PF3758309", dec); 0.9938242968::e_ksea("HIPK2", "PF3758309", inc) :- e_activity("HIPK2", "PF3758309", inc).
+0.7845279583::e_ksea("HIPK2", "PF4708671", dec); 0.001::e_ksea("HIPK2", "PF4708671", inc) :- e_activity("HIPK2", "PF4708671", dec).
+0.001::e_ksea("HIPK2", "PF4708671", dec); 0.7845279583::e_ksea("HIPK2", "PF4708671", inc) :- e_activity("HIPK2", "PF4708671", inc).
+0.5911922898::e_ksea("HIPK2", "PH797804", dec); 0.001::e_ksea("HIPK2", "PH797804", inc) :- e_activity("HIPK2", "PH797804", dec).
+0.001::e_ksea("HIPK2", "PH797804", dec); 0.5911922898::e_ksea("HIPK2", "PH797804", inc) :- e_activity("HIPK2", "PH797804", inc).
+0.9173055527::e_ksea("HIPK2", "PIK294", dec); 0.001::e_ksea("HIPK2", "PIK294", inc) :- e_activity("HIPK2", "PIK294", dec).
+0.001::e_ksea("HIPK2", "PIK294", dec); 0.9173055527::e_ksea("HIPK2", "PIK294", inc) :- e_activity("HIPK2", "PIK294", inc).
+0.5363949299::e_ksea("HIPK2", "Ribociclib", dec); 0.001::e_ksea("HIPK2", "Ribociclib", inc) :- e_activity("HIPK2", "Ribociclib", dec).
+0.001::e_ksea("HIPK2", "Ribociclib", dec); 0.5363949299::e_ksea("HIPK2", "Ribociclib", inc) :- e_activity("HIPK2", "Ribociclib", inc).
+0.9293111409::e_ksea("HIPK2", "Ripasudil", dec); 0.001::e_ksea("HIPK2", "Ripasudil", inc) :- e_activity("HIPK2", "Ripasudil", dec).
+0.001::e_ksea("HIPK2", "Ripasudil", dec); 0.9293111409::e_ksea("HIPK2", "Ripasudil", inc) :- e_activity("HIPK2", "Ripasudil", inc).
+0.8827635392::e_ksea("HIPK2", "SP600125", dec); 0.001::e_ksea("HIPK2", "SP600125", inc) :- e_activity("HIPK2", "SP600125", dec).
+0.001::e_ksea("HIPK2", "SP600125", dec); 0.8827635392::e_ksea("HIPK2", "SP600125", inc) :- e_activity("HIPK2", "SP600125", inc).
+0.5729050063::e_ksea("HIPK2", "Selumetinib", dec); 0.001::e_ksea("HIPK2", "Selumetinib", inc) :- e_activity("HIPK2", "Selumetinib", dec).
+0.001::e_ksea("HIPK2", "Selumetinib", dec); 0.5729050063::e_ksea("HIPK2", "Selumetinib", inc) :- e_activity("HIPK2", "Selumetinib", inc).
+0.799291612::e_ksea("HIPK2", "TAK715", dec); 0.001::e_ksea("HIPK2", "TAK715", inc) :- e_activity("HIPK2", "TAK715", dec).
+0.001::e_ksea("HIPK2", "TAK715", dec); 0.799291612::e_ksea("HIPK2", "TAK715", inc) :- e_activity("HIPK2", "TAK715", inc).
+0.6976976554::e_ksea("HIPK2", "TBCA", dec); 0.001::e_ksea("HIPK2", "TBCA", inc) :- e_activity("HIPK2", "TBCA", dec).
+0.001::e_ksea("HIPK2", "TBCA", dec); 0.6976976554::e_ksea("HIPK2", "TBCA", inc) :- e_activity("HIPK2", "TBCA", inc).
+0.8085446594::e_ksea("HIPK2", "TGX221", dec); 0.001::e_ksea("HIPK2", "TGX221", inc) :- e_activity("HIPK2", "TGX221", dec).
+0.001::e_ksea("HIPK2", "TGX221", dec); 0.8085446594::e_ksea("HIPK2", "TGX221", inc) :- e_activity("HIPK2", "TGX221", inc).
+0.6533948008::e_ksea("HIPK2", "Tofacitinib", dec); 0.001::e_ksea("HIPK2", "Tofacitinib", inc) :- e_activity("HIPK2", "Tofacitinib", dec).
+0.001::e_ksea("HIPK2", "Tofacitinib", dec); 0.6533948008::e_ksea("HIPK2", "Tofacitinib", inc) :- e_activity("HIPK2", "Tofacitinib", inc).
+0.5681831743::e_ksea("HIPK2", "Torin", dec); 0.001::e_ksea("HIPK2", "Torin", inc) :- e_activity("HIPK2", "Torin", dec).
+0.001::e_ksea("HIPK2", "Torin", dec); 0.5681831743::e_ksea("HIPK2", "Torin", inc) :- e_activity("HIPK2", "Torin", inc).
+0.7623752575::e_ksea("HIPK2", "Trametinib", dec); 0.001::e_ksea("HIPK2", "Trametinib", inc) :- e_activity("HIPK2", "Trametinib", dec).
+0.001::e_ksea("HIPK2", "Trametinib", dec); 0.7623752575::e_ksea("HIPK2", "Trametinib", inc) :- e_activity("HIPK2", "Trametinib", inc).
+0.5684267976::e_ksea("HIPK2", "U73122", dec); 0.001::e_ksea("HIPK2", "U73122", inc) :- e_activity("HIPK2", "U73122", dec).
+0.001::e_ksea("HIPK2", "U73122", dec); 0.5684267976::e_ksea("HIPK2", "U73122", inc) :- e_activity("HIPK2", "U73122", inc).
+0.5681954321::e_ksea("HIPK2", "Ulixertinib", dec); 0.001::e_ksea("HIPK2", "Ulixertinib", inc) :- e_activity("HIPK2", "Ulixertinib", dec).
+0.001::e_ksea("HIPK2", "Ulixertinib", dec); 0.5681954321::e_ksea("HIPK2", "Ulixertinib", inc) :- e_activity("HIPK2", "Ulixertinib", inc).
+0.6276624615::e_ksea("HIPK2", "Vemurafenib", dec); 0.001::e_ksea("HIPK2", "Vemurafenib", inc) :- e_activity("HIPK2", "Vemurafenib", dec).
+0.001::e_ksea("HIPK2", "Vemurafenib", dec); 0.6276624615::e_ksea("HIPK2", "Vemurafenib", inc) :- e_activity("HIPK2", "Vemurafenib", inc).
+0.5069575613::e_ksea("PTK2", "AC220", dec); 0.001::e_ksea("PTK2", "AC220", inc) :- e_activity("PTK2", "AC220", dec).
+0.001::e_ksea("PTK2", "AC220", dec); 0.5069575613::e_ksea("PTK2", "AC220", inc) :- e_activity("PTK2", "AC220", inc).
+0.667007332::e_ksea("PTK2", "AT13148", dec); 0.001::e_ksea("PTK2", "AT13148", inc) :- e_activity("PTK2", "AT13148", dec).
+0.001::e_ksea("PTK2", "AT13148", dec); 0.667007332::e_ksea("PTK2", "AT13148", inc) :- e_activity("PTK2", "AT13148", inc).
+0.6651862864::e_ksea("PTK2", "AZ20", dec); 0.001::e_ksea("PTK2", "AZ20", inc) :- e_activity("PTK2", "AZ20", dec).
+0.001::e_ksea("PTK2", "AZ20", dec); 0.6651862864::e_ksea("PTK2", "AZ20", inc) :- e_activity("PTK2", "AZ20", inc).
+0.7937734951::e_ksea("PTK2", "AZD1480", dec); 0.001::e_ksea("PTK2", "AZD1480", inc) :- e_activity("PTK2", "AZD1480", dec).
+0.001::e_ksea("PTK2", "AZD1480", dec); 0.7937734951::e_ksea("PTK2", "AZD1480", inc) :- e_activity("PTK2", "AZD1480", inc).
+0.7393868597::e_ksea("PTK2", "AZD3759", dec); 0.001::e_ksea("PTK2", "AZD3759", inc) :- e_activity("PTK2", "AZD3759", dec).
+0.001::e_ksea("PTK2", "AZD3759", dec); 0.7393868597::e_ksea("PTK2", "AZD3759", inc) :- e_activity("PTK2", "AZD3759", inc).
+0.7920848235::e_ksea("PTK2", "AZD5363", dec); 0.001::e_ksea("PTK2", "AZD5363", inc) :- e_activity("PTK2", "AZD5363", dec).
+0.001::e_ksea("PTK2", "AZD5363", dec); 0.7920848235::e_ksea("PTK2", "AZD5363", inc) :- e_activity("PTK2", "AZD5363", inc).
+0.5289208728::e_ksea("PTK2", "AZD5438", dec); 0.001::e_ksea("PTK2", "AZD5438", inc) :- e_activity("PTK2", "AZD5438", dec).
+0.001::e_ksea("PTK2", "AZD5438", dec); 0.5289208728::e_ksea("PTK2", "AZD5438", inc) :- e_activity("PTK2", "AZD5438", inc).
+0.7615577458::e_ksea("PTK2", "AZD6482", dec); 0.001::e_ksea("PTK2", "AZD6482", inc) :- e_activity("PTK2", "AZD6482", dec).
+0.001::e_ksea("PTK2", "AZD6482", dec); 0.7615577458::e_ksea("PTK2", "AZD6482", inc) :- e_activity("PTK2", "AZD6482", inc).
+0.6129638986::e_ksea("PTK2", "AZD6738", dec); 0.001::e_ksea("PTK2", "AZD6738", inc) :- e_activity("PTK2", "AZD6738", dec).
+0.001::e_ksea("PTK2", "AZD6738", dec); 0.6129638986::e_ksea("PTK2", "AZD6738", inc) :- e_activity("PTK2", "AZD6738", inc).
+0.7430982987::e_ksea("PTK2", "AZD8055", dec); 0.001::e_ksea("PTK2", "AZD8055", inc) :- e_activity("PTK2", "AZD8055", dec).
+0.001::e_ksea("PTK2", "AZD8055", dec); 0.7430982987::e_ksea("PTK2", "AZD8055", inc) :- e_activity("PTK2", "AZD8055", inc).
+0.593696762::e_ksea("PTK2", "Amuvatinib", dec); 0.001::e_ksea("PTK2", "Amuvatinib", inc) :- e_activity("PTK2", "Amuvatinib", dec).
+0.001::e_ksea("PTK2", "Amuvatinib", dec); 0.593696762::e_ksea("PTK2", "Amuvatinib", inc) :- e_activity("PTK2", "Amuvatinib", inc).
+0.793759227::e_ksea("PTK2", "BX912", dec); 0.001::e_ksea("PTK2", "BX912", inc) :- e_activity("PTK2", "BX912", dec).
+0.001::e_ksea("PTK2", "BX912", dec); 0.793759227::e_ksea("PTK2", "BX912", inc) :- e_activity("PTK2", "BX912", inc).
+0.5522212103::e_ksea("PTK2", "Bosutinib", dec); 0.001::e_ksea("PTK2", "Bosutinib", inc) :- e_activity("PTK2", "Bosutinib", dec).
+0.001::e_ksea("PTK2", "Bosutinib", dec); 0.5522212103::e_ksea("PTK2", "Bosutinib", inc) :- e_activity("PTK2", "Bosutinib", inc).
+0.6724733627::e_ksea("PTK2", "CAL101", dec); 0.001::e_ksea("PTK2", "CAL101", inc) :- e_activity("PTK2", "CAL101", dec).
+0.001::e_ksea("PTK2", "CAL101", dec); 0.6724733627::e_ksea("PTK2", "CAL101", inc) :- e_activity("PTK2", "CAL101", inc).
+0.676040444::e_ksea("PTK2", "CHIR99021", dec); 0.001::e_ksea("PTK2", "CHIR99021", inc) :- e_activity("PTK2", "CHIR99021", dec).
+0.001::e_ksea("PTK2", "CHIR99021", dec); 0.676040444::e_ksea("PTK2", "CHIR99021", inc) :- e_activity("PTK2", "CHIR99021", inc).
+0.591101047::e_ksea("PTK2", "CX4945", dec); 0.001::e_ksea("PTK2", "CX4945", inc) :- e_activity("PTK2", "CX4945", dec).
+0.001::e_ksea("PTK2", "CX4945", dec); 0.591101047::e_ksea("PTK2", "CX4945", inc) :- e_activity("PTK2", "CX4945", inc).
+0.6262898028::e_ksea("PTK2", "DNAPK", dec); 0.001::e_ksea("PTK2", "DNAPK", inc) :- e_activity("PTK2", "DNAPK", dec).
+0.001::e_ksea("PTK2", "DNAPK", dec); 0.6262898028::e_ksea("PTK2", "DNAPK", inc) :- e_activity("PTK2", "DNAPK", inc).
+0.6685337249::e_ksea("PTK2", "Dabrafenib", dec); 0.001::e_ksea("PTK2", "Dabrafenib", inc) :- e_activity("PTK2", "Dabrafenib", dec).
+0.001::e_ksea("PTK2", "Dabrafenib", dec); 0.6685337249::e_ksea("PTK2", "Dabrafenib", inc) :- e_activity("PTK2", "Dabrafenib", inc).
+0.5395296847::e_ksea("PTK2", "Dasatinib", dec); 0.001::e_ksea("PTK2", "Dasatinib", inc) :- e_activity("PTK2", "Dasatinib", dec).
+0.001::e_ksea("PTK2", "Dasatinib", dec); 0.5395296847::e_ksea("PTK2", "Dasatinib", inc) :- e_activity("PTK2", "Dasatinib", inc).
+0.5843132984::e_ksea("PTK2", "Edelfosine", dec); 0.001::e_ksea("PTK2", "Edelfosine", inc) :- e_activity("PTK2", "Edelfosine", dec).
+0.001::e_ksea("PTK2", "Edelfosine", dec); 0.5843132984::e_ksea("PTK2", "Edelfosine", inc) :- e_activity("PTK2", "Edelfosine", inc).
+0.6638302942::e_ksea("PTK2", "FRAX486", dec); 0.001::e_ksea("PTK2", "FRAX486", inc) :- e_activity("PTK2", "FRAX486", dec).
+0.001::e_ksea("PTK2", "FRAX486", dec); 0.6638302942::e_ksea("PTK2", "FRAX486", inc) :- e_activity("PTK2", "FRAX486", inc).
+0.6848377562::e_ksea("PTK2", "GDC0941", dec); 0.001::e_ksea("PTK2", "GDC0941", inc) :- e_activity("PTK2", "GDC0941", dec).
+0.001::e_ksea("PTK2", "GDC0941", dec); 0.6848377562::e_ksea("PTK2", "GDC0941", inc) :- e_activity("PTK2", "GDC0941", inc).
+0.7758153631::e_ksea("PTK2", "GDC0994", dec); 0.001::e_ksea("PTK2", "GDC0994", inc) :- e_activity("PTK2", "GDC0994", dec).
+0.001::e_ksea("PTK2", "GDC0994", dec); 0.7758153631::e_ksea("PTK2", "GDC0994", inc) :- e_activity("PTK2", "GDC0994", inc).
+0.6549173::e_ksea("PTK2", "GF109203X", dec); 0.001::e_ksea("PTK2", "GF109203X", inc) :- e_activity("PTK2", "GF109203X", dec).
+0.001::e_ksea("PTK2", "GF109203X", dec); 0.6549173::e_ksea("PTK2", "GF109203X", inc) :- e_activity("PTK2", "GF109203X", inc).
+0.5266752915::e_ksea("PTK2", "GO6983", dec); 0.001::e_ksea("PTK2", "GO6983", inc) :- e_activity("PTK2", "GO6983", dec).
+0.001::e_ksea("PTK2", "GO6983", dec); 0.5266752915::e_ksea("PTK2", "GO6983", inc) :- e_activity("PTK2", "GO6983", inc).
+0.7945430752::e_ksea("PTK2", "GSK2334470", dec); 0.001::e_ksea("PTK2", "GSK2334470", inc) :- e_activity("PTK2", "GSK2334470", dec).
+0.001::e_ksea("PTK2", "GSK2334470", dec); 0.7945430752::e_ksea("PTK2", "GSK2334470", inc) :- e_activity("PTK2", "GSK2334470", inc).
+0.5473377275::e_ksea("PTK2", "GSK690693", dec); 0.001::e_ksea("PTK2", "GSK690693", inc) :- e_activity("PTK2", "GSK690693", dec).
+0.001::e_ksea("PTK2", "GSK690693", dec); 0.5473377275::e_ksea("PTK2", "GSK690693", inc) :- e_activity("PTK2", "GSK690693", inc).
+0.6249148146::e_ksea("PTK2", "Go6976", dec); 0.001::e_ksea("PTK2", "Go6976", inc) :- e_activity("PTK2", "Go6976", dec).
+0.001::e_ksea("PTK2", "Go6976", dec); 0.6249148146::e_ksea("PTK2", "Go6976", inc) :- e_activity("PTK2", "Go6976", inc).
+0.5936989525::e_ksea("PTK2", "H89", dec); 0.001::e_ksea("PTK2", "H89", inc) :- e_activity("PTK2", "H89", dec).
+0.001::e_ksea("PTK2", "H89", dec); 0.5936989525::e_ksea("PTK2", "H89", inc) :- e_activity("PTK2", "H89", inc).
+0.5320785006::e_ksea("PTK2", "HS173", dec); 0.001::e_ksea("PTK2", "HS173", inc) :- e_activity("PTK2", "HS173", dec).
+0.001::e_ksea("PTK2", "HS173", dec); 0.5320785006::e_ksea("PTK2", "HS173", inc) :- e_activity("PTK2", "HS173", inc).
+0.7980858302::e_ksea("PTK2", "Ipatasertib", dec); 0.001::e_ksea("PTK2", "Ipatasertib", inc) :- e_activity("PTK2", "Ipatasertib", dec).
+0.001::e_ksea("PTK2", "Ipatasertib", dec); 0.7980858302::e_ksea("PTK2", "Ipatasertib", inc) :- e_activity("PTK2", "Ipatasertib", inc).
+0.6082048383::e_ksea("PTK2", "JNJ", dec); 0.001::e_ksea("PTK2", "JNJ", inc) :- e_activity("PTK2", "JNJ", dec).
+0.001::e_ksea("PTK2", "JNJ", dec); 0.6082048383::e_ksea("PTK2", "JNJ", inc) :- e_activity("PTK2", "JNJ", inc).
+0.6676523098::e_ksea("PTK2", "JNK", dec); 0.001::e_ksea("PTK2", "JNK", inc) :- e_activity("PTK2", "JNK", dec).
+0.001::e_ksea("PTK2", "JNK", dec); 0.6676523098::e_ksea("PTK2", "JNK", inc) :- e_activity("PTK2", "JNK", inc).
+0.7460550485::e_ksea("PTK2", "KD025", dec); 0.001::e_ksea("PTK2", "KD025", inc) :- e_activity("PTK2", "KD025", dec).
+0.001::e_ksea("PTK2", "KD025", dec); 0.7460550485::e_ksea("PTK2", "KD025", inc) :- e_activity("PTK2", "KD025", inc).
+0.7288251245::e_ksea("PTK2", "KN62", dec); 0.001::e_ksea("PTK2", "KN62", inc) :- e_activity("PTK2", "KN62", dec).
+0.001::e_ksea("PTK2", "KN62", dec); 0.7288251245::e_ksea("PTK2", "KN62", inc) :- e_activity("PTK2", "KN62", inc).
+0.5593325159::e_ksea("PTK2", "KN93", dec); 0.001::e_ksea("PTK2", "KN93", inc) :- e_activity("PTK2", "KN93", dec).
+0.001::e_ksea("PTK2", "KN93", dec); 0.5593325159::e_ksea("PTK2", "KN93", inc) :- e_activity("PTK2", "KN93", inc).
+0.5596283211::e_ksea("PTK2", "Ku0063794", dec); 0.001::e_ksea("PTK2", "Ku0063794", inc) :- e_activity("PTK2", "Ku0063794", dec).
+0.001::e_ksea("PTK2", "Ku0063794", dec); 0.5596283211::e_ksea("PTK2", "Ku0063794", inc) :- e_activity("PTK2", "Ku0063794", inc).
+0.7766443351::e_ksea("PTK2", "LY2090314", dec); 0.001::e_ksea("PTK2", "LY2090314", inc) :- e_activity("PTK2", "LY2090314", dec).
+0.001::e_ksea("PTK2", "LY2090314", dec); 0.7766443351::e_ksea("PTK2", "LY2090314", inc) :- e_activity("PTK2", "LY2090314", inc).
+0.7701833478::e_ksea("PTK2", "LY2584702", dec); 0.001::e_ksea("PTK2", "LY2584702", inc) :- e_activity("PTK2", "LY2584702", dec).
+0.001::e_ksea("PTK2", "LY2584702", dec); 0.7701833478::e_ksea("PTK2", "LY2584702", inc) :- e_activity("PTK2", "LY2584702", inc).
+0.6907706244::e_ksea("PTK2", "LY2835219", dec); 0.001::e_ksea("PTK2", "LY2835219", inc) :- e_activity("PTK2", "LY2835219", dec).
+0.001::e_ksea("PTK2", "LY2835219", dec); 0.6907706244::e_ksea("PTK2", "LY2835219", inc) :- e_activity("PTK2", "LY2835219", inc).
+0.6467485453::e_ksea("PTK2", "Linsitinib", dec); 0.001::e_ksea("PTK2", "Linsitinib", inc) :- e_activity("PTK2", "Linsitinib", dec).
+0.001::e_ksea("PTK2", "Linsitinib", dec); 0.6467485453::e_ksea("PTK2", "Linsitinib", inc) :- e_activity("PTK2", "Linsitinib", inc).
+0.5955677101::e_ksea("PTK2", "MK2206", dec); 0.001::e_ksea("PTK2", "MK2206", inc) :- e_activity("PTK2", "MK2206", dec).
+0.001::e_ksea("PTK2", "MK2206", dec); 0.5955677101::e_ksea("PTK2", "MK2206", inc) :- e_activity("PTK2", "MK2206", inc).
+0.6941820839::e_ksea("PTK2", "NU7441", dec); 0.001::e_ksea("PTK2", "NU7441", inc) :- e_activity("PTK2", "NU7441", dec).
+0.001::e_ksea("PTK2", "NU7441", dec); 0.6941820839::e_ksea("PTK2", "NU7441", inc) :- e_activity("PTK2", "NU7441", inc).
+0.7026022484::e_ksea("PTK2", "PD153035", dec); 0.001::e_ksea("PTK2", "PD153035", inc) :- e_activity("PTK2", "PD153035", dec).
+0.001::e_ksea("PTK2", "PD153035", dec); 0.7026022484::e_ksea("PTK2", "PD153035", inc) :- e_activity("PTK2", "PD153035", inc).
+0.5857641637::e_ksea("PTK2", "PF3758309", dec); 0.001::e_ksea("PTK2", "PF3758309", inc) :- e_activity("PTK2", "PF3758309", dec).
+0.001::e_ksea("PTK2", "PF3758309", dec); 0.5857641637::e_ksea("PTK2", "PF3758309", inc) :- e_activity("PTK2", "PF3758309", inc).
+0.534002158::e_ksea("PTK2", "PF4708671", dec); 0.001::e_ksea("PTK2", "PF4708671", inc) :- e_activity("PTK2", "PF4708671", dec).
+0.001::e_ksea("PTK2", "PF4708671", dec); 0.534002158::e_ksea("PTK2", "PF4708671", inc) :- e_activity("PTK2", "PF4708671", inc).
+0.5586751693::e_ksea("PTK2", "PH797804", dec); 0.001::e_ksea("PTK2", "PH797804", inc) :- e_activity("PTK2", "PH797804", dec).
+0.001::e_ksea("PTK2", "PH797804", dec); 0.5586751693::e_ksea("PTK2", "PH797804", inc) :- e_activity("PTK2", "PH797804", inc).
+0.6968906619::e_ksea("PTK2", "PIK294", dec); 0.001::e_ksea("PTK2", "PIK294", inc) :- e_activity("PTK2", "PIK294", dec).
+0.001::e_ksea("PTK2", "PIK294", dec); 0.6968906619::e_ksea("PTK2", "PIK294", inc) :- e_activity("PTK2", "PIK294", inc).
+0.73583891::e_ksea("PTK2", "Ribociclib", dec); 0.001::e_ksea("PTK2", "Ribociclib", inc) :- e_activity("PTK2", "Ribociclib", dec).
+0.001::e_ksea("PTK2", "Ribociclib", dec); 0.73583891::e_ksea("PTK2", "Ribociclib", inc) :- e_activity("PTK2", "Ribociclib", inc).
+0.6116557546::e_ksea("PTK2", "Ripasudil", dec); 0.001::e_ksea("PTK2", "Ripasudil", inc) :- e_activity("PTK2", "Ripasudil", dec).
+0.001::e_ksea("PTK2", "Ripasudil", dec); 0.6116557546::e_ksea("PTK2", "Ripasudil", inc) :- e_activity("PTK2", "Ripasudil", inc).
+0.5832103715::e_ksea("PTK2", "SP600125", dec); 0.001::e_ksea("PTK2", "SP600125", inc) :- e_activity("PTK2", "SP600125", dec).
+0.001::e_ksea("PTK2", "SP600125", dec); 0.5832103715::e_ksea("PTK2", "SP600125", inc) :- e_activity("PTK2", "SP600125", inc).
+0.6506957211::e_ksea("PTK2", "Selumetinib", dec); 0.001::e_ksea("PTK2", "Selumetinib", inc) :- e_activity("PTK2", "Selumetinib", dec).
+0.001::e_ksea("PTK2", "Selumetinib", dec); 0.6506957211::e_ksea("PTK2", "Selumetinib", inc) :- e_activity("PTK2", "Selumetinib", inc).
+0.7865489971::e_ksea("PTK2", "TAK715", dec); 0.001::e_ksea("PTK2", "TAK715", inc) :- e_activity("PTK2", "TAK715", dec).
+0.001::e_ksea("PTK2", "TAK715", dec); 0.7865489971::e_ksea("PTK2", "TAK715", inc) :- e_activity("PTK2", "TAK715", inc).
+0.6655478718::e_ksea("PTK2", "TBCA", dec); 0.001::e_ksea("PTK2", "TBCA", inc) :- e_activity("PTK2", "TBCA", dec).
+0.001::e_ksea("PTK2", "TBCA", dec); 0.6655478718::e_ksea("PTK2", "TBCA", inc) :- e_activity("PTK2", "TBCA", inc).
+0.6514608621::e_ksea("PTK2", "TGX221", dec); 0.001::e_ksea("PTK2", "TGX221", inc) :- e_activity("PTK2", "TGX221", dec).
+0.001::e_ksea("PTK2", "TGX221", dec); 0.6514608621::e_ksea("PTK2", "TGX221", inc) :- e_activity("PTK2", "TGX221", inc).
+0.7908692874::e_ksea("PTK2", "Tofacitinib", dec); 0.001::e_ksea("PTK2", "Tofacitinib", inc) :- e_activity("PTK2", "Tofacitinib", dec).
+0.001::e_ksea("PTK2", "Tofacitinib", dec); 0.7908692874::e_ksea("PTK2", "Tofacitinib", inc) :- e_activity("PTK2", "Tofacitinib", inc).
+0.5480494176::e_ksea("PTK2", "Torin", dec); 0.001::e_ksea("PTK2", "Torin", inc) :- e_activity("PTK2", "Torin", dec).
+0.001::e_ksea("PTK2", "Torin", dec); 0.5480494176::e_ksea("PTK2", "Torin", inc) :- e_activity("PTK2", "Torin", inc).
+0.5449014849::e_ksea("PTK2", "Trametinib", dec); 0.001::e_ksea("PTK2", "Trametinib", inc) :- e_activity("PTK2", "Trametinib", dec).
+0.001::e_ksea("PTK2", "Trametinib", dec); 0.5449014849::e_ksea("PTK2", "Trametinib", inc) :- e_activity("PTK2", "Trametinib", inc).
+0.5536301271::e_ksea("PTK2", "U73122", dec); 0.001::e_ksea("PTK2", "U73122", inc) :- e_activity("PTK2", "U73122", dec).
+0.001::e_ksea("PTK2", "U73122", dec); 0.5536301271::e_ksea("PTK2", "U73122", inc) :- e_activity("PTK2", "U73122", inc).
+0.5146613814::e_ksea("PTK2", "Ulixertinib", dec); 0.001::e_ksea("PTK2", "Ulixertinib", inc) :- e_activity("PTK2", "Ulixertinib", dec).
+0.001::e_ksea("PTK2", "Ulixertinib", dec); 0.5146613814::e_ksea("PTK2", "Ulixertinib", inc) :- e_activity("PTK2", "Ulixertinib", inc).
+0.7201071798::e_ksea("PTK2", "Vemurafenib", dec); 0.001::e_ksea("PTK2", "Vemurafenib", inc) :- e_activity("PTK2", "Vemurafenib", dec).
+0.001::e_ksea("PTK2", "Vemurafenib", dec); 0.7201071798::e_ksea("PTK2", "Vemurafenib", inc) :- e_activity("PTK2", "Vemurafenib", inc).
+0.5994749034::e_ksea("PTPRG", "AC220", dec); 0.001::e_ksea("PTPRG", "AC220", inc) :- e_activity("PTPRG", "AC220", dec).
+0.001::e_ksea("PTPRG", "AC220", dec); 0.5994749034::e_ksea("PTPRG", "AC220", inc) :- e_activity("PTPRG", "AC220", inc).
+0.5867333314::e_ksea("PTPRG", "AT13148", dec); 0.001::e_ksea("PTPRG", "AT13148", inc) :- e_activity("PTPRG", "AT13148", dec).
+0.001::e_ksea("PTPRG", "AT13148", dec); 0.5867333314::e_ksea("PTPRG", "AT13148", inc) :- e_activity("PTPRG", "AT13148", inc).
+0.5196142857::e_ksea("PTPRG", "AZ20", dec); 0.001::e_ksea("PTPRG", "AZ20", inc) :- e_activity("PTPRG", "AZ20", dec).
+0.001::e_ksea("PTPRG", "AZ20", dec); 0.5196142857::e_ksea("PTPRG", "AZ20", inc) :- e_activity("PTPRG", "AZ20", inc).
+0.6949489803::e_ksea("PTPRG", "AZD1480", dec); 0.001::e_ksea("PTPRG", "AZD1480", inc) :- e_activity("PTPRG", "AZD1480", dec).
+0.001::e_ksea("PTPRG", "AZD1480", dec); 0.6949489803::e_ksea("PTPRG", "AZD1480", inc) :- e_activity("PTPRG", "AZD1480", inc).
+0.5723099101::e_ksea("PTPRG", "AZD3759", dec); 0.001::e_ksea("PTPRG", "AZD3759", inc) :- e_activity("PTPRG", "AZD3759", dec).
+0.001::e_ksea("PTPRG", "AZD3759", dec); 0.5723099101::e_ksea("PTPRG", "AZD3759", inc) :- e_activity("PTPRG", "AZD3759", inc).
+0.6013568692::e_ksea("PTPRG", "AZD5363", dec); 0.001::e_ksea("PTPRG", "AZD5363", inc) :- e_activity("PTPRG", "AZD5363", dec).
+0.001::e_ksea("PTPRG", "AZD5363", dec); 0.6013568692::e_ksea("PTPRG", "AZD5363", inc) :- e_activity("PTPRG", "AZD5363", inc).
+0.5888240545::e_ksea("PTPRG", "AZD5438", dec); 0.001::e_ksea("PTPRG", "AZD5438", inc) :- e_activity("PTPRG", "AZD5438", dec).
+0.001::e_ksea("PTPRG", "AZD5438", dec); 0.5888240545::e_ksea("PTPRG", "AZD5438", inc) :- e_activity("PTPRG", "AZD5438", inc).
+0.594220976::e_ksea("PTPRG", "AZD6482", dec); 0.001::e_ksea("PTPRG", "AZD6482", inc) :- e_activity("PTPRG", "AZD6482", dec).
+0.001::e_ksea("PTPRG", "AZD6482", dec); 0.594220976::e_ksea("PTPRG", "AZD6482", inc) :- e_activity("PTPRG", "AZD6482", inc).
+0.4994500289::e_ksea("PTPRG", "AZD6738", dec); 0.001::e_ksea("PTPRG", "AZD6738", inc) :- e_activity("PTPRG", "AZD6738", dec).
+0.001::e_ksea("PTPRG", "AZD6738", dec); 0.4994500289::e_ksea("PTPRG", "AZD6738", inc) :- e_activity("PTPRG", "AZD6738", inc).
+0.5241091467::e_ksea("PTPRG", "AZD8055", dec); 0.001::e_ksea("PTPRG", "AZD8055", inc) :- e_activity("PTPRG", "AZD8055", dec).
+0.001::e_ksea("PTPRG", "AZD8055", dec); 0.5241091467::e_ksea("PTPRG", "AZD8055", inc) :- e_activity("PTPRG", "AZD8055", inc).
+0.52348215::e_ksea("PTPRG", "Amuvatinib", dec); 0.001::e_ksea("PTPRG", "Amuvatinib", inc) :- e_activity("PTPRG", "Amuvatinib", dec).
+0.001::e_ksea("PTPRG", "Amuvatinib", dec); 0.52348215::e_ksea("PTPRG", "Amuvatinib", inc) :- e_activity("PTPRG", "Amuvatinib", inc).
+0.7116552285::e_ksea("PTPRG", "BX912", dec); 0.001::e_ksea("PTPRG", "BX912", inc) :- e_activity("PTPRG", "BX912", dec).
+0.001::e_ksea("PTPRG", "BX912", dec); 0.7116552285::e_ksea("PTPRG", "BX912", inc) :- e_activity("PTPRG", "BX912", inc).
+0.6357757358::e_ksea("PTPRG", "Bosutinib", dec); 0.001::e_ksea("PTPRG", "Bosutinib", inc) :- e_activity("PTPRG", "Bosutinib", dec).
+0.001::e_ksea("PTPRG", "Bosutinib", dec); 0.6357757358::e_ksea("PTPRG", "Bosutinib", inc) :- e_activity("PTPRG", "Bosutinib", inc).
+0.5031085316::e_ksea("PTPRG", "CAL101", dec); 0.001::e_ksea("PTPRG", "CAL101", inc) :- e_activity("PTPRG", "CAL101", dec).
+0.001::e_ksea("PTPRG", "CAL101", dec); 0.5031085316::e_ksea("PTPRG", "CAL101", inc) :- e_activity("PTPRG", "CAL101", inc).
+0.6005063514::e_ksea("PTPRG", "CHIR99021", dec); 0.001::e_ksea("PTPRG", "CHIR99021", inc) :- e_activity("PTPRG", "CHIR99021", dec).
+0.001::e_ksea("PTPRG", "CHIR99021", dec); 0.6005063514::e_ksea("PTPRG", "CHIR99021", inc) :- e_activity("PTPRG", "CHIR99021", inc).
+0.5628883373::e_ksea("PTPRG", "CX4945", dec); 0.001::e_ksea("PTPRG", "CX4945", inc) :- e_activity("PTPRG", "CX4945", dec).
+0.001::e_ksea("PTPRG", "CX4945", dec); 0.5628883373::e_ksea("PTPRG", "CX4945", inc) :- e_activity("PTPRG", "CX4945", inc).
+0.539721766::e_ksea("PTPRG", "DNAPK", dec); 0.001::e_ksea("PTPRG", "DNAPK", inc) :- e_activity("PTPRG", "DNAPK", dec).
+0.001::e_ksea("PTPRG", "DNAPK", dec); 0.539721766::e_ksea("PTPRG", "DNAPK", inc) :- e_activity("PTPRG", "DNAPK", inc).
+0.5373727723::e_ksea("PTPRG", "Dabrafenib", dec); 0.001::e_ksea("PTPRG", "Dabrafenib", inc) :- e_activity("PTPRG", "Dabrafenib", dec).
+0.001::e_ksea("PTPRG", "Dabrafenib", dec); 0.5373727723::e_ksea("PTPRG", "Dabrafenib", inc) :- e_activity("PTPRG", "Dabrafenib", inc).
+0.6348969732::e_ksea("PTPRG", "Dasatinib", dec); 0.001::e_ksea("PTPRG", "Dasatinib", inc) :- e_activity("PTPRG", "Dasatinib", dec).
+0.001::e_ksea("PTPRG", "Dasatinib", dec); 0.6348969732::e_ksea("PTPRG", "Dasatinib", inc) :- e_activity("PTPRG", "Dasatinib", inc).
+0.5552168923::e_ksea("PTPRG", "Edelfosine", dec); 0.001::e_ksea("PTPRG", "Edelfosine", inc) :- e_activity("PTPRG", "Edelfosine", dec).
+0.001::e_ksea("PTPRG", "Edelfosine", dec); 0.5552168923::e_ksea("PTPRG", "Edelfosine", inc) :- e_activity("PTPRG", "Edelfosine", inc).
+0.6993573912::e_ksea("PTPRG", "FRAX486", dec); 0.001::e_ksea("PTPRG", "FRAX486", inc) :- e_activity("PTPRG", "FRAX486", dec).
+0.001::e_ksea("PTPRG", "FRAX486", dec); 0.6993573912::e_ksea("PTPRG", "FRAX486", inc) :- e_activity("PTPRG", "FRAX486", inc).
+0.5941488041::e_ksea("PTPRG", "GDC0941", dec); 0.001::e_ksea("PTPRG", "GDC0941", inc) :- e_activity("PTPRG", "GDC0941", dec).
+0.001::e_ksea("PTPRG", "GDC0941", dec); 0.5941488041::e_ksea("PTPRG", "GDC0941", inc) :- e_activity("PTPRG", "GDC0941", inc).
+0.6751728479::e_ksea("PTPRG", "GDC0994", dec); 0.001::e_ksea("PTPRG", "GDC0994", inc) :- e_activity("PTPRG", "GDC0994", dec).
+0.001::e_ksea("PTPRG", "GDC0994", dec); 0.6751728479::e_ksea("PTPRG", "GDC0994", inc) :- e_activity("PTPRG", "GDC0994", inc).
+0.513323231::e_ksea("PTPRG", "GF109203X", dec); 0.001::e_ksea("PTPRG", "GF109203X", inc) :- e_activity("PTPRG", "GF109203X", dec).
+0.001::e_ksea("PTPRG", "GF109203X", dec); 0.513323231::e_ksea("PTPRG", "GF109203X", inc) :- e_activity("PTPRG", "GF109203X", inc).
+0.5627159123::e_ksea("PTPRG", "GO6983", dec); 0.001::e_ksea("PTPRG", "GO6983", inc) :- e_activity("PTPRG", "GO6983", dec).
+0.001::e_ksea("PTPRG", "GO6983", dec); 0.5627159123::e_ksea("PTPRG", "GO6983", inc) :- e_activity("PTPRG", "GO6983", inc).
+0.7147288337::e_ksea("PTPRG", "GSK2334470", dec); 0.001::e_ksea("PTPRG", "GSK2334470", inc) :- e_activity("PTPRG", "GSK2334470", dec).
+0.001::e_ksea("PTPRG", "GSK2334470", dec); 0.7147288337::e_ksea("PTPRG", "GSK2334470", inc) :- e_activity("PTPRG", "GSK2334470", inc).
+0.7035546245::e_ksea("PTPRG", "GSK690693", dec); 0.001::e_ksea("PTPRG", "GSK690693", inc) :- e_activity("PTPRG", "GSK690693", dec).
+0.001::e_ksea("PTPRG", "GSK690693", dec); 0.7035546245::e_ksea("PTPRG", "GSK690693", inc) :- e_activity("PTPRG", "GSK690693", inc).
+0.5248036131::e_ksea("PTPRG", "Go6976", dec); 0.001::e_ksea("PTPRG", "Go6976", inc) :- e_activity("PTPRG", "Go6976", dec).
+0.001::e_ksea("PTPRG", "Go6976", dec); 0.5248036131::e_ksea("PTPRG", "Go6976", inc) :- e_activity("PTPRG", "Go6976", inc).
+0.5370912038::e_ksea("PTPRG", "H89", dec); 0.001::e_ksea("PTPRG", "H89", inc) :- e_activity("PTPRG", "H89", dec).
+0.001::e_ksea("PTPRG", "H89", dec); 0.5370912038::e_ksea("PTPRG", "H89", inc) :- e_activity("PTPRG", "H89", inc).
+0.5213286932::e_ksea("PTPRG", "HS173", dec); 0.001::e_ksea("PTPRG", "HS173", inc) :- e_activity("PTPRG", "HS173", dec).
+0.001::e_ksea("PTPRG", "HS173", dec); 0.5213286932::e_ksea("PTPRG", "HS173", inc) :- e_activity("PTPRG", "HS173", inc).
+0.701153374::e_ksea("PTPRG", "Ipatasertib", dec); 0.001::e_ksea("PTPRG", "Ipatasertib", inc) :- e_activity("PTPRG", "Ipatasertib", dec).
+0.001::e_ksea("PTPRG", "Ipatasertib", dec); 0.701153374::e_ksea("PTPRG", "Ipatasertib", inc) :- e_activity("PTPRG", "Ipatasertib", inc).
+0.543894822::e_ksea("PTPRG", "JNJ", dec); 0.001::e_ksea("PTPRG", "JNJ", inc) :- e_activity("PTPRG", "JNJ", dec).
+0.001::e_ksea("PTPRG", "JNJ", dec); 0.543894822::e_ksea("PTPRG", "JNJ", inc) :- e_activity("PTPRG", "JNJ", inc).
+0.5640778953::e_ksea("PTPRG", "JNK", dec); 0.001::e_ksea("PTPRG", "JNK", inc) :- e_activity("PTPRG", "JNK", dec).
+0.001::e_ksea("PTPRG", "JNK", dec); 0.5640778953::e_ksea("PTPRG", "JNK", inc) :- e_activity("PTPRG", "JNK", inc).
+0.5739057117::e_ksea("PTPRG", "KD025", dec); 0.001::e_ksea("PTPRG", "KD025", inc) :- e_activity("PTPRG", "KD025", dec).
+0.001::e_ksea("PTPRG", "KD025", dec); 0.5739057117::e_ksea("PTPRG", "KD025", inc) :- e_activity("PTPRG", "KD025", inc).
+0.5242767864::e_ksea("PTPRG", "KN62", dec); 0.001::e_ksea("PTPRG", "KN62", inc) :- e_activity("PTPRG", "KN62", dec).
+0.001::e_ksea("PTPRG", "KN62", dec); 0.5242767864::e_ksea("PTPRG", "KN62", inc) :- e_activity("PTPRG", "KN62", inc).
+0.6926526878::e_ksea("PTPRG", "KN93", dec); 0.001::e_ksea("PTPRG", "KN93", inc) :- e_activity("PTPRG", "KN93", dec).
+0.001::e_ksea("PTPRG", "KN93", dec); 0.6926526878::e_ksea("PTPRG", "KN93", inc) :- e_activity("PTPRG", "KN93", inc).
+0.613294986::e_ksea("PTPRG", "Ku0063794", dec); 0.001::e_ksea("PTPRG", "Ku0063794", inc) :- e_activity("PTPRG", "Ku0063794", dec).
+0.001::e_ksea("PTPRG", "Ku0063794", dec); 0.613294986::e_ksea("PTPRG", "Ku0063794", inc) :- e_activity("PTPRG", "Ku0063794", inc).
+0.5974862949::e_ksea("PTPRG", "LY2090314", dec); 0.001::e_ksea("PTPRG", "LY2090314", inc) :- e_activity("PTPRG", "LY2090314", dec).
+0.001::e_ksea("PTPRG", "LY2090314", dec); 0.5974862949::e_ksea("PTPRG", "LY2090314", inc) :- e_activity("PTPRG", "LY2090314", inc).
+0.6255107246::e_ksea("PTPRG", "LY2584702", dec); 0.001::e_ksea("PTPRG", "LY2584702", inc) :- e_activity("PTPRG", "LY2584702", dec).
+0.001::e_ksea("PTPRG", "LY2584702", dec); 0.6255107246::e_ksea("PTPRG", "LY2584702", inc) :- e_activity("PTPRG", "LY2584702", inc).
+0.5521413145::e_ksea("PTPRG", "LY2835219", dec); 0.001::e_ksea("PTPRG", "LY2835219", inc) :- e_activity("PTPRG", "LY2835219", dec).
+0.001::e_ksea("PTPRG", "LY2835219", dec); 0.5521413145::e_ksea("PTPRG", "LY2835219", inc) :- e_activity("PTPRG", "LY2835219", inc).
+0.5391269141::e_ksea("PTPRG", "Linsitinib", dec); 0.001::e_ksea("PTPRG", "Linsitinib", inc) :- e_activity("PTPRG", "Linsitinib", dec).
+0.001::e_ksea("PTPRG", "Linsitinib", dec); 0.5391269141::e_ksea("PTPRG", "Linsitinib", inc) :- e_activity("PTPRG", "Linsitinib", inc).
+0.7458543971::e_ksea("PTPRG", "MK2206", dec); 0.001::e_ksea("PTPRG", "MK2206", inc) :- e_activity("PTPRG", "MK2206", dec).
+0.001::e_ksea("PTPRG", "MK2206", dec); 0.7458543971::e_ksea("PTPRG", "MK2206", inc) :- e_activity("PTPRG", "MK2206", inc).
+0.542451748::e_ksea("PTPRG", "NU7441", dec); 0.001::e_ksea("PTPRG", "NU7441", inc) :- e_activity("PTPRG", "NU7441", dec).
+0.001::e_ksea("PTPRG", "NU7441", dec); 0.542451748::e_ksea("PTPRG", "NU7441", inc) :- e_activity("PTPRG", "NU7441", inc).
+0.7079410851::e_ksea("PTPRG", "PD153035", dec); 0.001::e_ksea("PTPRG", "PD153035", inc) :- e_activity("PTPRG", "PD153035", dec).
+0.001::e_ksea("PTPRG", "PD153035", dec); 0.7079410851::e_ksea("PTPRG", "PD153035", inc) :- e_activity("PTPRG", "PD153035", inc).
+0.7980654904::e_ksea("PTPRG", "PF3758309", dec); 0.001::e_ksea("PTPRG", "PF3758309", inc) :- e_activity("PTPRG", "PF3758309", dec).
+0.001::e_ksea("PTPRG", "PF3758309", dec); 0.7980654904::e_ksea("PTPRG", "PF3758309", inc) :- e_activity("PTPRG", "PF3758309", inc).
+0.6303313331::e_ksea("PTPRG", "PF4708671", dec); 0.001::e_ksea("PTPRG", "PF4708671", inc) :- e_activity("PTPRG", "PF4708671", dec).
+0.001::e_ksea("PTPRG", "PF4708671", dec); 0.6303313331::e_ksea("PTPRG", "PF4708671", inc) :- e_activity("PTPRG", "PF4708671", inc).
+0.5404990241::e_ksea("PTPRG", "PH797804", dec); 0.001::e_ksea("PTPRG", "PH797804", inc) :- e_activity("PTPRG", "PH797804", dec).
+0.001::e_ksea("PTPRG", "PH797804", dec); 0.5404990241::e_ksea("PTPRG", "PH797804", inc) :- e_activity("PTPRG", "PH797804", inc).
+0.6364075182::e_ksea("PTPRG", "PIK294", dec); 0.001::e_ksea("PTPRG", "PIK294", inc) :- e_activity("PTPRG", "PIK294", dec).
+0.001::e_ksea("PTPRG", "PIK294", dec); 0.6364075182::e_ksea("PTPRG", "PIK294", inc) :- e_activity("PTPRG", "PIK294", inc).
+0.6581959498::e_ksea("PTPRG", "Ribociclib", dec); 0.001::e_ksea("PTPRG", "Ribociclib", inc) :- e_activity("PTPRG", "Ribociclib", dec).
+0.001::e_ksea("PTPRG", "Ribociclib", dec); 0.6581959498::e_ksea("PTPRG", "Ribociclib", inc) :- e_activity("PTPRG", "Ribociclib", inc).
+0.507351225::e_ksea("PTPRG", "Ripasudil", dec); 0.001::e_ksea("PTPRG", "Ripasudil", inc) :- e_activity("PTPRG", "Ripasudil", dec).
+0.001::e_ksea("PTPRG", "Ripasudil", dec); 0.507351225::e_ksea("PTPRG", "Ripasudil", inc) :- e_activity("PTPRG", "Ripasudil", inc).
+0.5240251141::e_ksea("PTPRG", "SP600125", dec); 0.001::e_ksea("PTPRG", "SP600125", inc) :- e_activity("PTPRG", "SP600125", dec).
+0.001::e_ksea("PTPRG", "SP600125", dec); 0.5240251141::e_ksea("PTPRG", "SP600125", inc) :- e_activity("PTPRG", "SP600125", inc).
+0.5384363688::e_ksea("PTPRG", "Selumetinib", dec); 0.001::e_ksea("PTPRG", "Selumetinib", inc) :- e_activity("PTPRG", "Selumetinib", dec).
+0.001::e_ksea("PTPRG", "Selumetinib", dec); 0.5384363688::e_ksea("PTPRG", "Selumetinib", inc) :- e_activity("PTPRG", "Selumetinib", inc).
+0.5127592503::e_ksea("PTPRG", "TAK715", dec); 0.001::e_ksea("PTPRG", "TAK715", inc) :- e_activity("PTPRG", "TAK715", dec).
+0.001::e_ksea("PTPRG", "TAK715", dec); 0.5127592503::e_ksea("PTPRG", "TAK715", inc) :- e_activity("PTPRG", "TAK715", inc).
+0.590264172::e_ksea("PTPRG", "TBCA", dec); 0.001::e_ksea("PTPRG", "TBCA", inc) :- e_activity("PTPRG", "TBCA", dec).
+0.001::e_ksea("PTPRG", "TBCA", dec); 0.590264172::e_ksea("PTPRG", "TBCA", inc) :- e_activity("PTPRG", "TBCA", inc).
+0.5736186779::e_ksea("PTPRG", "TGX221", dec); 0.001::e_ksea("PTPRG", "TGX221", inc) :- e_activity("PTPRG", "TGX221", dec).
+0.001::e_ksea("PTPRG", "TGX221", dec); 0.5736186779::e_ksea("PTPRG", "TGX221", inc) :- e_activity("PTPRG", "TGX221", inc).
+0.6956495061::e_ksea("PTPRG", "Tofacitinib", dec); 0.001::e_ksea("PTPRG", "Tofacitinib", inc) :- e_activity("PTPRG", "Tofacitinib", dec).
+0.001::e_ksea("PTPRG", "Tofacitinib", dec); 0.6956495061::e_ksea("PTPRG", "Tofacitinib", inc) :- e_activity("PTPRG", "Tofacitinib", inc).
+0.5940448386::e_ksea("PTPRG", "Torin", dec); 0.001::e_ksea("PTPRG", "Torin", inc) :- e_activity("PTPRG", "Torin", dec).
+0.001::e_ksea("PTPRG", "Torin", dec); 0.5940448386::e_ksea("PTPRG", "Torin", inc) :- e_activity("PTPRG", "Torin", inc).
+0.6627782909::e_ksea("PTPRG", "Trametinib", dec); 0.001::e_ksea("PTPRG", "Trametinib", inc) :- e_activity("PTPRG", "Trametinib", dec).
+0.001::e_ksea("PTPRG", "Trametinib", dec); 0.6627782909::e_ksea("PTPRG", "Trametinib", inc) :- e_activity("PTPRG", "Trametinib", inc).
+0.5106478711::e_ksea("PTPRG", "U73122", dec); 0.001::e_ksea("PTPRG", "U73122", inc) :- e_activity("PTPRG", "U73122", dec).
+0.001::e_ksea("PTPRG", "U73122", dec); 0.5106478711::e_ksea("PTPRG", "U73122", inc) :- e_activity("PTPRG", "U73122", inc).
+0.5275644456::e_ksea("PTPRG", "Ulixertinib", dec); 0.001::e_ksea("PTPRG", "Ulixertinib", inc) :- e_activity("PTPRG", "Ulixertinib", dec).
+0.001::e_ksea("PTPRG", "Ulixertinib", dec); 0.5275644456::e_ksea("PTPRG", "Ulixertinib", inc) :- e_activity("PTPRG", "Ulixertinib", inc).
+0.5138175024::e_ksea("PTPRG", "Vemurafenib", dec); 0.001::e_ksea("PTPRG", "Vemurafenib", inc) :- e_activity("PTPRG", "Vemurafenib", dec).
+0.001::e_ksea("PTPRG", "Vemurafenib", dec); 0.5138175024::e_ksea("PTPRG", "Vemurafenib", inc) :- e_activity("PTPRG", "Vemurafenib", inc).
+0.8398796284::e_ksea("SRC", "AC220", dec); 0.001::e_ksea("SRC", "AC220", inc) :- e_activity("SRC", "AC220", dec).
+0.001::e_ksea("SRC", "AC220", dec); 0.8398796284::e_ksea("SRC", "AC220", inc) :- e_activity("SRC", "AC220", inc).
+0.6528554508::e_ksea("SRC", "AT13148", dec); 0.001::e_ksea("SRC", "AT13148", inc) :- e_activity("SRC", "AT13148", dec).
+0.001::e_ksea("SRC", "AT13148", dec); 0.6528554508::e_ksea("SRC", "AT13148", inc) :- e_activity("SRC", "AT13148", inc).
+0.7910925693::e_ksea("SRC", "AZ20", dec); 0.001::e_ksea("SRC", "AZ20", inc) :- e_activity("SRC", "AZ20", dec).
+0.001::e_ksea("SRC", "AZ20", dec); 0.7910925693::e_ksea("SRC", "AZ20", inc) :- e_activity("SRC", "AZ20", inc).
+0.6233229283::e_ksea("SRC", "AZD1480", dec); 0.001::e_ksea("SRC", "AZD1480", inc) :- e_activity("SRC", "AZD1480", dec).
+0.001::e_ksea("SRC", "AZD1480", dec); 0.6233229283::e_ksea("SRC", "AZD1480", inc) :- e_activity("SRC", "AZD1480", inc).
+0.6423967795::e_ksea("SRC", "AZD3759", dec); 0.001::e_ksea("SRC", "AZD3759", inc) :- e_activity("SRC", "AZD3759", dec).
+0.001::e_ksea("SRC", "AZD3759", dec); 0.6423967795::e_ksea("SRC", "AZD3759", inc) :- e_activity("SRC", "AZD3759", inc).
+0.6745323453::e_ksea("SRC", "AZD5363", dec); 0.001::e_ksea("SRC", "AZD5363", inc) :- e_activity("SRC", "AZD5363", dec).
+0.001::e_ksea("SRC", "AZD5363", dec); 0.6745323453::e_ksea("SRC", "AZD5363", inc) :- e_activity("SRC", "AZD5363", inc).
+0.7511368553::e_ksea("SRC", "AZD5438", dec); 0.001::e_ksea("SRC", "AZD5438", inc) :- e_activity("SRC", "AZD5438", dec).
+0.001::e_ksea("SRC", "AZD5438", dec); 0.7511368553::e_ksea("SRC", "AZD5438", inc) :- e_activity("SRC", "AZD5438", inc).
+0.8811418526::e_ksea("SRC", "AZD6482", dec); 0.001::e_ksea("SRC", "AZD6482", inc) :- e_activity("SRC", "AZD6482", dec).
+0.001::e_ksea("SRC", "AZD6482", dec); 0.8811418526::e_ksea("SRC", "AZD6482", inc) :- e_activity("SRC", "AZD6482", inc).
+0.9760158221::e_ksea("SRC", "AZD6738", dec); 0.001::e_ksea("SRC", "AZD6738", inc) :- e_activity("SRC", "AZD6738", dec).
+0.001::e_ksea("SRC", "AZD6738", dec); 0.9760158221::e_ksea("SRC", "AZD6738", inc) :- e_activity("SRC", "AZD6738", inc).
+0.6729559654::e_ksea("SRC", "AZD8055", dec); 0.001::e_ksea("SRC", "AZD8055", inc) :- e_activity("SRC", "AZD8055", dec).
+0.001::e_ksea("SRC", "AZD8055", dec); 0.6729559654::e_ksea("SRC", "AZD8055", inc) :- e_activity("SRC", "AZD8055", inc).
+0.6002503962::e_ksea("SRC", "Amuvatinib", dec); 0.001::e_ksea("SRC", "Amuvatinib", inc) :- e_activity("SRC", "Amuvatinib", dec).
+0.001::e_ksea("SRC", "Amuvatinib", dec); 0.6002503962::e_ksea("SRC", "Amuvatinib", inc) :- e_activity("SRC", "Amuvatinib", inc).
+0.5369145878::e_ksea("SRC", "BX912", dec); 0.001::e_ksea("SRC", "BX912", inc) :- e_activity("SRC", "BX912", dec).
+0.001::e_ksea("SRC", "BX912", dec); 0.5369145878::e_ksea("SRC", "BX912", inc) :- e_activity("SRC", "BX912", inc).
+0.9872709238::e_ksea("SRC", "Bosutinib", dec); 0.001::e_ksea("SRC", "Bosutinib", inc) :- e_activity("SRC", "Bosutinib", dec).
+0.001::e_ksea("SRC", "Bosutinib", dec); 0.9872709238::e_ksea("SRC", "Bosutinib", inc) :- e_activity("SRC", "Bosutinib", inc).
+0.5623476275::e_ksea("SRC", "CAL101", dec); 0.001::e_ksea("SRC", "CAL101", inc) :- e_activity("SRC", "CAL101", dec).
+0.001::e_ksea("SRC", "CAL101", dec); 0.5623476275::e_ksea("SRC", "CAL101", inc) :- e_activity("SRC", "CAL101", inc).
+0.7000871525::e_ksea("SRC", "CHIR99021", dec); 0.001::e_ksea("SRC", "CHIR99021", inc) :- e_activity("SRC", "CHIR99021", dec).
+0.001::e_ksea("SRC", "CHIR99021", dec); 0.7000871525::e_ksea("SRC", "CHIR99021", inc) :- e_activity("SRC", "CHIR99021", inc).
+0.9149204826::e_ksea("SRC", "CX4945", dec); 0.001::e_ksea("SRC", "CX4945", inc) :- e_activity("SRC", "CX4945", dec).
+0.001::e_ksea("SRC", "CX4945", dec); 0.9149204826::e_ksea("SRC", "CX4945", inc) :- e_activity("SRC", "CX4945", inc).
+0.6309896247::e_ksea("SRC", "DNAPK", dec); 0.001::e_ksea("SRC", "DNAPK", inc) :- e_activity("SRC", "DNAPK", dec).
+0.001::e_ksea("SRC", "DNAPK", dec); 0.6309896247::e_ksea("SRC", "DNAPK", inc) :- e_activity("SRC", "DNAPK", inc).
+0.6500982993::e_ksea("SRC", "Dabrafenib", dec); 0.001::e_ksea("SRC", "Dabrafenib", inc) :- e_activity("SRC", "Dabrafenib", dec).
+0.001::e_ksea("SRC", "Dabrafenib", dec); 0.6500982993::e_ksea("SRC", "Dabrafenib", inc) :- e_activity("SRC", "Dabrafenib", inc).
+0.887915682::e_ksea("SRC", "Dasatinib", dec); 0.001::e_ksea("SRC", "Dasatinib", inc) :- e_activity("SRC", "Dasatinib", dec).
+0.001::e_ksea("SRC", "Dasatinib", dec); 0.887915682::e_ksea("SRC", "Dasatinib", inc) :- e_activity("SRC", "Dasatinib", inc).
+0.853426962::e_ksea("SRC", "Edelfosine", dec); 0.001::e_ksea("SRC", "Edelfosine", inc) :- e_activity("SRC", "Edelfosine", dec).
+0.001::e_ksea("SRC", "Edelfosine", dec); 0.853426962::e_ksea("SRC", "Edelfosine", inc) :- e_activity("SRC", "Edelfosine", inc).
+0.7951814123::e_ksea("SRC", "FRAX486", dec); 0.001::e_ksea("SRC", "FRAX486", inc) :- e_activity("SRC", "FRAX486", dec).
+0.001::e_ksea("SRC", "FRAX486", dec); 0.7951814123::e_ksea("SRC", "FRAX486", inc) :- e_activity("SRC", "FRAX486", inc).
+0.5568026358::e_ksea("SRC", "GDC0941", dec); 0.001::e_ksea("SRC", "GDC0941", inc) :- e_activity("SRC", "GDC0941", dec).
+0.001::e_ksea("SRC", "GDC0941", dec); 0.5568026358::e_ksea("SRC", "GDC0941", inc) :- e_activity("SRC", "GDC0941", inc).
+0.9316782593::e_ksea("SRC", "GDC0994", dec); 0.001::e_ksea("SRC", "GDC0994", inc) :- e_activity("SRC", "GDC0994", dec).
+0.001::e_ksea("SRC", "GDC0994", dec); 0.9316782593::e_ksea("SRC", "GDC0994", inc) :- e_activity("SRC", "GDC0994", inc).
+0.9895363566::e_ksea("SRC", "GF109203X", dec); 0.001::e_ksea("SRC", "GF109203X", inc) :- e_activity("SRC", "GF109203X", dec).
+0.001::e_ksea("SRC", "GF109203X", dec); 0.9895363566::e_ksea("SRC", "GF109203X", inc) :- e_activity("SRC", "GF109203X", inc).
+0.9096057458::e_ksea("SRC", "GO6983", dec); 0.001::e_ksea("SRC", "GO6983", inc) :- e_activity("SRC", "GO6983", dec).
+0.001::e_ksea("SRC", "GO6983", dec); 0.9096057458::e_ksea("SRC", "GO6983", inc) :- e_activity("SRC", "GO6983", inc).
+0.7280571419::e_ksea("SRC", "GSK2334470", dec); 0.001::e_ksea("SRC", "GSK2334470", inc) :- e_activity("SRC", "GSK2334470", dec).
+0.001::e_ksea("SRC", "GSK2334470", dec); 0.7280571419::e_ksea("SRC", "GSK2334470", inc) :- e_activity("SRC", "GSK2334470", inc).
+0.5611571664::e_ksea("SRC", "GSK690693", dec); 0.001::e_ksea("SRC", "GSK690693", inc) :- e_activity("SRC", "GSK690693", dec).
+0.001::e_ksea("SRC", "GSK690693", dec); 0.5611571664::e_ksea("SRC", "GSK690693", inc) :- e_activity("SRC", "GSK690693", inc).
+0.7813235596::e_ksea("SRC", "Go6976", dec); 0.001::e_ksea("SRC", "Go6976", inc) :- e_activity("SRC", "Go6976", dec).
+0.001::e_ksea("SRC", "Go6976", dec); 0.7813235596::e_ksea("SRC", "Go6976", inc) :- e_activity("SRC", "Go6976", inc).
+0.9246610655::e_ksea("SRC", "H89", dec); 0.001::e_ksea("SRC", "H89", inc) :- e_activity("SRC", "H89", dec).
+0.001::e_ksea("SRC", "H89", dec); 0.9246610655::e_ksea("SRC", "H89", inc) :- e_activity("SRC", "H89", inc).
+0.5650781645::e_ksea("SRC", "HS173", dec); 0.001::e_ksea("SRC", "HS173", inc) :- e_activity("SRC", "HS173", dec).
+0.001::e_ksea("SRC", "HS173", dec); 0.5650781645::e_ksea("SRC", "HS173", inc) :- e_activity("SRC", "HS173", inc).
+0.953712136::e_ksea("SRC", "Ipatasertib", dec); 0.001::e_ksea("SRC", "Ipatasertib", inc) :- e_activity("SRC", "Ipatasertib", dec).
+0.001::e_ksea("SRC", "Ipatasertib", dec); 0.953712136::e_ksea("SRC", "Ipatasertib", inc) :- e_activity("SRC", "Ipatasertib", inc).
+0.7610507859::e_ksea("SRC", "JNJ", dec); 0.001::e_ksea("SRC", "JNJ", inc) :- e_activity("SRC", "JNJ", dec).
+0.001::e_ksea("SRC", "JNJ", dec); 0.7610507859::e_ksea("SRC", "JNJ", inc) :- e_activity("SRC", "JNJ", inc).
+0.6327992685::e_ksea("SRC", "JNK", dec); 0.001::e_ksea("SRC", "JNK", inc) :- e_activity("SRC", "JNK", dec).
+0.001::e_ksea("SRC", "JNK", dec); 0.6327992685::e_ksea("SRC", "JNK", inc) :- e_activity("SRC", "JNK", inc).
+0.6146734092::e_ksea("SRC", "KD025", dec); 0.001::e_ksea("SRC", "KD025", inc) :- e_activity("SRC", "KD025", dec).
+0.001::e_ksea("SRC", "KD025", dec); 0.6146734092::e_ksea("SRC", "KD025", inc) :- e_activity("SRC", "KD025", inc).
+0.5552953468::e_ksea("SRC", "KN62", dec); 0.001::e_ksea("SRC", "KN62", inc) :- e_activity("SRC", "KN62", dec).
+0.001::e_ksea("SRC", "KN62", dec); 0.5552953468::e_ksea("SRC", "KN62", inc) :- e_activity("SRC", "KN62", inc).
+0.8675867996::e_ksea("SRC", "KN93", dec); 0.001::e_ksea("SRC", "KN93", inc) :- e_activity("SRC", "KN93", dec).
+0.001::e_ksea("SRC", "KN93", dec); 0.8675867996::e_ksea("SRC", "KN93", inc) :- e_activity("SRC", "KN93", inc).
+0.6996859575::e_ksea("SRC", "Ku0063794", dec); 0.001::e_ksea("SRC", "Ku0063794", inc) :- e_activity("SRC", "Ku0063794", dec).
+0.001::e_ksea("SRC", "Ku0063794", dec); 0.6996859575::e_ksea("SRC", "Ku0063794", inc) :- e_activity("SRC", "Ku0063794", inc).
+0.6699186491::e_ksea("SRC", "LY2090314", dec); 0.001::e_ksea("SRC", "LY2090314", inc) :- e_activity("SRC", "LY2090314", dec).
+0.001::e_ksea("SRC", "LY2090314", dec); 0.6699186491::e_ksea("SRC", "LY2090314", inc) :- e_activity("SRC", "LY2090314", inc).
+0.6762884945::e_ksea("SRC", "LY2584702", dec); 0.001::e_ksea("SRC", "LY2584702", inc) :- e_activity("SRC", "LY2584702", dec).
+0.001::e_ksea("SRC", "LY2584702", dec); 0.6762884945::e_ksea("SRC", "LY2584702", inc) :- e_activity("SRC", "LY2584702", inc).
+0.5665501728::e_ksea("SRC", "LY2835219", dec); 0.001::e_ksea("SRC", "LY2835219", inc) :- e_activity("SRC", "LY2835219", dec).
+0.001::e_ksea("SRC", "LY2835219", dec); 0.5665501728::e_ksea("SRC", "LY2835219", inc) :- e_activity("SRC", "LY2835219", inc).
+0.6908962879::e_ksea("SRC", "Linsitinib", dec); 0.001::e_ksea("SRC", "Linsitinib", inc) :- e_activity("SRC", "Linsitinib", dec).
+0.001::e_ksea("SRC", "Linsitinib", dec); 0.6908962879::e_ksea("SRC", "Linsitinib", inc) :- e_activity("SRC", "Linsitinib", inc).
+0.7587734741::e_ksea("SRC", "MK2206", dec); 0.001::e_ksea("SRC", "MK2206", inc) :- e_activity("SRC", "MK2206", dec).
+0.001::e_ksea("SRC", "MK2206", dec); 0.7587734741::e_ksea("SRC", "MK2206", inc) :- e_activity("SRC", "MK2206", inc).
+0.9262141975::e_ksea("SRC", "NU7441", dec); 0.001::e_ksea("SRC", "NU7441", inc) :- e_activity("SRC", "NU7441", dec).
+0.001::e_ksea("SRC", "NU7441", dec); 0.9262141975::e_ksea("SRC", "NU7441", inc) :- e_activity("SRC", "NU7441", inc).
+0.7547020431::e_ksea("SRC", "PD153035", dec); 0.001::e_ksea("SRC", "PD153035", inc) :- e_activity("SRC", "PD153035", dec).
+0.001::e_ksea("SRC", "PD153035", dec); 0.7547020431::e_ksea("SRC", "PD153035", inc) :- e_activity("SRC", "PD153035", inc).
+0.7221966639::e_ksea("SRC", "PF3758309", dec); 0.001::e_ksea("SRC", "PF3758309", inc) :- e_activity("SRC", "PF3758309", dec).
+0.001::e_ksea("SRC", "PF3758309", dec); 0.7221966639::e_ksea("SRC", "PF3758309", inc) :- e_activity("SRC", "PF3758309", inc).
+0.9067870045::e_ksea("SRC", "PF4708671", dec); 0.001::e_ksea("SRC", "PF4708671", inc) :- e_activity("SRC", "PF4708671", dec).
+0.001::e_ksea("SRC", "PF4708671", dec); 0.9067870045::e_ksea("SRC", "PF4708671", inc) :- e_activity("SRC", "PF4708671", inc).
+0.6567843858::e_ksea("SRC", "PH797804", dec); 0.001::e_ksea("SRC", "PH797804", inc) :- e_activity("SRC", "PH797804", dec).
+0.001::e_ksea("SRC", "PH797804", dec); 0.6567843858::e_ksea("SRC", "PH797804", inc) :- e_activity("SRC", "PH797804", inc).
+0.8808273::e_ksea("SRC", "PIK294", dec); 0.001::e_ksea("SRC", "PIK294", inc) :- e_activity("SRC", "PIK294", dec).
+0.001::e_ksea("SRC", "PIK294", dec); 0.8808273::e_ksea("SRC", "PIK294", inc) :- e_activity("SRC", "PIK294", inc).
+0.8713799873::e_ksea("SRC", "Ribociclib", dec); 0.001::e_ksea("SRC", "Ribociclib", inc) :- e_activity("SRC", "Ribociclib", dec).
+0.001::e_ksea("SRC", "Ribociclib", dec); 0.8713799873::e_ksea("SRC", "Ribociclib", inc) :- e_activity("SRC", "Ribociclib", inc).
+0.6171787004::e_ksea("SRC", "Ripasudil", dec); 0.001::e_ksea("SRC", "Ripasudil", inc) :- e_activity("SRC", "Ripasudil", dec).
+0.001::e_ksea("SRC", "Ripasudil", dec); 0.6171787004::e_ksea("SRC", "Ripasudil", inc) :- e_activity("SRC", "Ripasudil", inc).
+0.9475344372::e_ksea("SRC", "SP600125", dec); 0.001::e_ksea("SRC", "SP600125", inc) :- e_activity("SRC", "SP600125", dec).
+0.001::e_ksea("SRC", "SP600125", dec); 0.9475344372::e_ksea("SRC", "SP600125", inc) :- e_activity("SRC", "SP600125", inc).
+0.7202679311::e_ksea("SRC", "Selumetinib", dec); 0.001::e_ksea("SRC", "Selumetinib", inc) :- e_activity("SRC", "Selumetinib", dec).
+0.001::e_ksea("SRC", "Selumetinib", dec); 0.7202679311::e_ksea("SRC", "Selumetinib", inc) :- e_activity("SRC", "Selumetinib", inc).
+0.8338084969::e_ksea("SRC", "TAK715", dec); 0.001::e_ksea("SRC", "TAK715", inc) :- e_activity("SRC", "TAK715", dec).
+0.001::e_ksea("SRC", "TAK715", dec); 0.8338084969::e_ksea("SRC", "TAK715", inc) :- e_activity("SRC", "TAK715", inc).
+0.7682700659::e_ksea("SRC", "TBCA", dec); 0.001::e_ksea("SRC", "TBCA", inc) :- e_activity("SRC", "TBCA", dec).
+0.001::e_ksea("SRC", "TBCA", dec); 0.7682700659::e_ksea("SRC", "TBCA", inc) :- e_activity("SRC", "TBCA", inc).
+0.5999814232::e_ksea("SRC", "TGX221", dec); 0.001::e_ksea("SRC", "TGX221", inc) :- e_activity("SRC", "TGX221", dec).
+0.001::e_ksea("SRC", "TGX221", dec); 0.5999814232::e_ksea("SRC", "TGX221", inc) :- e_activity("SRC", "TGX221", inc).
+0.860738931::e_ksea("SRC", "Tofacitinib", dec); 0.001::e_ksea("SRC", "Tofacitinib", inc) :- e_activity("SRC", "Tofacitinib", dec).
+0.001::e_ksea("SRC", "Tofacitinib", dec); 0.860738931::e_ksea("SRC", "Tofacitinib", inc) :- e_activity("SRC", "Tofacitinib", inc).
+0.7746828572::e_ksea("SRC", "Torin", dec); 0.001::e_ksea("SRC", "Torin", inc) :- e_activity("SRC", "Torin", dec).
+0.001::e_ksea("SRC", "Torin", dec); 0.7746828572::e_ksea("SRC", "Torin", inc) :- e_activity("SRC", "Torin", inc).
+0.7352346687::e_ksea("SRC", "Trametinib", dec); 0.001::e_ksea("SRC", "Trametinib", inc) :- e_activity("SRC", "Trametinib", dec).
+0.001::e_ksea("SRC", "Trametinib", dec); 0.7352346687::e_ksea("SRC", "Trametinib", inc) :- e_activity("SRC", "Trametinib", inc).
+0.5503249012::e_ksea("SRC", "U73122", dec); 0.001::e_ksea("SRC", "U73122", inc) :- e_activity("SRC", "U73122", dec).
+0.001::e_ksea("SRC", "U73122", dec); 0.5503249012::e_ksea("SRC", "U73122", inc) :- e_activity("SRC", "U73122", inc).
+0.6018116265::e_ksea("SRC", "Ulixertinib", dec); 0.001::e_ksea("SRC", "Ulixertinib", inc) :- e_activity("SRC", "Ulixertinib", dec).
+0.001::e_ksea("SRC", "Ulixertinib", dec); 0.6018116265::e_ksea("SRC", "Ulixertinib", inc) :- e_activity("SRC", "Ulixertinib", inc).
+0.7965407629::e_ksea("SRC", "Vemurafenib", dec); 0.001::e_ksea("SRC", "Vemurafenib", inc) :- e_activity("SRC", "Vemurafenib", dec).
+0.001::e_ksea("SRC", "Vemurafenib", dec); 0.7965407629::e_ksea("SRC", "Vemurafenib", inc) :- e_activity("SRC", "Vemurafenib", inc).
+0.1757321005::e_ksea("ABL1", "AC220", dec); 0.1757321005::e_ksea("ABL1", "AC220", inc) :- enzyme("ABL1").
+0.2046026536::e_ksea("ABL1", "AT13148", dec); 0.2046026536::e_ksea("ABL1", "AT13148", inc) :- enzyme("ABL1").
+0.1741516215::e_ksea("ABL1", "AZ20", dec); 0.1741516215::e_ksea("ABL1", "AZ20", inc) :- enzyme("ABL1").
+0.2151701559::e_ksea("ABL1", "AZD1480", dec); 0.2151701559::e_ksea("ABL1", "AZD1480", inc) :- enzyme("ABL1").
+0.0817921827::e_ksea("ABL1", "AZD3759", dec); 0.0817921827::e_ksea("ABL1", "AZD3759", inc) :- enzyme("ABL1").
+0.1347151883::e_ksea("ABL1", "AZD5363", dec); 0.1347151883::e_ksea("ABL1", "AZD5363", inc) :- enzyme("ABL1").
+0.1986342296::e_ksea("ABL1", "AZD5438", dec); 0.1986342296::e_ksea("ABL1", "AZD5438", inc) :- enzyme("ABL1").
+0.094617134::e_ksea("ABL1", "AZD6482", dec); 0.094617134::e_ksea("ABL1", "AZD6482", inc) :- enzyme("ABL1").
+0.2468265561::e_ksea("ABL1", "AZD6738", dec); 0.2468265561::e_ksea("ABL1", "AZD6738", inc) :- enzyme("ABL1").
+0.1883240092::e_ksea("ABL1", "AZD8055", dec); 0.1883240092::e_ksea("ABL1", "AZD8055", inc) :- enzyme("ABL1").
+0.1477192854::e_ksea("ABL1", "Amuvatinib", dec); 0.1477192854::e_ksea("ABL1", "Amuvatinib", inc) :- enzyme("ABL1").
+0.1872112858::e_ksea("ABL1", "BX912", dec); 0.1872112858::e_ksea("ABL1", "BX912", inc) :- enzyme("ABL1").
+0.00692537::e_ksea("ABL1", "Bosutinib", dec); 0.00692537::e_ksea("ABL1", "Bosutinib", inc) :- enzyme("ABL1").
+0.2238433245::e_ksea("ABL1", "CAL101", dec); 0.2238433245::e_ksea("ABL1", "CAL101", inc) :- enzyme("ABL1").
+0.1081881675::e_ksea("ABL1", "CHIR99021", dec); 0.1081881675::e_ksea("ABL1", "CHIR99021", inc) :- enzyme("ABL1").
+0.1098672625::e_ksea("ABL1", "CX4945", dec); 0.1098672625::e_ksea("ABL1", "CX4945", inc) :- enzyme("ABL1").
+0.1436936221::e_ksea("ABL1", "DNAPK", dec); 0.1436936221::e_ksea("ABL1", "DNAPK", inc) :- enzyme("ABL1").
+0.1316151279::e_ksea("ABL1", "Dabrafenib", dec); 0.1316151279::e_ksea("ABL1", "Dabrafenib", inc) :- enzyme("ABL1").
+0.0011193671::e_ksea("ABL1", "Dasatinib", dec); 0.0011193671::e_ksea("ABL1", "Dasatinib", inc) :- enzyme("ABL1").
+0.2442610734::e_ksea("ABL1", "Edelfosine", dec); 0.2442610734::e_ksea("ABL1", "Edelfosine", inc) :- enzyme("ABL1").
+0.0078561203::e_ksea("ABL1", "FRAX486", dec); 0.0078561203::e_ksea("ABL1", "FRAX486", inc) :- enzyme("ABL1").
+0.1024994037::e_ksea("ABL1", "GDC0941", dec); 0.1024994037::e_ksea("ABL1", "GDC0941", inc) :- enzyme("ABL1").
+0.0669311461::e_ksea("ABL1", "GDC0994", dec); 0.0669311461::e_ksea("ABL1", "GDC0994", inc) :- enzyme("ABL1").
+0.1802465061::e_ksea("ABL1", "GF109203X", dec); 0.1802465061::e_ksea("ABL1", "GF109203X", inc) :- enzyme("ABL1").
+0.2468794757::e_ksea("ABL1", "GO6983", dec); 0.2468794757::e_ksea("ABL1", "GO6983", inc) :- enzyme("ABL1").
+0.2448954568::e_ksea("ABL1", "GSK2334470", dec); 0.2448954568::e_ksea("ABL1", "GSK2334470", inc) :- enzyme("ABL1").
+0.2195941844::e_ksea("ABL1", "GSK690693", dec); 0.2195941844::e_ksea("ABL1", "GSK690693", inc) :- enzyme("ABL1").
+0.1842097366::e_ksea("ABL1", "Go6976", dec); 0.1842097366::e_ksea("ABL1", "Go6976", inc) :- enzyme("ABL1").
+0.2381658585::e_ksea("ABL1", "H89", dec); 0.2381658585::e_ksea("ABL1", "H89", inc) :- enzyme("ABL1").
+0.1863930324::e_ksea("ABL1", "HS173", dec); 0.1863930324::e_ksea("ABL1", "HS173", inc) :- enzyme("ABL1").
+0.1211259428::e_ksea("ABL1", "Ipatasertib", dec); 0.1211259428::e_ksea("ABL1", "Ipatasertib", inc) :- enzyme("ABL1").
+0.131753604::e_ksea("ABL1", "JNJ", dec); 0.131753604::e_ksea("ABL1", "JNJ", inc) :- enzyme("ABL1").
+0.206604474::e_ksea("ABL1", "JNK", dec); 0.206604474::e_ksea("ABL1", "JNK", inc) :- enzyme("ABL1").
+0.1736392536::e_ksea("ABL1", "KD025", dec); 0.1736392536::e_ksea("ABL1", "KD025", inc) :- enzyme("ABL1").
+0.0929711012::e_ksea("ABL1", "KN62", dec); 0.0929711012::e_ksea("ABL1", "KN62", inc) :- enzyme("ABL1").
+0.1407056674::e_ksea("ABL1", "KN93", dec); 0.1407056674::e_ksea("ABL1", "KN93", inc) :- enzyme("ABL1").
+0.2039514882::e_ksea("ABL1", "Ku0063794", dec); 0.2039514882::e_ksea("ABL1", "Ku0063794", inc) :- enzyme("ABL1").
+0.2234735548::e_ksea("ABL1", "LY2090314", dec); 0.2234735548::e_ksea("ABL1", "LY2090314", inc) :- enzyme("ABL1").
+0.0870639998::e_ksea("ABL1", "LY2584702", dec); 0.0870639998::e_ksea("ABL1", "LY2584702", inc) :- enzyme("ABL1").
+0.1572933947::e_ksea("ABL1", "LY2835219", dec); 0.1572933947::e_ksea("ABL1", "LY2835219", inc) :- enzyme("ABL1").
+0.1407969747::e_ksea("ABL1", "Linsitinib", dec); 0.1407969747::e_ksea("ABL1", "Linsitinib", inc) :- enzyme("ABL1").
+0.170756188::e_ksea("ABL1", "MK2206", dec); 0.170756188::e_ksea("ABL1", "MK2206", inc) :- enzyme("ABL1").
+0.2145682141::e_ksea("ABL1", "NU7441", dec); 0.2145682141::e_ksea("ABL1", "NU7441", inc) :- enzyme("ABL1").
+0.1881963365::e_ksea("ABL1", "PD153035", dec); 0.1881963365::e_ksea("ABL1", "PD153035", inc) :- enzyme("ABL1").
+0.2160376196::e_ksea("ABL1", "PF3758309", dec); 0.2160376196::e_ksea("ABL1", "PF3758309", inc) :- enzyme("ABL1").
+0.2442250567::e_ksea("ABL1", "PF4708671", dec); 0.2442250567::e_ksea("ABL1", "PF4708671", inc) :- enzyme("ABL1").
+0.2143546402::e_ksea("ABL1", "PH797804", dec); 0.2143546402::e_ksea("ABL1", "PH797804", inc) :- enzyme("ABL1").
+0.1995995594::e_ksea("ABL1", "PIK294", dec); 0.1995995594::e_ksea("ABL1", "PIK294", inc) :- enzyme("ABL1").
+0.1242258135::e_ksea("ABL1", "Ribociclib", dec); 0.1242258135::e_ksea("ABL1", "Ribociclib", inc) :- enzyme("ABL1").
+0.1797780148::e_ksea("ABL1", "Ripasudil", dec); 0.1797780148::e_ksea("ABL1", "Ripasudil", inc) :- enzyme("ABL1").
+0.2083241596::e_ksea("ABL1", "SP600125", dec); 0.2083241596::e_ksea("ABL1", "SP600125", inc) :- enzyme("ABL1").
+0.250009417::e_ksea("ABL1", "Selumetinib", dec); 0.250009417::e_ksea("ABL1", "Selumetinib", inc) :- enzyme("ABL1").
+0.1607363573::e_ksea("ABL1", "TAK715", dec); 0.1607363573::e_ksea("ABL1", "TAK715", inc) :- enzyme("ABL1").
+0.233665359::e_ksea("ABL1", "TBCA", dec); 0.233665359::e_ksea("ABL1", "TBCA", inc) :- enzyme("ABL1").
+0.2235408321::e_ksea("ABL1", "TGX221", dec); 0.2235408321::e_ksea("ABL1", "TGX221", inc) :- enzyme("ABL1").
+0.1216987188::e_ksea("ABL1", "Tofacitinib", dec); 0.1216987188::e_ksea("ABL1", "Tofacitinib", inc) :- enzyme("ABL1").
+0.165101133::e_ksea("ABL1", "Torin", dec); 0.165101133::e_ksea("ABL1", "Torin", inc) :- enzyme("ABL1").
+0.2341426691::e_ksea("ABL1", "Trametinib", dec); 0.2341426691::e_ksea("ABL1", "Trametinib", inc) :- enzyme("ABL1").
+0.2261600435::e_ksea("ABL1", "U73122", dec); 0.2261600435::e_ksea("ABL1", "U73122", inc) :- enzyme("ABL1").
+0.195616715::e_ksea("ABL1", "Ulixertinib", dec); 0.195616715::e_ksea("ABL1", "Ulixertinib", inc) :- enzyme("ABL1").
+0.2457694515::e_ksea("ABL1", "Vemurafenib", dec); 0.2457694515::e_ksea("ABL1", "Vemurafenib", inc) :- enzyme("ABL1").
+0.2401014394::e_ksea("FYN", "AC220", dec); 0.2401014394::e_ksea("FYN", "AC220", inc) :- enzyme("FYN").
+0.2025128886::e_ksea("FYN", "AT13148", dec); 0.2025128886::e_ksea("FYN", "AT13148", inc) :- enzyme("FYN").
+0.2095572563::e_ksea("FYN", "AZ20", dec); 0.2095572563::e_ksea("FYN", "AZ20", inc) :- enzyme("FYN").
+0.2439109663::e_ksea("FYN", "AZD1480", dec); 0.2439109663::e_ksea("FYN", "AZD1480", inc) :- enzyme("FYN").
+0.1977922894::e_ksea("FYN", "AZD3759", dec); 0.1977922894::e_ksea("FYN", "AZD3759", inc) :- enzyme("FYN").
+0.2330463931::e_ksea("FYN", "AZD5363", dec); 0.2330463931::e_ksea("FYN", "AZD5363", inc) :- enzyme("FYN").
+0.2377212949::e_ksea("FYN", "AZD5438", dec); 0.2377212949::e_ksea("FYN", "AZD5438", inc) :- enzyme("FYN").
+0.1980088813::e_ksea("FYN", "AZD6482", dec); 0.1980088813::e_ksea("FYN", "AZD6482", inc) :- enzyme("FYN").
+0.2231809083::e_ksea("FYN", "AZD6738", dec); 0.2231809083::e_ksea("FYN", "AZD6738", inc) :- enzyme("FYN").
+0.2304091547::e_ksea("FYN", "AZD8055", dec); 0.2304091547::e_ksea("FYN", "AZD8055", inc) :- enzyme("FYN").
+0.211878782::e_ksea("FYN", "Amuvatinib", dec); 0.211878782::e_ksea("FYN", "Amuvatinib", inc) :- enzyme("FYN").
+0.2284528942::e_ksea("FYN", "BX912", dec); 0.2284528942::e_ksea("FYN", "BX912", inc) :- enzyme("FYN").
+0.2116959828::e_ksea("FYN", "Bosutinib", dec); 0.2116959828::e_ksea("FYN", "Bosutinib", inc) :- enzyme("FYN").
+0.2365759328::e_ksea("FYN", "CAL101", dec); 0.2365759328::e_ksea("FYN", "CAL101", inc) :- enzyme("FYN").
+0.2220816339::e_ksea("FYN", "CHIR99021", dec); 0.2220816339::e_ksea("FYN", "CHIR99021", inc) :- enzyme("FYN").
+0.1681855689::e_ksea("FYN", "CX4945", dec); 0.1681855689::e_ksea("FYN", "CX4945", inc) :- enzyme("FYN").
+0.2436953325::e_ksea("FYN", "DNAPK", dec); 0.2436953325::e_ksea("FYN", "DNAPK", inc) :- enzyme("FYN").
+0.2140295787::e_ksea("FYN", "Dabrafenib", dec); 0.2140295787::e_ksea("FYN", "Dabrafenib", inc) :- enzyme("FYN").
+0.2431141761::e_ksea("FYN", "Dasatinib", dec); 0.2431141761::e_ksea("FYN", "Dasatinib", inc) :- enzyme("FYN").
+0.2466169895::e_ksea("FYN", "Edelfosine", dec); 0.2466169895::e_ksea("FYN", "Edelfosine", inc) :- enzyme("FYN").
+0.2255253966::e_ksea("FYN", "FRAX486", dec); 0.2255253966::e_ksea("FYN", "FRAX486", inc) :- enzyme("FYN").
+0.2329851497::e_ksea("FYN", "GDC0941", dec); 0.2329851497::e_ksea("FYN", "GDC0941", inc) :- enzyme("FYN").
+0.2250560364::e_ksea("FYN", "GDC0994", dec); 0.2250560364::e_ksea("FYN", "GDC0994", inc) :- enzyme("FYN").
+0.2352680739::e_ksea("FYN", "GF109203X", dec); 0.2352680739::e_ksea("FYN", "GF109203X", inc) :- enzyme("FYN").
+0.2419174432::e_ksea("FYN", "GO6983", dec); 0.2419174432::e_ksea("FYN", "GO6983", inc) :- enzyme("FYN").
+0.2085214125::e_ksea("FYN", "GSK2334470", dec); 0.2085214125::e_ksea("FYN", "GSK2334470", inc) :- enzyme("FYN").
+0.1907424651::e_ksea("FYN", "GSK690693", dec); 0.1907424651::e_ksea("FYN", "GSK690693", inc) :- enzyme("FYN").
+0.2425701813::e_ksea("FYN", "Go6976", dec); 0.2425701813::e_ksea("FYN", "Go6976", inc) :- enzyme("FYN").
+0.2422402032::e_ksea("FYN", "H89", dec); 0.2422402032::e_ksea("FYN", "H89", inc) :- enzyme("FYN").
+0.2454192692::e_ksea("FYN", "HS173", dec); 0.2454192692::e_ksea("FYN", "HS173", inc) :- enzyme("FYN").
+0.2235733398::e_ksea("FYN", "Ipatasertib", dec); 0.2235733398::e_ksea("FYN", "Ipatasertib", inc) :- enzyme("FYN").
+0.243826086::e_ksea("FYN", "JNJ", dec); 0.243826086::e_ksea("FYN", "JNJ", inc) :- enzyme("FYN").
+0.1699830323::e_ksea("FYN", "JNK", dec); 0.1699830323::e_ksea("FYN", "JNK", inc) :- enzyme("FYN").
+0.2095200552::e_ksea("FYN", "KD025", dec); 0.2095200552::e_ksea("FYN", "KD025", inc) :- enzyme("FYN").
+0.179715181::e_ksea("FYN", "KN62", dec); 0.179715181::e_ksea("FYN", "KN62", inc) :- enzyme("FYN").
+0.175198318::e_ksea("FYN", "KN93", dec); 0.175198318::e_ksea("FYN", "KN93", inc) :- enzyme("FYN").
+0.2333946797::e_ksea("FYN", "Ku0063794", dec); 0.2333946797::e_ksea("FYN", "Ku0063794", inc) :- enzyme("FYN").
+0.2272876279::e_ksea("FYN", "LY2090314", dec); 0.2272876279::e_ksea("FYN", "LY2090314", inc) :- enzyme("FYN").
+0.2091879407::e_ksea("FYN", "LY2584702", dec); 0.2091879407::e_ksea("FYN", "LY2584702", inc) :- enzyme("FYN").
+0.2168474068::e_ksea("FYN", "LY2835219", dec); 0.2168474068::e_ksea("FYN", "LY2835219", inc) :- enzyme("FYN").
+0.1751458455::e_ksea("FYN", "Linsitinib", dec); 0.1751458455::e_ksea("FYN", "Linsitinib", inc) :- enzyme("FYN").
+0.2056241408::e_ksea("FYN", "MK2206", dec); 0.2056241408::e_ksea("FYN", "MK2206", inc) :- enzyme("FYN").
+0.23944207::e_ksea("FYN", "NU7441", dec); 0.23944207::e_ksea("FYN", "NU7441", inc) :- enzyme("FYN").
+0.2417803935::e_ksea("FYN", "PD153035", dec); 0.2417803935::e_ksea("FYN", "PD153035", inc) :- enzyme("FYN").
+0.2480486237::e_ksea("FYN", "PF3758309", dec); 0.2480486237::e_ksea("FYN", "PF3758309", inc) :- enzyme("FYN").
+0.1933023432::e_ksea("FYN", "PF4708671", dec); 0.1933023432::e_ksea("FYN", "PF4708671", inc) :- enzyme("FYN").
+0.2361870703::e_ksea("FYN", "PH797804", dec); 0.2361870703::e_ksea("FYN", "PH797804", inc) :- enzyme("FYN").
+0.2391141474::e_ksea("FYN", "PIK294", dec); 0.2391141474::e_ksea("FYN", "PIK294", inc) :- enzyme("FYN").
+0.2378438609::e_ksea("FYN", "Ribociclib", dec); 0.2378438609::e_ksea("FYN", "Ribociclib", inc) :- enzyme("FYN").
+0.2074268762::e_ksea("FYN", "Ripasudil", dec); 0.2074268762::e_ksea("FYN", "Ripasudil", inc) :- enzyme("FYN").
+0.2428216956::e_ksea("FYN", "SP600125", dec); 0.2428216956::e_ksea("FYN", "SP600125", inc) :- enzyme("FYN").
+0.2400042855::e_ksea("FYN", "Selumetinib", dec); 0.2400042855::e_ksea("FYN", "Selumetinib", inc) :- enzyme("FYN").
+0.2415017209::e_ksea("FYN", "TAK715", dec); 0.2415017209::e_ksea("FYN", "TAK715", inc) :- enzyme("FYN").
+0.2152919799::e_ksea("FYN", "TBCA", dec); 0.2152919799::e_ksea("FYN", "TBCA", inc) :- enzyme("FYN").
+0.2433509955::e_ksea("FYN", "TGX221", dec); 0.2433509955::e_ksea("FYN", "TGX221", inc) :- enzyme("FYN").
+0.216932632::e_ksea("FYN", "Tofacitinib", dec); 0.216932632::e_ksea("FYN", "Tofacitinib", inc) :- enzyme("FYN").
+0.2069516887::e_ksea("FYN", "Torin", dec); 0.2069516887::e_ksea("FYN", "Torin", inc) :- enzyme("FYN").
+0.2240309323::e_ksea("FYN", "Trametinib", dec); 0.2240309323::e_ksea("FYN", "Trametinib", inc) :- enzyme("FYN").
+0.2468382315::e_ksea("FYN", "U73122", dec); 0.2468382315::e_ksea("FYN", "U73122", inc) :- enzyme("FYN").
+0.2466102013::e_ksea("FYN", "Ulixertinib", dec); 0.2466102013::e_ksea("FYN", "Ulixertinib", inc) :- enzyme("FYN").
+0.2291662659::e_ksea("FYN", "Vemurafenib", dec); 0.2291662659::e_ksea("FYN", "Vemurafenib", inc) :- enzyme("FYN").
+0.1723404943::e_ksea("HIPK2", "AC220", dec); 0.1723404943::e_ksea("HIPK2", "AC220", inc) :- enzyme("HIPK2").
+0.1501457426::e_ksea("HIPK2", "AT13148", dec); 0.1501457426::e_ksea("HIPK2", "AT13148", inc) :- enzyme("HIPK2").
+0.1682203768::e_ksea("HIPK2", "AZ20", dec); 0.1682203768::e_ksea("HIPK2", "AZ20", inc) :- enzyme("HIPK2").
+0.0161384162::e_ksea("HIPK2", "AZD1480", dec); 0.0161384162::e_ksea("HIPK2", "AZD1480", inc) :- enzyme("HIPK2").
+0.0618835114::e_ksea("HIPK2", "AZD3759", dec); 0.0618835114::e_ksea("HIPK2", "AZD3759", inc) :- enzyme("HIPK2").
+0.0085644664::e_ksea("HIPK2", "AZD5363", dec); 0.0085644664::e_ksea("HIPK2", "AZD5363", inc) :- enzyme("HIPK2").
+0.0015286759::e_ksea("HIPK2", "AZD5438", dec); 0.0015286759::e_ksea("HIPK2", "AZD5438", inc) :- enzyme("HIPK2").
+0.1167187939::e_ksea("HIPK2", "AZD6482", dec); 0.1167187939::e_ksea("HIPK2", "AZD6482", inc) :- enzyme("HIPK2").
+0.099631607::e_ksea("HIPK2", "AZD6738", dec); 0.099631607::e_ksea("HIPK2", "AZD6738", inc) :- enzyme("HIPK2").
+0.1295317803::e_ksea("HIPK2", "AZD8055", dec); 0.1295317803::e_ksea("HIPK2", "AZD8055", inc) :- enzyme("HIPK2").
+0.230705371::e_ksea("HIPK2", "Amuvatinib", dec); 0.230705371::e_ksea("HIPK2", "Amuvatinib", inc) :- enzyme("HIPK2").
+0.0308617248::e_ksea("HIPK2", "BX912", dec); 0.0308617248::e_ksea("HIPK2", "BX912", inc) :- enzyme("HIPK2").
+0.1567452947::e_ksea("HIPK2", "Bosutinib", dec); 0.1567452947::e_ksea("HIPK2", "Bosutinib", inc) :- enzyme("HIPK2").
+0.1519917707::e_ksea("HIPK2", "CAL101", dec); 0.1519917707::e_ksea("HIPK2", "CAL101", inc) :- enzyme("HIPK2").
+0.0459298351::e_ksea("HIPK2", "CHIR99021", dec); 0.0459298351::e_ksea("HIPK2", "CHIR99021", inc) :- enzyme("HIPK2").
+0.0498220372::e_ksea("HIPK2", "CX4945", dec); 0.0498220372::e_ksea("HIPK2", "CX4945", inc) :- enzyme("HIPK2").
+0.2309054662::e_ksea("HIPK2", "DNAPK", dec); 0.2309054662::e_ksea("HIPK2", "DNAPK", inc) :- enzyme("HIPK2").
+0.1899421456::e_ksea("HIPK2", "Dabrafenib", dec); 0.1899421456::e_ksea("HIPK2", "Dabrafenib", inc) :- enzyme("HIPK2").
+0.1526402303::e_ksea("HIPK2", "Dasatinib", dec); 0.1526402303::e_ksea("HIPK2", "Dasatinib", inc) :- enzyme("HIPK2").
+0.1801439749::e_ksea("HIPK2", "Edelfosine", dec); 0.1801439749::e_ksea("HIPK2", "Edelfosine", inc) :- enzyme("HIPK2").
+0.0137792402::e_ksea("HIPK2", "FRAX486", dec); 0.0137792402::e_ksea("HIPK2", "FRAX486", inc) :- enzyme("HIPK2").
+0.0256196504::e_ksea("HIPK2", "GDC0941", dec); 0.0256196504::e_ksea("HIPK2", "GDC0941", inc) :- enzyme("HIPK2").
+0.0422162876::e_ksea("HIPK2", "GDC0994", dec); 0.0422162876::e_ksea("HIPK2", "GDC0994", inc) :- enzyme("HIPK2").
+0.0785312654::e_ksea("HIPK2", "GF109203X", dec); 0.0785312654::e_ksea("HIPK2", "GF109203X", inc) :- enzyme("HIPK2").
+0.0542776801::e_ksea("HIPK2", "GO6983", dec); 0.0542776801::e_ksea("HIPK2", "GO6983", inc) :- enzyme("HIPK2").
+0.0663196111::e_ksea("HIPK2", "GSK2334470", dec); 0.0663196111::e_ksea("HIPK2", "GSK2334470", inc) :- enzyme("HIPK2").
+0.1543549056::e_ksea("HIPK2", "GSK690693", dec); 0.1543549056::e_ksea("HIPK2", "GSK690693", inc) :- enzyme("HIPK2").
+0.1089971104::e_ksea("HIPK2", "Go6976", dec); 0.1089971104::e_ksea("HIPK2", "Go6976", inc) :- enzyme("HIPK2").
+0.1255113585::e_ksea("HIPK2", "H89", dec); 0.1255113585::e_ksea("HIPK2", "H89", inc) :- enzyme("HIPK2").
+0.1108135907::e_ksea("HIPK2", "HS173", dec); 0.1108135907::e_ksea("HIPK2", "HS173", inc) :- enzyme("HIPK2").
+0.0527403695::e_ksea("HIPK2", "Ipatasertib", dec); 0.0527403695::e_ksea("HIPK2", "Ipatasertib", inc) :- enzyme("HIPK2").
+0.0937528206::e_ksea("HIPK2", "JNJ", dec); 0.0937528206::e_ksea("HIPK2", "JNJ", inc) :- enzyme("HIPK2").
+0.1620144923::e_ksea("HIPK2", "JNK", dec); 0.1620144923::e_ksea("HIPK2", "JNK", inc) :- enzyme("HIPK2").
+0.0994108341::e_ksea("HIPK2", "KD025", dec); 0.0994108341::e_ksea("HIPK2", "KD025", inc) :- enzyme("HIPK2").
+0.0305160261::e_ksea("HIPK2", "KN62", dec); 0.0305160261::e_ksea("HIPK2", "KN62", inc) :- enzyme("HIPK2").
+0.1301005853::e_ksea("HIPK2", "KN93", dec); 0.1301005853::e_ksea("HIPK2", "KN93", inc) :- enzyme("HIPK2").
+0.129318861::e_ksea("HIPK2", "Ku0063794", dec); 0.129318861::e_ksea("HIPK2", "Ku0063794", inc) :- enzyme("HIPK2").
+0.0184516654::e_ksea("HIPK2", "LY2090314", dec); 0.0184516654::e_ksea("HIPK2", "LY2090314", inc) :- enzyme("HIPK2").
+0.052742665::e_ksea("HIPK2", "LY2584702", dec); 0.052742665::e_ksea("HIPK2", "LY2584702", inc) :- enzyme("HIPK2").
+0.2390625949::e_ksea("HIPK2", "LY2835219", dec); 0.2390625949::e_ksea("HIPK2", "LY2835219", inc) :- enzyme("HIPK2").
+0.2097752736::e_ksea("HIPK2", "Linsitinib", dec); 0.2097752736::e_ksea("HIPK2", "Linsitinib", inc) :- enzyme("HIPK2").
+0.2093598492::e_ksea("HIPK2", "MK2206", dec); 0.2093598492::e_ksea("HIPK2", "MK2206", inc) :- enzyme("HIPK2").
+0.2231107227::e_ksea("HIPK2", "NU7441", dec); 0.2231107227::e_ksea("HIPK2", "NU7441", inc) :- enzyme("HIPK2").
+0.1539730374::e_ksea("HIPK2", "PD153035", dec); 0.1539730374::e_ksea("HIPK2", "PD153035", inc) :- enzyme("HIPK2").
+0.0030878516::e_ksea("HIPK2", "PF3758309", dec); 0.0030878516::e_ksea("HIPK2", "PF3758309", inc) :- enzyme("HIPK2").
+0.1077360209::e_ksea("HIPK2", "PF4708671", dec); 0.1077360209::e_ksea("HIPK2", "PF4708671", inc) :- enzyme("HIPK2").
+0.2044038551::e_ksea("HIPK2", "PH797804", dec); 0.2044038551::e_ksea("HIPK2", "PH797804", inc) :- enzyme("HIPK2").
+0.0413472236::e_ksea("HIPK2", "PIK294", dec); 0.0413472236::e_ksea("HIPK2", "PIK294", inc) :- enzyme("HIPK2").
+0.231802535::e_ksea("HIPK2", "Ribociclib", dec); 0.231802535::e_ksea("HIPK2", "Ribociclib", inc) :- enzyme("HIPK2").
+0.0353444295::e_ksea("HIPK2", "Ripasudil", dec); 0.0353444295::e_ksea("HIPK2", "Ripasudil", inc) :- enzyme("HIPK2").
+0.0586182304::e_ksea("HIPK2", "SP600125", dec); 0.0586182304::e_ksea("HIPK2", "SP600125", inc) :- enzyme("HIPK2").
+0.2135474968::e_ksea("HIPK2", "Selumetinib", dec); 0.2135474968::e_ksea("HIPK2", "Selumetinib", inc) :- enzyme("HIPK2").
+0.100354194::e_ksea("HIPK2", "TAK715", dec); 0.100354194::e_ksea("HIPK2", "TAK715", inc) :- enzyme("HIPK2").
+0.1511511723::e_ksea("HIPK2", "TBCA", dec); 0.1511511723::e_ksea("HIPK2", "TBCA", inc) :- enzyme("HIPK2").
+0.0957276703::e_ksea("HIPK2", "TGX221", dec); 0.0957276703::e_ksea("HIPK2", "TGX221", inc) :- enzyme("HIPK2").
+0.1733025996::e_ksea("HIPK2", "Tofacitinib", dec); 0.1733025996::e_ksea("HIPK2", "Tofacitinib", inc) :- enzyme("HIPK2").
+0.2159084129::e_ksea("HIPK2", "Torin", dec); 0.2159084129::e_ksea("HIPK2", "Torin", inc) :- enzyme("HIPK2").
+0.1188123713::e_ksea("HIPK2", "Trametinib", dec); 0.1188123713::e_ksea("HIPK2", "Trametinib", inc) :- enzyme("HIPK2").
+0.2157866012::e_ksea("HIPK2", "U73122", dec); 0.2157866012::e_ksea("HIPK2", "U73122", inc) :- enzyme("HIPK2").
+0.215902284::e_ksea("HIPK2", "Ulixertinib", dec); 0.215902284::e_ksea("HIPK2", "Ulixertinib", inc) :- enzyme("HIPK2").
+0.1861687692::e_ksea("HIPK2", "Vemurafenib", dec); 0.1861687692::e_ksea("HIPK2", "Vemurafenib", inc) :- enzyme("HIPK2").
+0.2465212194::e_ksea("PTK2", "AC220", dec); 0.2465212194::e_ksea("PTK2", "AC220", inc) :- enzyme("PTK2").
+0.166496334::e_ksea("PTK2", "AT13148", dec); 0.166496334::e_ksea("PTK2", "AT13148", inc) :- enzyme("PTK2").
+0.1674068568::e_ksea("PTK2", "AZ20", dec); 0.1674068568::e_ksea("PTK2", "AZ20", inc) :- enzyme("PTK2").
+0.1031132525::e_ksea("PTK2", "AZD1480", dec); 0.1031132525::e_ksea("PTK2", "AZD1480", inc) :- enzyme("PTK2").
+0.1303065701::e_ksea("PTK2", "AZD3759", dec); 0.1303065701::e_ksea("PTK2", "AZD3759", inc) :- enzyme("PTK2").
+0.1039575882::e_ksea("PTK2", "AZD5363", dec); 0.1039575882::e_ksea("PTK2", "AZD5363", inc) :- enzyme("PTK2").
+0.2355395636::e_ksea("PTK2", "AZD5438", dec); 0.2355395636::e_ksea("PTK2", "AZD5438", inc) :- enzyme("PTK2").
+0.1192211271::e_ksea("PTK2", "AZD6482", dec); 0.1192211271::e_ksea("PTK2", "AZD6482", inc) :- enzyme("PTK2").
+0.1935180507::e_ksea("PTK2", "AZD6738", dec); 0.1935180507::e_ksea("PTK2", "AZD6738", inc) :- enzyme("PTK2").
+0.1284508506::e_ksea("PTK2", "AZD8055", dec); 0.1284508506::e_ksea("PTK2", "AZD8055", inc) :- enzyme("PTK2").
+0.203151619::e_ksea("PTK2", "Amuvatinib", dec); 0.203151619::e_ksea("PTK2", "Amuvatinib", inc) :- enzyme("PTK2").
+0.1031203865::e_ksea("PTK2", "BX912", dec); 0.1031203865::e_ksea("PTK2", "BX912", inc) :- enzyme("PTK2").
+0.2238893949::e_ksea("PTK2", "Bosutinib", dec); 0.2238893949::e_ksea("PTK2", "Bosutinib", inc) :- enzyme("PTK2").
+0.1637633187::e_ksea("PTK2", "CAL101", dec); 0.1637633187::e_ksea("PTK2", "CAL101", inc) :- enzyme("PTK2").
+0.161979778::e_ksea("PTK2", "CHIR99021", dec); 0.161979778::e_ksea("PTK2", "CHIR99021", inc) :- enzyme("PTK2").
+0.2044494765::e_ksea("PTK2", "CX4945", dec); 0.2044494765::e_ksea("PTK2", "CX4945", inc) :- enzyme("PTK2").
+0.1868550986::e_ksea("PTK2", "DNAPK", dec); 0.1868550986::e_ksea("PTK2", "DNAPK", inc) :- enzyme("PTK2").
+0.1657331375::e_ksea("PTK2", "Dabrafenib", dec); 0.1657331375::e_ksea("PTK2", "Dabrafenib", inc) :- enzyme("PTK2").
+0.2302351576::e_ksea("PTK2", "Dasatinib", dec); 0.2302351576::e_ksea("PTK2", "Dasatinib", inc) :- enzyme("PTK2").
+0.2078433508::e_ksea("PTK2", "Edelfosine", dec); 0.2078433508::e_ksea("PTK2", "Edelfosine", inc) :- enzyme("PTK2").
+0.1680848529::e_ksea("PTK2", "FRAX486", dec); 0.1680848529::e_ksea("PTK2", "FRAX486", inc) :- enzyme("PTK2").
+0.1575811219::e_ksea("PTK2", "GDC0941", dec); 0.1575811219::e_ksea("PTK2", "GDC0941", inc) :- enzyme("PTK2").
+0.1120923185::e_ksea("PTK2", "GDC0994", dec); 0.1120923185::e_ksea("PTK2", "GDC0994", inc) :- enzyme("PTK2").
+0.17254135::e_ksea("PTK2", "GF109203X", dec); 0.17254135::e_ksea("PTK2", "GF109203X", inc) :- enzyme("PTK2").
+0.2366623543::e_ksea("PTK2", "GO6983", dec); 0.2366623543::e_ksea("PTK2", "GO6983", inc) :- enzyme("PTK2").
+0.1027284624::e_ksea("PTK2", "GSK2334470", dec); 0.1027284624::e_ksea("PTK2", "GSK2334470", inc) :- enzyme("PTK2").
+0.2263311362::e_ksea("PTK2", "GSK690693", dec); 0.2263311362::e_ksea("PTK2", "GSK690693", inc) :- enzyme("PTK2").
+0.1875425927::e_ksea("PTK2", "Go6976", dec); 0.1875425927::e_ksea("PTK2", "Go6976", inc) :- enzyme("PTK2").
+0.2031505237::e_ksea("PTK2", "H89", dec); 0.2031505237::e_ksea("PTK2", "H89", inc) :- enzyme("PTK2").
+0.2339607497::e_ksea("PTK2", "HS173", dec); 0.2339607497::e_ksea("PTK2", "HS173", inc) :- enzyme("PTK2").
+0.1009570849::e_ksea("PTK2", "Ipatasertib", dec); 0.1009570849::e_ksea("PTK2", "Ipatasertib", inc) :- enzyme("PTK2").
+0.1958975809::e_ksea("PTK2", "JNJ", dec); 0.1958975809::e_ksea("PTK2", "JNJ", inc) :- enzyme("PTK2").
+0.1661738451::e_ksea("PTK2", "JNK", dec); 0.1661738451::e_ksea("PTK2", "JNK", inc) :- enzyme("PTK2").
+0.1269724758::e_ksea("PTK2", "KD025", dec); 0.1269724758::e_ksea("PTK2", "KD025", inc) :- enzyme("PTK2").
+0.1355874377::e_ksea("PTK2", "KN62", dec); 0.1355874377::e_ksea("PTK2", "KN62", inc) :- enzyme("PTK2").
+0.2203337421::e_ksea("PTK2", "KN93", dec); 0.2203337421::e_ksea("PTK2", "KN93", inc) :- enzyme("PTK2").
+0.2201858395::e_ksea("PTK2", "Ku0063794", dec); 0.2201858395::e_ksea("PTK2", "Ku0063794", inc) :- enzyme("PTK2").
+0.1116778324::e_ksea("PTK2", "LY2090314", dec); 0.1116778324::e_ksea("PTK2", "LY2090314", inc) :- enzyme("PTK2").
+0.1149083261::e_ksea("PTK2", "LY2584702", dec); 0.1149083261::e_ksea("PTK2", "LY2584702", inc) :- enzyme("PTK2").
+0.1546146878::e_ksea("PTK2", "LY2835219", dec); 0.1546146878::e_ksea("PTK2", "LY2835219", inc) :- enzyme("PTK2").
+0.1766257273::e_ksea("PTK2", "Linsitinib", dec); 0.1766257273::e_ksea("PTK2", "Linsitinib", inc) :- enzyme("PTK2").
+0.2022161449::e_ksea("PTK2", "MK2206", dec); 0.2022161449::e_ksea("PTK2", "MK2206", inc) :- enzyme("PTK2").
+0.152908958::e_ksea("PTK2", "NU7441", dec); 0.152908958::e_ksea("PTK2", "NU7441", inc) :- enzyme("PTK2").
+0.1486988758::e_ksea("PTK2", "PD153035", dec); 0.1486988758::e_ksea("PTK2", "PD153035", inc) :- enzyme("PTK2").
+0.2071179182::e_ksea("PTK2", "PF3758309", dec); 0.2071179182::e_ksea("PTK2", "PF3758309", inc) :- enzyme("PTK2").
+0.232998921::e_ksea("PTK2", "PF4708671", dec); 0.232998921::e_ksea("PTK2", "PF4708671", inc) :- enzyme("PTK2").
+0.2206624154::e_ksea("PTK2", "PH797804", dec); 0.2206624154::e_ksea("PTK2", "PH797804", inc) :- enzyme("PTK2").
+0.151554669::e_ksea("PTK2", "PIK294", dec); 0.151554669::e_ksea("PTK2", "PIK294", inc) :- enzyme("PTK2").
+0.132080545::e_ksea("PTK2", "Ribociclib", dec); 0.132080545::e_ksea("PTK2", "Ribociclib", inc) :- enzyme("PTK2").
+0.1941721227::e_ksea("PTK2", "Ripasudil", dec); 0.1941721227::e_ksea("PTK2", "Ripasudil", inc) :- enzyme("PTK2").
+0.2083948143::e_ksea("PTK2", "SP600125", dec); 0.2083948143::e_ksea("PTK2", "SP600125", inc) :- enzyme("PTK2").
+0.1746521395::e_ksea("PTK2", "Selumetinib", dec); 0.1746521395::e_ksea("PTK2", "Selumetinib", inc) :- enzyme("PTK2").
+0.1067255015::e_ksea("PTK2", "TAK715", dec); 0.1067255015::e_ksea("PTK2", "TAK715", inc) :- enzyme("PTK2").
+0.1672260641::e_ksea("PTK2", "TBCA", dec); 0.1672260641::e_ksea("PTK2", "TBCA", inc) :- enzyme("PTK2").
+0.174269569::e_ksea("PTK2", "TGX221", dec); 0.174269569::e_ksea("PTK2", "TGX221", inc) :- enzyme("PTK2").
+0.1045653563::e_ksea("PTK2", "Tofacitinib", dec); 0.1045653563::e_ksea("PTK2", "Tofacitinib", inc) :- enzyme("PTK2").
+0.2259752912::e_ksea("PTK2", "Torin", dec); 0.2259752912::e_ksea("PTK2", "Torin", inc) :- enzyme("PTK2").
+0.2275492576::e_ksea("PTK2", "Trametinib", dec); 0.2275492576::e_ksea("PTK2", "Trametinib", inc) :- enzyme("PTK2").
+0.2231849364::e_ksea("PTK2", "U73122", dec); 0.2231849364::e_ksea("PTK2", "U73122", inc) :- enzyme("PTK2").
+0.2426693093::e_ksea("PTK2", "Ulixertinib", dec); 0.2426693093::e_ksea("PTK2", "Ulixertinib", inc) :- enzyme("PTK2").
+0.1399464101::e_ksea("PTK2", "Vemurafenib", dec); 0.1399464101::e_ksea("PTK2", "Vemurafenib", inc) :- enzyme("PTK2").
+0.2002625483::e_ksea("PTPRG", "AC220", dec); 0.2002625483::e_ksea("PTPRG", "AC220", inc) :- enzyme("PTPRG").
+0.2066333343::e_ksea("PTPRG", "AT13148", dec); 0.2066333343::e_ksea("PTPRG", "AT13148", inc) :- enzyme("PTPRG").
+0.2401928572::e_ksea("PTPRG", "AZ20", dec); 0.2401928572::e_ksea("PTPRG", "AZ20", inc) :- enzyme("PTPRG").
+0.1525255099::e_ksea("PTPRG", "AZD1480", dec); 0.1525255099::e_ksea("PTPRG", "AZD1480", inc) :- enzyme("PTPRG").
+0.213845045::e_ksea("PTPRG", "AZD3759", dec); 0.213845045::e_ksea("PTPRG", "AZD3759", inc) :- enzyme("PTPRG").
+0.1993215654::e_ksea("PTPRG", "AZD5363", dec); 0.1993215654::e_ksea("PTPRG", "AZD5363", inc) :- enzyme("PTPRG").
+0.2055879727::e_ksea("PTPRG", "AZD5438", dec); 0.2055879727::e_ksea("PTPRG", "AZD5438", inc) :- enzyme("PTPRG").
+0.202889512::e_ksea("PTPRG", "AZD6482", dec); 0.202889512::e_ksea("PTPRG", "AZD6482", inc) :- enzyme("PTPRG").
+0.2502749855::e_ksea("PTPRG", "AZD6738", dec); 0.2502749855::e_ksea("PTPRG", "AZD6738", inc) :- enzyme("PTPRG").
+0.2379454267::e_ksea("PTPRG", "AZD8055", dec); 0.2379454267::e_ksea("PTPRG", "AZD8055", inc) :- enzyme("PTPRG").
+0.238258925::e_ksea("PTPRG", "Amuvatinib", dec); 0.238258925::e_ksea("PTPRG", "Amuvatinib", inc) :- enzyme("PTPRG").
+0.1441723857::e_ksea("PTPRG", "BX912", dec); 0.1441723857::e_ksea("PTPRG", "BX912", inc) :- enzyme("PTPRG").
+0.1821121321::e_ksea("PTPRG", "Bosutinib", dec); 0.1821121321::e_ksea("PTPRG", "Bosutinib", inc) :- enzyme("PTPRG").
+0.2484457342::e_ksea("PTPRG", "CAL101", dec); 0.2484457342::e_ksea("PTPRG", "CAL101", inc) :- enzyme("PTPRG").
+0.1997468243::e_ksea("PTPRG", "CHIR99021", dec); 0.1997468243::e_ksea("PTPRG", "CHIR99021", inc) :- enzyme("PTPRG").
+0.2185558314::e_ksea("PTPRG", "CX4945", dec); 0.2185558314::e_ksea("PTPRG", "CX4945", inc) :- enzyme("PTPRG").
+0.230139117::e_ksea("PTPRG", "DNAPK", dec); 0.230139117::e_ksea("PTPRG", "DNAPK", inc) :- enzyme("PTPRG").
+0.2313136139::e_ksea("PTPRG", "Dabrafenib", dec); 0.2313136139::e_ksea("PTPRG", "Dabrafenib", inc) :- enzyme("PTPRG").
+0.1825515134::e_ksea("PTPRG", "Dasatinib", dec); 0.1825515134::e_ksea("PTPRG", "Dasatinib", inc) :- enzyme("PTPRG").
+0.2223915539::e_ksea("PTPRG", "Edelfosine", dec); 0.2223915539::e_ksea("PTPRG", "Edelfosine", inc) :- enzyme("PTPRG").
+0.1503213044::e_ksea("PTPRG", "FRAX486", dec); 0.1503213044::e_ksea("PTPRG", "FRAX486", inc) :- enzyme("PTPRG").
+0.2029255979::e_ksea("PTPRG", "GDC0941", dec); 0.2029255979::e_ksea("PTPRG", "GDC0941", inc) :- enzyme("PTPRG").
+0.162413576::e_ksea("PTPRG", "GDC0994", dec); 0.162413576::e_ksea("PTPRG", "GDC0994", inc) :- enzyme("PTPRG").
+0.2433383845::e_ksea("PTPRG", "GF109203X", dec); 0.2433383845::e_ksea("PTPRG", "GF109203X", inc) :- enzyme("PTPRG").
+0.2186420438::e_ksea("PTPRG", "GO6983", dec); 0.2186420438::e_ksea("PTPRG", "GO6983", inc) :- enzyme("PTPRG").
+0.1426355832::e_ksea("PTPRG", "GSK2334470", dec); 0.1426355832::e_ksea("PTPRG", "GSK2334470", inc) :- enzyme("PTPRG").
+0.1482226877::e_ksea("PTPRG", "GSK690693", dec); 0.1482226877::e_ksea("PTPRG", "GSK690693", inc) :- enzyme("PTPRG").
+0.2375981934::e_ksea("PTPRG", "Go6976", dec); 0.2375981934::e_ksea("PTPRG", "Go6976", inc) :- enzyme("PTPRG").
+0.2314543981::e_ksea("PTPRG", "H89", dec); 0.2314543981::e_ksea("PTPRG", "H89", inc) :- enzyme("PTPRG").
+0.2393356534::e_ksea("PTPRG", "HS173", dec); 0.2393356534::e_ksea("PTPRG", "HS173", inc) :- enzyme("PTPRG").
+0.149423313::e_ksea("PTPRG", "Ipatasertib", dec); 0.149423313::e_ksea("PTPRG", "Ipatasertib", inc) :- enzyme("PTPRG").
+0.228052589::e_ksea("PTPRG", "JNJ", dec); 0.228052589::e_ksea("PTPRG", "JNJ", inc) :- enzyme("PTPRG").
+0.2179610524::e_ksea("PTPRG", "JNK", dec); 0.2179610524::e_ksea("PTPRG", "JNK", inc) :- enzyme("PTPRG").
+0.2130471441::e_ksea("PTPRG", "KD025", dec); 0.2130471441::e_ksea("PTPRG", "KD025", inc) :- enzyme("PTPRG").
+0.2378616068::e_ksea("PTPRG", "KN62", dec); 0.2378616068::e_ksea("PTPRG", "KN62", inc) :- enzyme("PTPRG").
+0.1536736561::e_ksea("PTPRG", "KN93", dec); 0.1536736561::e_ksea("PTPRG", "KN93", inc) :- enzyme("PTPRG").
+0.193352507::e_ksea("PTPRG", "Ku0063794", dec); 0.193352507::e_ksea("PTPRG", "Ku0063794", inc) :- enzyme("PTPRG").
+0.2012568525::e_ksea("PTPRG", "LY2090314", dec); 0.2012568525::e_ksea("PTPRG", "LY2090314", inc) :- enzyme("PTPRG").
+0.1872446377::e_ksea("PTPRG", "LY2584702", dec); 0.1872446377::e_ksea("PTPRG", "LY2584702", inc) :- enzyme("PTPRG").
+0.2239293428::e_ksea("PTPRG", "LY2835219", dec); 0.2239293428::e_ksea("PTPRG", "LY2835219", inc) :- enzyme("PTPRG").
+0.230436543::e_ksea("PTPRG", "Linsitinib", dec); 0.230436543::e_ksea("PTPRG", "Linsitinib", inc) :- enzyme("PTPRG").
+0.1270728014::e_ksea("PTPRG", "MK2206", dec); 0.1270728014::e_ksea("PTPRG", "MK2206", inc) :- enzyme("PTPRG").
+0.228774126::e_ksea("PTPRG", "NU7441", dec); 0.228774126::e_ksea("PTPRG", "NU7441", inc) :- enzyme("PTPRG").
+0.1460294574::e_ksea("PTPRG", "PD153035", dec); 0.1460294574::e_ksea("PTPRG", "PD153035", inc) :- enzyme("PTPRG").
+0.1009672548::e_ksea("PTPRG", "PF3758309", dec); 0.1009672548::e_ksea("PTPRG", "PF3758309", inc) :- enzyme("PTPRG").
+0.1848343334::e_ksea("PTPRG", "PF4708671", dec); 0.1848343334::e_ksea("PTPRG", "PF4708671", inc) :- enzyme("PTPRG").
+0.2297504879::e_ksea("PTPRG", "PH797804", dec); 0.2297504879::e_ksea("PTPRG", "PH797804", inc) :- enzyme("PTPRG").
+0.1817962409::e_ksea("PTPRG", "PIK294", dec); 0.1817962409::e_ksea("PTPRG", "PIK294", inc) :- enzyme("PTPRG").
+0.1709020251::e_ksea("PTPRG", "Ribociclib", dec); 0.1709020251::e_ksea("PTPRG", "Ribociclib", inc) :- enzyme("PTPRG").
+0.2463243875::e_ksea("PTPRG", "Ripasudil", dec); 0.2463243875::e_ksea("PTPRG", "Ripasudil", inc) :- enzyme("PTPRG").
+0.237987443::e_ksea("PTPRG", "SP600125", dec); 0.237987443::e_ksea("PTPRG", "SP600125", inc) :- enzyme("PTPRG").
+0.2307818156::e_ksea("PTPRG", "Selumetinib", dec); 0.2307818156::e_ksea("PTPRG", "Selumetinib", inc) :- enzyme("PTPRG").
+0.2436203749::e_ksea("PTPRG", "TAK715", dec); 0.2436203749::e_ksea("PTPRG", "TAK715", inc) :- enzyme("PTPRG").
+0.204867914::e_ksea("PTPRG", "TBCA", dec); 0.204867914::e_ksea("PTPRG", "TBCA", inc) :- enzyme("PTPRG").
+0.213190661::e_ksea("PTPRG", "TGX221", dec); 0.213190661::e_ksea("PTPRG", "TGX221", inc) :- enzyme("PTPRG").
+0.152175247::e_ksea("PTPRG", "Tofacitinib", dec); 0.152175247::e_ksea("PTPRG", "Tofacitinib", inc) :- enzyme("PTPRG").
+0.2029775807::e_ksea("PTPRG", "Torin", dec); 0.2029775807::e_ksea("PTPRG", "Torin", inc) :- enzyme("PTPRG").
+0.1686108546::e_ksea("PTPRG", "Trametinib", dec); 0.1686108546::e_ksea("PTPRG", "Trametinib", inc) :- enzyme("PTPRG").
+0.2446760645::e_ksea("PTPRG", "U73122", dec); 0.2446760645::e_ksea("PTPRG", "U73122", inc) :- enzyme("PTPRG").
+0.2362177772::e_ksea("PTPRG", "Ulixertinib", dec); 0.2362177772::e_ksea("PTPRG", "Ulixertinib", inc) :- enzyme("PTPRG").
+0.2430912488::e_ksea("PTPRG", "Vemurafenib", dec); 0.2430912488::e_ksea("PTPRG", "Vemurafenib", inc) :- enzyme("PTPRG").
+0.0800601858::e_ksea("SRC", "AC220", dec); 0.0800601858::e_ksea("SRC", "AC220", inc) :- enzyme("SRC").
+0.1735722746::e_ksea("SRC", "AT13148", dec); 0.1735722746::e_ksea("SRC", "AT13148", inc) :- enzyme("SRC").
+0.1044537153::e_ksea("SRC", "AZ20", dec); 0.1044537153::e_ksea("SRC", "AZ20", inc) :- enzyme("SRC").
+0.1883385359::e_ksea("SRC", "AZD1480", dec); 0.1883385359::e_ksea("SRC", "AZD1480", inc) :- enzyme("SRC").
+0.1788016102::e_ksea("SRC", "AZD3759", dec); 0.1788016102::e_ksea("SRC", "AZD3759", inc) :- enzyme("SRC").
+0.1627338273::e_ksea("SRC", "AZD5363", dec); 0.1627338273::e_ksea("SRC", "AZD5363", inc) :- enzyme("SRC").
+0.1244315724::e_ksea("SRC", "AZD5438", dec); 0.1244315724::e_ksea("SRC", "AZD5438", inc) :- enzyme("SRC").
+0.0594290737::e_ksea("SRC", "AZD6482", dec); 0.0594290737::e_ksea("SRC", "AZD6482", inc) :- enzyme("SRC").
+0.0119920889::e_ksea("SRC", "AZD6738", dec); 0.0119920889::e_ksea("SRC", "AZD6738", inc) :- enzyme("SRC").
+0.1635220173::e_ksea("SRC", "AZD8055", dec); 0.1635220173::e_ksea("SRC", "AZD8055", inc) :- enzyme("SRC").
+0.1998748019::e_ksea("SRC", "Amuvatinib", dec); 0.1998748019::e_ksea("SRC", "Amuvatinib", inc) :- enzyme("SRC").
+0.2315427061::e_ksea("SRC", "BX912", dec); 0.2315427061::e_ksea("SRC", "BX912", inc) :- enzyme("SRC").
+0.0063645381::e_ksea("SRC", "Bosutinib", dec); 0.0063645381::e_ksea("SRC", "Bosutinib", inc) :- enzyme("SRC").
+0.2188261863::e_ksea("SRC", "CAL101", dec); 0.2188261863::e_ksea("SRC", "CAL101", inc) :- enzyme("SRC").
+0.1499564237::e_ksea("SRC", "CHIR99021", dec); 0.1499564237::e_ksea("SRC", "CHIR99021", inc) :- enzyme("SRC").
+0.0425397587::e_ksea("SRC", "CX4945", dec); 0.0425397587::e_ksea("SRC", "CX4945", inc) :- enzyme("SRC").
+0.1845051876::e_ksea("SRC", "DNAPK", dec); 0.1845051876::e_ksea("SRC", "DNAPK", inc) :- enzyme("SRC").
+0.1749508504::e_ksea("SRC", "Dabrafenib", dec); 0.1749508504::e_ksea("SRC", "Dabrafenib", inc) :- enzyme("SRC").
+0.056042159::e_ksea("SRC", "Dasatinib", dec); 0.056042159::e_ksea("SRC", "Dasatinib", inc) :- enzyme("SRC").
+0.073286519::e_ksea("SRC", "Edelfosine", dec); 0.073286519::e_ksea("SRC", "Edelfosine", inc) :- enzyme("SRC").
+0.1024092939::e_ksea("SRC", "FRAX486", dec); 0.1024092939::e_ksea("SRC", "FRAX486", inc) :- enzyme("SRC").
+0.2215986821::e_ksea("SRC", "GDC0941", dec); 0.2215986821::e_ksea("SRC", "GDC0941", inc) :- enzyme("SRC").
+0.0341608703::e_ksea("SRC", "GDC0994", dec); 0.0341608703::e_ksea("SRC", "GDC0994", inc) :- enzyme("SRC").
+0.0052318217::e_ksea("SRC", "GF109203X", dec); 0.0052318217::e_ksea("SRC", "GF109203X", inc) :- enzyme("SRC").
+0.0451971271::e_ksea("SRC", "GO6983", dec); 0.0451971271::e_ksea("SRC", "GO6983", inc) :- enzyme("SRC").
+0.135971429::e_ksea("SRC", "GSK2334470", dec); 0.135971429::e_ksea("SRC", "GSK2334470", inc) :- enzyme("SRC").
+0.2194214168::e_ksea("SRC", "GSK690693", dec); 0.2194214168::e_ksea("SRC", "GSK690693", inc) :- enzyme("SRC").
+0.1093382202::e_ksea("SRC", "Go6976", dec); 0.1093382202::e_ksea("SRC", "Go6976", inc) :- enzyme("SRC").
+0.0376694672::e_ksea("SRC", "H89", dec); 0.0376694672::e_ksea("SRC", "H89", inc) :- enzyme("SRC").
+0.2174609178::e_ksea("SRC", "HS173", dec); 0.2174609178::e_ksea("SRC", "HS173", inc) :- enzyme("SRC").
+0.023143932::e_ksea("SRC", "Ipatasertib", dec); 0.023143932::e_ksea("SRC", "Ipatasertib", inc) :- enzyme("SRC").
+0.119474607::e_ksea("SRC", "JNJ", dec); 0.119474607::e_ksea("SRC", "JNJ", inc) :- enzyme("SRC").
+0.1836003657::e_ksea("SRC", "JNK", dec); 0.1836003657::e_ksea("SRC", "JNK", inc) :- enzyme("SRC").
+0.1926632954::e_ksea("SRC", "KD025", dec); 0.1926632954::e_ksea("SRC", "KD025", inc) :- enzyme("SRC").
+0.2223523266::e_ksea("SRC", "KN62", dec); 0.2223523266::e_ksea("SRC", "KN62", inc) :- enzyme("SRC").
+0.0662066002::e_ksea("SRC", "KN93", dec); 0.0662066002::e_ksea("SRC", "KN93", inc) :- enzyme("SRC").
+0.1501570212::e_ksea("SRC", "Ku0063794", dec); 0.1501570212::e_ksea("SRC", "Ku0063794", inc) :- enzyme("SRC").
+0.1650406755::e_ksea("SRC", "LY2090314", dec); 0.1650406755::e_ksea("SRC", "LY2090314", inc) :- enzyme("SRC").
+0.1618557528::e_ksea("SRC", "LY2584702", dec); 0.1618557528::e_ksea("SRC", "LY2584702", inc) :- enzyme("SRC").
+0.2167249136::e_ksea("SRC", "LY2835219", dec); 0.2167249136::e_ksea("SRC", "LY2835219", inc) :- enzyme("SRC").
+0.154551856::e_ksea("SRC", "Linsitinib", dec); 0.154551856::e_ksea("SRC", "Linsitinib", inc) :- enzyme("SRC").
+0.1206132629::e_ksea("SRC", "MK2206", dec); 0.1206132629::e_ksea("SRC", "MK2206", inc) :- enzyme("SRC").
+0.0368929012::e_ksea("SRC", "NU7441", dec); 0.0368929012::e_ksea("SRC", "NU7441", inc) :- enzyme("SRC").
+0.1226489784::e_ksea("SRC", "PD153035", dec); 0.1226489784::e_ksea("SRC", "PD153035", inc) :- enzyme("SRC").
+0.138901668::e_ksea("SRC", "PF3758309", dec); 0.138901668::e_ksea("SRC", "PF3758309", inc) :- enzyme("SRC").
+0.0466064978::e_ksea("SRC", "PF4708671", dec); 0.0466064978::e_ksea("SRC", "PF4708671", inc) :- enzyme("SRC").
+0.1716078071::e_ksea("SRC", "PH797804", dec); 0.1716078071::e_ksea("SRC", "PH797804", inc) :- enzyme("SRC").
+0.05958635::e_ksea("SRC", "PIK294", dec); 0.05958635::e_ksea("SRC", "PIK294", inc) :- enzyme("SRC").
+0.0643100063::e_ksea("SRC", "Ribociclib", dec); 0.0643100063::e_ksea("SRC", "Ribociclib", inc) :- enzyme("SRC").
+0.1914106498::e_ksea("SRC", "Ripasudil", dec); 0.1914106498::e_ksea("SRC", "Ripasudil", inc) :- enzyme("SRC").
+0.0262327814::e_ksea("SRC", "SP600125", dec); 0.0262327814::e_ksea("SRC", "SP600125", inc) :- enzyme("SRC").
+0.1398660345::e_ksea("SRC", "Selumetinib", dec); 0.1398660345::e_ksea("SRC", "Selumetinib", inc) :- enzyme("SRC").
+0.0830957515::e_ksea("SRC", "TAK715", dec); 0.0830957515::e_ksea("SRC", "TAK715", inc) :- enzyme("SRC").
+0.1158649671::e_ksea("SRC", "TBCA", dec); 0.1158649671::e_ksea("SRC", "TBCA", inc) :- enzyme("SRC").
+0.2000092884::e_ksea("SRC", "TGX221", dec); 0.2000092884::e_ksea("SRC", "TGX221", inc) :- enzyme("SRC").
+0.0696305345::e_ksea("SRC", "Tofacitinib", dec); 0.0696305345::e_ksea("SRC", "Tofacitinib", inc) :- enzyme("SRC").
+0.1126585714::e_ksea("SRC", "Torin", dec); 0.1126585714::e_ksea("SRC", "Torin", inc) :- enzyme("SRC").
+0.1323826657::e_ksea("SRC", "Trametinib", dec); 0.1323826657::e_ksea("SRC", "Trametinib", inc) :- enzyme("SRC").
+0.2248375494::e_ksea("SRC", "U73122", dec); 0.2248375494::e_ksea("SRC", "U73122", inc) :- enzyme("SRC").
+0.1990941867::e_ksea("SRC", "Ulixertinib", dec); 0.1990941867::e_ksea("SRC", "Ulixertinib", inc) :- enzyme("SRC").
+0.1017296186::e_ksea("SRC", "Vemurafenib", dec); 0.1017296186::e_ksea("SRC", "Vemurafenib", inc) :- enzyme("SRC").
+%% p1::p_fc(P, S, dec); p2::p_fc(P, S, base); p3::p_fc(P, S, inc) :- p_occupancy(P, S, _dO). % value = _fc = [dec | base | inc] (cpd, P/S-level)
+0.7365195472::p_fc("ABL1(S569)", "AC220", dec); 0.001::p_fc("ABL1(S569)", "AC220", inc) :- p_occupancy("ABL1(S569)", "AC220", dec).
+0.001::p_fc("ABL1(S569)", "AC220", dec); 0.7365195472::p_fc("ABL1(S569)", "AC220", inc) :- p_occupancy("ABL1(S569)", "AC220", inc).
+0.2158915666::p_fc("ABL1(S569)", "AT13148", dec); 0.001::p_fc("ABL1(S569)", "AT13148", inc) :- p_occupancy("ABL1(S569)", "AT13148", dec).
+0.001::p_fc("ABL1(S569)", "AT13148", dec); 0.2158915666::p_fc("ABL1(S569)", "AT13148", inc) :- p_occupancy("ABL1(S569)", "AT13148", inc).
+0.0574123734::p_fc("ABL1(S569)", "AZ20", dec); 0.001::p_fc("ABL1(S569)", "AZ20", inc) :- p_occupancy("ABL1(S569)", "AZ20", dec).
+0.001::p_fc("ABL1(S569)", "AZ20", dec); 0.0574123734::p_fc("ABL1(S569)", "AZ20", inc) :- p_occupancy("ABL1(S569)", "AZ20", inc).
+0.2483110431::p_fc("ABL1(S569)", "AZD1480", dec); 0.001::p_fc("ABL1(S569)", "AZD1480", inc) :- p_occupancy("ABL1(S569)", "AZD1480", dec).
+0.001::p_fc("ABL1(S569)", "AZD1480", dec); 0.2483110431::p_fc("ABL1(S569)", "AZD1480", inc) :- p_occupancy("ABL1(S569)", "AZD1480", inc).
+0.5992072952::p_fc("ABL1(S569)", "AZD3759", dec); 0.001::p_fc("ABL1(S569)", "AZD3759", inc) :- p_occupancy("ABL1(S569)", "AZD3759", dec).
+0.001::p_fc("ABL1(S569)", "AZD3759", dec); 0.5992072952::p_fc("ABL1(S569)", "AZD3759", inc) :- p_occupancy("ABL1(S569)", "AZD3759", inc).
+0.3104199547::p_fc("ABL1(S569)", "AZD5363", dec); 0.001::p_fc("ABL1(S569)", "AZD5363", inc) :- p_occupancy("ABL1(S569)", "AZD5363", dec).
+0.001::p_fc("ABL1(S569)", "AZD5363", dec); 0.3104199547::p_fc("ABL1(S569)", "AZD5363", inc) :- p_occupancy("ABL1(S569)", "AZD5363", inc).
+0.6573360499::p_fc("ABL1(S569)", "AZD5438", dec); 0.001::p_fc("ABL1(S569)", "AZD5438", inc) :- p_occupancy("ABL1(S569)", "AZD5438", dec).
+0.001::p_fc("ABL1(S569)", "AZD5438", dec); 0.6573360499::p_fc("ABL1(S569)", "AZD5438", inc) :- p_occupancy("ABL1(S569)", "AZD5438", inc).
+0.3292058784::p_fc("ABL1(S569)", "AZD6482", dec); 0.001::p_fc("ABL1(S569)", "AZD6482", inc) :- p_occupancy("ABL1(S569)", "AZD6482", dec).
+0.001::p_fc("ABL1(S569)", "AZD6482", dec); 0.3292058784::p_fc("ABL1(S569)", "AZD6482", inc) :- p_occupancy("ABL1(S569)", "AZD6482", inc).
+0.4448130464::p_fc("ABL1(S569)", "AZD6738", dec); 0.001::p_fc("ABL1(S569)", "AZD6738", inc) :- p_occupancy("ABL1(S569)", "AZD6738", dec).
+0.001::p_fc("ABL1(S569)", "AZD6738", dec); 0.4448130464::p_fc("ABL1(S569)", "AZD6738", inc) :- p_occupancy("ABL1(S569)", "AZD6738", inc).
+0.1288142893::p_fc("ABL1(S569)", "AZD8055", dec); 0.001::p_fc("ABL1(S569)", "AZD8055", inc) :- p_occupancy("ABL1(S569)", "AZD8055", dec).
+0.001::p_fc("ABL1(S569)", "AZD8055", dec); 0.1288142893::p_fc("ABL1(S569)", "AZD8055", inc) :- p_occupancy("ABL1(S569)", "AZD8055", inc).
+0.740772872::p_fc("ABL1(S569)", "Amuvatinib", dec); 0.001::p_fc("ABL1(S569)", "Amuvatinib", inc) :- p_occupancy("ABL1(S569)", "Amuvatinib", dec).
+0.001::p_fc("ABL1(S569)", "Amuvatinib", dec); 0.740772872::p_fc("ABL1(S569)", "Amuvatinib", inc) :- p_occupancy("ABL1(S569)", "Amuvatinib", inc).
+0.0817551507::p_fc("ABL1(S569)", "BX912", dec); 0.001::p_fc("ABL1(S569)", "BX912", inc) :- p_occupancy("ABL1(S569)", "BX912", dec).
+0.001::p_fc("ABL1(S569)", "BX912", dec); 0.0817551507::p_fc("ABL1(S569)", "BX912", inc) :- p_occupancy("ABL1(S569)", "BX912", inc).
+0.8306166669::p_fc("ABL1(S569)", "Bosutinib", dec); 0.001::p_fc("ABL1(S569)", "Bosutinib", inc) :- p_occupancy("ABL1(S569)", "Bosutinib", dec).
+0.001::p_fc("ABL1(S569)", "Bosutinib", dec); 0.8306166669::p_fc("ABL1(S569)", "Bosutinib", inc) :- p_occupancy("ABL1(S569)", "Bosutinib", inc).
+0.2640355868::p_fc("ABL1(S569)", "CAL101", dec); 0.001::p_fc("ABL1(S569)", "CAL101", inc) :- p_occupancy("ABL1(S569)", "CAL101", dec).
+0.001::p_fc("ABL1(S569)", "CAL101", dec); 0.2640355868::p_fc("ABL1(S569)", "CAL101", inc) :- p_occupancy("ABL1(S569)", "CAL101", inc).
+0.9332547623::p_fc("ABL1(S569)", "CHIR99021", dec); 0.001::p_fc("ABL1(S569)", "CHIR99021", inc) :- p_occupancy("ABL1(S569)", "CHIR99021", dec).
+0.001::p_fc("ABL1(S569)", "CHIR99021", dec); 0.9332547623::p_fc("ABL1(S569)", "CHIR99021", inc) :- p_occupancy("ABL1(S569)", "CHIR99021", inc).
+0.0781330821::p_fc("ABL1(S569)", "CX4945", dec); 0.001::p_fc("ABL1(S569)", "CX4945", inc) :- p_occupancy("ABL1(S569)", "CX4945", dec).
+0.001::p_fc("ABL1(S569)", "CX4945", dec); 0.0781330821::p_fc("ABL1(S569)", "CX4945", inc) :- p_occupancy("ABL1(S569)", "CX4945", inc).
+0.2125999294::p_fc("ABL1(S569)", "DNAPK", dec); 0.001::p_fc("ABL1(S569)", "DNAPK", inc) :- p_occupancy("ABL1(S569)", "DNAPK", dec).
+0.001::p_fc("ABL1(S569)", "DNAPK", dec); 0.2125999294::p_fc("ABL1(S569)", "DNAPK", inc) :- p_occupancy("ABL1(S569)", "DNAPK", inc).
+0.2317891154::p_fc("ABL1(S569)", "Dabrafenib", dec); 0.001::p_fc("ABL1(S569)", "Dabrafenib", inc) :- p_occupancy("ABL1(S569)", "Dabrafenib", dec).
+0.001::p_fc("ABL1(S569)", "Dabrafenib", dec); 0.2317891154::p_fc("ABL1(S569)", "Dabrafenib", inc) :- p_occupancy("ABL1(S569)", "Dabrafenib", inc).
+0.3901157734::p_fc("ABL1(S569)", "Dasatinib", dec); 0.001::p_fc("ABL1(S569)", "Dasatinib", inc) :- p_occupancy("ABL1(S569)", "Dasatinib", dec).
+0.001::p_fc("ABL1(S569)", "Dasatinib", dec); 0.3901157734::p_fc("ABL1(S569)", "Dasatinib", inc) :- p_occupancy("ABL1(S569)", "Dasatinib", inc).
+0.9925128563::p_fc("ABL1(S569)", "Edelfosine", dec); 0.001::p_fc("ABL1(S569)", "Edelfosine", inc) :- p_occupancy("ABL1(S569)", "Edelfosine", dec).
+0.001::p_fc("ABL1(S569)", "Edelfosine", dec); 0.9925128563::p_fc("ABL1(S569)", "Edelfosine", inc) :- p_occupancy("ABL1(S569)", "Edelfosine", inc).
+0.1974571028::p_fc("ABL1(S569)", "FRAX486", dec); 0.001::p_fc("ABL1(S569)", "FRAX486", inc) :- p_occupancy("ABL1(S569)", "FRAX486", dec).
+0.001::p_fc("ABL1(S569)", "FRAX486", dec); 0.1974571028::p_fc("ABL1(S569)", "FRAX486", inc) :- p_occupancy("ABL1(S569)", "FRAX486", inc).
+0.3835354342::p_fc("ABL1(S569)", "GDC0941", dec); 0.001::p_fc("ABL1(S569)", "GDC0941", inc) :- p_occupancy("ABL1(S569)", "GDC0941", dec).
+0.001::p_fc("ABL1(S569)", "GDC0941", dec); 0.3835354342::p_fc("ABL1(S569)", "GDC0941", inc) :- p_occupancy("ABL1(S569)", "GDC0941", inc).
+0.0724072426::p_fc("ABL1(S569)", "GDC0994", dec); 0.001::p_fc("ABL1(S569)", "GDC0994", inc) :- p_occupancy("ABL1(S569)", "GDC0994", dec).
+0.001::p_fc("ABL1(S569)", "GDC0994", dec); 0.0724072426::p_fc("ABL1(S569)", "GDC0994", inc) :- p_occupancy("ABL1(S569)", "GDC0994", inc).
+0.4324788123::p_fc("ABL1(S569)", "GF109203X", dec); 0.001::p_fc("ABL1(S569)", "GF109203X", inc) :- p_occupancy("ABL1(S569)", "GF109203X", dec).
+0.001::p_fc("ABL1(S569)", "GF109203X", dec); 0.4324788123::p_fc("ABL1(S569)", "GF109203X", inc) :- p_occupancy("ABL1(S569)", "GF109203X", inc).
+0.3547352984::p_fc("ABL1(S569)", "GO6983", dec); 0.001::p_fc("ABL1(S569)", "GO6983", inc) :- p_occupancy("ABL1(S569)", "GO6983", dec).
+0.001::p_fc("ABL1(S569)", "GO6983", dec); 0.3547352984::p_fc("ABL1(S569)", "GO6983", inc) :- p_occupancy("ABL1(S569)", "GO6983", inc).
+0.3017777716::p_fc("ABL1(S569)", "GSK2334470", dec); 0.001::p_fc("ABL1(S569)", "GSK2334470", inc) :- p_occupancy("ABL1(S569)", "GSK2334470", dec).
+0.001::p_fc("ABL1(S569)", "GSK2334470", dec); 0.3017777716::p_fc("ABL1(S569)", "GSK2334470", inc) :- p_occupancy("ABL1(S569)", "GSK2334470", inc).
+0.9383238368::p_fc("ABL1(S569)", "GSK690693", dec); 0.001::p_fc("ABL1(S569)", "GSK690693", inc) :- p_occupancy("ABL1(S569)", "GSK690693", dec).
+0.001::p_fc("ABL1(S569)", "GSK690693", dec); 0.9383238368::p_fc("ABL1(S569)", "GSK690693", inc) :- p_occupancy("ABL1(S569)", "GSK690693", inc).
+0.7129131529::p_fc("ABL1(S569)", "Go6976", dec); 0.001::p_fc("ABL1(S569)", "Go6976", inc) :- p_occupancy("ABL1(S569)", "Go6976", dec).
+0.001::p_fc("ABL1(S569)", "Go6976", dec); 0.7129131529::p_fc("ABL1(S569)", "Go6976", inc) :- p_occupancy("ABL1(S569)", "Go6976", inc).
+0.6477877504::p_fc("ABL1(S569)", "H89", dec); 0.001::p_fc("ABL1(S569)", "H89", inc) :- p_occupancy("ABL1(S569)", "H89", dec).
+0.001::p_fc("ABL1(S569)", "H89", dec); 0.6477877504::p_fc("ABL1(S569)", "H89", inc) :- p_occupancy("ABL1(S569)", "H89", inc).
+0.6317505777::p_fc("ABL1(S569)", "HS173", dec); 0.001::p_fc("ABL1(S569)", "HS173", inc) :- p_occupancy("ABL1(S569)", "HS173", dec).
+0.001::p_fc("ABL1(S569)", "HS173", dec); 0.6317505777::p_fc("ABL1(S569)", "HS173", inc) :- p_occupancy("ABL1(S569)", "HS173", inc).
+0.1363207595::p_fc("ABL1(S569)", "Ipatasertib", dec); 0.001::p_fc("ABL1(S569)", "Ipatasertib", inc) :- p_occupancy("ABL1(S569)", "Ipatasertib", dec).
+0.001::p_fc("ABL1(S569)", "Ipatasertib", dec); 0.1363207595::p_fc("ABL1(S569)", "Ipatasertib", inc) :- p_occupancy("ABL1(S569)", "Ipatasertib", inc).
+0.913670453::p_fc("ABL1(S569)", "JNJ", dec); 0.001::p_fc("ABL1(S569)", "JNJ", inc) :- p_occupancy("ABL1(S569)", "JNJ", dec).
+0.001::p_fc("ABL1(S569)", "JNJ", dec); 0.913670453::p_fc("ABL1(S569)", "JNJ", inc) :- p_occupancy("ABL1(S569)", "JNJ", inc).
+0.2511955112::p_fc("ABL1(S569)", "JNK", dec); 0.001::p_fc("ABL1(S569)", "JNK", inc) :- p_occupancy("ABL1(S569)", "JNK", dec).
+0.001::p_fc("ABL1(S569)", "JNK", dec); 0.2511955112::p_fc("ABL1(S569)", "JNK", inc) :- p_occupancy("ABL1(S569)", "JNK", inc).
+0.4825286411::p_fc("ABL1(S569)", "KD025", dec); 0.001::p_fc("ABL1(S569)", "KD025", inc) :- p_occupancy("ABL1(S569)", "KD025", dec).
+0.001::p_fc("ABL1(S569)", "KD025", dec); 0.4825286411::p_fc("ABL1(S569)", "KD025", inc) :- p_occupancy("ABL1(S569)", "KD025", inc).
+0.4370370562::p_fc("ABL1(S569)", "KN62", dec); 0.001::p_fc("ABL1(S569)", "KN62", inc) :- p_occupancy("ABL1(S569)", "KN62", dec).
+0.001::p_fc("ABL1(S569)", "KN62", dec); 0.4370370562::p_fc("ABL1(S569)", "KN62", inc) :- p_occupancy("ABL1(S569)", "KN62", inc).
+0.3002555235::p_fc("ABL1(S569)", "KN93", dec); 0.001::p_fc("ABL1(S569)", "KN93", inc) :- p_occupancy("ABL1(S569)", "KN93", dec).
+0.001::p_fc("ABL1(S569)", "KN93", dec); 0.3002555235::p_fc("ABL1(S569)", "KN93", inc) :- p_occupancy("ABL1(S569)", "KN93", inc).
+0.016929771::p_fc("ABL1(S569)", "Ku0063794", dec); 0.001::p_fc("ABL1(S569)", "Ku0063794", inc) :- p_occupancy("ABL1(S569)", "Ku0063794", dec).
+0.001::p_fc("ABL1(S569)", "Ku0063794", dec); 0.016929771::p_fc("ABL1(S569)", "Ku0063794", inc) :- p_occupancy("ABL1(S569)", "Ku0063794", inc).
+0.9962852118::p_fc("ABL1(S569)", "LY2090314", dec); 0.001::p_fc("ABL1(S569)", "LY2090314", inc) :- p_occupancy("ABL1(S569)", "LY2090314", dec).
+0.001::p_fc("ABL1(S569)", "LY2090314", dec); 0.9962852118::p_fc("ABL1(S569)", "LY2090314", inc) :- p_occupancy("ABL1(S569)", "LY2090314", inc).
+0.4298096158::p_fc("ABL1(S569)", "LY2584702", dec); 0.001::p_fc("ABL1(S569)", "LY2584702", inc) :- p_occupancy("ABL1(S569)", "LY2584702", dec).
+0.001::p_fc("ABL1(S569)", "LY2584702", dec); 0.4298096158::p_fc("ABL1(S569)", "LY2584702", inc) :- p_occupancy("ABL1(S569)", "LY2584702", inc).
+0.3993449543::p_fc("ABL1(S569)", "LY2835219", dec); 0.001::p_fc("ABL1(S569)", "LY2835219", inc) :- p_occupancy("ABL1(S569)", "LY2835219", dec).
+0.001::p_fc("ABL1(S569)", "LY2835219", dec); 0.3993449543::p_fc("ABL1(S569)", "LY2835219", inc) :- p_occupancy("ABL1(S569)", "LY2835219", inc).
+0.3039387158::p_fc("ABL1(S569)", "Linsitinib", dec); 0.001::p_fc("ABL1(S569)", "Linsitinib", inc) :- p_occupancy("ABL1(S569)", "Linsitinib", dec).
+0.001::p_fc("ABL1(S569)", "Linsitinib", dec); 0.3039387158::p_fc("ABL1(S569)", "Linsitinib", inc) :- p_occupancy("ABL1(S569)", "Linsitinib", inc).
+0.2797045064::p_fc("ABL1(S569)", "MK2206", dec); 0.001::p_fc("ABL1(S569)", "MK2206", inc) :- p_occupancy("ABL1(S569)", "MK2206", dec).
+0.001::p_fc("ABL1(S569)", "MK2206", dec); 0.2797045064::p_fc("ABL1(S569)", "MK2206", inc) :- p_occupancy("ABL1(S569)", "MK2206", inc).
+0.3322446667::p_fc("ABL1(S569)", "NU7441", dec); 0.001::p_fc("ABL1(S569)", "NU7441", inc) :- p_occupancy("ABL1(S569)", "NU7441", dec).
+0.001::p_fc("ABL1(S569)", "NU7441", dec); 0.3322446667::p_fc("ABL1(S569)", "NU7441", inc) :- p_occupancy("ABL1(S569)", "NU7441", inc).
+0.7625801887::p_fc("ABL1(S569)", "PD153035", dec); 0.001::p_fc("ABL1(S569)", "PD153035", inc) :- p_occupancy("ABL1(S569)", "PD153035", dec).
+0.001::p_fc("ABL1(S569)", "PD153035", dec); 0.7625801887::p_fc("ABL1(S569)", "PD153035", inc) :- p_occupancy("ABL1(S569)", "PD153035", inc).
+0.7469910934::p_fc("ABL1(S569)", "PF3758309", dec); 0.001::p_fc("ABL1(S569)", "PF3758309", inc) :- p_occupancy("ABL1(S569)", "PF3758309", dec).
+0.001::p_fc("ABL1(S569)", "PF3758309", dec); 0.7469910934::p_fc("ABL1(S569)", "PF3758309", inc) :- p_occupancy("ABL1(S569)", "PF3758309", inc).
+0.7645401204::p_fc("ABL1(S569)", "PF4708671", dec); 0.001::p_fc("ABL1(S569)", "PF4708671", inc) :- p_occupancy("ABL1(S569)", "PF4708671", dec).
+0.001::p_fc("ABL1(S569)", "PF4708671", dec); 0.7645401204::p_fc("ABL1(S569)", "PF4708671", inc) :- p_occupancy("ABL1(S569)", "PF4708671", inc).
+0.9011874702::p_fc("ABL1(S569)", "PH797804", dec); 0.001::p_fc("ABL1(S569)", "PH797804", inc) :- p_occupancy("ABL1(S569)", "PH797804", dec).
+0.001::p_fc("ABL1(S569)", "PH797804", dec); 0.9011874702::p_fc("ABL1(S569)", "PH797804", inc) :- p_occupancy("ABL1(S569)", "PH797804", inc).
+0.040709475::p_fc("ABL1(S569)", "PIK294", dec); 0.001::p_fc("ABL1(S569)", "PIK294", inc) :- p_occupancy("ABL1(S569)", "PIK294", dec).
+0.001::p_fc("ABL1(S569)", "PIK294", dec); 0.040709475::p_fc("ABL1(S569)", "PIK294", inc) :- p_occupancy("ABL1(S569)", "PIK294", inc).
+0.7148131518::p_fc("ABL1(S569)", "Ribociclib", dec); 0.001::p_fc("ABL1(S569)", "Ribociclib", inc) :- p_occupancy("ABL1(S569)", "Ribociclib", dec).
+0.001::p_fc("ABL1(S569)", "Ribociclib", dec); 0.7148131518::p_fc("ABL1(S569)", "Ribociclib", inc) :- p_occupancy("ABL1(S569)", "Ribociclib", inc).
+0.8096545523::p_fc("ABL1(S569)", "Ripasudil", dec); 0.001::p_fc("ABL1(S569)", "Ripasudil", inc) :- p_occupancy("ABL1(S569)", "Ripasudil", dec).
+0.001::p_fc("ABL1(S569)", "Ripasudil", dec); 0.8096545523::p_fc("ABL1(S569)", "Ripasudil", inc) :- p_occupancy("ABL1(S569)", "Ripasudil", inc).
+0.8972194543::p_fc("ABL1(S569)", "SP600125", dec); 0.001::p_fc("ABL1(S569)", "SP600125", inc) :- p_occupancy("ABL1(S569)", "SP600125", dec).
+0.001::p_fc("ABL1(S569)", "SP600125", dec); 0.8972194543::p_fc("ABL1(S569)", "SP600125", inc) :- p_occupancy("ABL1(S569)", "SP600125", inc).
+0.0893778097::p_fc("ABL1(S569)", "Selumetinib", dec); 0.001::p_fc("ABL1(S569)", "Selumetinib", inc) :- p_occupancy("ABL1(S569)", "Selumetinib", dec).
+0.001::p_fc("ABL1(S569)", "Selumetinib", dec); 0.0893778097::p_fc("ABL1(S569)", "Selumetinib", inc) :- p_occupancy("ABL1(S569)", "Selumetinib", inc).
+0.2554644202::p_fc("ABL1(S569)", "TAK715", dec); 0.001::p_fc("ABL1(S569)", "TAK715", inc) :- p_occupancy("ABL1(S569)", "TAK715", dec).
+0.001::p_fc("ABL1(S569)", "TAK715", dec); 0.2554644202::p_fc("ABL1(S569)", "TAK715", inc) :- p_occupancy("ABL1(S569)", "TAK715", inc).
+0.3733213716::p_fc("ABL1(S569)", "TBCA", dec); 0.001::p_fc("ABL1(S569)", "TBCA", inc) :- p_occupancy("ABL1(S569)", "TBCA", dec).
+0.001::p_fc("ABL1(S569)", "TBCA", dec); 0.3733213716::p_fc("ABL1(S569)", "TBCA", inc) :- p_occupancy("ABL1(S569)", "TBCA", inc).
+0.1395714217::p_fc("ABL1(S569)", "TGX221", dec); 0.001::p_fc("ABL1(S569)", "TGX221", inc) :- p_occupancy("ABL1(S569)", "TGX221", dec).
+0.001::p_fc("ABL1(S569)", "TGX221", dec); 0.1395714217::p_fc("ABL1(S569)", "TGX221", inc) :- p_occupancy("ABL1(S569)", "TGX221", inc).
+0.2238189091::p_fc("ABL1(S569)", "Tofacitinib", dec); 0.001::p_fc("ABL1(S569)", "Tofacitinib", inc) :- p_occupancy("ABL1(S569)", "Tofacitinib", dec).
+0.001::p_fc("ABL1(S569)", "Tofacitinib", dec); 0.2238189091::p_fc("ABL1(S569)", "Tofacitinib", inc) :- p_occupancy("ABL1(S569)", "Tofacitinib", inc).
+0.5198472772::p_fc("ABL1(S569)", "Torin", dec); 0.001::p_fc("ABL1(S569)", "Torin", inc) :- p_occupancy("ABL1(S569)", "Torin", dec).
+0.001::p_fc("ABL1(S569)", "Torin", dec); 0.5198472772::p_fc("ABL1(S569)", "Torin", inc) :- p_occupancy("ABL1(S569)", "Torin", inc).
+0.0166180468::p_fc("ABL1(S569)", "Trametinib", dec); 0.001::p_fc("ABL1(S569)", "Trametinib", inc) :- p_occupancy("ABL1(S569)", "Trametinib", dec).
+0.001::p_fc("ABL1(S569)", "Trametinib", dec); 0.0166180468::p_fc("ABL1(S569)", "Trametinib", inc) :- p_occupancy("ABL1(S569)", "Trametinib", inc).
+0.7525441384::p_fc("ABL1(S569)", "U73122", dec); 0.001::p_fc("ABL1(S569)", "U73122", inc) :- p_occupancy("ABL1(S569)", "U73122", dec).
+0.001::p_fc("ABL1(S569)", "U73122", dec); 0.7525441384::p_fc("ABL1(S569)", "U73122", inc) :- p_occupancy("ABL1(S569)", "U73122", inc).
+0.3890482293::p_fc("ABL1(S569)", "Ulixertinib", dec); 0.001::p_fc("ABL1(S569)", "Ulixertinib", inc) :- p_occupancy("ABL1(S569)", "Ulixertinib", dec).
+0.001::p_fc("ABL1(S569)", "Ulixertinib", dec); 0.3890482293::p_fc("ABL1(S569)", "Ulixertinib", inc) :- p_occupancy("ABL1(S569)", "Ulixertinib", inc).
+0.905941106::p_fc("ABL1(S569)", "Vemurafenib", dec); 0.001::p_fc("ABL1(S569)", "Vemurafenib", inc) :- p_occupancy("ABL1(S569)", "Vemurafenib", dec).
+0.001::p_fc("ABL1(S569)", "Vemurafenib", dec); 0.905941106::p_fc("ABL1(S569)", "Vemurafenib", inc) :- p_occupancy("ABL1(S569)", "Vemurafenib", inc).
+0.177358319::p_fc("ABL1(S718)", "AC220", dec); 0.001::p_fc("ABL1(S718)", "AC220", inc) :- p_occupancy("ABL1(S718)", "AC220", dec).
+0.001::p_fc("ABL1(S718)", "AC220", dec); 0.177358319::p_fc("ABL1(S718)", "AC220", inc) :- p_occupancy("ABL1(S718)", "AC220", inc).
+0.4798002737::p_fc("ABL1(S718)", "AT13148", dec); 0.001::p_fc("ABL1(S718)", "AT13148", inc) :- p_occupancy("ABL1(S718)", "AT13148", dec).
+0.001::p_fc("ABL1(S718)", "AT13148", dec); 0.4798002737::p_fc("ABL1(S718)", "AT13148", inc) :- p_occupancy("ABL1(S718)", "AT13148", inc).
+0.214644036::p_fc("ABL1(S718)", "AZ20", dec); 0.001::p_fc("ABL1(S718)", "AZ20", inc) :- p_occupancy("ABL1(S718)", "AZ20", dec).
+0.001::p_fc("ABL1(S718)", "AZ20", dec); 0.214644036::p_fc("ABL1(S718)", "AZ20", inc) :- p_occupancy("ABL1(S718)", "AZ20", inc).
+0.3652864541::p_fc("ABL1(S718)", "AZD1480", dec); 0.001::p_fc("ABL1(S718)", "AZD1480", inc) :- p_occupancy("ABL1(S718)", "AZD1480", dec).
+0.001::p_fc("ABL1(S718)", "AZD1480", dec); 0.3652864541::p_fc("ABL1(S718)", "AZD1480", inc) :- p_occupancy("ABL1(S718)", "AZD1480", inc).
+0.2101821522::p_fc("ABL1(S718)", "AZD3759", dec); 0.001::p_fc("ABL1(S718)", "AZD3759", inc) :- p_occupancy("ABL1(S718)", "AZD3759", dec).
+0.001::p_fc("ABL1(S718)", "AZD3759", dec); 0.2101821522::p_fc("ABL1(S718)", "AZD3759", inc) :- p_occupancy("ABL1(S718)", "AZD3759", inc).
+0.3248406263::p_fc("ABL1(S718)", "AZD5363", dec); 0.001::p_fc("ABL1(S718)", "AZD5363", inc) :- p_occupancy("ABL1(S718)", "AZD5363", dec).
+0.001::p_fc("ABL1(S718)", "AZD5363", dec); 0.3248406263::p_fc("ABL1(S718)", "AZD5363", inc) :- p_occupancy("ABL1(S718)", "AZD5363", inc).
+0.4222024873::p_fc("ABL1(S718)", "AZD5438", dec); 0.001::p_fc("ABL1(S718)", "AZD5438", inc) :- p_occupancy("ABL1(S718)", "AZD5438", dec).
+0.001::p_fc("ABL1(S718)", "AZD5438", dec); 0.4222024873::p_fc("ABL1(S718)", "AZD5438", inc) :- p_occupancy("ABL1(S718)", "AZD5438", inc).
+0.2142564463::p_fc("ABL1(S718)", "AZD6482", dec); 0.001::p_fc("ABL1(S718)", "AZD6482", inc) :- p_occupancy("ABL1(S718)", "AZD6482", dec).
+0.001::p_fc("ABL1(S718)", "AZD6482", dec); 0.2142564463::p_fc("ABL1(S718)", "AZD6482", inc) :- p_occupancy("ABL1(S718)", "AZD6482", inc).
+0.5057650109::p_fc("ABL1(S718)", "AZD6738", dec); 0.001::p_fc("ABL1(S718)", "AZD6738", inc) :- p_occupancy("ABL1(S718)", "AZD6738", dec).
+0.001::p_fc("ABL1(S718)", "AZD6738", dec); 0.5057650109::p_fc("ABL1(S718)", "AZD6738", inc) :- p_occupancy("ABL1(S718)", "AZD6738", inc).
+0.9911452719::p_fc("ABL1(S718)", "AZD8055", dec); 0.001::p_fc("ABL1(S718)", "AZD8055", inc) :- p_occupancy("ABL1(S718)", "AZD8055", dec).
+0.001::p_fc("ABL1(S718)", "AZD8055", dec); 0.9911452719::p_fc("ABL1(S718)", "AZD8055", inc) :- p_occupancy("ABL1(S718)", "AZD8055", inc).
+0.1983658666::p_fc("ABL1(S718)", "Amuvatinib", dec); 0.001::p_fc("ABL1(S718)", "Amuvatinib", inc) :- p_occupancy("ABL1(S718)", "Amuvatinib", dec).
+0.001::p_fc("ABL1(S718)", "Amuvatinib", dec); 0.1983658666::p_fc("ABL1(S718)", "Amuvatinib", inc) :- p_occupancy("ABL1(S718)", "Amuvatinib", inc).
+0.3492654086::p_fc("ABL1(S718)", "BX912", dec); 0.001::p_fc("ABL1(S718)", "BX912", inc) :- p_occupancy("ABL1(S718)", "BX912", dec).
+0.001::p_fc("ABL1(S718)", "BX912", dec); 0.3492654086::p_fc("ABL1(S718)", "BX912", inc) :- p_occupancy("ABL1(S718)", "BX912", inc).
+0.333194516::p_fc("ABL1(S718)", "Bosutinib", dec); 0.001::p_fc("ABL1(S718)", "Bosutinib", inc) :- p_occupancy("ABL1(S718)", "Bosutinib", dec).
+0.001::p_fc("ABL1(S718)", "Bosutinib", dec); 0.333194516::p_fc("ABL1(S718)", "Bosutinib", inc) :- p_occupancy("ABL1(S718)", "Bosutinib", inc).
+0.5811865539::p_fc("ABL1(S718)", "CAL101", dec); 0.001::p_fc("ABL1(S718)", "CAL101", inc) :- p_occupancy("ABL1(S718)", "CAL101", dec).
+0.001::p_fc("ABL1(S718)", "CAL101", dec); 0.5811865539::p_fc("ABL1(S718)", "CAL101", inc) :- p_occupancy("ABL1(S718)", "CAL101", inc).
+0.2610230788::p_fc("ABL1(S718)", "CHIR99021", dec); 0.001::p_fc("ABL1(S718)", "CHIR99021", inc) :- p_occupancy("ABL1(S718)", "CHIR99021", dec).
+0.001::p_fc("ABL1(S718)", "CHIR99021", dec); 0.2610230788::p_fc("ABL1(S718)", "CHIR99021", inc) :- p_occupancy("ABL1(S718)", "CHIR99021", inc).
+0.8940438415::p_fc("ABL1(S718)", "CX4945", dec); 0.001::p_fc("ABL1(S718)", "CX4945", inc) :- p_occupancy("ABL1(S718)", "CX4945", dec).
+0.001::p_fc("ABL1(S718)", "CX4945", dec); 0.8940438415::p_fc("ABL1(S718)", "CX4945", inc) :- p_occupancy("ABL1(S718)", "CX4945", inc).
+0.1468027282::p_fc("ABL1(S718)", "DNAPK", dec); 0.001::p_fc("ABL1(S718)", "DNAPK", inc) :- p_occupancy("ABL1(S718)", "DNAPK", dec).
+0.001::p_fc("ABL1(S718)", "DNAPK", dec); 0.1468027282::p_fc("ABL1(S718)", "DNAPK", inc) :- p_occupancy("ABL1(S718)", "DNAPK", inc).
+0.1048577244::p_fc("ABL1(S718)", "Dabrafenib", dec); 0.001::p_fc("ABL1(S718)", "Dabrafenib", inc) :- p_occupancy("ABL1(S718)", "Dabrafenib", dec).
+0.001::p_fc("ABL1(S718)", "Dabrafenib", dec); 0.1048577244::p_fc("ABL1(S718)", "Dabrafenib", inc) :- p_occupancy("ABL1(S718)", "Dabrafenib", inc).
+0.3100588751::p_fc("ABL1(S718)", "Dasatinib", dec); 0.001::p_fc("ABL1(S718)", "Dasatinib", inc) :- p_occupancy("ABL1(S718)", "Dasatinib", dec).
+0.001::p_fc("ABL1(S718)", "Dasatinib", dec); 0.3100588751::p_fc("ABL1(S718)", "Dasatinib", inc) :- p_occupancy("ABL1(S718)", "Dasatinib", inc).
+0.5630430064::p_fc("ABL1(S718)", "Edelfosine", dec); 0.001::p_fc("ABL1(S718)", "Edelfosine", inc) :- p_occupancy("ABL1(S718)", "Edelfosine", dec).
+0.001::p_fc("ABL1(S718)", "Edelfosine", dec); 0.5630430064::p_fc("ABL1(S718)", "Edelfosine", inc) :- p_occupancy("ABL1(S718)", "Edelfosine", inc).
+0.6415059618::p_fc("ABL1(S718)", "FRAX486", dec); 0.001::p_fc("ABL1(S718)", "FRAX486", inc) :- p_occupancy("ABL1(S718)", "FRAX486", dec).
+0.001::p_fc("ABL1(S718)", "FRAX486", dec); 0.6415059618::p_fc("ABL1(S718)", "FRAX486", inc) :- p_occupancy("ABL1(S718)", "FRAX486", inc).
+0.0943835703::p_fc("ABL1(S718)", "GDC0941", dec); 0.001::p_fc("ABL1(S718)", "GDC0941", inc) :- p_occupancy("ABL1(S718)", "GDC0941", dec).
+0.001::p_fc("ABL1(S718)", "GDC0941", dec); 0.0943835703::p_fc("ABL1(S718)", "GDC0941", inc) :- p_occupancy("ABL1(S718)", "GDC0941", inc).
+0.7936689214::p_fc("ABL1(S718)", "GDC0994", dec); 0.001::p_fc("ABL1(S718)", "GDC0994", inc) :- p_occupancy("ABL1(S718)", "GDC0994", dec).
+0.001::p_fc("ABL1(S718)", "GDC0994", dec); 0.7936689214::p_fc("ABL1(S718)", "GDC0994", inc) :- p_occupancy("ABL1(S718)", "GDC0994", inc).
+0.3334741099::p_fc("ABL1(S718)", "GF109203X", dec); 0.001::p_fc("ABL1(S718)", "GF109203X", inc) :- p_occupancy("ABL1(S718)", "GF109203X", dec).
+0.001::p_fc("ABL1(S718)", "GF109203X", dec); 0.3334741099::p_fc("ABL1(S718)", "GF109203X", inc) :- p_occupancy("ABL1(S718)", "GF109203X", inc).
+0.9767743696::p_fc("ABL1(S718)", "GO6983", dec); 0.001::p_fc("ABL1(S718)", "GO6983", inc) :- p_occupancy("ABL1(S718)", "GO6983", dec).
+0.001::p_fc("ABL1(S718)", "GO6983", dec); 0.9767743696::p_fc("ABL1(S718)", "GO6983", inc) :- p_occupancy("ABL1(S718)", "GO6983", inc).
+0.6001857028::p_fc("ABL1(S718)", "GSK2334470", dec); 0.001::p_fc("ABL1(S718)", "GSK2334470", inc) :- p_occupancy("ABL1(S718)", "GSK2334470", dec).
+0.001::p_fc("ABL1(S718)", "GSK2334470", dec); 0.6001857028::p_fc("ABL1(S718)", "GSK2334470", inc) :- p_occupancy("ABL1(S718)", "GSK2334470", inc).
+0.2049318976::p_fc("ABL1(S718)", "GSK690693", dec); 0.001::p_fc("ABL1(S718)", "GSK690693", inc) :- p_occupancy("ABL1(S718)", "GSK690693", dec).
+0.001::p_fc("ABL1(S718)", "GSK690693", dec); 0.2049318976::p_fc("ABL1(S718)", "GSK690693", inc) :- p_occupancy("ABL1(S718)", "GSK690693", inc).
+0.2483615227::p_fc("ABL1(S718)", "Go6976", dec); 0.001::p_fc("ABL1(S718)", "Go6976", inc) :- p_occupancy("ABL1(S718)", "Go6976", dec).
+0.001::p_fc("ABL1(S718)", "Go6976", dec); 0.2483615227::p_fc("ABL1(S718)", "Go6976", inc) :- p_occupancy("ABL1(S718)", "Go6976", inc).
+0.3228156811::p_fc("ABL1(S718)", "H89", dec); 0.001::p_fc("ABL1(S718)", "H89", inc) :- p_occupancy("ABL1(S718)", "H89", dec).
+0.001::p_fc("ABL1(S718)", "H89", dec); 0.3228156811::p_fc("ABL1(S718)", "H89", inc) :- p_occupancy("ABL1(S718)", "H89", inc).
+0.0686644096::p_fc("ABL1(S718)", "HS173", dec); 0.001::p_fc("ABL1(S718)", "HS173", inc) :- p_occupancy("ABL1(S718)", "HS173", dec).
+0.001::p_fc("ABL1(S718)", "HS173", dec); 0.0686644096::p_fc("ABL1(S718)", "HS173", inc) :- p_occupancy("ABL1(S718)", "HS173", inc).
+0.6276497277::p_fc("ABL1(S718)", "Ipatasertib", dec); 0.001::p_fc("ABL1(S718)", "Ipatasertib", inc) :- p_occupancy("ABL1(S718)", "Ipatasertib", dec).
+0.001::p_fc("ABL1(S718)", "Ipatasertib", dec); 0.6276497277::p_fc("ABL1(S718)", "Ipatasertib", inc) :- p_occupancy("ABL1(S718)", "Ipatasertib", inc).
+0.0261807981::p_fc("ABL1(S718)", "JNJ", dec); 0.001::p_fc("ABL1(S718)", "JNJ", inc) :- p_occupancy("ABL1(S718)", "JNJ", dec).
+0.001::p_fc("ABL1(S718)", "JNJ", dec); 0.0261807981::p_fc("ABL1(S718)", "JNJ", inc) :- p_occupancy("ABL1(S718)", "JNJ", inc).
+0.6334440111::p_fc("ABL1(S718)", "JNK", dec); 0.001::p_fc("ABL1(S718)", "JNK", inc) :- p_occupancy("ABL1(S718)", "JNK", dec).
+0.001::p_fc("ABL1(S718)", "JNK", dec); 0.6334440111::p_fc("ABL1(S718)", "JNK", inc) :- p_occupancy("ABL1(S718)", "JNK", inc).
+0.1183674988::p_fc("ABL1(S718)", "KD025", dec); 0.001::p_fc("ABL1(S718)", "KD025", inc) :- p_occupancy("ABL1(S718)", "KD025", dec).
+0.001::p_fc("ABL1(S718)", "KD025", dec); 0.1183674988::p_fc("ABL1(S718)", "KD025", inc) :- p_occupancy("ABL1(S718)", "KD025", inc).
+0.0133540689::p_fc("ABL1(S718)", "KN62", dec); 0.001::p_fc("ABL1(S718)", "KN62", inc) :- p_occupancy("ABL1(S718)", "KN62", dec).
+0.001::p_fc("ABL1(S718)", "KN62", dec); 0.0133540689::p_fc("ABL1(S718)", "KN62", inc) :- p_occupancy("ABL1(S718)", "KN62", inc).
+0.0371193354::p_fc("ABL1(S718)", "KN93", dec); 0.001::p_fc("ABL1(S718)", "KN93", inc) :- p_occupancy("ABL1(S718)", "KN93", dec).
+0.001::p_fc("ABL1(S718)", "KN93", dec); 0.0371193354::p_fc("ABL1(S718)", "KN93", inc) :- p_occupancy("ABL1(S718)", "KN93", inc).
+0.0315831318::p_fc("ABL1(S718)", "Ku0063794", dec); 0.001::p_fc("ABL1(S718)", "Ku0063794", inc) :- p_occupancy("ABL1(S718)", "Ku0063794", dec).
+0.001::p_fc("ABL1(S718)", "Ku0063794", dec); 0.0315831318::p_fc("ABL1(S718)", "Ku0063794", inc) :- p_occupancy("ABL1(S718)", "Ku0063794", inc).
+0.6583916947::p_fc("ABL1(S718)", "LY2090314", dec); 0.001::p_fc("ABL1(S718)", "LY2090314", inc) :- p_occupancy("ABL1(S718)", "LY2090314", dec).
+0.001::p_fc("ABL1(S718)", "LY2090314", dec); 0.6583916947::p_fc("ABL1(S718)", "LY2090314", inc) :- p_occupancy("ABL1(S718)", "LY2090314", inc).
+0.7162484709::p_fc("ABL1(S718)", "LY2584702", dec); 0.001::p_fc("ABL1(S718)", "LY2584702", inc) :- p_occupancy("ABL1(S718)", "LY2584702", dec).
+0.001::p_fc("ABL1(S718)", "LY2584702", dec); 0.7162484709::p_fc("ABL1(S718)", "LY2584702", inc) :- p_occupancy("ABL1(S718)", "LY2584702", inc).
+0.0213633764::p_fc("ABL1(S718)", "LY2835219", dec); 0.001::p_fc("ABL1(S718)", "LY2835219", inc) :- p_occupancy("ABL1(S718)", "LY2835219", dec).
+0.001::p_fc("ABL1(S718)", "LY2835219", dec); 0.0213633764::p_fc("ABL1(S718)", "LY2835219", inc) :- p_occupancy("ABL1(S718)", "LY2835219", inc).
+0.4443913787::p_fc("ABL1(S718)", "Linsitinib", dec); 0.001::p_fc("ABL1(S718)", "Linsitinib", inc) :- p_occupancy("ABL1(S718)", "Linsitinib", dec).
+0.001::p_fc("ABL1(S718)", "Linsitinib", dec); 0.4443913787::p_fc("ABL1(S718)", "Linsitinib", inc) :- p_occupancy("ABL1(S718)", "Linsitinib", inc).
+0.1981608507::p_fc("ABL1(S718)", "MK2206", dec); 0.001::p_fc("ABL1(S718)", "MK2206", inc) :- p_occupancy("ABL1(S718)", "MK2206", dec).
+0.001::p_fc("ABL1(S718)", "MK2206", dec); 0.1981608507::p_fc("ABL1(S718)", "MK2206", inc) :- p_occupancy("ABL1(S718)", "MK2206", inc).
+0.2485750287::p_fc("ABL1(S718)", "NU7441", dec); 0.001::p_fc("ABL1(S718)", "NU7441", inc) :- p_occupancy("ABL1(S718)", "NU7441", dec).
+0.001::p_fc("ABL1(S718)", "NU7441", dec); 0.2485750287::p_fc("ABL1(S718)", "NU7441", inc) :- p_occupancy("ABL1(S718)", "NU7441", inc).
+0.2203174995::p_fc("ABL1(S718)", "PD153035", dec); 0.001::p_fc("ABL1(S718)", "PD153035", inc) :- p_occupancy("ABL1(S718)", "PD153035", dec).
+0.001::p_fc("ABL1(S718)", "PD153035", dec); 0.2203174995::p_fc("ABL1(S718)", "PD153035", inc) :- p_occupancy("ABL1(S718)", "PD153035", inc).
+0.8614128511::p_fc("ABL1(S718)", "PF3758309", dec); 0.001::p_fc("ABL1(S718)", "PF3758309", inc) :- p_occupancy("ABL1(S718)", "PF3758309", dec).
+0.001::p_fc("ABL1(S718)", "PF3758309", dec); 0.8614128511::p_fc("ABL1(S718)", "PF3758309", inc) :- p_occupancy("ABL1(S718)", "PF3758309", inc).
+0.2703617295::p_fc("ABL1(S718)", "PF4708671", dec); 0.001::p_fc("ABL1(S718)", "PF4708671", inc) :- p_occupancy("ABL1(S718)", "PF4708671", dec).
+0.001::p_fc("ABL1(S718)", "PF4708671", dec); 0.2703617295::p_fc("ABL1(S718)", "PF4708671", inc) :- p_occupancy("ABL1(S718)", "PF4708671", inc).
+0.7718692033::p_fc("ABL1(S718)", "PH797804", dec); 0.001::p_fc("ABL1(S718)", "PH797804", inc) :- p_occupancy("ABL1(S718)", "PH797804", dec).
+0.001::p_fc("ABL1(S718)", "PH797804", dec); 0.7718692033::p_fc("ABL1(S718)", "PH797804", inc) :- p_occupancy("ABL1(S718)", "PH797804", inc).
+0.1160382271::p_fc("ABL1(S718)", "PIK294", dec); 0.001::p_fc("ABL1(S718)", "PIK294", inc) :- p_occupancy("ABL1(S718)", "PIK294", dec).
+0.001::p_fc("ABL1(S718)", "PIK294", dec); 0.1160382271::p_fc("ABL1(S718)", "PIK294", inc) :- p_occupancy("ABL1(S718)", "PIK294", inc).
+0.0068614376::p_fc("ABL1(S718)", "Ribociclib", dec); 0.001::p_fc("ABL1(S718)", "Ribociclib", inc) :- p_occupancy("ABL1(S718)", "Ribociclib", dec).
+0.001::p_fc("ABL1(S718)", "Ribociclib", dec); 0.0068614376::p_fc("ABL1(S718)", "Ribociclib", inc) :- p_occupancy("ABL1(S718)", "Ribociclib", inc).
+0.4928541653::p_fc("ABL1(S718)", "Ripasudil", dec); 0.001::p_fc("ABL1(S718)", "Ripasudil", inc) :- p_occupancy("ABL1(S718)", "Ripasudil", dec).
+0.001::p_fc("ABL1(S718)", "Ripasudil", dec); 0.4928541653::p_fc("ABL1(S718)", "Ripasudil", inc) :- p_occupancy("ABL1(S718)", "Ripasudil", inc).
+0.15185443::p_fc("ABL1(S718)", "SP600125", dec); 0.001::p_fc("ABL1(S718)", "SP600125", inc) :- p_occupancy("ABL1(S718)", "SP600125", dec).
+0.001::p_fc("ABL1(S718)", "SP600125", dec); 0.15185443::p_fc("ABL1(S718)", "SP600125", inc) :- p_occupancy("ABL1(S718)", "SP600125", inc).
+0.1339580053::p_fc("ABL1(S718)", "Selumetinib", dec); 0.001::p_fc("ABL1(S718)", "Selumetinib", inc) :- p_occupancy("ABL1(S718)", "Selumetinib", dec).
+0.001::p_fc("ABL1(S718)", "Selumetinib", dec); 0.1339580053::p_fc("ABL1(S718)", "Selumetinib", inc) :- p_occupancy("ABL1(S718)", "Selumetinib", inc).
+0.7764699681::p_fc("ABL1(S718)", "TAK715", dec); 0.001::p_fc("ABL1(S718)", "TAK715", inc) :- p_occupancy("ABL1(S718)", "TAK715", dec).
+0.001::p_fc("ABL1(S718)", "TAK715", dec); 0.7764699681::p_fc("ABL1(S718)", "TAK715", inc) :- p_occupancy("ABL1(S718)", "TAK715", inc).
+0.2009760172::p_fc("ABL1(S718)", "TBCA", dec); 0.001::p_fc("ABL1(S718)", "TBCA", inc) :- p_occupancy("ABL1(S718)", "TBCA", dec).
+0.001::p_fc("ABL1(S718)", "TBCA", dec); 0.2009760172::p_fc("ABL1(S718)", "TBCA", inc) :- p_occupancy("ABL1(S718)", "TBCA", inc).
+0.2115007125::p_fc("ABL1(S718)", "TGX221", dec); 0.001::p_fc("ABL1(S718)", "TGX221", inc) :- p_occupancy("ABL1(S718)", "TGX221", dec).
+0.001::p_fc("ABL1(S718)", "TGX221", dec); 0.2115007125::p_fc("ABL1(S718)", "TGX221", inc) :- p_occupancy("ABL1(S718)", "TGX221", inc).
+0.4624684831::p_fc("ABL1(S718)", "Tofacitinib", dec); 0.001::p_fc("ABL1(S718)", "Tofacitinib", inc) :- p_occupancy("ABL1(S718)", "Tofacitinib", dec).
+0.001::p_fc("ABL1(S718)", "Tofacitinib", dec); 0.4624684831::p_fc("ABL1(S718)", "Tofacitinib", inc) :- p_occupancy("ABL1(S718)", "Tofacitinib", inc).
+0.872714853::p_fc("ABL1(S718)", "Torin", dec); 0.001::p_fc("ABL1(S718)", "Torin", inc) :- p_occupancy("ABL1(S718)", "Torin", dec).
+0.001::p_fc("ABL1(S718)", "Torin", dec); 0.872714853::p_fc("ABL1(S718)", "Torin", inc) :- p_occupancy("ABL1(S718)", "Torin", inc).
+0.5774995091::p_fc("ABL1(S718)", "Trametinib", dec); 0.001::p_fc("ABL1(S718)", "Trametinib", inc) :- p_occupancy("ABL1(S718)", "Trametinib", dec).
+0.001::p_fc("ABL1(S718)", "Trametinib", dec); 0.5774995091::p_fc("ABL1(S718)", "Trametinib", inc) :- p_occupancy("ABL1(S718)", "Trametinib", inc).
+0.7352087133::p_fc("ABL1(S718)", "U73122", dec); 0.001::p_fc("ABL1(S718)", "U73122", inc) :- p_occupancy("ABL1(S718)", "U73122", dec).
+0.001::p_fc("ABL1(S718)", "U73122", dec); 0.7352087133::p_fc("ABL1(S718)", "U73122", inc) :- p_occupancy("ABL1(S718)", "U73122", inc).
+0.9934417043::p_fc("ABL1(S718)", "Ulixertinib", dec); 0.001::p_fc("ABL1(S718)", "Ulixertinib", inc) :- p_occupancy("ABL1(S718)", "Ulixertinib", dec).
+0.001::p_fc("ABL1(S718)", "Ulixertinib", dec); 0.9934417043::p_fc("ABL1(S718)", "Ulixertinib", inc) :- p_occupancy("ABL1(S718)", "Ulixertinib", inc).
+0.0816328298::p_fc("ABL1(S718)", "Vemurafenib", dec); 0.001::p_fc("ABL1(S718)", "Vemurafenib", inc) :- p_occupancy("ABL1(S718)", "Vemurafenib", dec).
+0.001::p_fc("ABL1(S718)", "Vemurafenib", dec); 0.0816328298::p_fc("ABL1(S718)", "Vemurafenib", inc) :- p_occupancy("ABL1(S718)", "Vemurafenib", inc).
+0.4284219627::p_fc("ABL1(T735)", "AC220", dec); 0.001::p_fc("ABL1(T735)", "AC220", inc) :- p_occupancy("ABL1(T735)", "AC220", dec).
+0.001::p_fc("ABL1(T735)", "AC220", dec); 0.4284219627::p_fc("ABL1(T735)", "AC220", inc) :- p_occupancy("ABL1(T735)", "AC220", inc).
+0.9522429731::p_fc("ABL1(T735)", "AT13148", dec); 0.001::p_fc("ABL1(T735)", "AT13148", inc) :- p_occupancy("ABL1(T735)", "AT13148", dec).
+0.001::p_fc("ABL1(T735)", "AT13148", dec); 0.9522429731::p_fc("ABL1(T735)", "AT13148", inc) :- p_occupancy("ABL1(T735)", "AT13148", inc).
+0.3337390099::p_fc("ABL1(T735)", "AZ20", dec); 0.001::p_fc("ABL1(T735)", "AZ20", inc) :- p_occupancy("ABL1(T735)", "AZ20", dec).
+0.001::p_fc("ABL1(T735)", "AZ20", dec); 0.3337390099::p_fc("ABL1(T735)", "AZ20", inc) :- p_occupancy("ABL1(T735)", "AZ20", inc).
+0.9948726373::p_fc("ABL1(T735)", "AZD1480", dec); 0.001::p_fc("ABL1(T735)", "AZD1480", inc) :- p_occupancy("ABL1(T735)", "AZD1480", dec).
+0.001::p_fc("ABL1(T735)", "AZD1480", dec); 0.9948726373::p_fc("ABL1(T735)", "AZD1480", inc) :- p_occupancy("ABL1(T735)", "AZD1480", inc).
+0.2434721171::p_fc("ABL1(T735)", "AZD3759", dec); 0.001::p_fc("ABL1(T735)", "AZD3759", inc) :- p_occupancy("ABL1(T735)", "AZD3759", dec).
+0.001::p_fc("ABL1(T735)", "AZD3759", dec); 0.2434721171::p_fc("ABL1(T735)", "AZD3759", inc) :- p_occupancy("ABL1(T735)", "AZD3759", inc).
+0.998005988::p_fc("ABL1(T735)", "AZD5363", dec); 0.001::p_fc("ABL1(T735)", "AZD5363", inc) :- p_occupancy("ABL1(T735)", "AZD5363", dec).
+0.001::p_fc("ABL1(T735)", "AZD5363", dec); 0.998005988::p_fc("ABL1(T735)", "AZD5363", inc) :- p_occupancy("ABL1(T735)", "AZD5363", inc).
+0.9980059353::p_fc("ABL1(T735)", "AZD5438", dec); 0.001::p_fc("ABL1(T735)", "AZD5438", inc) :- p_occupancy("ABL1(T735)", "AZD5438", dec).
+0.001::p_fc("ABL1(T735)", "AZD5438", dec); 0.9980059353::p_fc("ABL1(T735)", "AZD5438", inc) :- p_occupancy("ABL1(T735)", "AZD5438", inc).
+0.4677202812::p_fc("ABL1(T735)", "AZD6482", dec); 0.001::p_fc("ABL1(T735)", "AZD6482", inc) :- p_occupancy("ABL1(T735)", "AZD6482", dec).
+0.001::p_fc("ABL1(T735)", "AZD6482", dec); 0.4677202812::p_fc("ABL1(T735)", "AZD6482", inc) :- p_occupancy("ABL1(T735)", "AZD6482", inc).
+0.0440784569::p_fc("ABL1(T735)", "AZD6738", dec); 0.001::p_fc("ABL1(T735)", "AZD6738", inc) :- p_occupancy("ABL1(T735)", "AZD6738", dec).
+0.001::p_fc("ABL1(T735)", "AZD6738", dec); 0.0440784569::p_fc("ABL1(T735)", "AZD6738", inc) :- p_occupancy("ABL1(T735)", "AZD6738", inc).
+0.5993816117::p_fc("ABL1(T735)", "AZD8055", dec); 0.001::p_fc("ABL1(T735)", "AZD8055", inc) :- p_occupancy("ABL1(T735)", "AZD8055", dec).
+0.001::p_fc("ABL1(T735)", "AZD8055", dec); 0.5993816117::p_fc("ABL1(T735)", "AZD8055", inc) :- p_occupancy("ABL1(T735)", "AZD8055", inc).
+0.8570131687::p_fc("ABL1(T735)", "Amuvatinib", dec); 0.001::p_fc("ABL1(T735)", "Amuvatinib", inc) :- p_occupancy("ABL1(T735)", "Amuvatinib", dec).
+0.001::p_fc("ABL1(T735)", "Amuvatinib", dec); 0.8570131687::p_fc("ABL1(T735)", "Amuvatinib", inc) :- p_occupancy("ABL1(T735)", "Amuvatinib", inc).
+0.998005988::p_fc("ABL1(T735)", "BX912", dec); 0.001::p_fc("ABL1(T735)", "BX912", inc) :- p_occupancy("ABL1(T735)", "BX912", dec).
+0.001::p_fc("ABL1(T735)", "BX912", dec); 0.998005988::p_fc("ABL1(T735)", "BX912", inc) :- p_occupancy("ABL1(T735)", "BX912", inc).
+0.1942129249::p_fc("ABL1(T735)", "Bosutinib", dec); 0.001::p_fc("ABL1(T735)", "Bosutinib", inc) :- p_occupancy("ABL1(T735)", "Bosutinib", dec).
+0.001::p_fc("ABL1(T735)", "Bosutinib", dec); 0.1942129249::p_fc("ABL1(T735)", "Bosutinib", inc) :- p_occupancy("ABL1(T735)", "Bosutinib", inc).
+0.9931434431::p_fc("ABL1(T735)", "CAL101", dec); 0.001::p_fc("ABL1(T735)", "CAL101", inc) :- p_occupancy("ABL1(T735)", "CAL101", dec).
+0.001::p_fc("ABL1(T735)", "CAL101", dec); 0.9931434431::p_fc("ABL1(T735)", "CAL101", inc) :- p_occupancy("ABL1(T735)", "CAL101", inc).
+0.9979666988::p_fc("ABL1(T735)", "CHIR99021", dec); 0.001::p_fc("ABL1(T735)", "CHIR99021", inc) :- p_occupancy("ABL1(T735)", "CHIR99021", dec).
+0.001::p_fc("ABL1(T735)", "CHIR99021", dec); 0.9979666988::p_fc("ABL1(T735)", "CHIR99021", inc) :- p_occupancy("ABL1(T735)", "CHIR99021", inc).
+0.9606548131::p_fc("ABL1(T735)", "CX4945", dec); 0.001::p_fc("ABL1(T735)", "CX4945", inc) :- p_occupancy("ABL1(T735)", "CX4945", dec).
+0.001::p_fc("ABL1(T735)", "CX4945", dec); 0.9606548131::p_fc("ABL1(T735)", "CX4945", inc) :- p_occupancy("ABL1(T735)", "CX4945", inc).
+0.3151673513::p_fc("ABL1(T735)", "DNAPK", dec); 0.001::p_fc("ABL1(T735)", "DNAPK", inc) :- p_occupancy("ABL1(T735)", "DNAPK", dec).
+0.001::p_fc("ABL1(T735)", "DNAPK", dec); 0.3151673513::p_fc("ABL1(T735)", "DNAPK", inc) :- p_occupancy("ABL1(T735)", "DNAPK", inc).
+0.1228086768::p_fc("ABL1(T735)", "Dabrafenib", dec); 0.001::p_fc("ABL1(T735)", "Dabrafenib", inc) :- p_occupancy("ABL1(T735)", "Dabrafenib", dec).
+0.001::p_fc("ABL1(T735)", "Dabrafenib", dec); 0.1228086768::p_fc("ABL1(T735)", "Dabrafenib", inc) :- p_occupancy("ABL1(T735)", "Dabrafenib", inc).
+0.8780898096::p_fc("ABL1(T735)", "Dasatinib", dec); 0.001::p_fc("ABL1(T735)", "Dasatinib", inc) :- p_occupancy("ABL1(T735)", "Dasatinib", dec).
+0.001::p_fc("ABL1(T735)", "Dasatinib", dec); 0.8780898096::p_fc("ABL1(T735)", "Dasatinib", inc) :- p_occupancy("ABL1(T735)", "Dasatinib", inc).
+0.3256352456::p_fc("ABL1(T735)", "Edelfosine", dec); 0.001::p_fc("ABL1(T735)", "Edelfosine", inc) :- p_occupancy("ABL1(T735)", "Edelfosine", dec).
+0.001::p_fc("ABL1(T735)", "Edelfosine", dec); 0.3256352456::p_fc("ABL1(T735)", "Edelfosine", inc) :- p_occupancy("ABL1(T735)", "Edelfosine", inc).
+0.860014021::p_fc("ABL1(T735)", "FRAX486", dec); 0.001::p_fc("ABL1(T735)", "FRAX486", inc) :- p_occupancy("ABL1(T735)", "FRAX486", dec).
+0.001::p_fc("ABL1(T735)", "FRAX486", dec); 0.860014021::p_fc("ABL1(T735)", "FRAX486", inc) :- p_occupancy("ABL1(T735)", "FRAX486", inc).
+0.7929779946::p_fc("ABL1(T735)", "GDC0941", dec); 0.001::p_fc("ABL1(T735)", "GDC0941", inc) :- p_occupancy("ABL1(T735)", "GDC0941", dec).
+0.001::p_fc("ABL1(T735)", "GDC0941", dec); 0.7929779946::p_fc("ABL1(T735)", "GDC0941", inc) :- p_occupancy("ABL1(T735)", "GDC0941", inc).
+0.1221473641::p_fc("ABL1(T735)", "GDC0994", dec); 0.001::p_fc("ABL1(T735)", "GDC0994", inc) :- p_occupancy("ABL1(T735)", "GDC0994", dec).
+0.001::p_fc("ABL1(T735)", "GDC0994", dec); 0.1221473641::p_fc("ABL1(T735)", "GDC0994", inc) :- p_occupancy("ABL1(T735)", "GDC0994", inc).
+0.1324288038::p_fc("ABL1(T735)", "GF109203X", dec); 0.001::p_fc("ABL1(T735)", "GF109203X", inc) :- p_occupancy("ABL1(T735)", "GF109203X", dec).
+0.001::p_fc("ABL1(T735)", "GF109203X", dec); 0.1324288038::p_fc("ABL1(T735)", "GF109203X", inc) :- p_occupancy("ABL1(T735)", "GF109203X", inc).
+0.884705737::p_fc("ABL1(T735)", "GO6983", dec); 0.001::p_fc("ABL1(T735)", "GO6983", inc) :- p_occupancy("ABL1(T735)", "GO6983", dec).
+0.001::p_fc("ABL1(T735)", "GO6983", dec); 0.884705737::p_fc("ABL1(T735)", "GO6983", inc) :- p_occupancy("ABL1(T735)", "GO6983", inc).
+0.998005988::p_fc("ABL1(T735)", "GSK2334470", dec); 0.001::p_fc("ABL1(T735)", "GSK2334470", inc) :- p_occupancy("ABL1(T735)", "GSK2334470", dec).
+0.001::p_fc("ABL1(T735)", "GSK2334470", dec); 0.998005988::p_fc("ABL1(T735)", "GSK2334470", inc) :- p_occupancy("ABL1(T735)", "GSK2334470", inc).
+0.2247295354::p_fc("ABL1(T735)", "GSK690693", dec); 0.001::p_fc("ABL1(T735)", "GSK690693", inc) :- p_occupancy("ABL1(T735)", "GSK690693", dec).
+0.001::p_fc("ABL1(T735)", "GSK690693", dec); 0.2247295354::p_fc("ABL1(T735)", "GSK690693", inc) :- p_occupancy("ABL1(T735)", "GSK690693", inc).
+0.8013236265::p_fc("ABL1(T735)", "Go6976", dec); 0.001::p_fc("ABL1(T735)", "Go6976", inc) :- p_occupancy("ABL1(T735)", "Go6976", dec).
+0.001::p_fc("ABL1(T735)", "Go6976", dec); 0.8013236265::p_fc("ABL1(T735)", "Go6976", inc) :- p_occupancy("ABL1(T735)", "Go6976", inc).
+0.2494110024::p_fc("ABL1(T735)", "H89", dec); 0.001::p_fc("ABL1(T735)", "H89", inc) :- p_occupancy("ABL1(T735)", "H89", dec).
+0.001::p_fc("ABL1(T735)", "H89", dec); 0.2494110024::p_fc("ABL1(T735)", "H89", inc) :- p_occupancy("ABL1(T735)", "H89", inc).
+0.2950074851::p_fc("ABL1(T735)", "HS173", dec); 0.001::p_fc("ABL1(T735)", "HS173", inc) :- p_occupancy("ABL1(T735)", "HS173", dec).
+0.001::p_fc("ABL1(T735)", "HS173", dec); 0.2950074851::p_fc("ABL1(T735)", "HS173", inc) :- p_occupancy("ABL1(T735)", "HS173", inc).
+0.9980043063::p_fc("ABL1(T735)", "Ipatasertib", dec); 0.001::p_fc("ABL1(T735)", "Ipatasertib", inc) :- p_occupancy("ABL1(T735)", "Ipatasertib", dec).
+0.001::p_fc("ABL1(T735)", "Ipatasertib", dec); 0.9980043063::p_fc("ABL1(T735)", "Ipatasertib", inc) :- p_occupancy("ABL1(T735)", "Ipatasertib", inc).
+0.567049392::p_fc("ABL1(T735)", "JNJ", dec); 0.001::p_fc("ABL1(T735)", "JNJ", inc) :- p_occupancy("ABL1(T735)", "JNJ", dec).
+0.001::p_fc("ABL1(T735)", "JNJ", dec); 0.567049392::p_fc("ABL1(T735)", "JNJ", inc) :- p_occupancy("ABL1(T735)", "JNJ", inc).
+0.3737580745::p_fc("ABL1(T735)", "JNK", dec); 0.001::p_fc("ABL1(T735)", "JNK", inc) :- p_occupancy("ABL1(T735)", "JNK", dec).
+0.001::p_fc("ABL1(T735)", "JNK", dec); 0.3737580745::p_fc("ABL1(T735)", "JNK", inc) :- p_occupancy("ABL1(T735)", "JNK", inc).
+0.3750949939::p_fc("ABL1(T735)", "KD025", dec); 0.001::p_fc("ABL1(T735)", "KD025", inc) :- p_occupancy("ABL1(T735)", "KD025", dec).
+0.001::p_fc("ABL1(T735)", "KD025", dec); 0.3750949939::p_fc("ABL1(T735)", "KD025", inc) :- p_occupancy("ABL1(T735)", "KD025", inc).
+0.741593101::p_fc("ABL1(T735)", "KN62", dec); 0.001::p_fc("ABL1(T735)", "KN62", inc) :- p_occupancy("ABL1(T735)", "KN62", dec).
+0.001::p_fc("ABL1(T735)", "KN62", dec); 0.741593101::p_fc("ABL1(T735)", "KN62", inc) :- p_occupancy("ABL1(T735)", "KN62", inc).
+0.9960261515::p_fc("ABL1(T735)", "KN93", dec); 0.001::p_fc("ABL1(T735)", "KN93", inc) :- p_occupancy("ABL1(T735)", "KN93", dec).
+0.001::p_fc("ABL1(T735)", "KN93", dec); 0.9960261515::p_fc("ABL1(T735)", "KN93", inc) :- p_occupancy("ABL1(T735)", "KN93", inc).
+0.9965682695::p_fc("ABL1(T735)", "Ku0063794", dec); 0.001::p_fc("ABL1(T735)", "Ku0063794", inc) :- p_occupancy("ABL1(T735)", "Ku0063794", dec).
+0.001::p_fc("ABL1(T735)", "Ku0063794", dec); 0.9965682695::p_fc("ABL1(T735)", "Ku0063794", inc) :- p_occupancy("ABL1(T735)", "Ku0063794", inc).
+0.9714227288::p_fc("ABL1(T735)", "LY2090314", dec); 0.001::p_fc("ABL1(T735)", "LY2090314", inc) :- p_occupancy("ABL1(T735)", "LY2090314", dec).
+0.001::p_fc("ABL1(T735)", "LY2090314", dec); 0.9714227288::p_fc("ABL1(T735)", "LY2090314", inc) :- p_occupancy("ABL1(T735)", "LY2090314", inc).
+0.4631041972::p_fc("ABL1(T735)", "LY2584702", dec); 0.001::p_fc("ABL1(T735)", "LY2584702", inc) :- p_occupancy("ABL1(T735)", "LY2584702", dec).
+0.001::p_fc("ABL1(T735)", "LY2584702", dec); 0.4631041972::p_fc("ABL1(T735)", "LY2584702", inc) :- p_occupancy("ABL1(T735)", "LY2584702", inc).
+0.240382513::p_fc("ABL1(T735)", "LY2835219", dec); 0.001::p_fc("ABL1(T735)", "LY2835219", inc) :- p_occupancy("ABL1(T735)", "LY2835219", dec).
+0.001::p_fc("ABL1(T735)", "LY2835219", dec); 0.240382513::p_fc("ABL1(T735)", "LY2835219", inc) :- p_occupancy("ABL1(T735)", "LY2835219", inc).
+0.2392386155::p_fc("ABL1(T735)", "Linsitinib", dec); 0.001::p_fc("ABL1(T735)", "Linsitinib", inc) :- p_occupancy("ABL1(T735)", "Linsitinib", dec).
+0.001::p_fc("ABL1(T735)", "Linsitinib", dec); 0.2392386155::p_fc("ABL1(T735)", "Linsitinib", inc) :- p_occupancy("ABL1(T735)", "Linsitinib", inc).
+0.7491456274::p_fc("ABL1(T735)", "MK2206", dec); 0.001::p_fc("ABL1(T735)", "MK2206", inc) :- p_occupancy("ABL1(T735)", "MK2206", dec).
+0.001::p_fc("ABL1(T735)", "MK2206", dec); 0.7491456274::p_fc("ABL1(T735)", "MK2206", inc) :- p_occupancy("ABL1(T735)", "MK2206", inc).
+0.7767338504::p_fc("ABL1(T735)", "NU7441", dec); 0.001::p_fc("ABL1(T735)", "NU7441", inc) :- p_occupancy("ABL1(T735)", "NU7441", dec).
+0.001::p_fc("ABL1(T735)", "NU7441", dec); 0.7767338504::p_fc("ABL1(T735)", "NU7441", inc) :- p_occupancy("ABL1(T735)", "NU7441", inc).
+0.3091425627::p_fc("ABL1(T735)", "PD153035", dec); 0.001::p_fc("ABL1(T735)", "PD153035", inc) :- p_occupancy("ABL1(T735)", "PD153035", dec).
+0.001::p_fc("ABL1(T735)", "PD153035", dec); 0.3091425627::p_fc("ABL1(T735)", "PD153035", inc) :- p_occupancy("ABL1(T735)", "PD153035", inc).
+0.126592392::p_fc("ABL1(T735)", "PF3758309", dec); 0.001::p_fc("ABL1(T735)", "PF3758309", inc) :- p_occupancy("ABL1(T735)", "PF3758309", dec).
+0.001::p_fc("ABL1(T735)", "PF3758309", dec); 0.126592392::p_fc("ABL1(T735)", "PF3758309", inc) :- p_occupancy("ABL1(T735)", "PF3758309", inc).
+0.281166533::p_fc("ABL1(T735)", "PF4708671", dec); 0.001::p_fc("ABL1(T735)", "PF4708671", inc) :- p_occupancy("ABL1(T735)", "PF4708671", dec).
+0.001::p_fc("ABL1(T735)", "PF4708671", dec); 0.281166533::p_fc("ABL1(T735)", "PF4708671", inc) :- p_occupancy("ABL1(T735)", "PF4708671", inc).
+0.8821067313::p_fc("ABL1(T735)", "PH797804", dec); 0.001::p_fc("ABL1(T735)", "PH797804", inc) :- p_occupancy("ABL1(T735)", "PH797804", dec).
+0.001::p_fc("ABL1(T735)", "PH797804", dec); 0.8821067313::p_fc("ABL1(T735)", "PH797804", inc) :- p_occupancy("ABL1(T735)", "PH797804", inc).
+0.9975482573::p_fc("ABL1(T735)", "PIK294", dec); 0.001::p_fc("ABL1(T735)", "PIK294", inc) :- p_occupancy("ABL1(T735)", "PIK294", dec).
+0.001::p_fc("ABL1(T735)", "PIK294", dec); 0.9975482573::p_fc("ABL1(T735)", "PIK294", inc) :- p_occupancy("ABL1(T735)", "PIK294", inc).
+0.4538633205::p_fc("ABL1(T735)", "Ribociclib", dec); 0.001::p_fc("ABL1(T735)", "Ribociclib", inc) :- p_occupancy("ABL1(T735)", "Ribociclib", dec).
+0.001::p_fc("ABL1(T735)", "Ribociclib", dec); 0.4538633205::p_fc("ABL1(T735)", "Ribociclib", inc) :- p_occupancy("ABL1(T735)", "Ribociclib", inc).
+0.0493646567::p_fc("ABL1(T735)", "Ripasudil", dec); 0.001::p_fc("ABL1(T735)", "Ripasudil", inc) :- p_occupancy("ABL1(T735)", "Ripasudil", dec).
+0.001::p_fc("ABL1(T735)", "Ripasudil", dec); 0.0493646567::p_fc("ABL1(T735)", "Ripasudil", inc) :- p_occupancy("ABL1(T735)", "Ripasudil", inc).
+0.1394437361::p_fc("ABL1(T735)", "SP600125", dec); 0.001::p_fc("ABL1(T735)", "SP600125", inc) :- p_occupancy("ABL1(T735)", "SP600125", dec).
+0.001::p_fc("ABL1(T735)", "SP600125", dec); 0.1394437361::p_fc("ABL1(T735)", "SP600125", inc) :- p_occupancy("ABL1(T735)", "SP600125", inc).
+0.7782818459::p_fc("ABL1(T735)", "Selumetinib", dec); 0.001::p_fc("ABL1(T735)", "Selumetinib", inc) :- p_occupancy("ABL1(T735)", "Selumetinib", dec).
+0.001::p_fc("ABL1(T735)", "Selumetinib", dec); 0.7782818459::p_fc("ABL1(T735)", "Selumetinib", inc) :- p_occupancy("ABL1(T735)", "Selumetinib", inc).
+0.2144182689::p_fc("ABL1(T735)", "TAK715", dec); 0.001::p_fc("ABL1(T735)", "TAK715", inc) :- p_occupancy("ABL1(T735)", "TAK715", dec).
+0.001::p_fc("ABL1(T735)", "TAK715", dec); 0.2144182689::p_fc("ABL1(T735)", "TAK715", inc) :- p_occupancy("ABL1(T735)", "TAK715", inc).
+0.4573774493::p_fc("ABL1(T735)", "TBCA", dec); 0.001::p_fc("ABL1(T735)", "TBCA", inc) :- p_occupancy("ABL1(T735)", "TBCA", dec).
+0.001::p_fc("ABL1(T735)", "TBCA", dec); 0.4573774493::p_fc("ABL1(T735)", "TBCA", inc) :- p_occupancy("ABL1(T735)", "TBCA", inc).
+0.1398373632::p_fc("ABL1(T735)", "TGX221", dec); 0.001::p_fc("ABL1(T735)", "TGX221", inc) :- p_occupancy("ABL1(T735)", "TGX221", dec).
+0.001::p_fc("ABL1(T735)", "TGX221", dec); 0.1398373632::p_fc("ABL1(T735)", "TGX221", inc) :- p_occupancy("ABL1(T735)", "TGX221", inc).
+0.9979617173::p_fc("ABL1(T735)", "Tofacitinib", dec); 0.001::p_fc("ABL1(T735)", "Tofacitinib", inc) :- p_occupancy("ABL1(T735)", "Tofacitinib", dec).
+0.001::p_fc("ABL1(T735)", "Tofacitinib", dec); 0.9979617173::p_fc("ABL1(T735)", "Tofacitinib", inc) :- p_occupancy("ABL1(T735)", "Tofacitinib", inc).
+0.8294491082::p_fc("ABL1(T735)", "Torin", dec); 0.001::p_fc("ABL1(T735)", "Torin", inc) :- p_occupancy("ABL1(T735)", "Torin", dec).
+0.001::p_fc("ABL1(T735)", "Torin", dec); 0.8294491082::p_fc("ABL1(T735)", "Torin", inc) :- p_occupancy("ABL1(T735)", "Torin", inc).
+0.891272185::p_fc("ABL1(T735)", "Trametinib", dec); 0.001::p_fc("ABL1(T735)", "Trametinib", inc) :- p_occupancy("ABL1(T735)", "Trametinib", dec).
+0.001::p_fc("ABL1(T735)", "Trametinib", dec); 0.891272185::p_fc("ABL1(T735)", "Trametinib", inc) :- p_occupancy("ABL1(T735)", "Trametinib", inc).
+0.4747563647::p_fc("ABL1(T735)", "U73122", dec); 0.001::p_fc("ABL1(T735)", "U73122", inc) :- p_occupancy("ABL1(T735)", "U73122", dec).
+0.001::p_fc("ABL1(T735)", "U73122", dec); 0.4747563647::p_fc("ABL1(T735)", "U73122", inc) :- p_occupancy("ABL1(T735)", "U73122", inc).
+0.2983572973::p_fc("ABL1(T735)", "Ulixertinib", dec); 0.001::p_fc("ABL1(T735)", "Ulixertinib", inc) :- p_occupancy("ABL1(T735)", "Ulixertinib", dec).
+0.001::p_fc("ABL1(T735)", "Ulixertinib", dec); 0.2983572973::p_fc("ABL1(T735)", "Ulixertinib", inc) :- p_occupancy("ABL1(T735)", "Ulixertinib", inc).
+0.3383102882::p_fc("ABL1(T735)", "Vemurafenib", dec); 0.001::p_fc("ABL1(T735)", "Vemurafenib", inc) :- p_occupancy("ABL1(T735)", "Vemurafenib", dec).
+0.001::p_fc("ABL1(T735)", "Vemurafenib", dec); 0.3383102882::p_fc("ABL1(T735)", "Vemurafenib", inc) :- p_occupancy("ABL1(T735)", "Vemurafenib", inc).
+0.6601432091::p_fc("HIPK2(Y361)", "AC220", dec); 0.001::p_fc("HIPK2(Y361)", "AC220", inc) :- p_occupancy("HIPK2(Y361)", "AC220", dec).
+0.001::p_fc("HIPK2(Y361)", "AC220", dec); 0.6601432091::p_fc("HIPK2(Y361)", "AC220", inc) :- p_occupancy("HIPK2(Y361)", "AC220", inc).
+0.0540873712::p_fc("HIPK2(Y361)", "AT13148", dec); 0.001::p_fc("HIPK2(Y361)", "AT13148", inc) :- p_occupancy("HIPK2(Y361)", "AT13148", dec).
+0.001::p_fc("HIPK2(Y361)", "AT13148", dec); 0.0540873712::p_fc("HIPK2(Y361)", "AT13148", inc) :- p_occupancy("HIPK2(Y361)", "AT13148", inc).
+0.8995910758::p_fc("HIPK2(Y361)", "AZ20", dec); 0.001::p_fc("HIPK2(Y361)", "AZ20", inc) :- p_occupancy("HIPK2(Y361)", "AZ20", dec).
+0.001::p_fc("HIPK2(Y361)", "AZ20", dec); 0.8995910758::p_fc("HIPK2(Y361)", "AZ20", inc) :- p_occupancy("HIPK2(Y361)", "AZ20", inc).
+0.3467336048::p_fc("HIPK2(Y361)", "AZD1480", dec); 0.001::p_fc("HIPK2(Y361)", "AZD1480", inc) :- p_occupancy("HIPK2(Y361)", "AZD1480", dec).
+0.001::p_fc("HIPK2(Y361)", "AZD1480", dec); 0.3467336048::p_fc("HIPK2(Y361)", "AZD1480", inc) :- p_occupancy("HIPK2(Y361)", "AZD1480", inc).
+0.9922743948::p_fc("HIPK2(Y361)", "AZD3759", dec); 0.001::p_fc("HIPK2(Y361)", "AZD3759", inc) :- p_occupancy("HIPK2(Y361)", "AZD3759", dec).
+0.001::p_fc("HIPK2(Y361)", "AZD3759", dec); 0.9922743948::p_fc("HIPK2(Y361)", "AZD3759", inc) :- p_occupancy("HIPK2(Y361)", "AZD3759", inc).
+0.7457152554::p_fc("HIPK2(Y361)", "AZD5363", dec); 0.001::p_fc("HIPK2(Y361)", "AZD5363", inc) :- p_occupancy("HIPK2(Y361)", "AZD5363", dec).
+0.001::p_fc("HIPK2(Y361)", "AZD5363", dec); 0.7457152554::p_fc("HIPK2(Y361)", "AZD5363", inc) :- p_occupancy("HIPK2(Y361)", "AZD5363", inc).
+0.4581002731::p_fc("HIPK2(Y361)", "AZD5438", dec); 0.001::p_fc("HIPK2(Y361)", "AZD5438", inc) :- p_occupancy("HIPK2(Y361)", "AZD5438", dec).
+0.001::p_fc("HIPK2(Y361)", "AZD5438", dec); 0.4581002731::p_fc("HIPK2(Y361)", "AZD5438", inc) :- p_occupancy("HIPK2(Y361)", "AZD5438", inc).
+0.214018877::p_fc("HIPK2(Y361)", "AZD6482", dec); 0.001::p_fc("HIPK2(Y361)", "AZD6482", inc) :- p_occupancy("HIPK2(Y361)", "AZD6482", dec).
+0.001::p_fc("HIPK2(Y361)", "AZD6482", dec); 0.214018877::p_fc("HIPK2(Y361)", "AZD6482", inc) :- p_occupancy("HIPK2(Y361)", "AZD6482", inc).
+0.43971308::p_fc("HIPK2(Y361)", "AZD6738", dec); 0.001::p_fc("HIPK2(Y361)", "AZD6738", inc) :- p_occupancy("HIPK2(Y361)", "AZD6738", dec).
+0.001::p_fc("HIPK2(Y361)", "AZD6738", dec); 0.43971308::p_fc("HIPK2(Y361)", "AZD6738", inc) :- p_occupancy("HIPK2(Y361)", "AZD6738", inc).
+0.9978017357::p_fc("HIPK2(Y361)", "AZD8055", dec); 0.001::p_fc("HIPK2(Y361)", "AZD8055", inc) :- p_occupancy("HIPK2(Y361)", "AZD8055", dec).
+0.001::p_fc("HIPK2(Y361)", "AZD8055", dec); 0.9978017357::p_fc("HIPK2(Y361)", "AZD8055", inc) :- p_occupancy("HIPK2(Y361)", "AZD8055", inc).
+0.9884633185::p_fc("HIPK2(Y361)", "Amuvatinib", dec); 0.001::p_fc("HIPK2(Y361)", "Amuvatinib", inc) :- p_occupancy("HIPK2(Y361)", "Amuvatinib", dec).
+0.001::p_fc("HIPK2(Y361)", "Amuvatinib", dec); 0.9884633185::p_fc("HIPK2(Y361)", "Amuvatinib", inc) :- p_occupancy("HIPK2(Y361)", "Amuvatinib", inc).
+0.6283836007::p_fc("HIPK2(Y361)", "BX912", dec); 0.001::p_fc("HIPK2(Y361)", "BX912", inc) :- p_occupancy("HIPK2(Y361)", "BX912", dec).
+0.001::p_fc("HIPK2(Y361)", "BX912", dec); 0.6283836007::p_fc("HIPK2(Y361)", "BX912", inc) :- p_occupancy("HIPK2(Y361)", "BX912", inc).
+0.6117392707::p_fc("HIPK2(Y361)", "Bosutinib", dec); 0.001::p_fc("HIPK2(Y361)", "Bosutinib", inc) :- p_occupancy("HIPK2(Y361)", "Bosutinib", dec).
+0.001::p_fc("HIPK2(Y361)", "Bosutinib", dec); 0.6117392707::p_fc("HIPK2(Y361)", "Bosutinib", inc) :- p_occupancy("HIPK2(Y361)", "Bosutinib", inc).
+0.3082409791::p_fc("HIPK2(Y361)", "CAL101", dec); 0.001::p_fc("HIPK2(Y361)", "CAL101", inc) :- p_occupancy("HIPK2(Y361)", "CAL101", dec).
+0.001::p_fc("HIPK2(Y361)", "CAL101", dec); 0.3082409791::p_fc("HIPK2(Y361)", "CAL101", inc) :- p_occupancy("HIPK2(Y361)", "CAL101", inc).
+0.7444465218::p_fc("HIPK2(Y361)", "CHIR99021", dec); 0.001::p_fc("HIPK2(Y361)", "CHIR99021", inc) :- p_occupancy("HIPK2(Y361)", "CHIR99021", dec).
+0.001::p_fc("HIPK2(Y361)", "CHIR99021", dec); 0.7444465218::p_fc("HIPK2(Y361)", "CHIR99021", inc) :- p_occupancy("HIPK2(Y361)", "CHIR99021", inc).
+0.7462608922::p_fc("HIPK2(Y361)", "CX4945", dec); 0.001::p_fc("HIPK2(Y361)", "CX4945", inc) :- p_occupancy("HIPK2(Y361)", "CX4945", dec).
+0.001::p_fc("HIPK2(Y361)", "CX4945", dec); 0.7462608922::p_fc("HIPK2(Y361)", "CX4945", inc) :- p_occupancy("HIPK2(Y361)", "CX4945", inc).
+0.1764094416::p_fc("HIPK2(Y361)", "DNAPK", dec); 0.001::p_fc("HIPK2(Y361)", "DNAPK", inc) :- p_occupancy("HIPK2(Y361)", "DNAPK", dec).
+0.001::p_fc("HIPK2(Y361)", "DNAPK", dec); 0.1764094416::p_fc("HIPK2(Y361)", "DNAPK", inc) :- p_occupancy("HIPK2(Y361)", "DNAPK", inc).
+0.3826924965::p_fc("HIPK2(Y361)", "Dabrafenib", dec); 0.001::p_fc("HIPK2(Y361)", "Dabrafenib", inc) :- p_occupancy("HIPK2(Y361)", "Dabrafenib", dec).
+0.001::p_fc("HIPK2(Y361)", "Dabrafenib", dec); 0.3826924965::p_fc("HIPK2(Y361)", "Dabrafenib", inc) :- p_occupancy("HIPK2(Y361)", "Dabrafenib", inc).
+0.0266010867::p_fc("HIPK2(Y361)", "Dasatinib", dec); 0.001::p_fc("HIPK2(Y361)", "Dasatinib", inc) :- p_occupancy("HIPK2(Y361)", "Dasatinib", dec).
+0.001::p_fc("HIPK2(Y361)", "Dasatinib", dec); 0.0266010867::p_fc("HIPK2(Y361)", "Dasatinib", inc) :- p_occupancy("HIPK2(Y361)", "Dasatinib", inc).
+0.7219658301::p_fc("HIPK2(Y361)", "Edelfosine", dec); 0.001::p_fc("HIPK2(Y361)", "Edelfosine", inc) :- p_occupancy("HIPK2(Y361)", "Edelfosine", dec).
+0.001::p_fc("HIPK2(Y361)", "Edelfosine", dec); 0.7219658301::p_fc("HIPK2(Y361)", "Edelfosine", inc) :- p_occupancy("HIPK2(Y361)", "Edelfosine", inc).
+0.4899333383::p_fc("HIPK2(Y361)", "FRAX486", dec); 0.001::p_fc("HIPK2(Y361)", "FRAX486", inc) :- p_occupancy("HIPK2(Y361)", "FRAX486", dec).
+0.001::p_fc("HIPK2(Y361)", "FRAX486", dec); 0.4899333383::p_fc("HIPK2(Y361)", "FRAX486", inc) :- p_occupancy("HIPK2(Y361)", "FRAX486", inc).
+0.7975376563::p_fc("HIPK2(Y361)", "GDC0941", dec); 0.001::p_fc("HIPK2(Y361)", "GDC0941", inc) :- p_occupancy("HIPK2(Y361)", "GDC0941", dec).
+0.001::p_fc("HIPK2(Y361)", "GDC0941", dec); 0.7975376563::p_fc("HIPK2(Y361)", "GDC0941", inc) :- p_occupancy("HIPK2(Y361)", "GDC0941", inc).
+0.7561796597::p_fc("HIPK2(Y361)", "GDC0994", dec); 0.001::p_fc("HIPK2(Y361)", "GDC0994", inc) :- p_occupancy("HIPK2(Y361)", "GDC0994", dec).
+0.001::p_fc("HIPK2(Y361)", "GDC0994", dec); 0.7561796597::p_fc("HIPK2(Y361)", "GDC0994", inc) :- p_occupancy("HIPK2(Y361)", "GDC0994", inc).
+0.888481358::p_fc("HIPK2(Y361)", "GF109203X", dec); 0.001::p_fc("HIPK2(Y361)", "GF109203X", inc) :- p_occupancy("HIPK2(Y361)", "GF109203X", dec).
+0.001::p_fc("HIPK2(Y361)", "GF109203X", dec); 0.888481358::p_fc("HIPK2(Y361)", "GF109203X", inc) :- p_occupancy("HIPK2(Y361)", "GF109203X", inc).
+0.7239402729::p_fc("HIPK2(Y361)", "GO6983", dec); 0.001::p_fc("HIPK2(Y361)", "GO6983", inc) :- p_occupancy("HIPK2(Y361)", "GO6983", dec).
+0.001::p_fc("HIPK2(Y361)", "GO6983", dec); 0.7239402729::p_fc("HIPK2(Y361)", "GO6983", inc) :- p_occupancy("HIPK2(Y361)", "GO6983", inc).
+0.9977995066::p_fc("HIPK2(Y361)", "GSK2334470", dec); 0.001::p_fc("HIPK2(Y361)", "GSK2334470", inc) :- p_occupancy("HIPK2(Y361)", "GSK2334470", dec).
+0.001::p_fc("HIPK2(Y361)", "GSK2334470", dec); 0.9977995066::p_fc("HIPK2(Y361)", "GSK2334470", inc) :- p_occupancy("HIPK2(Y361)", "GSK2334470", inc).
+0.7364769066::p_fc("HIPK2(Y361)", "GSK690693", dec); 0.001::p_fc("HIPK2(Y361)", "GSK690693", inc) :- p_occupancy("HIPK2(Y361)", "GSK690693", dec).
+0.001::p_fc("HIPK2(Y361)", "GSK690693", dec); 0.7364769066::p_fc("HIPK2(Y361)", "GSK690693", inc) :- p_occupancy("HIPK2(Y361)", "GSK690693", inc).
+0.1967453814::p_fc("HIPK2(Y361)", "Go6976", dec); 0.001::p_fc("HIPK2(Y361)", "Go6976", inc) :- p_occupancy("HIPK2(Y361)", "Go6976", dec).
+0.001::p_fc("HIPK2(Y361)", "Go6976", dec); 0.1967453814::p_fc("HIPK2(Y361)", "Go6976", inc) :- p_occupancy("HIPK2(Y361)", "Go6976", inc).
+0.2224575225::p_fc("HIPK2(Y361)", "H89", dec); 0.001::p_fc("HIPK2(Y361)", "H89", inc) :- p_occupancy("HIPK2(Y361)", "H89", dec).
+0.001::p_fc("HIPK2(Y361)", "H89", dec); 0.2224575225::p_fc("HIPK2(Y361)", "H89", inc) :- p_occupancy("HIPK2(Y361)", "H89", inc).
+0.7572004228::p_fc("HIPK2(Y361)", "HS173", dec); 0.001::p_fc("HIPK2(Y361)", "HS173", inc) :- p_occupancy("HIPK2(Y361)", "HS173", dec).
+0.001::p_fc("HIPK2(Y361)", "HS173", dec); 0.7572004228::p_fc("HIPK2(Y361)", "HS173", inc) :- p_occupancy("HIPK2(Y361)", "HS173", inc).
+0.6083738486::p_fc("HIPK2(Y361)", "Ipatasertib", dec); 0.001::p_fc("HIPK2(Y361)", "Ipatasertib", inc) :- p_occupancy("HIPK2(Y361)", "Ipatasertib", dec).
+0.001::p_fc("HIPK2(Y361)", "Ipatasertib", dec); 0.6083738486::p_fc("HIPK2(Y361)", "Ipatasertib", inc) :- p_occupancy("HIPK2(Y361)", "Ipatasertib", inc).
+0.4594401836::p_fc("HIPK2(Y361)", "JNJ", dec); 0.001::p_fc("HIPK2(Y361)", "JNJ", inc) :- p_occupancy("HIPK2(Y361)", "JNJ", dec).
+0.001::p_fc("HIPK2(Y361)", "JNJ", dec); 0.4594401836::p_fc("HIPK2(Y361)", "JNJ", inc) :- p_occupancy("HIPK2(Y361)", "JNJ", inc).
+0.7367651637::p_fc("HIPK2(Y361)", "JNK", dec); 0.001::p_fc("HIPK2(Y361)", "JNK", inc) :- p_occupancy("HIPK2(Y361)", "JNK", dec).
+0.001::p_fc("HIPK2(Y361)", "JNK", dec); 0.7367651637::p_fc("HIPK2(Y361)", "JNK", inc) :- p_occupancy("HIPK2(Y361)", "JNK", inc).
+0.7113575644::p_fc("HIPK2(Y361)", "KD025", dec); 0.001::p_fc("HIPK2(Y361)", "KD025", inc) :- p_occupancy("HIPK2(Y361)", "KD025", dec).
+0.001::p_fc("HIPK2(Y361)", "KD025", dec); 0.7113575644::p_fc("HIPK2(Y361)", "KD025", inc) :- p_occupancy("HIPK2(Y361)", "KD025", inc).
+0.7378426618::p_fc("HIPK2(Y361)", "KN62", dec); 0.001::p_fc("HIPK2(Y361)", "KN62", inc) :- p_occupancy("HIPK2(Y361)", "KN62", dec).
+0.001::p_fc("HIPK2(Y361)", "KN62", dec); 0.7378426618::p_fc("HIPK2(Y361)", "KN62", inc) :- p_occupancy("HIPK2(Y361)", "KN62", inc).
+0.6574964079::p_fc("HIPK2(Y361)", "KN93", dec); 0.001::p_fc("HIPK2(Y361)", "KN93", inc) :- p_occupancy("HIPK2(Y361)", "KN93", dec).
+0.001::p_fc("HIPK2(Y361)", "KN93", dec); 0.6574964079::p_fc("HIPK2(Y361)", "KN93", inc) :- p_occupancy("HIPK2(Y361)", "KN93", inc).
+0.8492259904::p_fc("HIPK2(Y361)", "Ku0063794", dec); 0.001::p_fc("HIPK2(Y361)", "Ku0063794", inc) :- p_occupancy("HIPK2(Y361)", "Ku0063794", dec).
+0.001::p_fc("HIPK2(Y361)", "Ku0063794", dec); 0.8492259904::p_fc("HIPK2(Y361)", "Ku0063794", inc) :- p_occupancy("HIPK2(Y361)", "Ku0063794", inc).
+0.4785446895::p_fc("HIPK2(Y361)", "LY2090314", dec); 0.001::p_fc("HIPK2(Y361)", "LY2090314", inc) :- p_occupancy("HIPK2(Y361)", "LY2090314", dec).
+0.001::p_fc("HIPK2(Y361)", "LY2090314", dec); 0.4785446895::p_fc("HIPK2(Y361)", "LY2090314", inc) :- p_occupancy("HIPK2(Y361)", "LY2090314", inc).
+0.5925832579::p_fc("HIPK2(Y361)", "LY2584702", dec); 0.001::p_fc("HIPK2(Y361)", "LY2584702", inc) :- p_occupancy("HIPK2(Y361)", "LY2584702", dec).
+0.001::p_fc("HIPK2(Y361)", "LY2584702", dec); 0.5925832579::p_fc("HIPK2(Y361)", "LY2584702", inc) :- p_occupancy("HIPK2(Y361)", "LY2584702", inc).
+0.2707849491::p_fc("HIPK2(Y361)", "LY2835219", dec); 0.001::p_fc("HIPK2(Y361)", "LY2835219", inc) :- p_occupancy("HIPK2(Y361)", "LY2835219", dec).
+0.001::p_fc("HIPK2(Y361)", "LY2835219", dec); 0.2707849491::p_fc("HIPK2(Y361)", "LY2835219", inc) :- p_occupancy("HIPK2(Y361)", "LY2835219", inc).
+0.8062140213::p_fc("HIPK2(Y361)", "Linsitinib", dec); 0.001::p_fc("HIPK2(Y361)", "Linsitinib", inc) :- p_occupancy("HIPK2(Y361)", "Linsitinib", dec).
+0.001::p_fc("HIPK2(Y361)", "Linsitinib", dec); 0.8062140213::p_fc("HIPK2(Y361)", "Linsitinib", inc) :- p_occupancy("HIPK2(Y361)", "Linsitinib", inc).
+0.1697008126::p_fc("HIPK2(Y361)", "MK2206", dec); 0.001::p_fc("HIPK2(Y361)", "MK2206", inc) :- p_occupancy("HIPK2(Y361)", "MK2206", dec).
+0.001::p_fc("HIPK2(Y361)", "MK2206", dec); 0.1697008126::p_fc("HIPK2(Y361)", "MK2206", inc) :- p_occupancy("HIPK2(Y361)", "MK2206", inc).
+0.4799792747::p_fc("HIPK2(Y361)", "NU7441", dec); 0.001::p_fc("HIPK2(Y361)", "NU7441", inc) :- p_occupancy("HIPK2(Y361)", "NU7441", dec).
+0.001::p_fc("HIPK2(Y361)", "NU7441", dec); 0.4799792747::p_fc("HIPK2(Y361)", "NU7441", inc) :- p_occupancy("HIPK2(Y361)", "NU7441", inc).
+0.1652044736::p_fc("HIPK2(Y361)", "PD153035", dec); 0.001::p_fc("HIPK2(Y361)", "PD153035", inc) :- p_occupancy("HIPK2(Y361)", "PD153035", dec).
+0.001::p_fc("HIPK2(Y361)", "PD153035", dec); 0.1652044736::p_fc("HIPK2(Y361)", "PD153035", inc) :- p_occupancy("HIPK2(Y361)", "PD153035", inc).
+0.998005967::p_fc("HIPK2(Y361)", "PF3758309", dec); 0.001::p_fc("HIPK2(Y361)", "PF3758309", inc) :- p_occupancy("HIPK2(Y361)", "PF3758309", dec).
+0.001::p_fc("HIPK2(Y361)", "PF3758309", dec); 0.998005967::p_fc("HIPK2(Y361)", "PF3758309", inc) :- p_occupancy("HIPK2(Y361)", "PF3758309", inc).
+0.8511966434::p_fc("HIPK2(Y361)", "PF4708671", dec); 0.001::p_fc("HIPK2(Y361)", "PF4708671", inc) :- p_occupancy("HIPK2(Y361)", "PF4708671", dec).
+0.001::p_fc("HIPK2(Y361)", "PF4708671", dec); 0.8511966434::p_fc("HIPK2(Y361)", "PF4708671", inc) :- p_occupancy("HIPK2(Y361)", "PF4708671", inc).
+0.5763981425::p_fc("HIPK2(Y361)", "PH797804", dec); 0.001::p_fc("HIPK2(Y361)", "PH797804", inc) :- p_occupancy("HIPK2(Y361)", "PH797804", dec).
+0.001::p_fc("HIPK2(Y361)", "PH797804", dec); 0.5763981425::p_fc("HIPK2(Y361)", "PH797804", inc) :- p_occupancy("HIPK2(Y361)", "PH797804", inc).
+0.494329657::p_fc("HIPK2(Y361)", "PIK294", dec); 0.001::p_fc("HIPK2(Y361)", "PIK294", inc) :- p_occupancy("HIPK2(Y361)", "PIK294", dec).
+0.001::p_fc("HIPK2(Y361)", "PIK294", dec); 0.494329657::p_fc("HIPK2(Y361)", "PIK294", inc) :- p_occupancy("HIPK2(Y361)", "PIK294", inc).
+0.7557064448::p_fc("HIPK2(Y361)", "Ribociclib", dec); 0.001::p_fc("HIPK2(Y361)", "Ribociclib", inc) :- p_occupancy("HIPK2(Y361)", "Ribociclib", dec).
+0.001::p_fc("HIPK2(Y361)", "Ribociclib", dec); 0.7557064448::p_fc("HIPK2(Y361)", "Ribociclib", inc) :- p_occupancy("HIPK2(Y361)", "Ribociclib", inc).
+0.1415724726::p_fc("HIPK2(Y361)", "Ripasudil", dec); 0.001::p_fc("HIPK2(Y361)", "Ripasudil", inc) :- p_occupancy("HIPK2(Y361)", "Ripasudil", dec).
+0.001::p_fc("HIPK2(Y361)", "Ripasudil", dec); 0.1415724726::p_fc("HIPK2(Y361)", "Ripasudil", inc) :- p_occupancy("HIPK2(Y361)", "Ripasudil", inc).
+0.7920702929::p_fc("HIPK2(Y361)", "SP600125", dec); 0.001::p_fc("HIPK2(Y361)", "SP600125", inc) :- p_occupancy("HIPK2(Y361)", "SP600125", dec).
+0.001::p_fc("HIPK2(Y361)", "SP600125", dec); 0.7920702929::p_fc("HIPK2(Y361)", "SP600125", inc) :- p_occupancy("HIPK2(Y361)", "SP600125", inc).
+0.2301846744::p_fc("HIPK2(Y361)", "Selumetinib", dec); 0.001::p_fc("HIPK2(Y361)", "Selumetinib", inc) :- p_occupancy("HIPK2(Y361)", "Selumetinib", dec).
+0.001::p_fc("HIPK2(Y361)", "Selumetinib", dec); 0.2301846744::p_fc("HIPK2(Y361)", "Selumetinib", inc) :- p_occupancy("HIPK2(Y361)", "Selumetinib", inc).
+0.4506890702::p_fc("HIPK2(Y361)", "TAK715", dec); 0.001::p_fc("HIPK2(Y361)", "TAK715", inc) :- p_occupancy("HIPK2(Y361)", "TAK715", dec).
+0.001::p_fc("HIPK2(Y361)", "TAK715", dec); 0.4506890702::p_fc("HIPK2(Y361)", "TAK715", inc) :- p_occupancy("HIPK2(Y361)", "TAK715", inc).
+0.4978549827::p_fc("HIPK2(Y361)", "TBCA", dec); 0.001::p_fc("HIPK2(Y361)", "TBCA", inc) :- p_occupancy("HIPK2(Y361)", "TBCA", dec).
+0.001::p_fc("HIPK2(Y361)", "TBCA", dec); 0.4978549827::p_fc("HIPK2(Y361)", "TBCA", inc) :- p_occupancy("HIPK2(Y361)", "TBCA", inc).
+0.3253547755::p_fc("HIPK2(Y361)", "TGX221", dec); 0.001::p_fc("HIPK2(Y361)", "TGX221", inc) :- p_occupancy("HIPK2(Y361)", "TGX221", dec).
+0.001::p_fc("HIPK2(Y361)", "TGX221", dec); 0.3253547755::p_fc("HIPK2(Y361)", "TGX221", inc) :- p_occupancy("HIPK2(Y361)", "TGX221", inc).
+0.5365326739::p_fc("HIPK2(Y361)", "Tofacitinib", dec); 0.001::p_fc("HIPK2(Y361)", "Tofacitinib", inc) :- p_occupancy("HIPK2(Y361)", "Tofacitinib", dec).
+0.001::p_fc("HIPK2(Y361)", "Tofacitinib", dec); 0.5365326739::p_fc("HIPK2(Y361)", "Tofacitinib", inc) :- p_occupancy("HIPK2(Y361)", "Tofacitinib", inc).
+0.92884092::p_fc("HIPK2(Y361)", "Torin", dec); 0.001::p_fc("HIPK2(Y361)", "Torin", inc) :- p_occupancy("HIPK2(Y361)", "Torin", dec).
+0.001::p_fc("HIPK2(Y361)", "Torin", dec); 0.92884092::p_fc("HIPK2(Y361)", "Torin", inc) :- p_occupancy("HIPK2(Y361)", "Torin", inc).
+0.3551272103::p_fc("HIPK2(Y361)", "Trametinib", dec); 0.001::p_fc("HIPK2(Y361)", "Trametinib", inc) :- p_occupancy("HIPK2(Y361)", "Trametinib", dec).
+0.001::p_fc("HIPK2(Y361)", "Trametinib", dec); 0.3551272103::p_fc("HIPK2(Y361)", "Trametinib", inc) :- p_occupancy("HIPK2(Y361)", "Trametinib", inc).
+0.8400465171::p_fc("HIPK2(Y361)", "U73122", dec); 0.001::p_fc("HIPK2(Y361)", "U73122", inc) :- p_occupancy("HIPK2(Y361)", "U73122", dec).
+0.001::p_fc("HIPK2(Y361)", "U73122", dec); 0.8400465171::p_fc("HIPK2(Y361)", "U73122", inc) :- p_occupancy("HIPK2(Y361)", "U73122", inc).
+0.7580042715::p_fc("HIPK2(Y361)", "Ulixertinib", dec); 0.001::p_fc("HIPK2(Y361)", "Ulixertinib", inc) :- p_occupancy("HIPK2(Y361)", "Ulixertinib", dec).
+0.001::p_fc("HIPK2(Y361)", "Ulixertinib", dec); 0.7580042715::p_fc("HIPK2(Y361)", "Ulixertinib", inc) :- p_occupancy("HIPK2(Y361)", "Ulixertinib", inc).
+0.016139198::p_fc("HIPK2(Y361)", "Vemurafenib", dec); 0.001::p_fc("HIPK2(Y361)", "Vemurafenib", inc) :- p_occupancy("HIPK2(Y361)", "Vemurafenib", dec).
+0.001::p_fc("HIPK2(Y361)", "Vemurafenib", dec); 0.016139198::p_fc("HIPK2(Y361)", "Vemurafenib", inc) :- p_occupancy("HIPK2(Y361)", "Vemurafenib", inc).
+0.7183018673::p_fc("PTK2(S29)", "AC220", dec); 0.001::p_fc("PTK2(S29)", "AC220", inc) :- p_occupancy("PTK2(S29)", "AC220", dec).
+0.001::p_fc("PTK2(S29)", "AC220", dec); 0.7183018673::p_fc("PTK2(S29)", "AC220", inc) :- p_occupancy("PTK2(S29)", "AC220", inc).
+0.4879365781::p_fc("PTK2(S29)", "AT13148", dec); 0.001::p_fc("PTK2(S29)", "AT13148", inc) :- p_occupancy("PTK2(S29)", "AT13148", dec).
+0.001::p_fc("PTK2(S29)", "AT13148", dec); 0.4879365781::p_fc("PTK2(S29)", "AT13148", inc) :- p_occupancy("PTK2(S29)", "AT13148", inc).
+0.3658912652::p_fc("PTK2(S29)", "AZ20", dec); 0.001::p_fc("PTK2(S29)", "AZ20", inc) :- p_occupancy("PTK2(S29)", "AZ20", dec).
+0.001::p_fc("PTK2(S29)", "AZ20", dec); 0.3658912652::p_fc("PTK2(S29)", "AZ20", inc) :- p_occupancy("PTK2(S29)", "AZ20", inc).
+0.8716697501::p_fc("PTK2(S29)", "AZD1480", dec); 0.001::p_fc("PTK2(S29)", "AZD1480", inc) :- p_occupancy("PTK2(S29)", "AZD1480", dec).
+0.001::p_fc("PTK2(S29)", "AZD1480", dec); 0.8716697501::p_fc("PTK2(S29)", "AZD1480", inc) :- p_occupancy("PTK2(S29)", "AZD1480", inc).
+0.4785592493::p_fc("PTK2(S29)", "AZD3759", dec); 0.001::p_fc("PTK2(S29)", "AZD3759", inc) :- p_occupancy("PTK2(S29)", "AZD3759", dec).
+0.001::p_fc("PTK2(S29)", "AZD3759", dec); 0.4785592493::p_fc("PTK2(S29)", "AZD3759", inc) :- p_occupancy("PTK2(S29)", "AZD3759", inc).
+0.6534581509::p_fc("PTK2(S29)", "AZD5363", dec); 0.001::p_fc("PTK2(S29)", "AZD5363", inc) :- p_occupancy("PTK2(S29)", "AZD5363", dec).
+0.001::p_fc("PTK2(S29)", "AZD5363", dec); 0.6534581509::p_fc("PTK2(S29)", "AZD5363", inc) :- p_occupancy("PTK2(S29)", "AZD5363", inc).
+0.4513802637::p_fc("PTK2(S29)", "AZD5438", dec); 0.001::p_fc("PTK2(S29)", "AZD5438", inc) :- p_occupancy("PTK2(S29)", "AZD5438", dec).
+0.001::p_fc("PTK2(S29)", "AZD5438", dec); 0.4513802637::p_fc("PTK2(S29)", "AZD5438", inc) :- p_occupancy("PTK2(S29)", "AZD5438", inc).
+0.1966381473::p_fc("PTK2(S29)", "AZD6482", dec); 0.001::p_fc("PTK2(S29)", "AZD6482", inc) :- p_occupancy("PTK2(S29)", "AZD6482", dec).
+0.001::p_fc("PTK2(S29)", "AZD6482", dec); 0.1966381473::p_fc("PTK2(S29)", "AZD6482", inc) :- p_occupancy("PTK2(S29)", "AZD6482", inc).
+0.0189162973::p_fc("PTK2(S29)", "AZD6738", dec); 0.001::p_fc("PTK2(S29)", "AZD6738", inc) :- p_occupancy("PTK2(S29)", "AZD6738", dec).
+0.001::p_fc("PTK2(S29)", "AZD6738", dec); 0.0189162973::p_fc("PTK2(S29)", "AZD6738", inc) :- p_occupancy("PTK2(S29)", "AZD6738", inc).
+0.8961020321::p_fc("PTK2(S29)", "AZD8055", dec); 0.001::p_fc("PTK2(S29)", "AZD8055", inc) :- p_occupancy("PTK2(S29)", "AZD8055", dec).
+0.001::p_fc("PTK2(S29)", "AZD8055", dec); 0.8961020321::p_fc("PTK2(S29)", "AZD8055", inc) :- p_occupancy("PTK2(S29)", "AZD8055", inc).
+0.9934028504::p_fc("PTK2(S29)", "Amuvatinib", dec); 0.001::p_fc("PTK2(S29)", "Amuvatinib", inc) :- p_occupancy("PTK2(S29)", "Amuvatinib", dec).
+0.001::p_fc("PTK2(S29)", "Amuvatinib", dec); 0.9934028504::p_fc("PTK2(S29)", "Amuvatinib", inc) :- p_occupancy("PTK2(S29)", "Amuvatinib", inc).
+0.8127258517::p_fc("PTK2(S29)", "BX912", dec); 0.001::p_fc("PTK2(S29)", "BX912", inc) :- p_occupancy("PTK2(S29)", "BX912", dec).
+0.001::p_fc("PTK2(S29)", "BX912", dec); 0.8127258517::p_fc("PTK2(S29)", "BX912", inc) :- p_occupancy("PTK2(S29)", "BX912", inc).
+0.5690348377::p_fc("PTK2(S29)", "Bosutinib", dec); 0.001::p_fc("PTK2(S29)", "Bosutinib", inc) :- p_occupancy("PTK2(S29)", "Bosutinib", dec).
+0.001::p_fc("PTK2(S29)", "Bosutinib", dec); 0.5690348377::p_fc("PTK2(S29)", "Bosutinib", inc) :- p_occupancy("PTK2(S29)", "Bosutinib", inc).
+0.1261816196::p_fc("PTK2(S29)", "CAL101", dec); 0.001::p_fc("PTK2(S29)", "CAL101", inc) :- p_occupancy("PTK2(S29)", "CAL101", dec).
+0.001::p_fc("PTK2(S29)", "CAL101", dec); 0.1261816196::p_fc("PTK2(S29)", "CAL101", inc) :- p_occupancy("PTK2(S29)", "CAL101", inc).
+0.9964295186::p_fc("PTK2(S29)", "CHIR99021", dec); 0.001::p_fc("PTK2(S29)", "CHIR99021", inc) :- p_occupancy("PTK2(S29)", "CHIR99021", dec).
+0.001::p_fc("PTK2(S29)", "CHIR99021", dec); 0.9964295186::p_fc("PTK2(S29)", "CHIR99021", inc) :- p_occupancy("PTK2(S29)", "CHIR99021", inc).
+0.9902181869::p_fc("PTK2(S29)", "CX4945", dec); 0.001::p_fc("PTK2(S29)", "CX4945", inc) :- p_occupancy("PTK2(S29)", "CX4945", dec).
+0.001::p_fc("PTK2(S29)", "CX4945", dec); 0.9902181869::p_fc("PTK2(S29)", "CX4945", inc) :- p_occupancy("PTK2(S29)", "CX4945", inc).
+0.1084501039::p_fc("PTK2(S29)", "DNAPK", dec); 0.001::p_fc("PTK2(S29)", "DNAPK", inc) :- p_occupancy("PTK2(S29)", "DNAPK", dec).
+0.001::p_fc("PTK2(S29)", "DNAPK", dec); 0.1084501039::p_fc("PTK2(S29)", "DNAPK", inc) :- p_occupancy("PTK2(S29)", "DNAPK", inc).
+0.5449208577::p_fc("PTK2(S29)", "Dabrafenib", dec); 0.001::p_fc("PTK2(S29)", "Dabrafenib", inc) :- p_occupancy("PTK2(S29)", "Dabrafenib", dec).
+0.001::p_fc("PTK2(S29)", "Dabrafenib", dec); 0.5449208577::p_fc("PTK2(S29)", "Dabrafenib", inc) :- p_occupancy("PTK2(S29)", "Dabrafenib", inc).
+0.3705689968::p_fc("PTK2(S29)", "Dasatinib", dec); 0.001::p_fc("PTK2(S29)", "Dasatinib", inc) :- p_occupancy("PTK2(S29)", "Dasatinib", dec).
+0.001::p_fc("PTK2(S29)", "Dasatinib", dec); 0.3705689968::p_fc("PTK2(S29)", "Dasatinib", inc) :- p_occupancy("PTK2(S29)", "Dasatinib", inc).
+0.6901822957::p_fc("PTK2(S29)", "Edelfosine", dec); 0.001::p_fc("PTK2(S29)", "Edelfosine", inc) :- p_occupancy("PTK2(S29)", "Edelfosine", dec).
+0.001::p_fc("PTK2(S29)", "Edelfosine", dec); 0.6901822957::p_fc("PTK2(S29)", "Edelfosine", inc) :- p_occupancy("PTK2(S29)", "Edelfosine", inc).
+0.2604650813::p_fc("PTK2(S29)", "FRAX486", dec); 0.001::p_fc("PTK2(S29)", "FRAX486", inc) :- p_occupancy("PTK2(S29)", "FRAX486", dec).
+0.001::p_fc("PTK2(S29)", "FRAX486", dec); 0.2604650813::p_fc("PTK2(S29)", "FRAX486", inc) :- p_occupancy("PTK2(S29)", "FRAX486", inc).
+0.1156002646::p_fc("PTK2(S29)", "GDC0941", dec); 0.001::p_fc("PTK2(S29)", "GDC0941", inc) :- p_occupancy("PTK2(S29)", "GDC0941", dec).
+0.001::p_fc("PTK2(S29)", "GDC0941", dec); 0.1156002646::p_fc("PTK2(S29)", "GDC0941", inc) :- p_occupancy("PTK2(S29)", "GDC0941", inc).
+0.8770810798::p_fc("PTK2(S29)", "GDC0994", dec); 0.001::p_fc("PTK2(S29)", "GDC0994", inc) :- p_occupancy("PTK2(S29)", "GDC0994", dec).
+0.001::p_fc("PTK2(S29)", "GDC0994", dec); 0.8770810798::p_fc("PTK2(S29)", "GDC0994", inc) :- p_occupancy("PTK2(S29)", "GDC0994", inc).
+0.4709462962::p_fc("PTK2(S29)", "GF109203X", dec); 0.001::p_fc("PTK2(S29)", "GF109203X", inc) :- p_occupancy("PTK2(S29)", "GF109203X", dec).
+0.001::p_fc("PTK2(S29)", "GF109203X", dec); 0.4709462962::p_fc("PTK2(S29)", "GF109203X", inc) :- p_occupancy("PTK2(S29)", "GF109203X", inc).
+0.02493037::p_fc("PTK2(S29)", "GO6983", dec); 0.001::p_fc("PTK2(S29)", "GO6983", inc) :- p_occupancy("PTK2(S29)", "GO6983", dec).
+0.001::p_fc("PTK2(S29)", "GO6983", dec); 0.02493037::p_fc("PTK2(S29)", "GO6983", inc) :- p_occupancy("PTK2(S29)", "GO6983", inc).
+0.8521645043::p_fc("PTK2(S29)", "GSK2334470", dec); 0.001::p_fc("PTK2(S29)", "GSK2334470", inc) :- p_occupancy("PTK2(S29)", "GSK2334470", dec).
+0.001::p_fc("PTK2(S29)", "GSK2334470", dec); 0.8521645043::p_fc("PTK2(S29)", "GSK2334470", inc) :- p_occupancy("PTK2(S29)", "GSK2334470", inc).
+0.6435880487::p_fc("PTK2(S29)", "GSK690693", dec); 0.001::p_fc("PTK2(S29)", "GSK690693", inc) :- p_occupancy("PTK2(S29)", "GSK690693", dec).
+0.001::p_fc("PTK2(S29)", "GSK690693", dec); 0.6435880487::p_fc("PTK2(S29)", "GSK690693", inc) :- p_occupancy("PTK2(S29)", "GSK690693", inc).
+0.4170634166::p_fc("PTK2(S29)", "Go6976", dec); 0.001::p_fc("PTK2(S29)", "Go6976", inc) :- p_occupancy("PTK2(S29)", "Go6976", dec).
+0.001::p_fc("PTK2(S29)", "Go6976", dec); 0.4170634166::p_fc("PTK2(S29)", "Go6976", inc) :- p_occupancy("PTK2(S29)", "Go6976", inc).
+0.7730383616::p_fc("PTK2(S29)", "H89", dec); 0.001::p_fc("PTK2(S29)", "H89", inc) :- p_occupancy("PTK2(S29)", "H89", dec).
+0.001::p_fc("PTK2(S29)", "H89", dec); 0.7730383616::p_fc("PTK2(S29)", "H89", inc) :- p_occupancy("PTK2(S29)", "H89", inc).
+0.3471866051::p_fc("PTK2(S29)", "HS173", dec); 0.001::p_fc("PTK2(S29)", "HS173", inc) :- p_occupancy("PTK2(S29)", "HS173", dec).
+0.001::p_fc("PTK2(S29)", "HS173", dec); 0.3471866051::p_fc("PTK2(S29)", "HS173", inc) :- p_occupancy("PTK2(S29)", "HS173", inc).
+0.7336591407::p_fc("PTK2(S29)", "Ipatasertib", dec); 0.001::p_fc("PTK2(S29)", "Ipatasertib", inc) :- p_occupancy("PTK2(S29)", "Ipatasertib", dec).
+0.001::p_fc("PTK2(S29)", "Ipatasertib", dec); 0.7336591407::p_fc("PTK2(S29)", "Ipatasertib", inc) :- p_occupancy("PTK2(S29)", "Ipatasertib", inc).
+0.9559850668::p_fc("PTK2(S29)", "JNJ", dec); 0.001::p_fc("PTK2(S29)", "JNJ", inc) :- p_occupancy("PTK2(S29)", "JNJ", dec).
+0.001::p_fc("PTK2(S29)", "JNJ", dec); 0.9559850668::p_fc("PTK2(S29)", "JNJ", inc) :- p_occupancy("PTK2(S29)", "JNJ", inc).
+0.3659776545::p_fc("PTK2(S29)", "JNK", dec); 0.001::p_fc("PTK2(S29)", "JNK", inc) :- p_occupancy("PTK2(S29)", "JNK", dec).
+0.001::p_fc("PTK2(S29)", "JNK", dec); 0.3659776545::p_fc("PTK2(S29)", "JNK", inc) :- p_occupancy("PTK2(S29)", "JNK", inc).
+0.8110794016::p_fc("PTK2(S29)", "KD025", dec); 0.001::p_fc("PTK2(S29)", "KD025", inc) :- p_occupancy("PTK2(S29)", "KD025", dec).
+0.001::p_fc("PTK2(S29)", "KD025", dec); 0.8110794016::p_fc("PTK2(S29)", "KD025", inc) :- p_occupancy("PTK2(S29)", "KD025", inc).
+0.6435880487::p_fc("PTK2(S29)", "KN62", dec); 0.001::p_fc("PTK2(S29)", "KN62", inc) :- p_occupancy("PTK2(S29)", "KN62", dec).
+0.001::p_fc("PTK2(S29)", "KN62", dec); 0.6435880487::p_fc("PTK2(S29)", "KN62", inc) :- p_occupancy("PTK2(S29)", "KN62", inc).
+0.8302926707::p_fc("PTK2(S29)", "KN93", dec); 0.001::p_fc("PTK2(S29)", "KN93", inc) :- p_occupancy("PTK2(S29)", "KN93", dec).
+0.001::p_fc("PTK2(S29)", "KN93", dec); 0.8302926707::p_fc("PTK2(S29)", "KN93", inc) :- p_occupancy("PTK2(S29)", "KN93", inc).
+0.6699543509::p_fc("PTK2(S29)", "Ku0063794", dec); 0.001::p_fc("PTK2(S29)", "Ku0063794", inc) :- p_occupancy("PTK2(S29)", "Ku0063794", dec).
+0.001::p_fc("PTK2(S29)", "Ku0063794", dec); 0.6699543509::p_fc("PTK2(S29)", "Ku0063794", inc) :- p_occupancy("PTK2(S29)", "Ku0063794", inc).
+0.7968783763::p_fc("PTK2(S29)", "LY2090314", dec); 0.001::p_fc("PTK2(S29)", "LY2090314", inc) :- p_occupancy("PTK2(S29)", "LY2090314", dec).
+0.001::p_fc("PTK2(S29)", "LY2090314", dec); 0.7968783763::p_fc("PTK2(S29)", "LY2090314", inc) :- p_occupancy("PTK2(S29)", "LY2090314", inc).
+0.4811294731::p_fc("PTK2(S29)", "LY2584702", dec); 0.001::p_fc("PTK2(S29)", "LY2584702", inc) :- p_occupancy("PTK2(S29)", "LY2584702", dec).
+0.001::p_fc("PTK2(S29)", "LY2584702", dec); 0.4811294731::p_fc("PTK2(S29)", "LY2584702", inc) :- p_occupancy("PTK2(S29)", "LY2584702", inc).
+0.998005988::p_fc("PTK2(S29)", "LY2835219", dec); 0.001::p_fc("PTK2(S29)", "LY2835219", inc) :- p_occupancy("PTK2(S29)", "LY2835219", dec).
+0.001::p_fc("PTK2(S29)", "LY2835219", dec); 0.998005988::p_fc("PTK2(S29)", "LY2835219", inc) :- p_occupancy("PTK2(S29)", "LY2835219", inc).
+0.9883835231::p_fc("PTK2(S29)", "Linsitinib", dec); 0.001::p_fc("PTK2(S29)", "Linsitinib", inc) :- p_occupancy("PTK2(S29)", "Linsitinib", dec).
+0.001::p_fc("PTK2(S29)", "Linsitinib", dec); 0.9883835231::p_fc("PTK2(S29)", "Linsitinib", inc) :- p_occupancy("PTK2(S29)", "Linsitinib", inc).
+0.7221517532::p_fc("PTK2(S29)", "MK2206", dec); 0.001::p_fc("PTK2(S29)", "MK2206", inc) :- p_occupancy("PTK2(S29)", "MK2206", dec).
+0.001::p_fc("PTK2(S29)", "MK2206", dec); 0.7221517532::p_fc("PTK2(S29)", "MK2206", inc) :- p_occupancy("PTK2(S29)", "MK2206", inc).
+0.0829261103::p_fc("PTK2(S29)", "NU7441", dec); 0.001::p_fc("PTK2(S29)", "NU7441", inc) :- p_occupancy("PTK2(S29)", "NU7441", dec).
+0.001::p_fc("PTK2(S29)", "NU7441", dec); 0.0829261103::p_fc("PTK2(S29)", "NU7441", inc) :- p_occupancy("PTK2(S29)", "NU7441", inc).
+0.9400166294::p_fc("PTK2(S29)", "PD153035", dec); 0.001::p_fc("PTK2(S29)", "PD153035", inc) :- p_occupancy("PTK2(S29)", "PD153035", dec).
+0.001::p_fc("PTK2(S29)", "PD153035", dec); 0.9400166294::p_fc("PTK2(S29)", "PD153035", inc) :- p_occupancy("PTK2(S29)", "PD153035", inc).
+0.3768073973::p_fc("PTK2(S29)", "PF3758309", dec); 0.001::p_fc("PTK2(S29)", "PF3758309", inc) :- p_occupancy("PTK2(S29)", "PF3758309", dec).
+0.001::p_fc("PTK2(S29)", "PF3758309", dec); 0.3768073973::p_fc("PTK2(S29)", "PF3758309", inc) :- p_occupancy("PTK2(S29)", "PF3758309", inc).
+0.4879861279::p_fc("PTK2(S29)", "PF4708671", dec); 0.001::p_fc("PTK2(S29)", "PF4708671", inc) :- p_occupancy("PTK2(S29)", "PF4708671", dec).
+0.001::p_fc("PTK2(S29)", "PF4708671", dec); 0.4879861279::p_fc("PTK2(S29)", "PF4708671", inc) :- p_occupancy("PTK2(S29)", "PF4708671", inc).
+0.5256358607::p_fc("PTK2(S29)", "PH797804", dec); 0.001::p_fc("PTK2(S29)", "PH797804", inc) :- p_occupancy("PTK2(S29)", "PH797804", dec).
+0.001::p_fc("PTK2(S29)", "PH797804", dec); 0.5256358607::p_fc("PTK2(S29)", "PH797804", inc) :- p_occupancy("PTK2(S29)", "PH797804", inc).
+0.0387305384::p_fc("PTK2(S29)", "PIK294", dec); 0.001::p_fc("PTK2(S29)", "PIK294", inc) :- p_occupancy("PTK2(S29)", "PIK294", dec).
+0.001::p_fc("PTK2(S29)", "PIK294", dec); 0.0387305384::p_fc("PTK2(S29)", "PIK294", inc) :- p_occupancy("PTK2(S29)", "PIK294", inc).
+0.6435880487::p_fc("PTK2(S29)", "Ribociclib", dec); 0.001::p_fc("PTK2(S29)", "Ribociclib", inc) :- p_occupancy("PTK2(S29)", "Ribociclib", dec).
+0.001::p_fc("PTK2(S29)", "Ribociclib", dec); 0.6435880487::p_fc("PTK2(S29)", "Ribociclib", inc) :- p_occupancy("PTK2(S29)", "Ribociclib", inc).
+0.1230895002::p_fc("PTK2(S29)", "Ripasudil", dec); 0.001::p_fc("PTK2(S29)", "Ripasudil", inc) :- p_occupancy("PTK2(S29)", "Ripasudil", dec).
+0.001::p_fc("PTK2(S29)", "Ripasudil", dec); 0.1230895002::p_fc("PTK2(S29)", "Ripasudil", inc) :- p_occupancy("PTK2(S29)", "Ripasudil", inc).
+0.4091863434::p_fc("PTK2(S29)", "SP600125", dec); 0.001::p_fc("PTK2(S29)", "SP600125", inc) :- p_occupancy("PTK2(S29)", "SP600125", dec).
+0.001::p_fc("PTK2(S29)", "SP600125", dec); 0.4091863434::p_fc("PTK2(S29)", "SP600125", inc) :- p_occupancy("PTK2(S29)", "SP600125", inc).
+0.8684300506::p_fc("PTK2(S29)", "Selumetinib", dec); 0.001::p_fc("PTK2(S29)", "Selumetinib", inc) :- p_occupancy("PTK2(S29)", "Selumetinib", dec).
+0.001::p_fc("PTK2(S29)", "Selumetinib", dec); 0.8684300506::p_fc("PTK2(S29)", "Selumetinib", inc) :- p_occupancy("PTK2(S29)", "Selumetinib", inc).
+0.3714254918::p_fc("PTK2(S29)", "TAK715", dec); 0.001::p_fc("PTK2(S29)", "TAK715", inc) :- p_occupancy("PTK2(S29)", "TAK715", dec).
+0.001::p_fc("PTK2(S29)", "TAK715", dec); 0.3714254918::p_fc("PTK2(S29)", "TAK715", inc) :- p_occupancy("PTK2(S29)", "TAK715", inc).
+0.6898372398::p_fc("PTK2(S29)", "TBCA", dec); 0.001::p_fc("PTK2(S29)", "TBCA", inc) :- p_occupancy("PTK2(S29)", "TBCA", dec).
+0.001::p_fc("PTK2(S29)", "TBCA", dec); 0.6898372398::p_fc("PTK2(S29)", "TBCA", inc) :- p_occupancy("PTK2(S29)", "TBCA", inc).
+0.4093575432::p_fc("PTK2(S29)", "TGX221", dec); 0.001::p_fc("PTK2(S29)", "TGX221", inc) :- p_occupancy("PTK2(S29)", "TGX221", dec).
+0.001::p_fc("PTK2(S29)", "TGX221", dec); 0.4093575432::p_fc("PTK2(S29)", "TGX221", inc) :- p_occupancy("PTK2(S29)", "TGX221", inc).
+0.4665355894::p_fc("PTK2(S29)", "Tofacitinib", dec); 0.001::p_fc("PTK2(S29)", "Tofacitinib", inc) :- p_occupancy("PTK2(S29)", "Tofacitinib", dec).
+0.001::p_fc("PTK2(S29)", "Tofacitinib", dec); 0.4665355894::p_fc("PTK2(S29)", "Tofacitinib", inc) :- p_occupancy("PTK2(S29)", "Tofacitinib", inc).
+0.1986936852::p_fc("PTK2(S29)", "Torin", dec); 0.001::p_fc("PTK2(S29)", "Torin", inc) :- p_occupancy("PTK2(S29)", "Torin", dec).
+0.001::p_fc("PTK2(S29)", "Torin", dec); 0.1986936852::p_fc("PTK2(S29)", "Torin", inc) :- p_occupancy("PTK2(S29)", "Torin", inc).
+0.3649052799::p_fc("PTK2(S29)", "Trametinib", dec); 0.001::p_fc("PTK2(S29)", "Trametinib", inc) :- p_occupancy("PTK2(S29)", "Trametinib", dec).
+0.001::p_fc("PTK2(S29)", "Trametinib", dec); 0.3649052799::p_fc("PTK2(S29)", "Trametinib", inc) :- p_occupancy("PTK2(S29)", "Trametinib", inc).
+0.6887118594::p_fc("PTK2(S29)", "U73122", dec); 0.001::p_fc("PTK2(S29)", "U73122", inc) :- p_occupancy("PTK2(S29)", "U73122", dec).
+0.001::p_fc("PTK2(S29)", "U73122", dec); 0.6887118594::p_fc("PTK2(S29)", "U73122", inc) :- p_occupancy("PTK2(S29)", "U73122", inc).
+0.708547448::p_fc("PTK2(S29)", "Ulixertinib", dec); 0.001::p_fc("PTK2(S29)", "Ulixertinib", inc) :- p_occupancy("PTK2(S29)", "Ulixertinib", dec).
+0.001::p_fc("PTK2(S29)", "Ulixertinib", dec); 0.708547448::p_fc("PTK2(S29)", "Ulixertinib", inc) :- p_occupancy("PTK2(S29)", "Ulixertinib", inc).
+0.2211900525::p_fc("PTK2(S29)", "Vemurafenib", dec); 0.001::p_fc("PTK2(S29)", "Vemurafenib", inc) :- p_occupancy("PTK2(S29)", "Vemurafenib", dec).
+0.001::p_fc("PTK2(S29)", "Vemurafenib", dec); 0.2211900525::p_fc("PTK2(S29)", "Vemurafenib", inc) :- p_occupancy("PTK2(S29)", "Vemurafenib", inc).
+0.9779363174::p_fc("PTK2(S722)", "AC220", dec); 0.001::p_fc("PTK2(S722)", "AC220", inc) :- p_occupancy("PTK2(S722)", "AC220", dec).
+0.001::p_fc("PTK2(S722)", "AC220", dec); 0.9779363174::p_fc("PTK2(S722)", "AC220", inc) :- p_occupancy("PTK2(S722)", "AC220", inc).
+0.8201857674::p_fc("PTK2(S722)", "AT13148", dec); 0.001::p_fc("PTK2(S722)", "AT13148", inc) :- p_occupancy("PTK2(S722)", "AT13148", dec).
+0.001::p_fc("PTK2(S722)", "AT13148", dec); 0.8201857674::p_fc("PTK2(S722)", "AT13148", inc) :- p_occupancy("PTK2(S722)", "AT13148", inc).
+0.8201857674::p_fc("PTK2(S722)", "AZ20", dec); 0.001::p_fc("PTK2(S722)", "AZ20", inc) :- p_occupancy("PTK2(S722)", "AZ20", dec).
+0.001::p_fc("PTK2(S722)", "AZ20", dec); 0.8201857674::p_fc("PTK2(S722)", "AZ20", inc) :- p_occupancy("PTK2(S722)", "AZ20", inc).
+0.8201857674::p_fc("PTK2(S722)", "AZD1480", dec); 0.001::p_fc("PTK2(S722)", "AZD1480", inc) :- p_occupancy("PTK2(S722)", "AZD1480", dec).
+0.001::p_fc("PTK2(S722)", "AZD1480", dec); 0.8201857674::p_fc("PTK2(S722)", "AZD1480", inc) :- p_occupancy("PTK2(S722)", "AZD1480", inc).
+0.9450015442::p_fc("PTK2(S722)", "AZD3759", dec); 0.001::p_fc("PTK2(S722)", "AZD3759", inc) :- p_occupancy("PTK2(S722)", "AZD3759", dec).
+0.001::p_fc("PTK2(S722)", "AZD3759", dec); 0.9450015442::p_fc("PTK2(S722)", "AZD3759", inc) :- p_occupancy("PTK2(S722)", "AZD3759", inc).
+0.791674345::p_fc("PTK2(S722)", "AZD5363", dec); 0.001::p_fc("PTK2(S722)", "AZD5363", inc) :- p_occupancy("PTK2(S722)", "AZD5363", dec).
+0.001::p_fc("PTK2(S722)", "AZD5363", dec); 0.791674345::p_fc("PTK2(S722)", "AZD5363", inc) :- p_occupancy("PTK2(S722)", "AZD5363", inc).
+0.1703808741::p_fc("PTK2(S722)", "AZD5438", dec); 0.001::p_fc("PTK2(S722)", "AZD5438", inc) :- p_occupancy("PTK2(S722)", "AZD5438", dec).
+0.001::p_fc("PTK2(S722)", "AZD5438", dec); 0.1703808741::p_fc("PTK2(S722)", "AZD5438", inc) :- p_occupancy("PTK2(S722)", "AZD5438", inc).
+0.8201857674::p_fc("PTK2(S722)", "AZD6482", dec); 0.001::p_fc("PTK2(S722)", "AZD6482", inc) :- p_occupancy("PTK2(S722)", "AZD6482", dec).
+0.001::p_fc("PTK2(S722)", "AZD6482", dec); 0.8201857674::p_fc("PTK2(S722)", "AZD6482", inc) :- p_occupancy("PTK2(S722)", "AZD6482", inc).
+0.8201857674::p_fc("PTK2(S722)", "AZD6738", dec); 0.001::p_fc("PTK2(S722)", "AZD6738", inc) :- p_occupancy("PTK2(S722)", "AZD6738", dec).
+0.001::p_fc("PTK2(S722)", "AZD6738", dec); 0.8201857674::p_fc("PTK2(S722)", "AZD6738", inc) :- p_occupancy("PTK2(S722)", "AZD6738", inc).
+0.8425024298::p_fc("PTK2(S722)", "AZD8055", dec); 0.001::p_fc("PTK2(S722)", "AZD8055", inc) :- p_occupancy("PTK2(S722)", "AZD8055", dec).
+0.001::p_fc("PTK2(S722)", "AZD8055", dec); 0.8425024298::p_fc("PTK2(S722)", "AZD8055", inc) :- p_occupancy("PTK2(S722)", "AZD8055", inc).
+0.2095739016::p_fc("PTK2(S722)", "Amuvatinib", dec); 0.001::p_fc("PTK2(S722)", "Amuvatinib", inc) :- p_occupancy("PTK2(S722)", "Amuvatinib", dec).
+0.001::p_fc("PTK2(S722)", "Amuvatinib", dec); 0.2095739016::p_fc("PTK2(S722)", "Amuvatinib", inc) :- p_occupancy("PTK2(S722)", "Amuvatinib", inc).
+0.8201857674::p_fc("PTK2(S722)", "BX912", dec); 0.001::p_fc("PTK2(S722)", "BX912", inc) :- p_occupancy("PTK2(S722)", "BX912", dec).
+0.001::p_fc("PTK2(S722)", "BX912", dec); 0.8201857674::p_fc("PTK2(S722)", "BX912", inc) :- p_occupancy("PTK2(S722)", "BX912", inc).
+0.8201857674::p_fc("PTK2(S722)", "Bosutinib", dec); 0.001::p_fc("PTK2(S722)", "Bosutinib", inc) :- p_occupancy("PTK2(S722)", "Bosutinib", dec).
+0.001::p_fc("PTK2(S722)", "Bosutinib", dec); 0.8201857674::p_fc("PTK2(S722)", "Bosutinib", inc) :- p_occupancy("PTK2(S722)", "Bosutinib", inc).
+0.8201857674::p_fc("PTK2(S722)", "CAL101", dec); 0.001::p_fc("PTK2(S722)", "CAL101", inc) :- p_occupancy("PTK2(S722)", "CAL101", dec).
+0.001::p_fc("PTK2(S722)", "CAL101", dec); 0.8201857674::p_fc("PTK2(S722)", "CAL101", inc) :- p_occupancy("PTK2(S722)", "CAL101", inc).
+0.7633613486::p_fc("PTK2(S722)", "CHIR99021", dec); 0.001::p_fc("PTK2(S722)", "CHIR99021", inc) :- p_occupancy("PTK2(S722)", "CHIR99021", dec).
+0.001::p_fc("PTK2(S722)", "CHIR99021", dec); 0.7633613486::p_fc("PTK2(S722)", "CHIR99021", inc) :- p_occupancy("PTK2(S722)", "CHIR99021", inc).
+0.9543115451::p_fc("PTK2(S722)", "CX4945", dec); 0.001::p_fc("PTK2(S722)", "CX4945", inc) :- p_occupancy("PTK2(S722)", "CX4945", dec).
+0.001::p_fc("PTK2(S722)", "CX4945", dec); 0.9543115451::p_fc("PTK2(S722)", "CX4945", inc) :- p_occupancy("PTK2(S722)", "CX4945", inc).
+0.8201857674::p_fc("PTK2(S722)", "DNAPK", dec); 0.001::p_fc("PTK2(S722)", "DNAPK", inc) :- p_occupancy("PTK2(S722)", "DNAPK", dec).
+0.001::p_fc("PTK2(S722)", "DNAPK", dec); 0.8201857674::p_fc("PTK2(S722)", "DNAPK", inc) :- p_occupancy("PTK2(S722)", "DNAPK", inc).
+0.8201857674::p_fc("PTK2(S722)", "Dabrafenib", dec); 0.001::p_fc("PTK2(S722)", "Dabrafenib", inc) :- p_occupancy("PTK2(S722)", "Dabrafenib", dec).
+0.001::p_fc("PTK2(S722)", "Dabrafenib", dec); 0.8201857674::p_fc("PTK2(S722)", "Dabrafenib", inc) :- p_occupancy("PTK2(S722)", "Dabrafenib", inc).
+0.8201857674::p_fc("PTK2(S722)", "Dasatinib", dec); 0.001::p_fc("PTK2(S722)", "Dasatinib", inc) :- p_occupancy("PTK2(S722)", "Dasatinib", dec).
+0.001::p_fc("PTK2(S722)", "Dasatinib", dec); 0.8201857674::p_fc("PTK2(S722)", "Dasatinib", inc) :- p_occupancy("PTK2(S722)", "Dasatinib", inc).
+0.8201857674::p_fc("PTK2(S722)", "Edelfosine", dec); 0.001::p_fc("PTK2(S722)", "Edelfosine", inc) :- p_occupancy("PTK2(S722)", "Edelfosine", dec).
+0.001::p_fc("PTK2(S722)", "Edelfosine", dec); 0.8201857674::p_fc("PTK2(S722)", "Edelfosine", inc) :- p_occupancy("PTK2(S722)", "Edelfosine", inc).
+0.2893815989::p_fc("PTK2(S722)", "FRAX486", dec); 0.001::p_fc("PTK2(S722)", "FRAX486", inc) :- p_occupancy("PTK2(S722)", "FRAX486", dec).
+0.001::p_fc("PTK2(S722)", "FRAX486", dec); 0.2893815989::p_fc("PTK2(S722)", "FRAX486", inc) :- p_occupancy("PTK2(S722)", "FRAX486", inc).
+0.8201857674::p_fc("PTK2(S722)", "GDC0941", dec); 0.001::p_fc("PTK2(S722)", "GDC0941", inc) :- p_occupancy("PTK2(S722)", "GDC0941", dec).
+0.001::p_fc("PTK2(S722)", "GDC0941", dec); 0.8201857674::p_fc("PTK2(S722)", "GDC0941", inc) :- p_occupancy("PTK2(S722)", "GDC0941", inc).
+0.4728174068::p_fc("PTK2(S722)", "GDC0994", dec); 0.001::p_fc("PTK2(S722)", "GDC0994", inc) :- p_occupancy("PTK2(S722)", "GDC0994", dec).
+0.001::p_fc("PTK2(S722)", "GDC0994", dec); 0.4728174068::p_fc("PTK2(S722)", "GDC0994", inc) :- p_occupancy("PTK2(S722)", "GDC0994", inc).
+0.8201857674::p_fc("PTK2(S722)", "GF109203X", dec); 0.001::p_fc("PTK2(S722)", "GF109203X", inc) :- p_occupancy("PTK2(S722)", "GF109203X", dec).
+0.001::p_fc("PTK2(S722)", "GF109203X", dec); 0.8201857674::p_fc("PTK2(S722)", "GF109203X", inc) :- p_occupancy("PTK2(S722)", "GF109203X", inc).
+0.8201857674::p_fc("PTK2(S722)", "GO6983", dec); 0.001::p_fc("PTK2(S722)", "GO6983", inc) :- p_occupancy("PTK2(S722)", "GO6983", dec).
+0.001::p_fc("PTK2(S722)", "GO6983", dec); 0.8201857674::p_fc("PTK2(S722)", "GO6983", inc) :- p_occupancy("PTK2(S722)", "GO6983", inc).
+0.9725490259::p_fc("PTK2(S722)", "GSK2334470", dec); 0.001::p_fc("PTK2(S722)", "GSK2334470", inc) :- p_occupancy("PTK2(S722)", "GSK2334470", dec).
+0.001::p_fc("PTK2(S722)", "GSK2334470", dec); 0.9725490259::p_fc("PTK2(S722)", "GSK2334470", inc) :- p_occupancy("PTK2(S722)", "GSK2334470", inc).
+0.1333465353::p_fc("PTK2(S722)", "GSK690693", dec); 0.001::p_fc("PTK2(S722)", "GSK690693", inc) :- p_occupancy("PTK2(S722)", "GSK690693", dec).
+0.001::p_fc("PTK2(S722)", "GSK690693", dec); 0.1333465353::p_fc("PTK2(S722)", "GSK690693", inc) :- p_occupancy("PTK2(S722)", "GSK690693", inc).
+0.9842483672::p_fc("PTK2(S722)", "Go6976", dec); 0.001::p_fc("PTK2(S722)", "Go6976", inc) :- p_occupancy("PTK2(S722)", "Go6976", dec).
+0.001::p_fc("PTK2(S722)", "Go6976", dec); 0.9842483672::p_fc("PTK2(S722)", "Go6976", inc) :- p_occupancy("PTK2(S722)", "Go6976", inc).
+0.8201857674::p_fc("PTK2(S722)", "H89", dec); 0.001::p_fc("PTK2(S722)", "H89", inc) :- p_occupancy("PTK2(S722)", "H89", dec).
+0.001::p_fc("PTK2(S722)", "H89", dec); 0.8201857674::p_fc("PTK2(S722)", "H89", inc) :- p_occupancy("PTK2(S722)", "H89", inc).
+0.9836872704::p_fc("PTK2(S722)", "HS173", dec); 0.001::p_fc("PTK2(S722)", "HS173", inc) :- p_occupancy("PTK2(S722)", "HS173", dec).
+0.001::p_fc("PTK2(S722)", "HS173", dec); 0.9836872704::p_fc("PTK2(S722)", "HS173", inc) :- p_occupancy("PTK2(S722)", "HS173", inc).
+0.9704597396::p_fc("PTK2(S722)", "Ipatasertib", dec); 0.001::p_fc("PTK2(S722)", "Ipatasertib", inc) :- p_occupancy("PTK2(S722)", "Ipatasertib", dec).
+0.001::p_fc("PTK2(S722)", "Ipatasertib", dec); 0.9704597396::p_fc("PTK2(S722)", "Ipatasertib", inc) :- p_occupancy("PTK2(S722)", "Ipatasertib", inc).
+0.9943645873::p_fc("PTK2(S722)", "JNJ", dec); 0.001::p_fc("PTK2(S722)", "JNJ", inc) :- p_occupancy("PTK2(S722)", "JNJ", dec).
+0.001::p_fc("PTK2(S722)", "JNJ", dec); 0.9943645873::p_fc("PTK2(S722)", "JNJ", inc) :- p_occupancy("PTK2(S722)", "JNJ", inc).
+0.9921601525::p_fc("PTK2(S722)", "JNK", dec); 0.001::p_fc("PTK2(S722)", "JNK", inc) :- p_occupancy("PTK2(S722)", "JNK", dec).
+0.001::p_fc("PTK2(S722)", "JNK", dec); 0.9921601525::p_fc("PTK2(S722)", "JNK", inc) :- p_occupancy("PTK2(S722)", "JNK", inc).
+0.8201857674::p_fc("PTK2(S722)", "KD025", dec); 0.001::p_fc("PTK2(S722)", "KD025", inc) :- p_occupancy("PTK2(S722)", "KD025", dec).
+0.001::p_fc("PTK2(S722)", "KD025", dec); 0.8201857674::p_fc("PTK2(S722)", "KD025", inc) :- p_occupancy("PTK2(S722)", "KD025", inc).
+0.8201857674::p_fc("PTK2(S722)", "KN62", dec); 0.001::p_fc("PTK2(S722)", "KN62", inc) :- p_occupancy("PTK2(S722)", "KN62", dec).
+0.001::p_fc("PTK2(S722)", "KN62", dec); 0.8201857674::p_fc("PTK2(S722)", "KN62", inc) :- p_occupancy("PTK2(S722)", "KN62", inc).
+0.9424047156::p_fc("PTK2(S722)", "KN93", dec); 0.001::p_fc("PTK2(S722)", "KN93", inc) :- p_occupancy("PTK2(S722)", "KN93", dec).
+0.001::p_fc("PTK2(S722)", "KN93", dec); 0.9424047156::p_fc("PTK2(S722)", "KN93", inc) :- p_occupancy("PTK2(S722)", "KN93", inc).
+0.2735983614::p_fc("PTK2(S722)", "Ku0063794", dec); 0.001::p_fc("PTK2(S722)", "Ku0063794", inc) :- p_occupancy("PTK2(S722)", "Ku0063794", dec).
+0.001::p_fc("PTK2(S722)", "Ku0063794", dec); 0.2735983614::p_fc("PTK2(S722)", "Ku0063794", inc) :- p_occupancy("PTK2(S722)", "Ku0063794", inc).
+0.8201857674::p_fc("PTK2(S722)", "LY2090314", dec); 0.001::p_fc("PTK2(S722)", "LY2090314", inc) :- p_occupancy("PTK2(S722)", "LY2090314", dec).
+0.001::p_fc("PTK2(S722)", "LY2090314", dec); 0.8201857674::p_fc("PTK2(S722)", "LY2090314", inc) :- p_occupancy("PTK2(S722)", "LY2090314", inc).
+0.1251312194::p_fc("PTK2(S722)", "LY2584702", dec); 0.001::p_fc("PTK2(S722)", "LY2584702", inc) :- p_occupancy("PTK2(S722)", "LY2584702", dec).
+0.001::p_fc("PTK2(S722)", "LY2584702", dec); 0.1251312194::p_fc("PTK2(S722)", "LY2584702", inc) :- p_occupancy("PTK2(S722)", "LY2584702", inc).
+0.8201857674::p_fc("PTK2(S722)", "LY2835219", dec); 0.001::p_fc("PTK2(S722)", "LY2835219", inc) :- p_occupancy("PTK2(S722)", "LY2835219", dec).
+0.001::p_fc("PTK2(S722)", "LY2835219", dec); 0.8201857674::p_fc("PTK2(S722)", "LY2835219", inc) :- p_occupancy("PTK2(S722)", "LY2835219", inc).
+0.8201857674::p_fc("PTK2(S722)", "Linsitinib", dec); 0.001::p_fc("PTK2(S722)", "Linsitinib", inc) :- p_occupancy("PTK2(S722)", "Linsitinib", dec).
+0.001::p_fc("PTK2(S722)", "Linsitinib", dec); 0.8201857674::p_fc("PTK2(S722)", "Linsitinib", inc) :- p_occupancy("PTK2(S722)", "Linsitinib", inc).
+0.8201857674::p_fc("PTK2(S722)", "MK2206", dec); 0.001::p_fc("PTK2(S722)", "MK2206", inc) :- p_occupancy("PTK2(S722)", "MK2206", dec).
+0.001::p_fc("PTK2(S722)", "MK2206", dec); 0.8201857674::p_fc("PTK2(S722)", "MK2206", inc) :- p_occupancy("PTK2(S722)", "MK2206", inc).
+0.8201857674::p_fc("PTK2(S722)", "NU7441", dec); 0.001::p_fc("PTK2(S722)", "NU7441", inc) :- p_occupancy("PTK2(S722)", "NU7441", dec).
+0.001::p_fc("PTK2(S722)", "NU7441", dec); 0.8201857674::p_fc("PTK2(S722)", "NU7441", inc) :- p_occupancy("PTK2(S722)", "NU7441", inc).
+0.3667240929::p_fc("PTK2(S722)", "PD153035", dec); 0.001::p_fc("PTK2(S722)", "PD153035", inc) :- p_occupancy("PTK2(S722)", "PD153035", dec).
+0.001::p_fc("PTK2(S722)", "PD153035", dec); 0.3667240929::p_fc("PTK2(S722)", "PD153035", inc) :- p_occupancy("PTK2(S722)", "PD153035", inc).
+0.3139972301::p_fc("PTK2(S722)", "PF3758309", dec); 0.001::p_fc("PTK2(S722)", "PF3758309", inc) :- p_occupancy("PTK2(S722)", "PF3758309", dec).
+0.001::p_fc("PTK2(S722)", "PF3758309", dec); 0.3139972301::p_fc("PTK2(S722)", "PF3758309", inc) :- p_occupancy("PTK2(S722)", "PF3758309", inc).
+0.9662501272::p_fc("PTK2(S722)", "PF4708671", dec); 0.001::p_fc("PTK2(S722)", "PF4708671", inc) :- p_occupancy("PTK2(S722)", "PF4708671", dec).
+0.001::p_fc("PTK2(S722)", "PF4708671", dec); 0.9662501272::p_fc("PTK2(S722)", "PF4708671", inc) :- p_occupancy("PTK2(S722)", "PF4708671", inc).
+0.4859147472::p_fc("PTK2(S722)", "PH797804", dec); 0.001::p_fc("PTK2(S722)", "PH797804", inc) :- p_occupancy("PTK2(S722)", "PH797804", dec).
+0.001::p_fc("PTK2(S722)", "PH797804", dec); 0.4859147472::p_fc("PTK2(S722)", "PH797804", inc) :- p_occupancy("PTK2(S722)", "PH797804", inc).
+0.8201857674::p_fc("PTK2(S722)", "PIK294", dec); 0.001::p_fc("PTK2(S722)", "PIK294", inc) :- p_occupancy("PTK2(S722)", "PIK294", dec).
+0.001::p_fc("PTK2(S722)", "PIK294", dec); 0.8201857674::p_fc("PTK2(S722)", "PIK294", inc) :- p_occupancy("PTK2(S722)", "PIK294", inc).
+0.3054849519::p_fc("PTK2(S722)", "Ribociclib", dec); 0.001::p_fc("PTK2(S722)", "Ribociclib", inc) :- p_occupancy("PTK2(S722)", "Ribociclib", dec).
+0.001::p_fc("PTK2(S722)", "Ribociclib", dec); 0.3054849519::p_fc("PTK2(S722)", "Ribociclib", inc) :- p_occupancy("PTK2(S722)", "Ribociclib", inc).
+0.8201857674::p_fc("PTK2(S722)", "Ripasudil", dec); 0.001::p_fc("PTK2(S722)", "Ripasudil", inc) :- p_occupancy("PTK2(S722)", "Ripasudil", dec).
+0.001::p_fc("PTK2(S722)", "Ripasudil", dec); 0.8201857674::p_fc("PTK2(S722)", "Ripasudil", inc) :- p_occupancy("PTK2(S722)", "Ripasudil", inc).
+0.8201857674::p_fc("PTK2(S722)", "SP600125", dec); 0.001::p_fc("PTK2(S722)", "SP600125", inc) :- p_occupancy("PTK2(S722)", "SP600125", dec).
+0.001::p_fc("PTK2(S722)", "SP600125", dec); 0.8201857674::p_fc("PTK2(S722)", "SP600125", inc) :- p_occupancy("PTK2(S722)", "SP600125", inc).
+0.7536603209::p_fc("PTK2(S722)", "Selumetinib", dec); 0.001::p_fc("PTK2(S722)", "Selumetinib", inc) :- p_occupancy("PTK2(S722)", "Selumetinib", dec).
+0.001::p_fc("PTK2(S722)", "Selumetinib", dec); 0.7536603209::p_fc("PTK2(S722)", "Selumetinib", inc) :- p_occupancy("PTK2(S722)", "Selumetinib", inc).
+0.8201857674::p_fc("PTK2(S722)", "TAK715", dec); 0.001::p_fc("PTK2(S722)", "TAK715", inc) :- p_occupancy("PTK2(S722)", "TAK715", dec).
+0.001::p_fc("PTK2(S722)", "TAK715", dec); 0.8201857674::p_fc("PTK2(S722)", "TAK715", inc) :- p_occupancy("PTK2(S722)", "TAK715", inc).
+0.8201857674::p_fc("PTK2(S722)", "TBCA", dec); 0.001::p_fc("PTK2(S722)", "TBCA", inc) :- p_occupancy("PTK2(S722)", "TBCA", dec).
+0.001::p_fc("PTK2(S722)", "TBCA", dec); 0.8201857674::p_fc("PTK2(S722)", "TBCA", inc) :- p_occupancy("PTK2(S722)", "TBCA", inc).
+0.9964249292::p_fc("PTK2(S722)", "TGX221", dec); 0.001::p_fc("PTK2(S722)", "TGX221", inc) :- p_occupancy("PTK2(S722)", "TGX221", dec).
+0.001::p_fc("PTK2(S722)", "TGX221", dec); 0.9964249292::p_fc("PTK2(S722)", "TGX221", inc) :- p_occupancy("PTK2(S722)", "TGX221", inc).
+0.8201857674::p_fc("PTK2(S722)", "Tofacitinib", dec); 0.001::p_fc("PTK2(S722)", "Tofacitinib", inc) :- p_occupancy("PTK2(S722)", "Tofacitinib", dec).
+0.001::p_fc("PTK2(S722)", "Tofacitinib", dec); 0.8201857674::p_fc("PTK2(S722)", "Tofacitinib", inc) :- p_occupancy("PTK2(S722)", "Tofacitinib", inc).
+0.6359501357::p_fc("PTK2(S722)", "Torin", dec); 0.001::p_fc("PTK2(S722)", "Torin", inc) :- p_occupancy("PTK2(S722)", "Torin", dec).
+0.001::p_fc("PTK2(S722)", "Torin", dec); 0.6359501357::p_fc("PTK2(S722)", "Torin", inc) :- p_occupancy("PTK2(S722)", "Torin", inc).
+0.5465637866::p_fc("PTK2(S722)", "Trametinib", dec); 0.001::p_fc("PTK2(S722)", "Trametinib", inc) :- p_occupancy("PTK2(S722)", "Trametinib", dec).
+0.001::p_fc("PTK2(S722)", "Trametinib", dec); 0.5465637866::p_fc("PTK2(S722)", "Trametinib", inc) :- p_occupancy("PTK2(S722)", "Trametinib", inc).
+0.0740383513::p_fc("PTK2(S722)", "U73122", dec); 0.001::p_fc("PTK2(S722)", "U73122", inc) :- p_occupancy("PTK2(S722)", "U73122", dec).
+0.001::p_fc("PTK2(S722)", "U73122", dec); 0.0740383513::p_fc("PTK2(S722)", "U73122", inc) :- p_occupancy("PTK2(S722)", "U73122", inc).
+0.2639328965::p_fc("PTK2(S722)", "Ulixertinib", dec); 0.001::p_fc("PTK2(S722)", "Ulixertinib", inc) :- p_occupancy("PTK2(S722)", "Ulixertinib", dec).
+0.001::p_fc("PTK2(S722)", "Ulixertinib", dec); 0.2639328965::p_fc("PTK2(S722)", "Ulixertinib", inc) :- p_occupancy("PTK2(S722)", "Ulixertinib", inc).
+0.8201857674::p_fc("PTK2(S722)", "Vemurafenib", dec); 0.001::p_fc("PTK2(S722)", "Vemurafenib", inc) :- p_occupancy("PTK2(S722)", "Vemurafenib", dec).
+0.001::p_fc("PTK2(S722)", "Vemurafenib", dec); 0.8201857674::p_fc("PTK2(S722)", "Vemurafenib", inc) :- p_occupancy("PTK2(S722)", "Vemurafenib", inc).
+0.001::p_fc("PTK2(S843)", "AC220", dec); 0.001::p_fc("PTK2(S843)", "AC220", inc) :- p_occupancy("PTK2(S843)", "AC220", dec).
+0.001::p_fc("PTK2(S843)", "AC220", dec); 0.001::p_fc("PTK2(S843)", "AC220", inc) :- p_occupancy("PTK2(S843)", "AC220", inc).
+0.001::p_fc("PTK2(S843)", "AT13148", dec); 0.001::p_fc("PTK2(S843)", "AT13148", inc) :- p_occupancy("PTK2(S843)", "AT13148", dec).
+0.001::p_fc("PTK2(S843)", "AT13148", dec); 0.001::p_fc("PTK2(S843)", "AT13148", inc) :- p_occupancy("PTK2(S843)", "AT13148", inc).
+0.001::p_fc("PTK2(S843)", "AZ20", dec); 0.001::p_fc("PTK2(S843)", "AZ20", inc) :- p_occupancy("PTK2(S843)", "AZ20", dec).
+0.001::p_fc("PTK2(S843)", "AZ20", dec); 0.001::p_fc("PTK2(S843)", "AZ20", inc) :- p_occupancy("PTK2(S843)", "AZ20", inc).
+0.001::p_fc("PTK2(S843)", "AZD1480", dec); 0.001::p_fc("PTK2(S843)", "AZD1480", inc) :- p_occupancy("PTK2(S843)", "AZD1480", dec).
+0.001::p_fc("PTK2(S843)", "AZD1480", dec); 0.001::p_fc("PTK2(S843)", "AZD1480", inc) :- p_occupancy("PTK2(S843)", "AZD1480", inc).
+0.001::p_fc("PTK2(S843)", "AZD3759", dec); 0.001::p_fc("PTK2(S843)", "AZD3759", inc) :- p_occupancy("PTK2(S843)", "AZD3759", dec).
+0.001::p_fc("PTK2(S843)", "AZD3759", dec); 0.001::p_fc("PTK2(S843)", "AZD3759", inc) :- p_occupancy("PTK2(S843)", "AZD3759", inc).
+0.001::p_fc("PTK2(S843)", "AZD5363", dec); 0.001::p_fc("PTK2(S843)", "AZD5363", inc) :- p_occupancy("PTK2(S843)", "AZD5363", dec).
+0.001::p_fc("PTK2(S843)", "AZD5363", dec); 0.001::p_fc("PTK2(S843)", "AZD5363", inc) :- p_occupancy("PTK2(S843)", "AZD5363", inc).
+0.993270665::p_fc("PTK2(S843)", "AZD5438", dec); 0.001::p_fc("PTK2(S843)", "AZD5438", inc) :- p_occupancy("PTK2(S843)", "AZD5438", dec).
+0.001::p_fc("PTK2(S843)", "AZD5438", dec); 0.993270665::p_fc("PTK2(S843)", "AZD5438", inc) :- p_occupancy("PTK2(S843)", "AZD5438", inc).
+0.001::p_fc("PTK2(S843)", "AZD6482", dec); 0.001::p_fc("PTK2(S843)", "AZD6482", inc) :- p_occupancy("PTK2(S843)", "AZD6482", dec).
+0.001::p_fc("PTK2(S843)", "AZD6482", dec); 0.001::p_fc("PTK2(S843)", "AZD6482", inc) :- p_occupancy("PTK2(S843)", "AZD6482", inc).
+0.001::p_fc("PTK2(S843)", "AZD6738", dec); 0.001::p_fc("PTK2(S843)", "AZD6738", inc) :- p_occupancy("PTK2(S843)", "AZD6738", dec).
+0.001::p_fc("PTK2(S843)", "AZD6738", dec); 0.001::p_fc("PTK2(S843)", "AZD6738", inc) :- p_occupancy("PTK2(S843)", "AZD6738", inc).
+0.001::p_fc("PTK2(S843)", "AZD8055", dec); 0.001::p_fc("PTK2(S843)", "AZD8055", inc) :- p_occupancy("PTK2(S843)", "AZD8055", dec).
+0.001::p_fc("PTK2(S843)", "AZD8055", dec); 0.001::p_fc("PTK2(S843)", "AZD8055", inc) :- p_occupancy("PTK2(S843)", "AZD8055", inc).
+0.001::p_fc("PTK2(S843)", "Amuvatinib", dec); 0.001::p_fc("PTK2(S843)", "Amuvatinib", inc) :- p_occupancy("PTK2(S843)", "Amuvatinib", dec).
+0.001::p_fc("PTK2(S843)", "Amuvatinib", dec); 0.001::p_fc("PTK2(S843)", "Amuvatinib", inc) :- p_occupancy("PTK2(S843)", "Amuvatinib", inc).
+0.001::p_fc("PTK2(S843)", "BX912", dec); 0.001::p_fc("PTK2(S843)", "BX912", inc) :- p_occupancy("PTK2(S843)", "BX912", dec).
+0.001::p_fc("PTK2(S843)", "BX912", dec); 0.001::p_fc("PTK2(S843)", "BX912", inc) :- p_occupancy("PTK2(S843)", "BX912", inc).
+0.001::p_fc("PTK2(S843)", "Bosutinib", dec); 0.001::p_fc("PTK2(S843)", "Bosutinib", inc) :- p_occupancy("PTK2(S843)", "Bosutinib", dec).
+0.001::p_fc("PTK2(S843)", "Bosutinib", dec); 0.001::p_fc("PTK2(S843)", "Bosutinib", inc) :- p_occupancy("PTK2(S843)", "Bosutinib", inc).
+0.001::p_fc("PTK2(S843)", "CAL101", dec); 0.001::p_fc("PTK2(S843)", "CAL101", inc) :- p_occupancy("PTK2(S843)", "CAL101", dec).
+0.001::p_fc("PTK2(S843)", "CAL101", dec); 0.001::p_fc("PTK2(S843)", "CAL101", inc) :- p_occupancy("PTK2(S843)", "CAL101", inc).
+0.001::p_fc("PTK2(S843)", "CHIR99021", dec); 0.001::p_fc("PTK2(S843)", "CHIR99021", inc) :- p_occupancy("PTK2(S843)", "CHIR99021", dec).
+0.001::p_fc("PTK2(S843)", "CHIR99021", dec); 0.001::p_fc("PTK2(S843)", "CHIR99021", inc) :- p_occupancy("PTK2(S843)", "CHIR99021", inc).
+0.001::p_fc("PTK2(S843)", "CX4945", dec); 0.001::p_fc("PTK2(S843)", "CX4945", inc) :- p_occupancy("PTK2(S843)", "CX4945", dec).
+0.001::p_fc("PTK2(S843)", "CX4945", dec); 0.001::p_fc("PTK2(S843)", "CX4945", inc) :- p_occupancy("PTK2(S843)", "CX4945", inc).
+0.001::p_fc("PTK2(S843)", "DNAPK", dec); 0.001::p_fc("PTK2(S843)", "DNAPK", inc) :- p_occupancy("PTK2(S843)", "DNAPK", dec).
+0.001::p_fc("PTK2(S843)", "DNAPK", dec); 0.001::p_fc("PTK2(S843)", "DNAPK", inc) :- p_occupancy("PTK2(S843)", "DNAPK", inc).
+0.001::p_fc("PTK2(S843)", "Dabrafenib", dec); 0.001::p_fc("PTK2(S843)", "Dabrafenib", inc) :- p_occupancy("PTK2(S843)", "Dabrafenib", dec).
+0.001::p_fc("PTK2(S843)", "Dabrafenib", dec); 0.001::p_fc("PTK2(S843)", "Dabrafenib", inc) :- p_occupancy("PTK2(S843)", "Dabrafenib", inc).
+0.001::p_fc("PTK2(S843)", "Dasatinib", dec); 0.001::p_fc("PTK2(S843)", "Dasatinib", inc) :- p_occupancy("PTK2(S843)", "Dasatinib", dec).
+0.001::p_fc("PTK2(S843)", "Dasatinib", dec); 0.001::p_fc("PTK2(S843)", "Dasatinib", inc) :- p_occupancy("PTK2(S843)", "Dasatinib", inc).
+0.001::p_fc("PTK2(S843)", "Edelfosine", dec); 0.001::p_fc("PTK2(S843)", "Edelfosine", inc) :- p_occupancy("PTK2(S843)", "Edelfosine", dec).
+0.001::p_fc("PTK2(S843)", "Edelfosine", dec); 0.001::p_fc("PTK2(S843)", "Edelfosine", inc) :- p_occupancy("PTK2(S843)", "Edelfosine", inc).
+0.9977670832::p_fc("PTK2(S843)", "FRAX486", dec); 0.001::p_fc("PTK2(S843)", "FRAX486", inc) :- p_occupancy("PTK2(S843)", "FRAX486", dec).
+0.001::p_fc("PTK2(S843)", "FRAX486", dec); 0.9977670832::p_fc("PTK2(S843)", "FRAX486", inc) :- p_occupancy("PTK2(S843)", "FRAX486", inc).
+0.001::p_fc("PTK2(S843)", "GDC0941", dec); 0.001::p_fc("PTK2(S843)", "GDC0941", inc) :- p_occupancy("PTK2(S843)", "GDC0941", dec).
+0.001::p_fc("PTK2(S843)", "GDC0941", dec); 0.001::p_fc("PTK2(S843)", "GDC0941", inc) :- p_occupancy("PTK2(S843)", "GDC0941", inc).
+0.001::p_fc("PTK2(S843)", "GDC0994", dec); 0.001::p_fc("PTK2(S843)", "GDC0994", inc) :- p_occupancy("PTK2(S843)", "GDC0994", dec).
+0.001::p_fc("PTK2(S843)", "GDC0994", dec); 0.001::p_fc("PTK2(S843)", "GDC0994", inc) :- p_occupancy("PTK2(S843)", "GDC0994", inc).
+0.001::p_fc("PTK2(S843)", "GF109203X", dec); 0.001::p_fc("PTK2(S843)", "GF109203X", inc) :- p_occupancy("PTK2(S843)", "GF109203X", dec).
+0.001::p_fc("PTK2(S843)", "GF109203X", dec); 0.001::p_fc("PTK2(S843)", "GF109203X", inc) :- p_occupancy("PTK2(S843)", "GF109203X", inc).
+0.001::p_fc("PTK2(S843)", "GO6983", dec); 0.001::p_fc("PTK2(S843)", "GO6983", inc) :- p_occupancy("PTK2(S843)", "GO6983", dec).
+0.001::p_fc("PTK2(S843)", "GO6983", dec); 0.001::p_fc("PTK2(S843)", "GO6983", inc) :- p_occupancy("PTK2(S843)", "GO6983", inc).
+0.001::p_fc("PTK2(S843)", "GSK2334470", dec); 0.001::p_fc("PTK2(S843)", "GSK2334470", inc) :- p_occupancy("PTK2(S843)", "GSK2334470", dec).
+0.001::p_fc("PTK2(S843)", "GSK2334470", dec); 0.001::p_fc("PTK2(S843)", "GSK2334470", inc) :- p_occupancy("PTK2(S843)", "GSK2334470", inc).
+0.001::p_fc("PTK2(S843)", "GSK690693", dec); 0.001::p_fc("PTK2(S843)", "GSK690693", inc) :- p_occupancy("PTK2(S843)", "GSK690693", dec).
+0.001::p_fc("PTK2(S843)", "GSK690693", dec); 0.001::p_fc("PTK2(S843)", "GSK690693", inc) :- p_occupancy("PTK2(S843)", "GSK690693", inc).
+0.001::p_fc("PTK2(S843)", "Go6976", dec); 0.001::p_fc("PTK2(S843)", "Go6976", inc) :- p_occupancy("PTK2(S843)", "Go6976", dec).
+0.001::p_fc("PTK2(S843)", "Go6976", dec); 0.001::p_fc("PTK2(S843)", "Go6976", inc) :- p_occupancy("PTK2(S843)", "Go6976", inc).
+0.001::p_fc("PTK2(S843)", "H89", dec); 0.001::p_fc("PTK2(S843)", "H89", inc) :- p_occupancy("PTK2(S843)", "H89", dec).
+0.001::p_fc("PTK2(S843)", "H89", dec); 0.001::p_fc("PTK2(S843)", "H89", inc) :- p_occupancy("PTK2(S843)", "H89", inc).
+0.001::p_fc("PTK2(S843)", "HS173", dec); 0.001::p_fc("PTK2(S843)", "HS173", inc) :- p_occupancy("PTK2(S843)", "HS173", dec).
+0.001::p_fc("PTK2(S843)", "HS173", dec); 0.001::p_fc("PTK2(S843)", "HS173", inc) :- p_occupancy("PTK2(S843)", "HS173", inc).
+0.001::p_fc("PTK2(S843)", "Ipatasertib", dec); 0.001::p_fc("PTK2(S843)", "Ipatasertib", inc) :- p_occupancy("PTK2(S843)", "Ipatasertib", dec).
+0.001::p_fc("PTK2(S843)", "Ipatasertib", dec); 0.001::p_fc("PTK2(S843)", "Ipatasertib", inc) :- p_occupancy("PTK2(S843)", "Ipatasertib", inc).
+0.001::p_fc("PTK2(S843)", "JNJ", dec); 0.001::p_fc("PTK2(S843)", "JNJ", inc) :- p_occupancy("PTK2(S843)", "JNJ", dec).
+0.001::p_fc("PTK2(S843)", "JNJ", dec); 0.001::p_fc("PTK2(S843)", "JNJ", inc) :- p_occupancy("PTK2(S843)", "JNJ", inc).
+0.001::p_fc("PTK2(S843)", "JNK", dec); 0.001::p_fc("PTK2(S843)", "JNK", inc) :- p_occupancy("PTK2(S843)", "JNK", dec).
+0.001::p_fc("PTK2(S843)", "JNK", dec); 0.001::p_fc("PTK2(S843)", "JNK", inc) :- p_occupancy("PTK2(S843)", "JNK", inc).
+0.001::p_fc("PTK2(S843)", "KD025", dec); 0.001::p_fc("PTK2(S843)", "KD025", inc) :- p_occupancy("PTK2(S843)", "KD025", dec).
+0.001::p_fc("PTK2(S843)", "KD025", dec); 0.001::p_fc("PTK2(S843)", "KD025", inc) :- p_occupancy("PTK2(S843)", "KD025", inc).
+0.001::p_fc("PTK2(S843)", "KN62", dec); 0.001::p_fc("PTK2(S843)", "KN62", inc) :- p_occupancy("PTK2(S843)", "KN62", dec).
+0.001::p_fc("PTK2(S843)", "KN62", dec); 0.001::p_fc("PTK2(S843)", "KN62", inc) :- p_occupancy("PTK2(S843)", "KN62", inc).
+0.001::p_fc("PTK2(S843)", "KN93", dec); 0.001::p_fc("PTK2(S843)", "KN93", inc) :- p_occupancy("PTK2(S843)", "KN93", dec).
+0.001::p_fc("PTK2(S843)", "KN93", dec); 0.001::p_fc("PTK2(S843)", "KN93", inc) :- p_occupancy("PTK2(S843)", "KN93", inc).
+0.9979582125::p_fc("PTK2(S843)", "Ku0063794", dec); 0.001::p_fc("PTK2(S843)", "Ku0063794", inc) :- p_occupancy("PTK2(S843)", "Ku0063794", dec).
+0.001::p_fc("PTK2(S843)", "Ku0063794", dec); 0.9979582125::p_fc("PTK2(S843)", "Ku0063794", inc) :- p_occupancy("PTK2(S843)", "Ku0063794", inc).
+0.001::p_fc("PTK2(S843)", "LY2090314", dec); 0.001::p_fc("PTK2(S843)", "LY2090314", inc) :- p_occupancy("PTK2(S843)", "LY2090314", dec).
+0.001::p_fc("PTK2(S843)", "LY2090314", dec); 0.001::p_fc("PTK2(S843)", "LY2090314", inc) :- p_occupancy("PTK2(S843)", "LY2090314", inc).
+0.001::p_fc("PTK2(S843)", "LY2584702", dec); 0.001::p_fc("PTK2(S843)", "LY2584702", inc) :- p_occupancy("PTK2(S843)", "LY2584702", dec).
+0.001::p_fc("PTK2(S843)", "LY2584702", dec); 0.001::p_fc("PTK2(S843)", "LY2584702", inc) :- p_occupancy("PTK2(S843)", "LY2584702", inc).
+0.001::p_fc("PTK2(S843)", "LY2835219", dec); 0.001::p_fc("PTK2(S843)", "LY2835219", inc) :- p_occupancy("PTK2(S843)", "LY2835219", dec).
+0.001::p_fc("PTK2(S843)", "LY2835219", dec); 0.001::p_fc("PTK2(S843)", "LY2835219", inc) :- p_occupancy("PTK2(S843)", "LY2835219", inc).
+0.001::p_fc("PTK2(S843)", "Linsitinib", dec); 0.001::p_fc("PTK2(S843)", "Linsitinib", inc) :- p_occupancy("PTK2(S843)", "Linsitinib", dec).
+0.001::p_fc("PTK2(S843)", "Linsitinib", dec); 0.001::p_fc("PTK2(S843)", "Linsitinib", inc) :- p_occupancy("PTK2(S843)", "Linsitinib", inc).
+0.001::p_fc("PTK2(S843)", "MK2206", dec); 0.001::p_fc("PTK2(S843)", "MK2206", inc) :- p_occupancy("PTK2(S843)", "MK2206", dec).
+0.001::p_fc("PTK2(S843)", "MK2206", dec); 0.001::p_fc("PTK2(S843)", "MK2206", inc) :- p_occupancy("PTK2(S843)", "MK2206", inc).
+0.001::p_fc("PTK2(S843)", "NU7441", dec); 0.001::p_fc("PTK2(S843)", "NU7441", inc) :- p_occupancy("PTK2(S843)", "NU7441", dec).
+0.001::p_fc("PTK2(S843)", "NU7441", dec); 0.001::p_fc("PTK2(S843)", "NU7441", inc) :- p_occupancy("PTK2(S843)", "NU7441", inc).
+0.9980014235::p_fc("PTK2(S843)", "PD153035", dec); 0.001::p_fc("PTK2(S843)", "PD153035", inc) :- p_occupancy("PTK2(S843)", "PD153035", dec).
+0.001::p_fc("PTK2(S843)", "PD153035", dec); 0.9980014235::p_fc("PTK2(S843)", "PD153035", inc) :- p_occupancy("PTK2(S843)", "PD153035", inc).
+0.9869151298::p_fc("PTK2(S843)", "PF3758309", dec); 0.001::p_fc("PTK2(S843)", "PF3758309", inc) :- p_occupancy("PTK2(S843)", "PF3758309", dec).
+0.001::p_fc("PTK2(S843)", "PF3758309", dec); 0.9869151298::p_fc("PTK2(S843)", "PF3758309", inc) :- p_occupancy("PTK2(S843)", "PF3758309", inc).
+0.001::p_fc("PTK2(S843)", "PF4708671", dec); 0.001::p_fc("PTK2(S843)", "PF4708671", inc) :- p_occupancy("PTK2(S843)", "PF4708671", dec).
+0.001::p_fc("PTK2(S843)", "PF4708671", dec); 0.001::p_fc("PTK2(S843)", "PF4708671", inc) :- p_occupancy("PTK2(S843)", "PF4708671", inc).
+0.001::p_fc("PTK2(S843)", "PH797804", dec); 0.001::p_fc("PTK2(S843)", "PH797804", inc) :- p_occupancy("PTK2(S843)", "PH797804", dec).
+0.001::p_fc("PTK2(S843)", "PH797804", dec); 0.001::p_fc("PTK2(S843)", "PH797804", inc) :- p_occupancy("PTK2(S843)", "PH797804", inc).
+0.001::p_fc("PTK2(S843)", "PIK294", dec); 0.001::p_fc("PTK2(S843)", "PIK294", inc) :- p_occupancy("PTK2(S843)", "PIK294", dec).
+0.001::p_fc("PTK2(S843)", "PIK294", dec); 0.001::p_fc("PTK2(S843)", "PIK294", inc) :- p_occupancy("PTK2(S843)", "PIK294", inc).
+0.001::p_fc("PTK2(S843)", "Ribociclib", dec); 0.001::p_fc("PTK2(S843)", "Ribociclib", inc) :- p_occupancy("PTK2(S843)", "Ribociclib", dec).
+0.001::p_fc("PTK2(S843)", "Ribociclib", dec); 0.001::p_fc("PTK2(S843)", "Ribociclib", inc) :- p_occupancy("PTK2(S843)", "Ribociclib", inc).
+0.001::p_fc("PTK2(S843)", "Ripasudil", dec); 0.001::p_fc("PTK2(S843)", "Ripasudil", inc) :- p_occupancy("PTK2(S843)", "Ripasudil", dec).
+0.001::p_fc("PTK2(S843)", "Ripasudil", dec); 0.001::p_fc("PTK2(S843)", "Ripasudil", inc) :- p_occupancy("PTK2(S843)", "Ripasudil", inc).
+0.001::p_fc("PTK2(S843)", "SP600125", dec); 0.001::p_fc("PTK2(S843)", "SP600125", inc) :- p_occupancy("PTK2(S843)", "SP600125", dec).
+0.001::p_fc("PTK2(S843)", "SP600125", dec); 0.001::p_fc("PTK2(S843)", "SP600125", inc) :- p_occupancy("PTK2(S843)", "SP600125", inc).
+0.001::p_fc("PTK2(S843)", "Selumetinib", dec); 0.001::p_fc("PTK2(S843)", "Selumetinib", inc) :- p_occupancy("PTK2(S843)", "Selumetinib", dec).
+0.001::p_fc("PTK2(S843)", "Selumetinib", dec); 0.001::p_fc("PTK2(S843)", "Selumetinib", inc) :- p_occupancy("PTK2(S843)", "Selumetinib", inc).
+0.001::p_fc("PTK2(S843)", "TAK715", dec); 0.001::p_fc("PTK2(S843)", "TAK715", inc) :- p_occupancy("PTK2(S843)", "TAK715", dec).
+0.001::p_fc("PTK2(S843)", "TAK715", dec); 0.001::p_fc("PTK2(S843)", "TAK715", inc) :- p_occupancy("PTK2(S843)", "TAK715", inc).
+0.001::p_fc("PTK2(S843)", "TBCA", dec); 0.001::p_fc("PTK2(S843)", "TBCA", inc) :- p_occupancy("PTK2(S843)", "TBCA", dec).
+0.001::p_fc("PTK2(S843)", "TBCA", dec); 0.001::p_fc("PTK2(S843)", "TBCA", inc) :- p_occupancy("PTK2(S843)", "TBCA", inc).
+0.001::p_fc("PTK2(S843)", "TGX221", dec); 0.001::p_fc("PTK2(S843)", "TGX221", inc) :- p_occupancy("PTK2(S843)", "TGX221", dec).
+0.001::p_fc("PTK2(S843)", "TGX221", dec); 0.001::p_fc("PTK2(S843)", "TGX221", inc) :- p_occupancy("PTK2(S843)", "TGX221", inc).
+0.001::p_fc("PTK2(S843)", "Tofacitinib", dec); 0.001::p_fc("PTK2(S843)", "Tofacitinib", inc) :- p_occupancy("PTK2(S843)", "Tofacitinib", dec).
+0.001::p_fc("PTK2(S843)", "Tofacitinib", dec); 0.001::p_fc("PTK2(S843)", "Tofacitinib", inc) :- p_occupancy("PTK2(S843)", "Tofacitinib", inc).
+0.997988508::p_fc("PTK2(S843)", "Torin", dec); 0.001::p_fc("PTK2(S843)", "Torin", inc) :- p_occupancy("PTK2(S843)", "Torin", dec).
+0.001::p_fc("PTK2(S843)", "Torin", dec); 0.997988508::p_fc("PTK2(S843)", "Torin", inc) :- p_occupancy("PTK2(S843)", "Torin", inc).
+0.9980043548::p_fc("PTK2(S843)", "Trametinib", dec); 0.001::p_fc("PTK2(S843)", "Trametinib", inc) :- p_occupancy("PTK2(S843)", "Trametinib", dec).
+0.001::p_fc("PTK2(S843)", "Trametinib", dec); 0.9980043548::p_fc("PTK2(S843)", "Trametinib", inc) :- p_occupancy("PTK2(S843)", "Trametinib", inc).
+0.001::p_fc("PTK2(S843)", "U73122", dec); 0.001::p_fc("PTK2(S843)", "U73122", inc) :- p_occupancy("PTK2(S843)", "U73122", dec).
+0.001::p_fc("PTK2(S843)", "U73122", dec); 0.001::p_fc("PTK2(S843)", "U73122", inc) :- p_occupancy("PTK2(S843)", "U73122", inc).
+0.001::p_fc("PTK2(S843)", "Ulixertinib", dec); 0.001::p_fc("PTK2(S843)", "Ulixertinib", inc) :- p_occupancy("PTK2(S843)", "Ulixertinib", dec).
+0.001::p_fc("PTK2(S843)", "Ulixertinib", dec); 0.001::p_fc("PTK2(S843)", "Ulixertinib", inc) :- p_occupancy("PTK2(S843)", "Ulixertinib", inc).
+0.001::p_fc("PTK2(S843)", "Vemurafenib", dec); 0.001::p_fc("PTK2(S843)", "Vemurafenib", inc) :- p_occupancy("PTK2(S843)", "Vemurafenib", dec).
+0.001::p_fc("PTK2(S843)", "Vemurafenib", dec); 0.001::p_fc("PTK2(S843)", "Vemurafenib", inc) :- p_occupancy("PTK2(S843)", "Vemurafenib", inc).
+0.9950263084::p_fc("PTK2(S910)", "AC220", dec); 0.001::p_fc("PTK2(S910)", "AC220", inc) :- p_occupancy("PTK2(S910)", "AC220", dec).
+0.001::p_fc("PTK2(S910)", "AC220", dec); 0.9950263084::p_fc("PTK2(S910)", "AC220", inc) :- p_occupancy("PTK2(S910)", "AC220", inc).
+0.3216506063::p_fc("PTK2(S910)", "AT13148", dec); 0.001::p_fc("PTK2(S910)", "AT13148", inc) :- p_occupancy("PTK2(S910)", "AT13148", dec).
+0.001::p_fc("PTK2(S910)", "AT13148", dec); 0.3216506063::p_fc("PTK2(S910)", "AT13148", inc) :- p_occupancy("PTK2(S910)", "AT13148", inc).
+0.0649564598::p_fc("PTK2(S910)", "AZ20", dec); 0.001::p_fc("PTK2(S910)", "AZ20", inc) :- p_occupancy("PTK2(S910)", "AZ20", dec).
+0.001::p_fc("PTK2(S910)", "AZ20", dec); 0.0649564598::p_fc("PTK2(S910)", "AZ20", inc) :- p_occupancy("PTK2(S910)", "AZ20", inc).
+0.8339870682::p_fc("PTK2(S910)", "AZD1480", dec); 0.001::p_fc("PTK2(S910)", "AZD1480", inc) :- p_occupancy("PTK2(S910)", "AZD1480", dec).
+0.001::p_fc("PTK2(S910)", "AZD1480", dec); 0.8339870682::p_fc("PTK2(S910)", "AZD1480", inc) :- p_occupancy("PTK2(S910)", "AZD1480", inc).
+0.5272957611::p_fc("PTK2(S910)", "AZD3759", dec); 0.001::p_fc("PTK2(S910)", "AZD3759", inc) :- p_occupancy("PTK2(S910)", "AZD3759", dec).
+0.001::p_fc("PTK2(S910)", "AZD3759", dec); 0.5272957611::p_fc("PTK2(S910)", "AZD3759", inc) :- p_occupancy("PTK2(S910)", "AZD3759", inc).
+0.8875147759::p_fc("PTK2(S910)", "AZD5363", dec); 0.001::p_fc("PTK2(S910)", "AZD5363", inc) :- p_occupancy("PTK2(S910)", "AZD5363", dec).
+0.001::p_fc("PTK2(S910)", "AZD5363", dec); 0.8875147759::p_fc("PTK2(S910)", "AZD5363", inc) :- p_occupancy("PTK2(S910)", "AZD5363", inc).
+0.2895195703::p_fc("PTK2(S910)", "AZD5438", dec); 0.001::p_fc("PTK2(S910)", "AZD5438", inc) :- p_occupancy("PTK2(S910)", "AZD5438", dec).
+0.001::p_fc("PTK2(S910)", "AZD5438", dec); 0.2895195703::p_fc("PTK2(S910)", "AZD5438", inc) :- p_occupancy("PTK2(S910)", "AZD5438", inc).
+0.2059588083::p_fc("PTK2(S910)", "AZD6482", dec); 0.001::p_fc("PTK2(S910)", "AZD6482", inc) :- p_occupancy("PTK2(S910)", "AZD6482", dec).
+0.001::p_fc("PTK2(S910)", "AZD6482", dec); 0.2059588083::p_fc("PTK2(S910)", "AZD6482", inc) :- p_occupancy("PTK2(S910)", "AZD6482", inc).
+0.0093909505::p_fc("PTK2(S910)", "AZD6738", dec); 0.001::p_fc("PTK2(S910)", "AZD6738", inc) :- p_occupancy("PTK2(S910)", "AZD6738", dec).
+0.001::p_fc("PTK2(S910)", "AZD6738", dec); 0.0093909505::p_fc("PTK2(S910)", "AZD6738", inc) :- p_occupancy("PTK2(S910)", "AZD6738", inc).
+0.9897511731::p_fc("PTK2(S910)", "AZD8055", dec); 0.001::p_fc("PTK2(S910)", "AZD8055", inc) :- p_occupancy("PTK2(S910)", "AZD8055", dec).
+0.001::p_fc("PTK2(S910)", "AZD8055", dec); 0.9897511731::p_fc("PTK2(S910)", "AZD8055", inc) :- p_occupancy("PTK2(S910)", "AZD8055", inc).
+0.1926141689::p_fc("PTK2(S910)", "Amuvatinib", dec); 0.001::p_fc("PTK2(S910)", "Amuvatinib", inc) :- p_occupancy("PTK2(S910)", "Amuvatinib", dec).
+0.001::p_fc("PTK2(S910)", "Amuvatinib", dec); 0.1926141689::p_fc("PTK2(S910)", "Amuvatinib", inc) :- p_occupancy("PTK2(S910)", "Amuvatinib", inc).
+0.3496446144::p_fc("PTK2(S910)", "BX912", dec); 0.001::p_fc("PTK2(S910)", "BX912", inc) :- p_occupancy("PTK2(S910)", "BX912", dec).
+0.001::p_fc("PTK2(S910)", "BX912", dec); 0.3496446144::p_fc("PTK2(S910)", "BX912", inc) :- p_occupancy("PTK2(S910)", "BX912", inc).
+0.521769616::p_fc("PTK2(S910)", "Bosutinib", dec); 0.001::p_fc("PTK2(S910)", "Bosutinib", inc) :- p_occupancy("PTK2(S910)", "Bosutinib", dec).
+0.001::p_fc("PTK2(S910)", "Bosutinib", dec); 0.521769616::p_fc("PTK2(S910)", "Bosutinib", inc) :- p_occupancy("PTK2(S910)", "Bosutinib", inc).
+0.3515276563::p_fc("PTK2(S910)", "CAL101", dec); 0.001::p_fc("PTK2(S910)", "CAL101", inc) :- p_occupancy("PTK2(S910)", "CAL101", dec).
+0.001::p_fc("PTK2(S910)", "CAL101", dec); 0.3515276563::p_fc("PTK2(S910)", "CAL101", inc) :- p_occupancy("PTK2(S910)", "CAL101", inc).
+0.678985521::p_fc("PTK2(S910)", "CHIR99021", dec); 0.001::p_fc("PTK2(S910)", "CHIR99021", inc) :- p_occupancy("PTK2(S910)", "CHIR99021", dec).
+0.001::p_fc("PTK2(S910)", "CHIR99021", dec); 0.678985521::p_fc("PTK2(S910)", "CHIR99021", inc) :- p_occupancy("PTK2(S910)", "CHIR99021", inc).
+0.7304490499::p_fc("PTK2(S910)", "CX4945", dec); 0.001::p_fc("PTK2(S910)", "CX4945", inc) :- p_occupancy("PTK2(S910)", "CX4945", dec).
+0.001::p_fc("PTK2(S910)", "CX4945", dec); 0.7304490499::p_fc("PTK2(S910)", "CX4945", inc) :- p_occupancy("PTK2(S910)", "CX4945", inc).
+0.8399366741::p_fc("PTK2(S910)", "DNAPK", dec); 0.001::p_fc("PTK2(S910)", "DNAPK", inc) :- p_occupancy("PTK2(S910)", "DNAPK", dec).
+0.001::p_fc("PTK2(S910)", "DNAPK", dec); 0.8399366741::p_fc("PTK2(S910)", "DNAPK", inc) :- p_occupancy("PTK2(S910)", "DNAPK", inc).
+0.7593019847::p_fc("PTK2(S910)", "Dabrafenib", dec); 0.001::p_fc("PTK2(S910)", "Dabrafenib", inc) :- p_occupancy("PTK2(S910)", "Dabrafenib", dec).
+0.001::p_fc("PTK2(S910)", "Dabrafenib", dec); 0.7593019847::p_fc("PTK2(S910)", "Dabrafenib", inc) :- p_occupancy("PTK2(S910)", "Dabrafenib", inc).
+0.3609259422::p_fc("PTK2(S910)", "Dasatinib", dec); 0.001::p_fc("PTK2(S910)", "Dasatinib", inc) :- p_occupancy("PTK2(S910)", "Dasatinib", dec).
+0.001::p_fc("PTK2(S910)", "Dasatinib", dec); 0.3609259422::p_fc("PTK2(S910)", "Dasatinib", inc) :- p_occupancy("PTK2(S910)", "Dasatinib", inc).
+0.9559968748::p_fc("PTK2(S910)", "Edelfosine", dec); 0.001::p_fc("PTK2(S910)", "Edelfosine", inc) :- p_occupancy("PTK2(S910)", "Edelfosine", dec).
+0.001::p_fc("PTK2(S910)", "Edelfosine", dec); 0.9559968748::p_fc("PTK2(S910)", "Edelfosine", inc) :- p_occupancy("PTK2(S910)", "Edelfosine", inc).
+0.4694197361::p_fc("PTK2(S910)", "FRAX486", dec); 0.001::p_fc("PTK2(S910)", "FRAX486", inc) :- p_occupancy("PTK2(S910)", "FRAX486", dec).
+0.001::p_fc("PTK2(S910)", "FRAX486", dec); 0.4694197361::p_fc("PTK2(S910)", "FRAX486", inc) :- p_occupancy("PTK2(S910)", "FRAX486", inc).
+0.216818571::p_fc("PTK2(S910)", "GDC0941", dec); 0.001::p_fc("PTK2(S910)", "GDC0941", inc) :- p_occupancy("PTK2(S910)", "GDC0941", dec).
+0.001::p_fc("PTK2(S910)", "GDC0941", dec); 0.216818571::p_fc("PTK2(S910)", "GDC0941", inc) :- p_occupancy("PTK2(S910)", "GDC0941", inc).
+0.9816540655::p_fc("PTK2(S910)", "GDC0994", dec); 0.001::p_fc("PTK2(S910)", "GDC0994", inc) :- p_occupancy("PTK2(S910)", "GDC0994", dec).
+0.001::p_fc("PTK2(S910)", "GDC0994", dec); 0.9816540655::p_fc("PTK2(S910)", "GDC0994", inc) :- p_occupancy("PTK2(S910)", "GDC0994", inc).
+0.6046840079::p_fc("PTK2(S910)", "GF109203X", dec); 0.001::p_fc("PTK2(S910)", "GF109203X", inc) :- p_occupancy("PTK2(S910)", "GF109203X", dec).
+0.001::p_fc("PTK2(S910)", "GF109203X", dec); 0.6046840079::p_fc("PTK2(S910)", "GF109203X", inc) :- p_occupancy("PTK2(S910)", "GF109203X", inc).
+0.4150946059::p_fc("PTK2(S910)", "GO6983", dec); 0.001::p_fc("PTK2(S910)", "GO6983", inc) :- p_occupancy("PTK2(S910)", "GO6983", dec).
+0.001::p_fc("PTK2(S910)", "GO6983", dec); 0.4150946059::p_fc("PTK2(S910)", "GO6983", inc) :- p_occupancy("PTK2(S910)", "GO6983", inc).
+0.9337276481::p_fc("PTK2(S910)", "GSK2334470", dec); 0.001::p_fc("PTK2(S910)", "GSK2334470", inc) :- p_occupancy("PTK2(S910)", "GSK2334470", dec).
+0.001::p_fc("PTK2(S910)", "GSK2334470", dec); 0.9337276481::p_fc("PTK2(S910)", "GSK2334470", inc) :- p_occupancy("PTK2(S910)", "GSK2334470", inc).
+0.0069445867::p_fc("PTK2(S910)", "GSK690693", dec); 0.001::p_fc("PTK2(S910)", "GSK690693", inc) :- p_occupancy("PTK2(S910)", "GSK690693", dec).
+0.001::p_fc("PTK2(S910)", "GSK690693", dec); 0.0069445867::p_fc("PTK2(S910)", "GSK690693", inc) :- p_occupancy("PTK2(S910)", "GSK690693", inc).
+0.9593785228::p_fc("PTK2(S910)", "Go6976", dec); 0.001::p_fc("PTK2(S910)", "Go6976", inc) :- p_occupancy("PTK2(S910)", "Go6976", dec).
+0.001::p_fc("PTK2(S910)", "Go6976", dec); 0.9593785228::p_fc("PTK2(S910)", "Go6976", inc) :- p_occupancy("PTK2(S910)", "Go6976", inc).
+0.0310907238::p_fc("PTK2(S910)", "H89", dec); 0.001::p_fc("PTK2(S910)", "H89", inc) :- p_occupancy("PTK2(S910)", "H89", dec).
+0.001::p_fc("PTK2(S910)", "H89", dec); 0.0310907238::p_fc("PTK2(S910)", "H89", inc) :- p_occupancy("PTK2(S910)", "H89", inc).
+0.3159981085::p_fc("PTK2(S910)", "HS173", dec); 0.001::p_fc("PTK2(S910)", "HS173", inc) :- p_occupancy("PTK2(S910)", "HS173", dec).
+0.001::p_fc("PTK2(S910)", "HS173", dec); 0.3159981085::p_fc("PTK2(S910)", "HS173", inc) :- p_occupancy("PTK2(S910)", "HS173", inc).
+0.9284252563::p_fc("PTK2(S910)", "Ipatasertib", dec); 0.001::p_fc("PTK2(S910)", "Ipatasertib", inc) :- p_occupancy("PTK2(S910)", "Ipatasertib", dec).
+0.001::p_fc("PTK2(S910)", "Ipatasertib", dec); 0.9284252563::p_fc("PTK2(S910)", "Ipatasertib", inc) :- p_occupancy("PTK2(S910)", "Ipatasertib", inc).
+0.52891667::p_fc("PTK2(S910)", "JNJ", dec); 0.001::p_fc("PTK2(S910)", "JNJ", inc) :- p_occupancy("PTK2(S910)", "JNJ", dec).
+0.001::p_fc("PTK2(S910)", "JNJ", dec); 0.52891667::p_fc("PTK2(S910)", "JNJ", inc) :- p_occupancy("PTK2(S910)", "JNJ", inc).
+0.653424062::p_fc("PTK2(S910)", "JNK", dec); 0.001::p_fc("PTK2(S910)", "JNK", inc) :- p_occupancy("PTK2(S910)", "JNK", dec).
+0.001::p_fc("PTK2(S910)", "JNK", dec); 0.653424062::p_fc("PTK2(S910)", "JNK", inc) :- p_occupancy("PTK2(S910)", "JNK", inc).
+0.9710394177::p_fc("PTK2(S910)", "KD025", dec); 0.001::p_fc("PTK2(S910)", "KD025", inc) :- p_occupancy("PTK2(S910)", "KD025", dec).
+0.001::p_fc("PTK2(S910)", "KD025", dec); 0.9710394177::p_fc("PTK2(S910)", "KD025", inc) :- p_occupancy("PTK2(S910)", "KD025", inc).
+0.0176779838::p_fc("PTK2(S910)", "KN62", dec); 0.001::p_fc("PTK2(S910)", "KN62", inc) :- p_occupancy("PTK2(S910)", "KN62", dec).
+0.001::p_fc("PTK2(S910)", "KN62", dec); 0.0176779838::p_fc("PTK2(S910)", "KN62", inc) :- p_occupancy("PTK2(S910)", "KN62", inc).
+0.6479908972::p_fc("PTK2(S910)", "KN93", dec); 0.001::p_fc("PTK2(S910)", "KN93", inc) :- p_occupancy("PTK2(S910)", "KN93", dec).
+0.001::p_fc("PTK2(S910)", "KN93", dec); 0.6479908972::p_fc("PTK2(S910)", "KN93", inc) :- p_occupancy("PTK2(S910)", "KN93", inc).
+0.260210494::p_fc("PTK2(S910)", "Ku0063794", dec); 0.001::p_fc("PTK2(S910)", "Ku0063794", inc) :- p_occupancy("PTK2(S910)", "Ku0063794", dec).
+0.001::p_fc("PTK2(S910)", "Ku0063794", dec); 0.260210494::p_fc("PTK2(S910)", "Ku0063794", inc) :- p_occupancy("PTK2(S910)", "Ku0063794", inc).
+0.4775253153::p_fc("PTK2(S910)", "LY2090314", dec); 0.001::p_fc("PTK2(S910)", "LY2090314", inc) :- p_occupancy("PTK2(S910)", "LY2090314", dec).
+0.001::p_fc("PTK2(S910)", "LY2090314", dec); 0.4775253153::p_fc("PTK2(S910)", "LY2090314", inc) :- p_occupancy("PTK2(S910)", "LY2090314", inc).
+0.4799166583::p_fc("PTK2(S910)", "LY2584702", dec); 0.001::p_fc("PTK2(S910)", "LY2584702", inc) :- p_occupancy("PTK2(S910)", "LY2584702", dec).
+0.001::p_fc("PTK2(S910)", "LY2584702", dec); 0.4799166583::p_fc("PTK2(S910)", "LY2584702", inc) :- p_occupancy("PTK2(S910)", "LY2584702", inc).
+0.4991395554::p_fc("PTK2(S910)", "LY2835219", dec); 0.001::p_fc("PTK2(S910)", "LY2835219", inc) :- p_occupancy("PTK2(S910)", "LY2835219", dec).
+0.001::p_fc("PTK2(S910)", "LY2835219", dec); 0.4991395554::p_fc("PTK2(S910)", "LY2835219", inc) :- p_occupancy("PTK2(S910)", "LY2835219", inc).
+0.1098122152::p_fc("PTK2(S910)", "Linsitinib", dec); 0.001::p_fc("PTK2(S910)", "Linsitinib", inc) :- p_occupancy("PTK2(S910)", "Linsitinib", dec).
+0.001::p_fc("PTK2(S910)", "Linsitinib", dec); 0.1098122152::p_fc("PTK2(S910)", "Linsitinib", inc) :- p_occupancy("PTK2(S910)", "Linsitinib", inc).
+0.0941798417::p_fc("PTK2(S910)", "MK2206", dec); 0.001::p_fc("PTK2(S910)", "MK2206", inc) :- p_occupancy("PTK2(S910)", "MK2206", dec).
+0.001::p_fc("PTK2(S910)", "MK2206", dec); 0.0941798417::p_fc("PTK2(S910)", "MK2206", inc) :- p_occupancy("PTK2(S910)", "MK2206", inc).
+0.550340087::p_fc("PTK2(S910)", "NU7441", dec); 0.001::p_fc("PTK2(S910)", "NU7441", inc) :- p_occupancy("PTK2(S910)", "NU7441", dec).
+0.001::p_fc("PTK2(S910)", "NU7441", dec); 0.550340087::p_fc("PTK2(S910)", "NU7441", inc) :- p_occupancy("PTK2(S910)", "NU7441", inc).
+0.151296506::p_fc("PTK2(S910)", "PD153035", dec); 0.001::p_fc("PTK2(S910)", "PD153035", inc) :- p_occupancy("PTK2(S910)", "PD153035", dec).
+0.001::p_fc("PTK2(S910)", "PD153035", dec); 0.151296506::p_fc("PTK2(S910)", "PD153035", inc) :- p_occupancy("PTK2(S910)", "PD153035", inc).
+0.8607378627::p_fc("PTK2(S910)", "PF3758309", dec); 0.001::p_fc("PTK2(S910)", "PF3758309", inc) :- p_occupancy("PTK2(S910)", "PF3758309", dec).
+0.001::p_fc("PTK2(S910)", "PF3758309", dec); 0.8607378627::p_fc("PTK2(S910)", "PF3758309", inc) :- p_occupancy("PTK2(S910)", "PF3758309", inc).
+0.1974269956::p_fc("PTK2(S910)", "PF4708671", dec); 0.001::p_fc("PTK2(S910)", "PF4708671", inc) :- p_occupancy("PTK2(S910)", "PF4708671", dec).
+0.001::p_fc("PTK2(S910)", "PF4708671", dec); 0.1974269956::p_fc("PTK2(S910)", "PF4708671", inc) :- p_occupancy("PTK2(S910)", "PF4708671", inc).
+0.887087389::p_fc("PTK2(S910)", "PH797804", dec); 0.001::p_fc("PTK2(S910)", "PH797804", inc) :- p_occupancy("PTK2(S910)", "PH797804", dec).
+0.001::p_fc("PTK2(S910)", "PH797804", dec); 0.887087389::p_fc("PTK2(S910)", "PH797804", inc) :- p_occupancy("PTK2(S910)", "PH797804", inc).
+0.9368542555::p_fc("PTK2(S910)", "PIK294", dec); 0.001::p_fc("PTK2(S910)", "PIK294", inc) :- p_occupancy("PTK2(S910)", "PIK294", dec).
+0.001::p_fc("PTK2(S910)", "PIK294", dec); 0.9368542555::p_fc("PTK2(S910)", "PIK294", inc) :- p_occupancy("PTK2(S910)", "PIK294", inc).
+0.8393706639::p_fc("PTK2(S910)", "Ribociclib", dec); 0.001::p_fc("PTK2(S910)", "Ribociclib", inc) :- p_occupancy("PTK2(S910)", "Ribociclib", dec).
+0.001::p_fc("PTK2(S910)", "Ribociclib", dec); 0.8393706639::p_fc("PTK2(S910)", "Ribociclib", inc) :- p_occupancy("PTK2(S910)", "Ribociclib", inc).
+0.8362445061::p_fc("PTK2(S910)", "Ripasudil", dec); 0.001::p_fc("PTK2(S910)", "Ripasudil", inc) :- p_occupancy("PTK2(S910)", "Ripasudil", dec).
+0.001::p_fc("PTK2(S910)", "Ripasudil", dec); 0.8362445061::p_fc("PTK2(S910)", "Ripasudil", inc) :- p_occupancy("PTK2(S910)", "Ripasudil", inc).
+0.2479909696::p_fc("PTK2(S910)", "SP600125", dec); 0.001::p_fc("PTK2(S910)", "SP600125", inc) :- p_occupancy("PTK2(S910)", "SP600125", dec).
+0.001::p_fc("PTK2(S910)", "SP600125", dec); 0.2479909696::p_fc("PTK2(S910)", "SP600125", inc) :- p_occupancy("PTK2(S910)", "SP600125", inc).
+0.989318787::p_fc("PTK2(S910)", "Selumetinib", dec); 0.001::p_fc("PTK2(S910)", "Selumetinib", inc) :- p_occupancy("PTK2(S910)", "Selumetinib", dec).
+0.001::p_fc("PTK2(S910)", "Selumetinib", dec); 0.989318787::p_fc("PTK2(S910)", "Selumetinib", inc) :- p_occupancy("PTK2(S910)", "Selumetinib", inc).
+0.9390560816::p_fc("PTK2(S910)", "TAK715", dec); 0.001::p_fc("PTK2(S910)", "TAK715", inc) :- p_occupancy("PTK2(S910)", "TAK715", dec).
+0.001::p_fc("PTK2(S910)", "TAK715", dec); 0.9390560816::p_fc("PTK2(S910)", "TAK715", inc) :- p_occupancy("PTK2(S910)", "TAK715", inc).
+0.2302646365::p_fc("PTK2(S910)", "TBCA", dec); 0.001::p_fc("PTK2(S910)", "TBCA", inc) :- p_occupancy("PTK2(S910)", "TBCA", dec).
+0.001::p_fc("PTK2(S910)", "TBCA", dec); 0.2302646365::p_fc("PTK2(S910)", "TBCA", inc) :- p_occupancy("PTK2(S910)", "TBCA", inc).
+0.8587454078::p_fc("PTK2(S910)", "TGX221", dec); 0.001::p_fc("PTK2(S910)", "TGX221", inc) :- p_occupancy("PTK2(S910)", "TGX221", dec).
+0.001::p_fc("PTK2(S910)", "TGX221", dec); 0.8587454078::p_fc("PTK2(S910)", "TGX221", inc) :- p_occupancy("PTK2(S910)", "TGX221", inc).
+0.6805857216::p_fc("PTK2(S910)", "Tofacitinib", dec); 0.001::p_fc("PTK2(S910)", "Tofacitinib", inc) :- p_occupancy("PTK2(S910)", "Tofacitinib", dec).
+0.001::p_fc("PTK2(S910)", "Tofacitinib", dec); 0.6805857216::p_fc("PTK2(S910)", "Tofacitinib", inc) :- p_occupancy("PTK2(S910)", "Tofacitinib", inc).
+0.6165177739::p_fc("PTK2(S910)", "Torin", dec); 0.001::p_fc("PTK2(S910)", "Torin", inc) :- p_occupancy("PTK2(S910)", "Torin", dec).
+0.001::p_fc("PTK2(S910)", "Torin", dec); 0.6165177739::p_fc("PTK2(S910)", "Torin", inc) :- p_occupancy("PTK2(S910)", "Torin", inc).
+0.7059498817::p_fc("PTK2(S910)", "Trametinib", dec); 0.001::p_fc("PTK2(S910)", "Trametinib", inc) :- p_occupancy("PTK2(S910)", "Trametinib", dec).
+0.001::p_fc("PTK2(S910)", "Trametinib", dec); 0.7059498817::p_fc("PTK2(S910)", "Trametinib", inc) :- p_occupancy("PTK2(S910)", "Trametinib", inc).
+0.9768735222::p_fc("PTK2(S910)", "U73122", dec); 0.001::p_fc("PTK2(S910)", "U73122", inc) :- p_occupancy("PTK2(S910)", "U73122", dec).
+0.001::p_fc("PTK2(S910)", "U73122", dec); 0.9768735222::p_fc("PTK2(S910)", "U73122", inc) :- p_occupancy("PTK2(S910)", "U73122", inc).
+0.9570424098::p_fc("PTK2(S910)", "Ulixertinib", dec); 0.001::p_fc("PTK2(S910)", "Ulixertinib", inc) :- p_occupancy("PTK2(S910)", "Ulixertinib", dec).
+0.001::p_fc("PTK2(S910)", "Ulixertinib", dec); 0.9570424098::p_fc("PTK2(S910)", "Ulixertinib", inc) :- p_occupancy("PTK2(S910)", "Ulixertinib", inc).
+0.1333938921::p_fc("PTK2(S910)", "Vemurafenib", dec); 0.001::p_fc("PTK2(S910)", "Vemurafenib", inc) :- p_occupancy("PTK2(S910)", "Vemurafenib", dec).
+0.001::p_fc("PTK2(S910)", "Vemurafenib", dec); 0.1333938921::p_fc("PTK2(S910)", "Vemurafenib", inc) :- p_occupancy("PTK2(S910)", "Vemurafenib", inc).
+0.9828624991::p_fc("PTPRG(S995)", "AC220", dec); 0.001::p_fc("PTPRG(S995)", "AC220", inc) :- p_occupancy("PTPRG(S995)", "AC220", dec).
+0.001::p_fc("PTPRG(S995)", "AC220", dec); 0.9828624991::p_fc("PTPRG(S995)", "AC220", inc) :- p_occupancy("PTPRG(S995)", "AC220", inc).
+0.3733476595::p_fc("PTPRG(S995)", "AT13148", dec); 0.001::p_fc("PTPRG(S995)", "AT13148", inc) :- p_occupancy("PTPRG(S995)", "AT13148", dec).
+0.001::p_fc("PTPRG(S995)", "AT13148", dec); 0.3733476595::p_fc("PTPRG(S995)", "AT13148", inc) :- p_occupancy("PTPRG(S995)", "AT13148", inc).
+0.2856771751::p_fc("PTPRG(S995)", "AZ20", dec); 0.001::p_fc("PTPRG(S995)", "AZ20", inc) :- p_occupancy("PTPRG(S995)", "AZ20", dec).
+0.001::p_fc("PTPRG(S995)", "AZ20", dec); 0.2856771751::p_fc("PTPRG(S995)", "AZ20", inc) :- p_occupancy("PTPRG(S995)", "AZ20", inc).
+0.0020742244::p_fc("PTPRG(S995)", "AZD1480", dec); 0.001::p_fc("PTPRG(S995)", "AZD1480", inc) :- p_occupancy("PTPRG(S995)", "AZD1480", dec).
+0.001::p_fc("PTPRG(S995)", "AZD1480", dec); 0.0020742244::p_fc("PTPRG(S995)", "AZD1480", inc) :- p_occupancy("PTPRG(S995)", "AZD1480", inc).
+0.3686749487::p_fc("PTPRG(S995)", "AZD3759", dec); 0.001::p_fc("PTPRG(S995)", "AZD3759", inc) :- p_occupancy("PTPRG(S995)", "AZD3759", dec).
+0.001::p_fc("PTPRG(S995)", "AZD3759", dec); 0.3686749487::p_fc("PTPRG(S995)", "AZD3759", inc) :- p_occupancy("PTPRG(S995)", "AZD3759", inc).
+0.3126529816::p_fc("PTPRG(S995)", "AZD5363", dec); 0.001::p_fc("PTPRG(S995)", "AZD5363", inc) :- p_occupancy("PTPRG(S995)", "AZD5363", dec).
+0.001::p_fc("PTPRG(S995)", "AZD5363", dec); 0.3126529816::p_fc("PTPRG(S995)", "AZD5363", inc) :- p_occupancy("PTPRG(S995)", "AZD5363", inc).
+0.206877942::p_fc("PTPRG(S995)", "AZD5438", dec); 0.001::p_fc("PTPRG(S995)", "AZD5438", inc) :- p_occupancy("PTPRG(S995)", "AZD5438", dec).
+0.001::p_fc("PTPRG(S995)", "AZD5438", dec); 0.206877942::p_fc("PTPRG(S995)", "AZD5438", inc) :- p_occupancy("PTPRG(S995)", "AZD5438", inc).
+0.0817555889::p_fc("PTPRG(S995)", "AZD6482", dec); 0.001::p_fc("PTPRG(S995)", "AZD6482", inc) :- p_occupancy("PTPRG(S995)", "AZD6482", dec).
+0.001::p_fc("PTPRG(S995)", "AZD6482", dec); 0.0817555889::p_fc("PTPRG(S995)", "AZD6482", inc) :- p_occupancy("PTPRG(S995)", "AZD6482", inc).
+0.6468660379::p_fc("PTPRG(S995)", "AZD6738", dec); 0.001::p_fc("PTPRG(S995)", "AZD6738", inc) :- p_occupancy("PTPRG(S995)", "AZD6738", dec).
+0.001::p_fc("PTPRG(S995)", "AZD6738", dec); 0.6468660379::p_fc("PTPRG(S995)", "AZD6738", inc) :- p_occupancy("PTPRG(S995)", "AZD6738", inc).
+0.0175007274::p_fc("PTPRG(S995)", "AZD8055", dec); 0.001::p_fc("PTPRG(S995)", "AZD8055", inc) :- p_occupancy("PTPRG(S995)", "AZD8055", dec).
+0.001::p_fc("PTPRG(S995)", "AZD8055", dec); 0.0175007274::p_fc("PTPRG(S995)", "AZD8055", inc) :- p_occupancy("PTPRG(S995)", "AZD8055", inc).
+0.1808788972::p_fc("PTPRG(S995)", "Amuvatinib", dec); 0.001::p_fc("PTPRG(S995)", "Amuvatinib", inc) :- p_occupancy("PTPRG(S995)", "Amuvatinib", dec).
+0.001::p_fc("PTPRG(S995)", "Amuvatinib", dec); 0.1808788972::p_fc("PTPRG(S995)", "Amuvatinib", inc) :- p_occupancy("PTPRG(S995)", "Amuvatinib", inc).
+0.0145628458::p_fc("PTPRG(S995)", "BX912", dec); 0.001::p_fc("PTPRG(S995)", "BX912", inc) :- p_occupancy("PTPRG(S995)", "BX912", dec).
+0.001::p_fc("PTPRG(S995)", "BX912", dec); 0.0145628458::p_fc("PTPRG(S995)", "BX912", inc) :- p_occupancy("PTPRG(S995)", "BX912", inc).
+0.881219228::p_fc("PTPRG(S995)", "Bosutinib", dec); 0.001::p_fc("PTPRG(S995)", "Bosutinib", inc) :- p_occupancy("PTPRG(S995)", "Bosutinib", dec).
+0.001::p_fc("PTPRG(S995)", "Bosutinib", dec); 0.881219228::p_fc("PTPRG(S995)", "Bosutinib", inc) :- p_occupancy("PTPRG(S995)", "Bosutinib", inc).
+0.8448459651::p_fc("PTPRG(S995)", "CAL101", dec); 0.001::p_fc("PTPRG(S995)", "CAL101", inc) :- p_occupancy("PTPRG(S995)", "CAL101", dec).
+0.001::p_fc("PTPRG(S995)", "CAL101", dec); 0.8448459651::p_fc("PTPRG(S995)", "CAL101", inc) :- p_occupancy("PTPRG(S995)", "CAL101", inc).
+0.0083477723::p_fc("PTPRG(S995)", "CHIR99021", dec); 0.001::p_fc("PTPRG(S995)", "CHIR99021", inc) :- p_occupancy("PTPRG(S995)", "CHIR99021", dec).
+0.001::p_fc("PTPRG(S995)", "CHIR99021", dec); 0.0083477723::p_fc("PTPRG(S995)", "CHIR99021", inc) :- p_occupancy("PTPRG(S995)", "CHIR99021", inc).
+0.024945273::p_fc("PTPRG(S995)", "CX4945", dec); 0.001::p_fc("PTPRG(S995)", "CX4945", inc) :- p_occupancy("PTPRG(S995)", "CX4945", dec).
+0.001::p_fc("PTPRG(S995)", "CX4945", dec); 0.024945273::p_fc("PTPRG(S995)", "CX4945", inc) :- p_occupancy("PTPRG(S995)", "CX4945", inc).
+0.3514782035::p_fc("PTPRG(S995)", "DNAPK", dec); 0.001::p_fc("PTPRG(S995)", "DNAPK", inc) :- p_occupancy("PTPRG(S995)", "DNAPK", dec).
+0.001::p_fc("PTPRG(S995)", "DNAPK", dec); 0.3514782035::p_fc("PTPRG(S995)", "DNAPK", inc) :- p_occupancy("PTPRG(S995)", "DNAPK", inc).
+0.4611202009::p_fc("PTPRG(S995)", "Dabrafenib", dec); 0.001::p_fc("PTPRG(S995)", "Dabrafenib", inc) :- p_occupancy("PTPRG(S995)", "Dabrafenib", dec).
+0.001::p_fc("PTPRG(S995)", "Dabrafenib", dec); 0.4611202009::p_fc("PTPRG(S995)", "Dabrafenib", inc) :- p_occupancy("PTPRG(S995)", "Dabrafenib", inc).
+0.6372992957::p_fc("PTPRG(S995)", "Dasatinib", dec); 0.001::p_fc("PTPRG(S995)", "Dasatinib", inc) :- p_occupancy("PTPRG(S995)", "Dasatinib", dec).
+0.001::p_fc("PTPRG(S995)", "Dasatinib", dec); 0.6372992957::p_fc("PTPRG(S995)", "Dasatinib", inc) :- p_occupancy("PTPRG(S995)", "Dasatinib", inc).
+0.3468018383::p_fc("PTPRG(S995)", "Edelfosine", dec); 0.001::p_fc("PTPRG(S995)", "Edelfosine", inc) :- p_occupancy("PTPRG(S995)", "Edelfosine", dec).
+0.001::p_fc("PTPRG(S995)", "Edelfosine", dec); 0.3468018383::p_fc("PTPRG(S995)", "Edelfosine", inc) :- p_occupancy("PTPRG(S995)", "Edelfosine", inc).
+0.3253641924::p_fc("PTPRG(S995)", "FRAX486", dec); 0.001::p_fc("PTPRG(S995)", "FRAX486", inc) :- p_occupancy("PTPRG(S995)", "FRAX486", dec).
+0.001::p_fc("PTPRG(S995)", "FRAX486", dec); 0.3253641924::p_fc("PTPRG(S995)", "FRAX486", inc) :- p_occupancy("PTPRG(S995)", "FRAX486", inc).
+0.1092181517::p_fc("PTPRG(S995)", "GDC0941", dec); 0.001::p_fc("PTPRG(S995)", "GDC0941", inc) :- p_occupancy("PTPRG(S995)", "GDC0941", dec).
+0.001::p_fc("PTPRG(S995)", "GDC0941", dec); 0.1092181517::p_fc("PTPRG(S995)", "GDC0941", inc) :- p_occupancy("PTPRG(S995)", "GDC0941", inc).
+0.1986022561::p_fc("PTPRG(S995)", "GDC0994", dec); 0.001::p_fc("PTPRG(S995)", "GDC0994", inc) :- p_occupancy("PTPRG(S995)", "GDC0994", dec).
+0.001::p_fc("PTPRG(S995)", "GDC0994", dec); 0.1986022561::p_fc("PTPRG(S995)", "GDC0994", inc) :- p_occupancy("PTPRG(S995)", "GDC0994", inc).
+0.5126727595::p_fc("PTPRG(S995)", "GF109203X", dec); 0.001::p_fc("PTPRG(S995)", "GF109203X", inc) :- p_occupancy("PTPRG(S995)", "GF109203X", dec).
+0.001::p_fc("PTPRG(S995)", "GF109203X", dec); 0.5126727595::p_fc("PTPRG(S995)", "GF109203X", inc) :- p_occupancy("PTPRG(S995)", "GF109203X", inc).
+0.589223803::p_fc("PTPRG(S995)", "GO6983", dec); 0.001::p_fc("PTPRG(S995)", "GO6983", inc) :- p_occupancy("PTPRG(S995)", "GO6983", dec).
+0.001::p_fc("PTPRG(S995)", "GO6983", dec); 0.589223803::p_fc("PTPRG(S995)", "GO6983", inc) :- p_occupancy("PTPRG(S995)", "GO6983", inc).
+0.0747156967::p_fc("PTPRG(S995)", "GSK2334470", dec); 0.001::p_fc("PTPRG(S995)", "GSK2334470", inc) :- p_occupancy("PTPRG(S995)", "GSK2334470", dec).
+0.001::p_fc("PTPRG(S995)", "GSK2334470", dec); 0.0747156967::p_fc("PTPRG(S995)", "GSK2334470", inc) :- p_occupancy("PTPRG(S995)", "GSK2334470", inc).
+0.4892107482::p_fc("PTPRG(S995)", "GSK690693", dec); 0.001::p_fc("PTPRG(S995)", "GSK690693", inc) :- p_occupancy("PTPRG(S995)", "GSK690693", dec).
+0.001::p_fc("PTPRG(S995)", "GSK690693", dec); 0.4892107482::p_fc("PTPRG(S995)", "GSK690693", inc) :- p_occupancy("PTPRG(S995)", "GSK690693", inc).
+0.8675223257::p_fc("PTPRG(S995)", "Go6976", dec); 0.001::p_fc("PTPRG(S995)", "Go6976", inc) :- p_occupancy("PTPRG(S995)", "Go6976", dec).
+0.001::p_fc("PTPRG(S995)", "Go6976", dec); 0.8675223257::p_fc("PTPRG(S995)", "Go6976", inc) :- p_occupancy("PTPRG(S995)", "Go6976", inc).
+0.6024264631::p_fc("PTPRG(S995)", "H89", dec); 0.001::p_fc("PTPRG(S995)", "H89", inc) :- p_occupancy("PTPRG(S995)", "H89", dec).
+0.001::p_fc("PTPRG(S995)", "H89", dec); 0.6024264631::p_fc("PTPRG(S995)", "H89", inc) :- p_occupancy("PTPRG(S995)", "H89", inc).
+0.3417022009::p_fc("PTPRG(S995)", "HS173", dec); 0.001::p_fc("PTPRG(S995)", "HS173", inc) :- p_occupancy("PTPRG(S995)", "HS173", dec).
+0.001::p_fc("PTPRG(S995)", "HS173", dec); 0.3417022009::p_fc("PTPRG(S995)", "HS173", inc) :- p_occupancy("PTPRG(S995)", "HS173", inc).
+0.0022559943::p_fc("PTPRG(S995)", "Ipatasertib", dec); 0.001::p_fc("PTPRG(S995)", "Ipatasertib", inc) :- p_occupancy("PTPRG(S995)", "Ipatasertib", dec).
+0.001::p_fc("PTPRG(S995)", "Ipatasertib", dec); 0.0022559943::p_fc("PTPRG(S995)", "Ipatasertib", inc) :- p_occupancy("PTPRG(S995)", "Ipatasertib", inc).
+0.9067413274::p_fc("PTPRG(S995)", "JNJ", dec); 0.001::p_fc("PTPRG(S995)", "JNJ", inc) :- p_occupancy("PTPRG(S995)", "JNJ", dec).
+0.001::p_fc("PTPRG(S995)", "JNJ", dec); 0.9067413274::p_fc("PTPRG(S995)", "JNJ", inc) :- p_occupancy("PTPRG(S995)", "JNJ", inc).
+0.7431187138::p_fc("PTPRG(S995)", "JNK", dec); 0.001::p_fc("PTPRG(S995)", "JNK", inc) :- p_occupancy("PTPRG(S995)", "JNK", dec).
+0.001::p_fc("PTPRG(S995)", "JNK", dec); 0.7431187138::p_fc("PTPRG(S995)", "JNK", inc) :- p_occupancy("PTPRG(S995)", "JNK", inc).
+0.687305045::p_fc("PTPRG(S995)", "KD025", dec); 0.001::p_fc("PTPRG(S995)", "KD025", inc) :- p_occupancy("PTPRG(S995)", "KD025", dec).
+0.001::p_fc("PTPRG(S995)", "KD025", dec); 0.687305045::p_fc("PTPRG(S995)", "KD025", inc) :- p_occupancy("PTPRG(S995)", "KD025", inc).
+0.802888725::p_fc("PTPRG(S995)", "KN62", dec); 0.001::p_fc("PTPRG(S995)", "KN62", inc) :- p_occupancy("PTPRG(S995)", "KN62", dec).
+0.001::p_fc("PTPRG(S995)", "KN62", dec); 0.802888725::p_fc("PTPRG(S995)", "KN62", inc) :- p_occupancy("PTPRG(S995)", "KN62", inc).
+0.457110525::p_fc("PTPRG(S995)", "KN93", dec); 0.001::p_fc("PTPRG(S995)", "KN93", inc) :- p_occupancy("PTPRG(S995)", "KN93", dec).
+0.001::p_fc("PTPRG(S995)", "KN93", dec); 0.457110525::p_fc("PTPRG(S995)", "KN93", inc) :- p_occupancy("PTPRG(S995)", "KN93", inc).
+0.9388790502::p_fc("PTPRG(S995)", "Ku0063794", dec); 0.001::p_fc("PTPRG(S995)", "Ku0063794", inc) :- p_occupancy("PTPRG(S995)", "Ku0063794", dec).
+0.001::p_fc("PTPRG(S995)", "Ku0063794", dec); 0.9388790502::p_fc("PTPRG(S995)", "Ku0063794", inc) :- p_occupancy("PTPRG(S995)", "Ku0063794", inc).
+0.2780501517::p_fc("PTPRG(S995)", "LY2090314", dec); 0.001::p_fc("PTPRG(S995)", "LY2090314", inc) :- p_occupancy("PTPRG(S995)", "LY2090314", dec).
+0.001::p_fc("PTPRG(S995)", "LY2090314", dec); 0.2780501517::p_fc("PTPRG(S995)", "LY2090314", inc) :- p_occupancy("PTPRG(S995)", "LY2090314", inc).
+0.7708101476::p_fc("PTPRG(S995)", "LY2584702", dec); 0.001::p_fc("PTPRG(S995)", "LY2584702", inc) :- p_occupancy("PTPRG(S995)", "LY2584702", dec).
+0.001::p_fc("PTPRG(S995)", "LY2584702", dec); 0.7708101476::p_fc("PTPRG(S995)", "LY2584702", inc) :- p_occupancy("PTPRG(S995)", "LY2584702", inc).
+0.5501190102::p_fc("PTPRG(S995)", "LY2835219", dec); 0.001::p_fc("PTPRG(S995)", "LY2835219", inc) :- p_occupancy("PTPRG(S995)", "LY2835219", dec).
+0.001::p_fc("PTPRG(S995)", "LY2835219", dec); 0.5501190102::p_fc("PTPRG(S995)", "LY2835219", inc) :- p_occupancy("PTPRG(S995)", "LY2835219", inc).
+0.31199445::p_fc("PTPRG(S995)", "Linsitinib", dec); 0.001::p_fc("PTPRG(S995)", "Linsitinib", inc) :- p_occupancy("PTPRG(S995)", "Linsitinib", dec).
+0.001::p_fc("PTPRG(S995)", "Linsitinib", dec); 0.31199445::p_fc("PTPRG(S995)", "Linsitinib", inc) :- p_occupancy("PTPRG(S995)", "Linsitinib", inc).
+0.4884245758::p_fc("PTPRG(S995)", "MK2206", dec); 0.001::p_fc("PTPRG(S995)", "MK2206", inc) :- p_occupancy("PTPRG(S995)", "MK2206", dec).
+0.001::p_fc("PTPRG(S995)", "MK2206", dec); 0.4884245758::p_fc("PTPRG(S995)", "MK2206", inc) :- p_occupancy("PTPRG(S995)", "MK2206", inc).
+0.5840288368::p_fc("PTPRG(S995)", "NU7441", dec); 0.001::p_fc("PTPRG(S995)", "NU7441", inc) :- p_occupancy("PTPRG(S995)", "NU7441", dec).
+0.001::p_fc("PTPRG(S995)", "NU7441", dec); 0.5840288368::p_fc("PTPRG(S995)", "NU7441", inc) :- p_occupancy("PTPRG(S995)", "NU7441", inc).
+0.9114521055::p_fc("PTPRG(S995)", "PD153035", dec); 0.001::p_fc("PTPRG(S995)", "PD153035", inc) :- p_occupancy("PTPRG(S995)", "PD153035", dec).
+0.001::p_fc("PTPRG(S995)", "PD153035", dec); 0.9114521055::p_fc("PTPRG(S995)", "PD153035", inc) :- p_occupancy("PTPRG(S995)", "PD153035", inc).
+0.9935868099::p_fc("PTPRG(S995)", "PF3758309", dec); 0.001::p_fc("PTPRG(S995)", "PF3758309", inc) :- p_occupancy("PTPRG(S995)", "PF3758309", dec).
+0.001::p_fc("PTPRG(S995)", "PF3758309", dec); 0.9935868099::p_fc("PTPRG(S995)", "PF3758309", inc) :- p_occupancy("PTPRG(S995)", "PF3758309", inc).
+0.3047187122::p_fc("PTPRG(S995)", "PF4708671", dec); 0.001::p_fc("PTPRG(S995)", "PF4708671", inc) :- p_occupancy("PTPRG(S995)", "PF4708671", dec).
+0.001::p_fc("PTPRG(S995)", "PF4708671", dec); 0.3047187122::p_fc("PTPRG(S995)", "PF4708671", inc) :- p_occupancy("PTPRG(S995)", "PF4708671", inc).
+0.0652618694::p_fc("PTPRG(S995)", "PH797804", dec); 0.001::p_fc("PTPRG(S995)", "PH797804", inc) :- p_occupancy("PTPRG(S995)", "PH797804", dec).
+0.001::p_fc("PTPRG(S995)", "PH797804", dec); 0.0652618694::p_fc("PTPRG(S995)", "PH797804", inc) :- p_occupancy("PTPRG(S995)", "PH797804", inc).
+0.040472002::p_fc("PTPRG(S995)", "PIK294", dec); 0.001::p_fc("PTPRG(S995)", "PIK294", inc) :- p_occupancy("PTPRG(S995)", "PIK294", dec).
+0.001::p_fc("PTPRG(S995)", "PIK294", dec); 0.040472002::p_fc("PTPRG(S995)", "PIK294", inc) :- p_occupancy("PTPRG(S995)", "PIK294", inc).
+0.1118489389::p_fc("PTPRG(S995)", "Ribociclib", dec); 0.001::p_fc("PTPRG(S995)", "Ribociclib", inc) :- p_occupancy("PTPRG(S995)", "Ribociclib", dec).
+0.001::p_fc("PTPRG(S995)", "Ribociclib", dec); 0.1118489389::p_fc("PTPRG(S995)", "Ribociclib", inc) :- p_occupancy("PTPRG(S995)", "Ribociclib", inc).
+0.4652510621::p_fc("PTPRG(S995)", "Ripasudil", dec); 0.001::p_fc("PTPRG(S995)", "Ripasudil", inc) :- p_occupancy("PTPRG(S995)", "Ripasudil", dec).
+0.001::p_fc("PTPRG(S995)", "Ripasudil", dec); 0.4652510621::p_fc("PTPRG(S995)", "Ripasudil", inc) :- p_occupancy("PTPRG(S995)", "Ripasudil", inc).
+0.8470685205::p_fc("PTPRG(S995)", "SP600125", dec); 0.001::p_fc("PTPRG(S995)", "SP600125", inc) :- p_occupancy("PTPRG(S995)", "SP600125", dec).
+0.001::p_fc("PTPRG(S995)", "SP600125", dec); 0.8470685205::p_fc("PTPRG(S995)", "SP600125", inc) :- p_occupancy("PTPRG(S995)", "SP600125", inc).
+0.988168552::p_fc("PTPRG(S995)", "Selumetinib", dec); 0.001::p_fc("PTPRG(S995)", "Selumetinib", inc) :- p_occupancy("PTPRG(S995)", "Selumetinib", dec).
+0.001::p_fc("PTPRG(S995)", "Selumetinib", dec); 0.988168552::p_fc("PTPRG(S995)", "Selumetinib", inc) :- p_occupancy("PTPRG(S995)", "Selumetinib", inc).
+0.7305567364::p_fc("PTPRG(S995)", "TAK715", dec); 0.001::p_fc("PTPRG(S995)", "TAK715", inc) :- p_occupancy("PTPRG(S995)", "TAK715", dec).
+0.001::p_fc("PTPRG(S995)", "TAK715", dec); 0.7305567364::p_fc("PTPRG(S995)", "TAK715", inc) :- p_occupancy("PTPRG(S995)", "TAK715", inc).
+0.8953113895::p_fc("PTPRG(S995)", "TBCA", dec); 0.001::p_fc("PTPRG(S995)", "TBCA", inc) :- p_occupancy("PTPRG(S995)", "TBCA", dec).
+0.001::p_fc("PTPRG(S995)", "TBCA", dec); 0.8953113895::p_fc("PTPRG(S995)", "TBCA", inc) :- p_occupancy("PTPRG(S995)", "TBCA", inc).
+0.5757162795::p_fc("PTPRG(S995)", "TGX221", dec); 0.001::p_fc("PTPRG(S995)", "TGX221", inc) :- p_occupancy("PTPRG(S995)", "TGX221", dec).
+0.001::p_fc("PTPRG(S995)", "TGX221", dec); 0.5757162795::p_fc("PTPRG(S995)", "TGX221", inc) :- p_occupancy("PTPRG(S995)", "TGX221", inc).
+0.1576942963::p_fc("PTPRG(S995)", "Tofacitinib", dec); 0.001::p_fc("PTPRG(S995)", "Tofacitinib", inc) :- p_occupancy("PTPRG(S995)", "Tofacitinib", dec).
+0.001::p_fc("PTPRG(S995)", "Tofacitinib", dec); 0.1576942963::p_fc("PTPRG(S995)", "Tofacitinib", inc) :- p_occupancy("PTPRG(S995)", "Tofacitinib", inc).
+0.5460709687::p_fc("PTPRG(S995)", "Torin", dec); 0.001::p_fc("PTPRG(S995)", "Torin", inc) :- p_occupancy("PTPRG(S995)", "Torin", dec).
+0.001::p_fc("PTPRG(S995)", "Torin", dec); 0.5460709687::p_fc("PTPRG(S995)", "Torin", inc) :- p_occupancy("PTPRG(S995)", "Torin", inc).
+0.8811360439::p_fc("PTPRG(S995)", "Trametinib", dec); 0.001::p_fc("PTPRG(S995)", "Trametinib", inc) :- p_occupancy("PTPRG(S995)", "Trametinib", dec).
+0.001::p_fc("PTPRG(S995)", "Trametinib", dec); 0.8811360439::p_fc("PTPRG(S995)", "Trametinib", inc) :- p_occupancy("PTPRG(S995)", "Trametinib", inc).
+0.3800709894::p_fc("PTPRG(S995)", "U73122", dec); 0.001::p_fc("PTPRG(S995)", "U73122", inc) :- p_occupancy("PTPRG(S995)", "U73122", dec).
+0.001::p_fc("PTPRG(S995)", "U73122", dec); 0.3800709894::p_fc("PTPRG(S995)", "U73122", inc) :- p_occupancy("PTPRG(S995)", "U73122", inc).
+0.6346853923::p_fc("PTPRG(S995)", "Ulixertinib", dec); 0.001::p_fc("PTPRG(S995)", "Ulixertinib", inc) :- p_occupancy("PTPRG(S995)", "Ulixertinib", dec).
+0.001::p_fc("PTPRG(S995)", "Ulixertinib", dec); 0.6346853923::p_fc("PTPRG(S995)", "Ulixertinib", inc) :- p_occupancy("PTPRG(S995)", "Ulixertinib", inc).
+0.9891710104::p_fc("PTPRG(S995)", "Vemurafenib", dec); 0.001::p_fc("PTPRG(S995)", "Vemurafenib", inc) :- p_occupancy("PTPRG(S995)", "Vemurafenib", dec).
+0.001::p_fc("PTPRG(S995)", "Vemurafenib", dec); 0.9891710104::p_fc("PTPRG(S995)", "Vemurafenib", inc) :- p_occupancy("PTPRG(S995)", "Vemurafenib", inc).
+0.761060614::p_fc("SRC(S17)", "AC220", dec); 0.001::p_fc("SRC(S17)", "AC220", inc) :- p_occupancy("SRC(S17)", "AC220", dec).
+0.001::p_fc("SRC(S17)", "AC220", dec); 0.761060614::p_fc("SRC(S17)", "AC220", inc) :- p_occupancy("SRC(S17)", "AC220", inc).
+0.9976475485::p_fc("SRC(S17)", "AT13148", dec); 0.001::p_fc("SRC(S17)", "AT13148", inc) :- p_occupancy("SRC(S17)", "AT13148", dec).
+0.001::p_fc("SRC(S17)", "AT13148", dec); 0.9976475485::p_fc("SRC(S17)", "AT13148", inc) :- p_occupancy("SRC(S17)", "AT13148", inc).
+0.9865085392::p_fc("SRC(S17)", "AZ20", dec); 0.001::p_fc("SRC(S17)", "AZ20", inc) :- p_occupancy("SRC(S17)", "AZ20", dec).
+0.001::p_fc("SRC(S17)", "AZ20", dec); 0.9865085392::p_fc("SRC(S17)", "AZ20", inc) :- p_occupancy("SRC(S17)", "AZ20", inc).
+0.6241392593::p_fc("SRC(S17)", "AZD1480", dec); 0.001::p_fc("SRC(S17)", "AZD1480", inc) :- p_occupancy("SRC(S17)", "AZD1480", dec).
+0.001::p_fc("SRC(S17)", "AZD1480", dec); 0.6241392593::p_fc("SRC(S17)", "AZD1480", inc) :- p_occupancy("SRC(S17)", "AZD1480", inc).
+0.8611894619::p_fc("SRC(S17)", "AZD3759", dec); 0.001::p_fc("SRC(S17)", "AZD3759", inc) :- p_occupancy("SRC(S17)", "AZD3759", dec).
+0.001::p_fc("SRC(S17)", "AZD3759", dec); 0.8611894619::p_fc("SRC(S17)", "AZD3759", inc) :- p_occupancy("SRC(S17)", "AZD3759", inc).
+0.2404175363::p_fc("SRC(S17)", "AZD5363", dec); 0.001::p_fc("SRC(S17)", "AZD5363", inc) :- p_occupancy("SRC(S17)", "AZD5363", dec).
+0.001::p_fc("SRC(S17)", "AZD5363", dec); 0.2404175363::p_fc("SRC(S17)", "AZD5363", inc) :- p_occupancy("SRC(S17)", "AZD5363", inc).
+0.2940151626::p_fc("SRC(S17)", "AZD5438", dec); 0.001::p_fc("SRC(S17)", "AZD5438", inc) :- p_occupancy("SRC(S17)", "AZD5438", dec).
+0.001::p_fc("SRC(S17)", "AZD5438", dec); 0.2940151626::p_fc("SRC(S17)", "AZD5438", inc) :- p_occupancy("SRC(S17)", "AZD5438", inc).
+0.8974580532::p_fc("SRC(S17)", "AZD6482", dec); 0.001::p_fc("SRC(S17)", "AZD6482", inc) :- p_occupancy("SRC(S17)", "AZD6482", dec).
+0.001::p_fc("SRC(S17)", "AZD6482", dec); 0.8974580532::p_fc("SRC(S17)", "AZD6482", inc) :- p_occupancy("SRC(S17)", "AZD6482", inc).
+0.6349582407::p_fc("SRC(S17)", "AZD6738", dec); 0.001::p_fc("SRC(S17)", "AZD6738", inc) :- p_occupancy("SRC(S17)", "AZD6738", dec).
+0.001::p_fc("SRC(S17)", "AZD6738", dec); 0.6349582407::p_fc("SRC(S17)", "AZD6738", inc) :- p_occupancy("SRC(S17)", "AZD6738", inc).
+0.997998487::p_fc("SRC(S17)", "AZD8055", dec); 0.001::p_fc("SRC(S17)", "AZD8055", inc) :- p_occupancy("SRC(S17)", "AZD8055", dec).
+0.001::p_fc("SRC(S17)", "AZD8055", dec); 0.997998487::p_fc("SRC(S17)", "AZD8055", inc) :- p_occupancy("SRC(S17)", "AZD8055", inc).
+0.0190302677::p_fc("SRC(S17)", "Amuvatinib", dec); 0.001::p_fc("SRC(S17)", "Amuvatinib", inc) :- p_occupancy("SRC(S17)", "Amuvatinib", dec).
+0.001::p_fc("SRC(S17)", "Amuvatinib", dec); 0.0190302677::p_fc("SRC(S17)", "Amuvatinib", inc) :- p_occupancy("SRC(S17)", "Amuvatinib", inc).
+0.6341846441::p_fc("SRC(S17)", "BX912", dec); 0.001::p_fc("SRC(S17)", "BX912", inc) :- p_occupancy("SRC(S17)", "BX912", dec).
+0.001::p_fc("SRC(S17)", "BX912", dec); 0.6341846441::p_fc("SRC(S17)", "BX912", inc) :- p_occupancy("SRC(S17)", "BX912", inc).
+0.7936869129::p_fc("SRC(S17)", "Bosutinib", dec); 0.001::p_fc("SRC(S17)", "Bosutinib", inc) :- p_occupancy("SRC(S17)", "Bosutinib", dec).
+0.001::p_fc("SRC(S17)", "Bosutinib", dec); 0.7936869129::p_fc("SRC(S17)", "Bosutinib", inc) :- p_occupancy("SRC(S17)", "Bosutinib", inc).
+0.2833950507::p_fc("SRC(S17)", "CAL101", dec); 0.001::p_fc("SRC(S17)", "CAL101", inc) :- p_occupancy("SRC(S17)", "CAL101", dec).
+0.001::p_fc("SRC(S17)", "CAL101", dec); 0.2833950507::p_fc("SRC(S17)", "CAL101", inc) :- p_occupancy("SRC(S17)", "CAL101", inc).
+0.8966172969::p_fc("SRC(S17)", "CHIR99021", dec); 0.001::p_fc("SRC(S17)", "CHIR99021", inc) :- p_occupancy("SRC(S17)", "CHIR99021", dec).
+0.001::p_fc("SRC(S17)", "CHIR99021", dec); 0.8966172969::p_fc("SRC(S17)", "CHIR99021", inc) :- p_occupancy("SRC(S17)", "CHIR99021", inc).
+0.1951320211::p_fc("SRC(S17)", "CX4945", dec); 0.001::p_fc("SRC(S17)", "CX4945", inc) :- p_occupancy("SRC(S17)", "CX4945", dec).
+0.001::p_fc("SRC(S17)", "CX4945", dec); 0.1951320211::p_fc("SRC(S17)", "CX4945", inc) :- p_occupancy("SRC(S17)", "CX4945", inc).
+0.9878507016::p_fc("SRC(S17)", "DNAPK", dec); 0.001::p_fc("SRC(S17)", "DNAPK", inc) :- p_occupancy("SRC(S17)", "DNAPK", dec).
+0.001::p_fc("SRC(S17)", "DNAPK", dec); 0.9878507016::p_fc("SRC(S17)", "DNAPK", inc) :- p_occupancy("SRC(S17)", "DNAPK", inc).
+0.4311055158::p_fc("SRC(S17)", "Dabrafenib", dec); 0.001::p_fc("SRC(S17)", "Dabrafenib", inc) :- p_occupancy("SRC(S17)", "Dabrafenib", dec).
+0.001::p_fc("SRC(S17)", "Dabrafenib", dec); 0.4311055158::p_fc("SRC(S17)", "Dabrafenib", inc) :- p_occupancy("SRC(S17)", "Dabrafenib", inc).
+0.9979677133::p_fc("SRC(S17)", "Dasatinib", dec); 0.001::p_fc("SRC(S17)", "Dasatinib", inc) :- p_occupancy("SRC(S17)", "Dasatinib", dec).
+0.001::p_fc("SRC(S17)", "Dasatinib", dec); 0.9979677133::p_fc("SRC(S17)", "Dasatinib", inc) :- p_occupancy("SRC(S17)", "Dasatinib", inc).
+0.8887074543::p_fc("SRC(S17)", "Edelfosine", dec); 0.001::p_fc("SRC(S17)", "Edelfosine", inc) :- p_occupancy("SRC(S17)", "Edelfosine", dec).
+0.001::p_fc("SRC(S17)", "Edelfosine", dec); 0.8887074543::p_fc("SRC(S17)", "Edelfosine", inc) :- p_occupancy("SRC(S17)", "Edelfosine", inc).
+0.5576153527::p_fc("SRC(S17)", "FRAX486", dec); 0.001::p_fc("SRC(S17)", "FRAX486", inc) :- p_occupancy("SRC(S17)", "FRAX486", dec).
+0.001::p_fc("SRC(S17)", "FRAX486", dec); 0.5576153527::p_fc("SRC(S17)", "FRAX486", inc) :- p_occupancy("SRC(S17)", "FRAX486", inc).
+0.6687890628::p_fc("SRC(S17)", "GDC0941", dec); 0.001::p_fc("SRC(S17)", "GDC0941", inc) :- p_occupancy("SRC(S17)", "GDC0941", dec).
+0.001::p_fc("SRC(S17)", "GDC0941", dec); 0.6687890628::p_fc("SRC(S17)", "GDC0941", inc) :- p_occupancy("SRC(S17)", "GDC0941", inc).
+0.9980013659::p_fc("SRC(S17)", "GDC0994", dec); 0.001::p_fc("SRC(S17)", "GDC0994", inc) :- p_occupancy("SRC(S17)", "GDC0994", dec).
+0.001::p_fc("SRC(S17)", "GDC0994", dec); 0.9980013659::p_fc("SRC(S17)", "GDC0994", inc) :- p_occupancy("SRC(S17)", "GDC0994", inc).
+0.9467127731::p_fc("SRC(S17)", "GF109203X", dec); 0.001::p_fc("SRC(S17)", "GF109203X", inc) :- p_occupancy("SRC(S17)", "GF109203X", dec).
+0.001::p_fc("SRC(S17)", "GF109203X", dec); 0.9467127731::p_fc("SRC(S17)", "GF109203X", inc) :- p_occupancy("SRC(S17)", "GF109203X", inc).
+0.9913858851::p_fc("SRC(S17)", "GO6983", dec); 0.001::p_fc("SRC(S17)", "GO6983", inc) :- p_occupancy("SRC(S17)", "GO6983", dec).
+0.001::p_fc("SRC(S17)", "GO6983", dec); 0.9913858851::p_fc("SRC(S17)", "GO6983", inc) :- p_occupancy("SRC(S17)", "GO6983", inc).
+0.9443459134::p_fc("SRC(S17)", "GSK2334470", dec); 0.001::p_fc("SRC(S17)", "GSK2334470", inc) :- p_occupancy("SRC(S17)", "GSK2334470", dec).
+0.001::p_fc("SRC(S17)", "GSK2334470", dec); 0.9443459134::p_fc("SRC(S17)", "GSK2334470", inc) :- p_occupancy("SRC(S17)", "GSK2334470", inc).
+0.8396612041::p_fc("SRC(S17)", "GSK690693", dec); 0.001::p_fc("SRC(S17)", "GSK690693", inc) :- p_occupancy("SRC(S17)", "GSK690693", dec).
+0.001::p_fc("SRC(S17)", "GSK690693", dec); 0.8396612041::p_fc("SRC(S17)", "GSK690693", inc) :- p_occupancy("SRC(S17)", "GSK690693", inc).
+0.1266560769::p_fc("SRC(S17)", "Go6976", dec); 0.001::p_fc("SRC(S17)", "Go6976", inc) :- p_occupancy("SRC(S17)", "Go6976", dec).
+0.001::p_fc("SRC(S17)", "Go6976", dec); 0.1266560769::p_fc("SRC(S17)", "Go6976", inc) :- p_occupancy("SRC(S17)", "Go6976", inc).
+0.509079349::p_fc("SRC(S17)", "H89", dec); 0.001::p_fc("SRC(S17)", "H89", inc) :- p_occupancy("SRC(S17)", "H89", dec).
+0.001::p_fc("SRC(S17)", "H89", dec); 0.509079349::p_fc("SRC(S17)", "H89", inc) :- p_occupancy("SRC(S17)", "H89", inc).
+0.3305220588::p_fc("SRC(S17)", "HS173", dec); 0.001::p_fc("SRC(S17)", "HS173", inc) :- p_occupancy("SRC(S17)", "HS173", dec).
+0.001::p_fc("SRC(S17)", "HS173", dec); 0.3305220588::p_fc("SRC(S17)", "HS173", inc) :- p_occupancy("SRC(S17)", "HS173", inc).
+0.7917123411::p_fc("SRC(S17)", "Ipatasertib", dec); 0.001::p_fc("SRC(S17)", "Ipatasertib", inc) :- p_occupancy("SRC(S17)", "Ipatasertib", dec).
+0.001::p_fc("SRC(S17)", "Ipatasertib", dec); 0.7917123411::p_fc("SRC(S17)", "Ipatasertib", inc) :- p_occupancy("SRC(S17)", "Ipatasertib", inc).
+0.958978579::p_fc("SRC(S17)", "JNJ", dec); 0.001::p_fc("SRC(S17)", "JNJ", inc) :- p_occupancy("SRC(S17)", "JNJ", dec).
+0.001::p_fc("SRC(S17)", "JNJ", dec); 0.958978579::p_fc("SRC(S17)", "JNJ", inc) :- p_occupancy("SRC(S17)", "JNJ", inc).
+0.544230498::p_fc("SRC(S17)", "JNK", dec); 0.001::p_fc("SRC(S17)", "JNK", inc) :- p_occupancy("SRC(S17)", "JNK", dec).
+0.001::p_fc("SRC(S17)", "JNK", dec); 0.544230498::p_fc("SRC(S17)", "JNK", inc) :- p_occupancy("SRC(S17)", "JNK", inc).
+0.8783125041::p_fc("SRC(S17)", "KD025", dec); 0.001::p_fc("SRC(S17)", "KD025", inc) :- p_occupancy("SRC(S17)", "KD025", dec).
+0.001::p_fc("SRC(S17)", "KD025", dec); 0.8783125041::p_fc("SRC(S17)", "KD025", inc) :- p_occupancy("SRC(S17)", "KD025", inc).
+0.1283251101::p_fc("SRC(S17)", "KN62", dec); 0.001::p_fc("SRC(S17)", "KN62", inc) :- p_occupancy("SRC(S17)", "KN62", dec).
+0.001::p_fc("SRC(S17)", "KN62", dec); 0.1283251101::p_fc("SRC(S17)", "KN62", inc) :- p_occupancy("SRC(S17)", "KN62", inc).
+0.0253729127::p_fc("SRC(S17)", "KN93", dec); 0.001::p_fc("SRC(S17)", "KN93", inc) :- p_occupancy("SRC(S17)", "KN93", dec).
+0.001::p_fc("SRC(S17)", "KN93", dec); 0.0253729127::p_fc("SRC(S17)", "KN93", inc) :- p_occupancy("SRC(S17)", "KN93", inc).
+0.9458347638::p_fc("SRC(S17)", "Ku0063794", dec); 0.001::p_fc("SRC(S17)", "Ku0063794", inc) :- p_occupancy("SRC(S17)", "Ku0063794", dec).
+0.001::p_fc("SRC(S17)", "Ku0063794", dec); 0.9458347638::p_fc("SRC(S17)", "Ku0063794", inc) :- p_occupancy("SRC(S17)", "Ku0063794", inc).
+0.5865601534::p_fc("SRC(S17)", "LY2090314", dec); 0.001::p_fc("SRC(S17)", "LY2090314", inc) :- p_occupancy("SRC(S17)", "LY2090314", dec).
+0.001::p_fc("SRC(S17)", "LY2090314", dec); 0.5865601534::p_fc("SRC(S17)", "LY2090314", inc) :- p_occupancy("SRC(S17)", "LY2090314", inc).
+0.8420812067::p_fc("SRC(S17)", "LY2584702", dec); 0.001::p_fc("SRC(S17)", "LY2584702", inc) :- p_occupancy("SRC(S17)", "LY2584702", dec).
+0.001::p_fc("SRC(S17)", "LY2584702", dec); 0.8420812067::p_fc("SRC(S17)", "LY2584702", inc) :- p_occupancy("SRC(S17)", "LY2584702", inc).
+0.8202941978::p_fc("SRC(S17)", "LY2835219", dec); 0.001::p_fc("SRC(S17)", "LY2835219", inc) :- p_occupancy("SRC(S17)", "LY2835219", dec).
+0.001::p_fc("SRC(S17)", "LY2835219", dec); 0.8202941978::p_fc("SRC(S17)", "LY2835219", inc) :- p_occupancy("SRC(S17)", "LY2835219", inc).
+0.7081493228::p_fc("SRC(S17)", "Linsitinib", dec); 0.001::p_fc("SRC(S17)", "Linsitinib", inc) :- p_occupancy("SRC(S17)", "Linsitinib", dec).
+0.001::p_fc("SRC(S17)", "Linsitinib", dec); 0.7081493228::p_fc("SRC(S17)", "Linsitinib", inc) :- p_occupancy("SRC(S17)", "Linsitinib", inc).
+0.8875340777::p_fc("SRC(S17)", "MK2206", dec); 0.001::p_fc("SRC(S17)", "MK2206", inc) :- p_occupancy("SRC(S17)", "MK2206", dec).
+0.001::p_fc("SRC(S17)", "MK2206", dec); 0.8875340777::p_fc("SRC(S17)", "MK2206", inc) :- p_occupancy("SRC(S17)", "MK2206", inc).
+0.9316045197::p_fc("SRC(S17)", "NU7441", dec); 0.001::p_fc("SRC(S17)", "NU7441", inc) :- p_occupancy("SRC(S17)", "NU7441", dec).
+0.001::p_fc("SRC(S17)", "NU7441", dec); 0.9316045197::p_fc("SRC(S17)", "NU7441", inc) :- p_occupancy("SRC(S17)", "NU7441", inc).
+0.7758909292::p_fc("SRC(S17)", "PD153035", dec); 0.001::p_fc("SRC(S17)", "PD153035", inc) :- p_occupancy("SRC(S17)", "PD153035", dec).
+0.001::p_fc("SRC(S17)", "PD153035", dec); 0.7758909292::p_fc("SRC(S17)", "PD153035", inc) :- p_occupancy("SRC(S17)", "PD153035", inc).
+0.3494405616::p_fc("SRC(S17)", "PF3758309", dec); 0.001::p_fc("SRC(S17)", "PF3758309", inc) :- p_occupancy("SRC(S17)", "PF3758309", dec).
+0.001::p_fc("SRC(S17)", "PF3758309", dec); 0.3494405616::p_fc("SRC(S17)", "PF3758309", inc) :- p_occupancy("SRC(S17)", "PF3758309", inc).
+0.9968761375::p_fc("SRC(S17)", "PF4708671", dec); 0.001::p_fc("SRC(S17)", "PF4708671", inc) :- p_occupancy("SRC(S17)", "PF4708671", dec).
+0.001::p_fc("SRC(S17)", "PF4708671", dec); 0.9968761375::p_fc("SRC(S17)", "PF4708671", inc) :- p_occupancy("SRC(S17)", "PF4708671", inc).
+0.8276835432::p_fc("SRC(S17)", "PH797804", dec); 0.001::p_fc("SRC(S17)", "PH797804", inc) :- p_occupancy("SRC(S17)", "PH797804", dec).
+0.001::p_fc("SRC(S17)", "PH797804", dec); 0.8276835432::p_fc("SRC(S17)", "PH797804", inc) :- p_occupancy("SRC(S17)", "PH797804", inc).
+0.7347188409::p_fc("SRC(S17)", "PIK294", dec); 0.001::p_fc("SRC(S17)", "PIK294", inc) :- p_occupancy("SRC(S17)", "PIK294", dec).
+0.001::p_fc("SRC(S17)", "PIK294", dec); 0.7347188409::p_fc("SRC(S17)", "PIK294", inc) :- p_occupancy("SRC(S17)", "PIK294", inc).
+0.053131714::p_fc("SRC(S17)", "Ribociclib", dec); 0.001::p_fc("SRC(S17)", "Ribociclib", inc) :- p_occupancy("SRC(S17)", "Ribociclib", dec).
+0.001::p_fc("SRC(S17)", "Ribociclib", dec); 0.053131714::p_fc("SRC(S17)", "Ribociclib", inc) :- p_occupancy("SRC(S17)", "Ribociclib", inc).
+0.7746951234::p_fc("SRC(S17)", "Ripasudil", dec); 0.001::p_fc("SRC(S17)", "Ripasudil", inc) :- p_occupancy("SRC(S17)", "Ripasudil", dec).
+0.001::p_fc("SRC(S17)", "Ripasudil", dec); 0.7746951234::p_fc("SRC(S17)", "Ripasudil", inc) :- p_occupancy("SRC(S17)", "Ripasudil", inc).
+0.7908395135::p_fc("SRC(S17)", "SP600125", dec); 0.001::p_fc("SRC(S17)", "SP600125", inc) :- p_occupancy("SRC(S17)", "SP600125", dec).
+0.001::p_fc("SRC(S17)", "SP600125", dec); 0.7908395135::p_fc("SRC(S17)", "SP600125", inc) :- p_occupancy("SRC(S17)", "SP600125", inc).
+0.9964434874::p_fc("SRC(S17)", "Selumetinib", dec); 0.001::p_fc("SRC(S17)", "Selumetinib", inc) :- p_occupancy("SRC(S17)", "Selumetinib", dec).
+0.001::p_fc("SRC(S17)", "Selumetinib", dec); 0.9964434874::p_fc("SRC(S17)", "Selumetinib", inc) :- p_occupancy("SRC(S17)", "Selumetinib", inc).
+0.7662381427::p_fc("SRC(S17)", "TAK715", dec); 0.001::p_fc("SRC(S17)", "TAK715", inc) :- p_occupancy("SRC(S17)", "TAK715", dec).
+0.001::p_fc("SRC(S17)", "TAK715", dec); 0.7662381427::p_fc("SRC(S17)", "TAK715", inc) :- p_occupancy("SRC(S17)", "TAK715", inc).
+0.8858549484::p_fc("SRC(S17)", "TBCA", dec); 0.001::p_fc("SRC(S17)", "TBCA", inc) :- p_occupancy("SRC(S17)", "TBCA", dec).
+0.001::p_fc("SRC(S17)", "TBCA", dec); 0.8858549484::p_fc("SRC(S17)", "TBCA", inc) :- p_occupancy("SRC(S17)", "TBCA", inc).
+0.9469923821::p_fc("SRC(S17)", "TGX221", dec); 0.001::p_fc("SRC(S17)", "TGX221", inc) :- p_occupancy("SRC(S17)", "TGX221", dec).
+0.001::p_fc("SRC(S17)", "TGX221", dec); 0.9469923821::p_fc("SRC(S17)", "TGX221", inc) :- p_occupancy("SRC(S17)", "TGX221", inc).
+0.1788290309::p_fc("SRC(S17)", "Tofacitinib", dec); 0.001::p_fc("SRC(S17)", "Tofacitinib", inc) :- p_occupancy("SRC(S17)", "Tofacitinib", dec).
+0.001::p_fc("SRC(S17)", "Tofacitinib", dec); 0.1788290309::p_fc("SRC(S17)", "Tofacitinib", inc) :- p_occupancy("SRC(S17)", "Tofacitinib", inc).
+0.8666228543::p_fc("SRC(S17)", "Torin", dec); 0.001::p_fc("SRC(S17)", "Torin", inc) :- p_occupancy("SRC(S17)", "Torin", dec).
+0.001::p_fc("SRC(S17)", "Torin", dec); 0.8666228543::p_fc("SRC(S17)", "Torin", inc) :- p_occupancy("SRC(S17)", "Torin", inc).
+0.926707674::p_fc("SRC(S17)", "Trametinib", dec); 0.001::p_fc("SRC(S17)", "Trametinib", inc) :- p_occupancy("SRC(S17)", "Trametinib", dec).
+0.001::p_fc("SRC(S17)", "Trametinib", dec); 0.926707674::p_fc("SRC(S17)", "Trametinib", inc) :- p_occupancy("SRC(S17)", "Trametinib", inc).
+0.9841303785::p_fc("SRC(S17)", "U73122", dec); 0.001::p_fc("SRC(S17)", "U73122", inc) :- p_occupancy("SRC(S17)", "U73122", dec).
+0.001::p_fc("SRC(S17)", "U73122", dec); 0.9841303785::p_fc("SRC(S17)", "U73122", inc) :- p_occupancy("SRC(S17)", "U73122", inc).
+0.9980059879::p_fc("SRC(S17)", "Ulixertinib", dec); 0.001::p_fc("SRC(S17)", "Ulixertinib", inc) :- p_occupancy("SRC(S17)", "Ulixertinib", dec).
+0.001::p_fc("SRC(S17)", "Ulixertinib", dec); 0.9980059879::p_fc("SRC(S17)", "Ulixertinib", inc) :- p_occupancy("SRC(S17)", "Ulixertinib", inc).
+0.9854475121::p_fc("SRC(S17)", "Vemurafenib", dec); 0.001::p_fc("SRC(S17)", "Vemurafenib", inc) :- p_occupancy("SRC(S17)", "Vemurafenib", dec).
+0.001::p_fc("SRC(S17)", "Vemurafenib", dec); 0.9854475121::p_fc("SRC(S17)", "Vemurafenib", inc) :- p_occupancy("SRC(S17)", "Vemurafenib", inc).
+0.8870595439::p_fc("SRC(S75)", "AC220", dec); 0.001::p_fc("SRC(S75)", "AC220", inc) :- p_occupancy("SRC(S75)", "AC220", dec).
+0.001::p_fc("SRC(S75)", "AC220", dec); 0.8870595439::p_fc("SRC(S75)", "AC220", inc) :- p_occupancy("SRC(S75)", "AC220", inc).
+0.9110487742::p_fc("SRC(S75)", "AT13148", dec); 0.001::p_fc("SRC(S75)", "AT13148", inc) :- p_occupancy("SRC(S75)", "AT13148", dec).
+0.001::p_fc("SRC(S75)", "AT13148", dec); 0.9110487742::p_fc("SRC(S75)", "AT13148", inc) :- p_occupancy("SRC(S75)", "AT13148", inc).
+0.4159181193::p_fc("SRC(S75)", "AZ20", dec); 0.001::p_fc("SRC(S75)", "AZ20", inc) :- p_occupancy("SRC(S75)", "AZ20", dec).
+0.001::p_fc("SRC(S75)", "AZ20", dec); 0.4159181193::p_fc("SRC(S75)", "AZ20", inc) :- p_occupancy("SRC(S75)", "AZ20", inc).
+0.2088909645::p_fc("SRC(S75)", "AZD1480", dec); 0.001::p_fc("SRC(S75)", "AZD1480", inc) :- p_occupancy("SRC(S75)", "AZD1480", dec).
+0.001::p_fc("SRC(S75)", "AZD1480", dec); 0.2088909645::p_fc("SRC(S75)", "AZD1480", inc) :- p_occupancy("SRC(S75)", "AZD1480", inc).
+0.8009021082::p_fc("SRC(S75)", "AZD3759", dec); 0.001::p_fc("SRC(S75)", "AZD3759", inc) :- p_occupancy("SRC(S75)", "AZD3759", dec).
+0.001::p_fc("SRC(S75)", "AZD3759", dec); 0.8009021082::p_fc("SRC(S75)", "AZD3759", inc) :- p_occupancy("SRC(S75)", "AZD3759", inc).
+0.5956275107::p_fc("SRC(S75)", "AZD5363", dec); 0.001::p_fc("SRC(S75)", "AZD5363", inc) :- p_occupancy("SRC(S75)", "AZD5363", dec).
+0.001::p_fc("SRC(S75)", "AZD5363", dec); 0.5956275107::p_fc("SRC(S75)", "AZD5363", inc) :- p_occupancy("SRC(S75)", "AZD5363", inc).
+0.4938940512::p_fc("SRC(S75)", "AZD5438", dec); 0.001::p_fc("SRC(S75)", "AZD5438", inc) :- p_occupancy("SRC(S75)", "AZD5438", dec).
+0.001::p_fc("SRC(S75)", "AZD5438", dec); 0.4938940512::p_fc("SRC(S75)", "AZD5438", inc) :- p_occupancy("SRC(S75)", "AZD5438", inc).
+0.8042000395::p_fc("SRC(S75)", "AZD6482", dec); 0.001::p_fc("SRC(S75)", "AZD6482", inc) :- p_occupancy("SRC(S75)", "AZD6482", dec).
+0.001::p_fc("SRC(S75)", "AZD6482", dec); 0.8042000395::p_fc("SRC(S75)", "AZD6482", inc) :- p_occupancy("SRC(S75)", "AZD6482", inc).
+0.4069481744::p_fc("SRC(S75)", "AZD6738", dec); 0.001::p_fc("SRC(S75)", "AZD6738", inc) :- p_occupancy("SRC(S75)", "AZD6738", dec).
+0.001::p_fc("SRC(S75)", "AZD6738", dec); 0.4069481744::p_fc("SRC(S75)", "AZD6738", inc) :- p_occupancy("SRC(S75)", "AZD6738", inc).
+0.6016987036::p_fc("SRC(S75)", "AZD8055", dec); 0.001::p_fc("SRC(S75)", "AZD8055", inc) :- p_occupancy("SRC(S75)", "AZD8055", dec).
+0.001::p_fc("SRC(S75)", "AZD8055", dec); 0.6016987036::p_fc("SRC(S75)", "AZD8055", inc) :- p_occupancy("SRC(S75)", "AZD8055", inc).
+0.3166895024::p_fc("SRC(S75)", "Amuvatinib", dec); 0.001::p_fc("SRC(S75)", "Amuvatinib", inc) :- p_occupancy("SRC(S75)", "Amuvatinib", dec).
+0.001::p_fc("SRC(S75)", "Amuvatinib", dec); 0.3166895024::p_fc("SRC(S75)", "Amuvatinib", inc) :- p_occupancy("SRC(S75)", "Amuvatinib", inc).
+0.0733277203::p_fc("SRC(S75)", "BX912", dec); 0.001::p_fc("SRC(S75)", "BX912", inc) :- p_occupancy("SRC(S75)", "BX912", dec).
+0.001::p_fc("SRC(S75)", "BX912", dec); 0.0733277203::p_fc("SRC(S75)", "BX912", inc) :- p_occupancy("SRC(S75)", "BX912", inc).
+0.341737095::p_fc("SRC(S75)", "Bosutinib", dec); 0.001::p_fc("SRC(S75)", "Bosutinib", inc) :- p_occupancy("SRC(S75)", "Bosutinib", dec).
+0.001::p_fc("SRC(S75)", "Bosutinib", dec); 0.341737095::p_fc("SRC(S75)", "Bosutinib", inc) :- p_occupancy("SRC(S75)", "Bosutinib", inc).
+0.6757215101::p_fc("SRC(S75)", "CAL101", dec); 0.001::p_fc("SRC(S75)", "CAL101", inc) :- p_occupancy("SRC(S75)", "CAL101", dec).
+0.001::p_fc("SRC(S75)", "CAL101", dec); 0.6757215101::p_fc("SRC(S75)", "CAL101", inc) :- p_occupancy("SRC(S75)", "CAL101", inc).
+0.784039463::p_fc("SRC(S75)", "CHIR99021", dec); 0.001::p_fc("SRC(S75)", "CHIR99021", inc) :- p_occupancy("SRC(S75)", "CHIR99021", dec).
+0.001::p_fc("SRC(S75)", "CHIR99021", dec); 0.784039463::p_fc("SRC(S75)", "CHIR99021", inc) :- p_occupancy("SRC(S75)", "CHIR99021", inc).
+0.4672195804::p_fc("SRC(S75)", "CX4945", dec); 0.001::p_fc("SRC(S75)", "CX4945", inc) :- p_occupancy("SRC(S75)", "CX4945", dec).
+0.001::p_fc("SRC(S75)", "CX4945", dec); 0.4672195804::p_fc("SRC(S75)", "CX4945", inc) :- p_occupancy("SRC(S75)", "CX4945", inc).
+0.3357610755::p_fc("SRC(S75)", "DNAPK", dec); 0.001::p_fc("SRC(S75)", "DNAPK", inc) :- p_occupancy("SRC(S75)", "DNAPK", dec).
+0.001::p_fc("SRC(S75)", "DNAPK", dec); 0.3357610755::p_fc("SRC(S75)", "DNAPK", inc) :- p_occupancy("SRC(S75)", "DNAPK", inc).
+0.4332905302::p_fc("SRC(S75)", "Dabrafenib", dec); 0.001::p_fc("SRC(S75)", "Dabrafenib", inc) :- p_occupancy("SRC(S75)", "Dabrafenib", dec).
+0.001::p_fc("SRC(S75)", "Dabrafenib", dec); 0.4332905302::p_fc("SRC(S75)", "Dabrafenib", inc) :- p_occupancy("SRC(S75)", "Dabrafenib", inc).
+0.6972744814::p_fc("SRC(S75)", "Dasatinib", dec); 0.001::p_fc("SRC(S75)", "Dasatinib", inc) :- p_occupancy("SRC(S75)", "Dasatinib", dec).
+0.001::p_fc("SRC(S75)", "Dasatinib", dec); 0.6972744814::p_fc("SRC(S75)", "Dasatinib", inc) :- p_occupancy("SRC(S75)", "Dasatinib", inc).
+0.1707977388::p_fc("SRC(S75)", "Edelfosine", dec); 0.001::p_fc("SRC(S75)", "Edelfosine", inc) :- p_occupancy("SRC(S75)", "Edelfosine", dec).
+0.001::p_fc("SRC(S75)", "Edelfosine", dec); 0.1707977388::p_fc("SRC(S75)", "Edelfosine", inc) :- p_occupancy("SRC(S75)", "Edelfosine", inc).
+0.6354207639::p_fc("SRC(S75)", "FRAX486", dec); 0.001::p_fc("SRC(S75)", "FRAX486", inc) :- p_occupancy("SRC(S75)", "FRAX486", dec).
+0.001::p_fc("SRC(S75)", "FRAX486", dec); 0.6354207639::p_fc("SRC(S75)", "FRAX486", inc) :- p_occupancy("SRC(S75)", "FRAX486", inc).
+0.1205792461::p_fc("SRC(S75)", "GDC0941", dec); 0.001::p_fc("SRC(S75)", "GDC0941", inc) :- p_occupancy("SRC(S75)", "GDC0941", dec).
+0.001::p_fc("SRC(S75)", "GDC0941", dec); 0.1205792461::p_fc("SRC(S75)", "GDC0941", inc) :- p_occupancy("SRC(S75)", "GDC0941", inc).
+0.9252526847::p_fc("SRC(S75)", "GDC0994", dec); 0.001::p_fc("SRC(S75)", "GDC0994", inc) :- p_occupancy("SRC(S75)", "GDC0994", dec).
+0.001::p_fc("SRC(S75)", "GDC0994", dec); 0.9252526847::p_fc("SRC(S75)", "GDC0994", inc) :- p_occupancy("SRC(S75)", "GDC0994", inc).
+0.6679153819::p_fc("SRC(S75)", "GF109203X", dec); 0.001::p_fc("SRC(S75)", "GF109203X", inc) :- p_occupancy("SRC(S75)", "GF109203X", dec).
+0.001::p_fc("SRC(S75)", "GF109203X", dec); 0.6679153819::p_fc("SRC(S75)", "GF109203X", inc) :- p_occupancy("SRC(S75)", "GF109203X", inc).
+0.8555180429::p_fc("SRC(S75)", "GO6983", dec); 0.001::p_fc("SRC(S75)", "GO6983", inc) :- p_occupancy("SRC(S75)", "GO6983", dec).
+0.001::p_fc("SRC(S75)", "GO6983", dec); 0.8555180429::p_fc("SRC(S75)", "GO6983", inc) :- p_occupancy("SRC(S75)", "GO6983", inc).
+0.8793691315::p_fc("SRC(S75)", "GSK2334470", dec); 0.001::p_fc("SRC(S75)", "GSK2334470", inc) :- p_occupancy("SRC(S75)", "GSK2334470", dec).
+0.001::p_fc("SRC(S75)", "GSK2334470", dec); 0.8793691315::p_fc("SRC(S75)", "GSK2334470", inc) :- p_occupancy("SRC(S75)", "GSK2334470", inc).
+0.6580319443::p_fc("SRC(S75)", "GSK690693", dec); 0.001::p_fc("SRC(S75)", "GSK690693", inc) :- p_occupancy("SRC(S75)", "GSK690693", dec).
+0.001::p_fc("SRC(S75)", "GSK690693", dec); 0.6580319443::p_fc("SRC(S75)", "GSK690693", inc) :- p_occupancy("SRC(S75)", "GSK690693", inc).
+0.1217867236::p_fc("SRC(S75)", "Go6976", dec); 0.001::p_fc("SRC(S75)", "Go6976", inc) :- p_occupancy("SRC(S75)", "Go6976", dec).
+0.001::p_fc("SRC(S75)", "Go6976", dec); 0.1217867236::p_fc("SRC(S75)", "Go6976", inc) :- p_occupancy("SRC(S75)", "Go6976", inc).
+0.3296181639::p_fc("SRC(S75)", "H89", dec); 0.001::p_fc("SRC(S75)", "H89", inc) :- p_occupancy("SRC(S75)", "H89", dec).
+0.001::p_fc("SRC(S75)", "H89", dec); 0.3296181639::p_fc("SRC(S75)", "H89", inc) :- p_occupancy("SRC(S75)", "H89", inc).
+0.211072234::p_fc("SRC(S75)", "HS173", dec); 0.001::p_fc("SRC(S75)", "HS173", inc) :- p_occupancy("SRC(S75)", "HS173", dec).
+0.001::p_fc("SRC(S75)", "HS173", dec); 0.211072234::p_fc("SRC(S75)", "HS173", inc) :- p_occupancy("SRC(S75)", "HS173", inc).
+0.0894024645::p_fc("SRC(S75)", "Ipatasertib", dec); 0.001::p_fc("SRC(S75)", "Ipatasertib", inc) :- p_occupancy("SRC(S75)", "Ipatasertib", dec).
+0.001::p_fc("SRC(S75)", "Ipatasertib", dec); 0.0894024645::p_fc("SRC(S75)", "Ipatasertib", inc) :- p_occupancy("SRC(S75)", "Ipatasertib", inc).
+0.9533691394::p_fc("SRC(S75)", "JNJ", dec); 0.001::p_fc("SRC(S75)", "JNJ", inc) :- p_occupancy("SRC(S75)", "JNJ", dec).
+0.001::p_fc("SRC(S75)", "JNJ", dec); 0.9533691394::p_fc("SRC(S75)", "JNJ", inc) :- p_occupancy("SRC(S75)", "JNJ", inc).
+0.2999630001::p_fc("SRC(S75)", "JNK", dec); 0.001::p_fc("SRC(S75)", "JNK", inc) :- p_occupancy("SRC(S75)", "JNK", dec).
+0.001::p_fc("SRC(S75)", "JNK", dec); 0.2999630001::p_fc("SRC(S75)", "JNK", inc) :- p_occupancy("SRC(S75)", "JNK", inc).
+0.4501403062::p_fc("SRC(S75)", "KD025", dec); 0.001::p_fc("SRC(S75)", "KD025", inc) :- p_occupancy("SRC(S75)", "KD025", dec).
+0.001::p_fc("SRC(S75)", "KD025", dec); 0.4501403062::p_fc("SRC(S75)", "KD025", inc) :- p_occupancy("SRC(S75)", "KD025", inc).
+0.5258568915::p_fc("SRC(S75)", "KN62", dec); 0.001::p_fc("SRC(S75)", "KN62", inc) :- p_occupancy("SRC(S75)", "KN62", dec).
+0.001::p_fc("SRC(S75)", "KN62", dec); 0.5258568915::p_fc("SRC(S75)", "KN62", inc) :- p_occupancy("SRC(S75)", "KN62", inc).
+0.8555180429::p_fc("SRC(S75)", "KN93", dec); 0.001::p_fc("SRC(S75)", "KN93", inc) :- p_occupancy("SRC(S75)", "KN93", dec).
+0.001::p_fc("SRC(S75)", "KN93", dec); 0.8555180429::p_fc("SRC(S75)", "KN93", inc) :- p_occupancy("SRC(S75)", "KN93", inc).
+0.4531757281::p_fc("SRC(S75)", "Ku0063794", dec); 0.001::p_fc("SRC(S75)", "Ku0063794", inc) :- p_occupancy("SRC(S75)", "Ku0063794", dec).
+0.001::p_fc("SRC(S75)", "Ku0063794", dec); 0.4531757281::p_fc("SRC(S75)", "Ku0063794", inc) :- p_occupancy("SRC(S75)", "Ku0063794", inc).
+0.4142261909::p_fc("SRC(S75)", "LY2090314", dec); 0.001::p_fc("SRC(S75)", "LY2090314", inc) :- p_occupancy("SRC(S75)", "LY2090314", dec).
+0.001::p_fc("SRC(S75)", "LY2090314", dec); 0.4142261909::p_fc("SRC(S75)", "LY2090314", inc) :- p_occupancy("SRC(S75)", "LY2090314", inc).
+0.5639554845::p_fc("SRC(S75)", "LY2584702", dec); 0.001::p_fc("SRC(S75)", "LY2584702", inc) :- p_occupancy("SRC(S75)", "LY2584702", dec).
+0.001::p_fc("SRC(S75)", "LY2584702", dec); 0.5639554845::p_fc("SRC(S75)", "LY2584702", inc) :- p_occupancy("SRC(S75)", "LY2584702", inc).
+0.4436181538::p_fc("SRC(S75)", "LY2835219", dec); 0.001::p_fc("SRC(S75)", "LY2835219", inc) :- p_occupancy("SRC(S75)", "LY2835219", dec).
+0.001::p_fc("SRC(S75)", "LY2835219", dec); 0.4436181538::p_fc("SRC(S75)", "LY2835219", inc) :- p_occupancy("SRC(S75)", "LY2835219", inc).
+0.8820619676::p_fc("SRC(S75)", "Linsitinib", dec); 0.001::p_fc("SRC(S75)", "Linsitinib", inc) :- p_occupancy("SRC(S75)", "Linsitinib", dec).
+0.001::p_fc("SRC(S75)", "Linsitinib", dec); 0.8820619676::p_fc("SRC(S75)", "Linsitinib", inc) :- p_occupancy("SRC(S75)", "Linsitinib", inc).
+0.737215362::p_fc("SRC(S75)", "MK2206", dec); 0.001::p_fc("SRC(S75)", "MK2206", inc) :- p_occupancy("SRC(S75)", "MK2206", dec).
+0.001::p_fc("SRC(S75)", "MK2206", dec); 0.737215362::p_fc("SRC(S75)", "MK2206", inc) :- p_occupancy("SRC(S75)", "MK2206", inc).
+0.3131867245::p_fc("SRC(S75)", "NU7441", dec); 0.001::p_fc("SRC(S75)", "NU7441", inc) :- p_occupancy("SRC(S75)", "NU7441", dec).
+0.001::p_fc("SRC(S75)", "NU7441", dec); 0.3131867245::p_fc("SRC(S75)", "NU7441", inc) :- p_occupancy("SRC(S75)", "NU7441", inc).
+0.7255124816::p_fc("SRC(S75)", "PD153035", dec); 0.001::p_fc("SRC(S75)", "PD153035", inc) :- p_occupancy("SRC(S75)", "PD153035", dec).
+0.001::p_fc("SRC(S75)", "PD153035", dec); 0.7255124816::p_fc("SRC(S75)", "PD153035", inc) :- p_occupancy("SRC(S75)", "PD153035", inc).
+0.2226757336::p_fc("SRC(S75)", "PF3758309", dec); 0.001::p_fc("SRC(S75)", "PF3758309", inc) :- p_occupancy("SRC(S75)", "PF3758309", dec).
+0.001::p_fc("SRC(S75)", "PF3758309", dec); 0.2226757336::p_fc("SRC(S75)", "PF3758309", inc) :- p_occupancy("SRC(S75)", "PF3758309", inc).
+0.5284157443::p_fc("SRC(S75)", "PF4708671", dec); 0.001::p_fc("SRC(S75)", "PF4708671", inc) :- p_occupancy("SRC(S75)", "PF4708671", dec).
+0.001::p_fc("SRC(S75)", "PF4708671", dec); 0.5284157443::p_fc("SRC(S75)", "PF4708671", inc) :- p_occupancy("SRC(S75)", "PF4708671", inc).
+0.3016324776::p_fc("SRC(S75)", "PH797804", dec); 0.001::p_fc("SRC(S75)", "PH797804", inc) :- p_occupancy("SRC(S75)", "PH797804", dec).
+0.001::p_fc("SRC(S75)", "PH797804", dec); 0.3016324776::p_fc("SRC(S75)", "PH797804", inc) :- p_occupancy("SRC(S75)", "PH797804", inc).
+0.6815713124::p_fc("SRC(S75)", "PIK294", dec); 0.001::p_fc("SRC(S75)", "PIK294", inc) :- p_occupancy("SRC(S75)", "PIK294", dec).
+0.001::p_fc("SRC(S75)", "PIK294", dec); 0.6815713124::p_fc("SRC(S75)", "PIK294", inc) :- p_occupancy("SRC(S75)", "PIK294", inc).
+0.5670374198::p_fc("SRC(S75)", "Ribociclib", dec); 0.001::p_fc("SRC(S75)", "Ribociclib", inc) :- p_occupancy("SRC(S75)", "Ribociclib", dec).
+0.001::p_fc("SRC(S75)", "Ribociclib", dec); 0.5670374198::p_fc("SRC(S75)", "Ribociclib", inc) :- p_occupancy("SRC(S75)", "Ribociclib", inc).
+0.8059973326::p_fc("SRC(S75)", "Ripasudil", dec); 0.001::p_fc("SRC(S75)", "Ripasudil", inc) :- p_occupancy("SRC(S75)", "Ripasudil", dec).
+0.001::p_fc("SRC(S75)", "Ripasudil", dec); 0.8059973326::p_fc("SRC(S75)", "Ripasudil", inc) :- p_occupancy("SRC(S75)", "Ripasudil", inc).
+0.5778756999::p_fc("SRC(S75)", "SP600125", dec); 0.001::p_fc("SRC(S75)", "SP600125", inc) :- p_occupancy("SRC(S75)", "SP600125", dec).
+0.001::p_fc("SRC(S75)", "SP600125", dec); 0.5778756999::p_fc("SRC(S75)", "SP600125", inc) :- p_occupancy("SRC(S75)", "SP600125", inc).
+0.4118362988::p_fc("SRC(S75)", "Selumetinib", dec); 0.001::p_fc("SRC(S75)", "Selumetinib", inc) :- p_occupancy("SRC(S75)", "Selumetinib", dec).
+0.001::p_fc("SRC(S75)", "Selumetinib", dec); 0.4118362988::p_fc("SRC(S75)", "Selumetinib", inc) :- p_occupancy("SRC(S75)", "Selumetinib", inc).
+0.9116918341::p_fc("SRC(S75)", "TAK715", dec); 0.001::p_fc("SRC(S75)", "TAK715", inc) :- p_occupancy("SRC(S75)", "TAK715", dec).
+0.001::p_fc("SRC(S75)", "TAK715", dec); 0.9116918341::p_fc("SRC(S75)", "TAK715", inc) :- p_occupancy("SRC(S75)", "TAK715", inc).
+0.8555180429::p_fc("SRC(S75)", "TBCA", dec); 0.001::p_fc("SRC(S75)", "TBCA", inc) :- p_occupancy("SRC(S75)", "TBCA", dec).
+0.001::p_fc("SRC(S75)", "TBCA", dec); 0.8555180429::p_fc("SRC(S75)", "TBCA", inc) :- p_occupancy("SRC(S75)", "TBCA", inc).
+0.3265219626::p_fc("SRC(S75)", "TGX221", dec); 0.001::p_fc("SRC(S75)", "TGX221", inc) :- p_occupancy("SRC(S75)", "TGX221", dec).
+0.001::p_fc("SRC(S75)", "TGX221", dec); 0.3265219626::p_fc("SRC(S75)", "TGX221", inc) :- p_occupancy("SRC(S75)", "TGX221", inc).
+0.8560007711::p_fc("SRC(S75)", "Tofacitinib", dec); 0.001::p_fc("SRC(S75)", "Tofacitinib", inc) :- p_occupancy("SRC(S75)", "Tofacitinib", dec).
+0.001::p_fc("SRC(S75)", "Tofacitinib", dec); 0.8560007711::p_fc("SRC(S75)", "Tofacitinib", inc) :- p_occupancy("SRC(S75)", "Tofacitinib", inc).
+0.4779838831::p_fc("SRC(S75)", "Torin", dec); 0.001::p_fc("SRC(S75)", "Torin", inc) :- p_occupancy("SRC(S75)", "Torin", dec).
+0.001::p_fc("SRC(S75)", "Torin", dec); 0.4779838831::p_fc("SRC(S75)", "Torin", inc) :- p_occupancy("SRC(S75)", "Torin", inc).
+0.6480720743::p_fc("SRC(S75)", "Trametinib", dec); 0.001::p_fc("SRC(S75)", "Trametinib", inc) :- p_occupancy("SRC(S75)", "Trametinib", dec).
+0.001::p_fc("SRC(S75)", "Trametinib", dec); 0.6480720743::p_fc("SRC(S75)", "Trametinib", inc) :- p_occupancy("SRC(S75)", "Trametinib", inc).
+0.7535248847::p_fc("SRC(S75)", "U73122", dec); 0.001::p_fc("SRC(S75)", "U73122", inc) :- p_occupancy("SRC(S75)", "U73122", dec).
+0.001::p_fc("SRC(S75)", "U73122", dec); 0.7535248847::p_fc("SRC(S75)", "U73122", inc) :- p_occupancy("SRC(S75)", "U73122", inc).
+0.5646284087::p_fc("SRC(S75)", "Ulixertinib", dec); 0.001::p_fc("SRC(S75)", "Ulixertinib", inc) :- p_occupancy("SRC(S75)", "Ulixertinib", dec).
+0.001::p_fc("SRC(S75)", "Ulixertinib", dec); 0.5646284087::p_fc("SRC(S75)", "Ulixertinib", inc) :- p_occupancy("SRC(S75)", "Ulixertinib", inc).
+0.515024544::p_fc("SRC(S75)", "Vemurafenib", dec); 0.001::p_fc("SRC(S75)", "Vemurafenib", inc) :- p_occupancy("SRC(S75)", "Vemurafenib", dec).
+0.001::p_fc("SRC(S75)", "Vemurafenib", dec); 0.515024544::p_fc("SRC(S75)", "Vemurafenib", inc) :- p_occupancy("SRC(S75)", "Vemurafenib", inc).
+0.1317402264::p_fc("ABL1(S569)", "AC220", dec); 0.1317402264::p_fc("ABL1(S569)", "AC220", inc) :- phosphosite("ABL1(S569)").
+0.3920542167::p_fc("ABL1(S569)", "AT13148", dec); 0.3920542167::p_fc("ABL1(S569)", "AT13148", inc) :- phosphosite("ABL1(S569)").
+0.4712938133::p_fc("ABL1(S569)", "AZ20", dec); 0.4712938133::p_fc("ABL1(S569)", "AZ20", inc) :- phosphosite("ABL1(S569)").
+0.3758444785::p_fc("ABL1(S569)", "AZD1480", dec); 0.3758444785::p_fc("ABL1(S569)", "AZD1480", inc) :- phosphosite("ABL1(S569)").
+0.2003963524::p_fc("ABL1(S569)", "AZD3759", dec); 0.2003963524::p_fc("ABL1(S569)", "AZD3759", inc) :- phosphosite("ABL1(S569)").
+0.3447900226::p_fc("ABL1(S569)", "AZD5363", dec); 0.3447900226::p_fc("ABL1(S569)", "AZD5363", inc) :- phosphosite("ABL1(S569)").
+0.1713319751::p_fc("ABL1(S569)", "AZD5438", dec); 0.1713319751::p_fc("ABL1(S569)", "AZD5438", inc) :- phosphosite("ABL1(S569)").
+0.3353970608::p_fc("ABL1(S569)", "AZD6482", dec); 0.3353970608::p_fc("ABL1(S569)", "AZD6482", inc) :- phosphosite("ABL1(S569)").
+0.2775934768::p_fc("ABL1(S569)", "AZD6738", dec); 0.2775934768::p_fc("ABL1(S569)", "AZD6738", inc) :- phosphosite("ABL1(S569)").
+0.4355928553::p_fc("ABL1(S569)", "AZD8055", dec); 0.4355928553::p_fc("ABL1(S569)", "AZD8055", inc) :- phosphosite("ABL1(S569)").
+0.129613564::p_fc("ABL1(S569)", "Amuvatinib", dec); 0.129613564::p_fc("ABL1(S569)", "Amuvatinib", inc) :- phosphosite("ABL1(S569)").
+0.4591224247::p_fc("ABL1(S569)", "BX912", dec); 0.4591224247::p_fc("ABL1(S569)", "BX912", inc) :- phosphosite("ABL1(S569)").
+0.0846916666::p_fc("ABL1(S569)", "Bosutinib", dec); 0.0846916666::p_fc("ABL1(S569)", "Bosutinib", inc) :- phosphosite("ABL1(S569)").
+0.3679822066::p_fc("ABL1(S569)", "CAL101", dec); 0.3679822066::p_fc("ABL1(S569)", "CAL101", inc) :- phosphosite("ABL1(S569)").
+0.0333726188::p_fc("ABL1(S569)", "CHIR99021", dec); 0.0333726188::p_fc("ABL1(S569)", "CHIR99021", inc) :- phosphosite("ABL1(S569)").
+0.4609334589::p_fc("ABL1(S569)", "CX4945", dec); 0.4609334589::p_fc("ABL1(S569)", "CX4945", inc) :- phosphosite("ABL1(S569)").
+0.3937000353::p_fc("ABL1(S569)", "DNAPK", dec); 0.3937000353::p_fc("ABL1(S569)", "DNAPK", inc) :- phosphosite("ABL1(S569)").
+0.3841054423::p_fc("ABL1(S569)", "Dabrafenib", dec); 0.3841054423::p_fc("ABL1(S569)", "Dabrafenib", inc) :- phosphosite("ABL1(S569)").
+0.3049421133::p_fc("ABL1(S569)", "Dasatinib", dec); 0.3049421133::p_fc("ABL1(S569)", "Dasatinib", inc) :- phosphosite("ABL1(S569)").
+0.0037435718::p_fc("ABL1(S569)", "Edelfosine", dec); 0.0037435718::p_fc("ABL1(S569)", "Edelfosine", inc) :- phosphosite("ABL1(S569)").
+0.4012714486::p_fc("ABL1(S569)", "FRAX486", dec); 0.4012714486::p_fc("ABL1(S569)", "FRAX486", inc) :- phosphosite("ABL1(S569)").
+0.3082322829::p_fc("ABL1(S569)", "GDC0941", dec); 0.3082322829::p_fc("ABL1(S569)", "GDC0941", inc) :- phosphosite("ABL1(S569)").
+0.4637963787::p_fc("ABL1(S569)", "GDC0994", dec); 0.4637963787::p_fc("ABL1(S569)", "GDC0994", inc) :- phosphosite("ABL1(S569)").
+0.2837605939::p_fc("ABL1(S569)", "GF109203X", dec); 0.2837605939::p_fc("ABL1(S569)", "GF109203X", inc) :- phosphosite("ABL1(S569)").
+0.3226323508::p_fc("ABL1(S569)", "GO6983", dec); 0.3226323508::p_fc("ABL1(S569)", "GO6983", inc) :- phosphosite("ABL1(S569)").
+0.3491111142::p_fc("ABL1(S569)", "GSK2334470", dec); 0.3491111142::p_fc("ABL1(S569)", "GSK2334470", inc) :- phosphosite("ABL1(S569)").
+0.0308380816::p_fc("ABL1(S569)", "GSK690693", dec); 0.0308380816::p_fc("ABL1(S569)", "GSK690693", inc) :- phosphosite("ABL1(S569)").
+0.1435434236::p_fc("ABL1(S569)", "Go6976", dec); 0.1435434236::p_fc("ABL1(S569)", "Go6976", inc) :- phosphosite("ABL1(S569)").
+0.1761061248::p_fc("ABL1(S569)", "H89", dec); 0.1761061248::p_fc("ABL1(S569)", "H89", inc) :- phosphosite("ABL1(S569)").
+0.1841247112::p_fc("ABL1(S569)", "HS173", dec); 0.1841247112::p_fc("ABL1(S569)", "HS173", inc) :- phosphosite("ABL1(S569)").
+0.4318396203::p_fc("ABL1(S569)", "Ipatasertib", dec); 0.4318396203::p_fc("ABL1(S569)", "Ipatasertib", inc) :- phosphosite("ABL1(S569)").
+0.0431647735::p_fc("ABL1(S569)", "JNJ", dec); 0.0431647735::p_fc("ABL1(S569)", "JNJ", inc) :- phosphosite("ABL1(S569)").
+0.3744022444::p_fc("ABL1(S569)", "JNK", dec); 0.3744022444::p_fc("ABL1(S569)", "JNK", inc) :- phosphosite("ABL1(S569)").
+0.2587356795::p_fc("ABL1(S569)", "KD025", dec); 0.2587356795::p_fc("ABL1(S569)", "KD025", inc) :- phosphosite("ABL1(S569)").
+0.2814814719::p_fc("ABL1(S569)", "KN62", dec); 0.2814814719::p_fc("ABL1(S569)", "KN62", inc) :- phosphosite("ABL1(S569)").
+0.3498722382::p_fc("ABL1(S569)", "KN93", dec); 0.3498722382::p_fc("ABL1(S569)", "KN93", inc) :- phosphosite("ABL1(S569)").
+0.4915351145::p_fc("ABL1(S569)", "Ku0063794", dec); 0.4915351145::p_fc("ABL1(S569)", "Ku0063794", inc) :- phosphosite("ABL1(S569)").
+0.0018573941::p_fc("ABL1(S569)", "LY2090314", dec); 0.0018573941::p_fc("ABL1(S569)", "LY2090314", inc) :- phosphosite("ABL1(S569)").
+0.2850951921::p_fc("ABL1(S569)", "LY2584702", dec); 0.2850951921::p_fc("ABL1(S569)", "LY2584702", inc) :- phosphosite("ABL1(S569)").
+0.3003275229::p_fc("ABL1(S569)", "LY2835219", dec); 0.3003275229::p_fc("ABL1(S569)", "LY2835219", inc) :- phosphosite("ABL1(S569)").
+0.3480306421::p_fc("ABL1(S569)", "Linsitinib", dec); 0.3480306421::p_fc("ABL1(S569)", "Linsitinib", inc) :- phosphosite("ABL1(S569)").
+0.3601477468::p_fc("ABL1(S569)", "MK2206", dec); 0.3601477468::p_fc("ABL1(S569)", "MK2206", inc) :- phosphosite("ABL1(S569)").
+0.3338776666::p_fc("ABL1(S569)", "NU7441", dec); 0.3338776666::p_fc("ABL1(S569)", "NU7441", inc) :- phosphosite("ABL1(S569)").
+0.1187099057::p_fc("ABL1(S569)", "PD153035", dec); 0.1187099057::p_fc("ABL1(S569)", "PD153035", inc) :- phosphosite("ABL1(S569)").
+0.1265044533::p_fc("ABL1(S569)", "PF3758309", dec); 0.1265044533::p_fc("ABL1(S569)", "PF3758309", inc) :- phosphosite("ABL1(S569)").
+0.1177299398::p_fc("ABL1(S569)", "PF4708671", dec); 0.1177299398::p_fc("ABL1(S569)", "PF4708671", inc) :- phosphosite("ABL1(S569)").
+0.0494062649::p_fc("ABL1(S569)", "PH797804", dec); 0.0494062649::p_fc("ABL1(S569)", "PH797804", inc) :- phosphosite("ABL1(S569)").
+0.4796452625::p_fc("ABL1(S569)", "PIK294", dec); 0.4796452625::p_fc("ABL1(S569)", "PIK294", inc) :- phosphosite("ABL1(S569)").
+0.1425934241::p_fc("ABL1(S569)", "Ribociclib", dec); 0.1425934241::p_fc("ABL1(S569)", "Ribociclib", inc) :- phosphosite("ABL1(S569)").
+0.0951727239::p_fc("ABL1(S569)", "Ripasudil", dec); 0.0951727239::p_fc("ABL1(S569)", "Ripasudil", inc) :- phosphosite("ABL1(S569)").
+0.0513902728::p_fc("ABL1(S569)", "SP600125", dec); 0.0513902728::p_fc("ABL1(S569)", "SP600125", inc) :- phosphosite("ABL1(S569)").
+0.4553110951::p_fc("ABL1(S569)", "Selumetinib", dec); 0.4553110951::p_fc("ABL1(S569)", "Selumetinib", inc) :- phosphosite("ABL1(S569)").
+0.3722677899::p_fc("ABL1(S569)", "TAK715", dec); 0.3722677899::p_fc("ABL1(S569)", "TAK715", inc) :- phosphosite("ABL1(S569)").
+0.3133393142::p_fc("ABL1(S569)", "TBCA", dec); 0.3133393142::p_fc("ABL1(S569)", "TBCA", inc) :- phosphosite("ABL1(S569)").
+0.4302142891::p_fc("ABL1(S569)", "TGX221", dec); 0.4302142891::p_fc("ABL1(S569)", "TGX221", inc) :- phosphosite("ABL1(S569)").
+0.3880905455::p_fc("ABL1(S569)", "Tofacitinib", dec); 0.3880905455::p_fc("ABL1(S569)", "Tofacitinib", inc) :- phosphosite("ABL1(S569)").
+0.2400763614::p_fc("ABL1(S569)", "Torin", dec); 0.2400763614::p_fc("ABL1(S569)", "Torin", inc) :- phosphosite("ABL1(S569)").
+0.4916909766::p_fc("ABL1(S569)", "Trametinib", dec); 0.4916909766::p_fc("ABL1(S569)", "Trametinib", inc) :- phosphosite("ABL1(S569)").
+0.1237279308::p_fc("ABL1(S569)", "U73122", dec); 0.1237279308::p_fc("ABL1(S569)", "U73122", inc) :- phosphosite("ABL1(S569)").
+0.3054758854::p_fc("ABL1(S569)", "Ulixertinib", dec); 0.3054758854::p_fc("ABL1(S569)", "Ulixertinib", inc) :- phosphosite("ABL1(S569)").
+0.047029447::p_fc("ABL1(S569)", "Vemurafenib", dec); 0.047029447::p_fc("ABL1(S569)", "Vemurafenib", inc) :- phosphosite("ABL1(S569)").
+0.4113208405::p_fc("ABL1(S718)", "AC220", dec); 0.4113208405::p_fc("ABL1(S718)", "AC220", inc) :- phosphosite("ABL1(S718)").
+0.2600998631::p_fc("ABL1(S718)", "AT13148", dec); 0.2600998631::p_fc("ABL1(S718)", "AT13148", inc) :- phosphosite("ABL1(S718)").
+0.392677982::p_fc("ABL1(S718)", "AZ20", dec); 0.392677982::p_fc("ABL1(S718)", "AZ20", inc) :- phosphosite("ABL1(S718)").
+0.3173567729::p_fc("ABL1(S718)", "AZD1480", dec); 0.3173567729::p_fc("ABL1(S718)", "AZD1480", inc) :- phosphosite("ABL1(S718)").
+0.3949089239::p_fc("ABL1(S718)", "AZD3759", dec); 0.3949089239::p_fc("ABL1(S718)", "AZD3759", inc) :- phosphosite("ABL1(S718)").
+0.3375796868::p_fc("ABL1(S718)", "AZD5363", dec); 0.3375796868::p_fc("ABL1(S718)", "AZD5363", inc) :- phosphosite("ABL1(S718)").
+0.2888987564::p_fc("ABL1(S718)", "AZD5438", dec); 0.2888987564::p_fc("ABL1(S718)", "AZD5438", inc) :- phosphosite("ABL1(S718)").
+0.3928717768::p_fc("ABL1(S718)", "AZD6482", dec); 0.3928717768::p_fc("ABL1(S718)", "AZD6482", inc) :- phosphosite("ABL1(S718)").
+0.2471174946::p_fc("ABL1(S718)", "AZD6738", dec); 0.2471174946::p_fc("ABL1(S718)", "AZD6738", inc) :- phosphosite("ABL1(S718)").
+0.004427364::p_fc("ABL1(S718)", "AZD8055", dec); 0.004427364::p_fc("ABL1(S718)", "AZD8055", inc) :- phosphosite("ABL1(S718)").
+0.4008170667::p_fc("ABL1(S718)", "Amuvatinib", dec); 0.4008170667::p_fc("ABL1(S718)", "Amuvatinib", inc) :- phosphosite("ABL1(S718)").
+0.3253672957::p_fc("ABL1(S718)", "BX912", dec); 0.3253672957::p_fc("ABL1(S718)", "BX912", inc) :- phosphosite("ABL1(S718)").
+0.333402742::p_fc("ABL1(S718)", "Bosutinib", dec); 0.333402742::p_fc("ABL1(S718)", "Bosutinib", inc) :- phosphosite("ABL1(S718)").
+0.2094067231::p_fc("ABL1(S718)", "CAL101", dec); 0.2094067231::p_fc("ABL1(S718)", "CAL101", inc) :- phosphosite("ABL1(S718)").
+0.3694884606::p_fc("ABL1(S718)", "CHIR99021", dec); 0.3694884606::p_fc("ABL1(S718)", "CHIR99021", inc) :- phosphosite("ABL1(S718)").
+0.0529780792::p_fc("ABL1(S718)", "CX4945", dec); 0.0529780792::p_fc("ABL1(S718)", "CX4945", inc) :- phosphosite("ABL1(S718)").
+0.4265986359::p_fc("ABL1(S718)", "DNAPK", dec); 0.4265986359::p_fc("ABL1(S718)", "DNAPK", inc) :- phosphosite("ABL1(S718)").
+0.4475711378::p_fc("ABL1(S718)", "Dabrafenib", dec); 0.4475711378::p_fc("ABL1(S718)", "Dabrafenib", inc) :- phosphosite("ABL1(S718)").
+0.3449705624::p_fc("ABL1(S718)", "Dasatinib", dec); 0.3449705624::p_fc("ABL1(S718)", "Dasatinib", inc) :- phosphosite("ABL1(S718)").
+0.2184784968::p_fc("ABL1(S718)", "Edelfosine", dec); 0.2184784968::p_fc("ABL1(S718)", "Edelfosine", inc) :- phosphosite("ABL1(S718)").
+0.1792470191::p_fc("ABL1(S718)", "FRAX486", dec); 0.1792470191::p_fc("ABL1(S718)", "FRAX486", inc) :- phosphosite("ABL1(S718)").
+0.4528082148::p_fc("ABL1(S718)", "GDC0941", dec); 0.4528082148::p_fc("ABL1(S718)", "GDC0941", inc) :- phosphosite("ABL1(S718)").
+0.1031655393::p_fc("ABL1(S718)", "GDC0994", dec); 0.1031655393::p_fc("ABL1(S718)", "GDC0994", inc) :- phosphosite("ABL1(S718)").
+0.3332629451::p_fc("ABL1(S718)", "GF109203X", dec); 0.3332629451::p_fc("ABL1(S718)", "GF109203X", inc) :- phosphosite("ABL1(S718)").
+0.0116128152::p_fc("ABL1(S718)", "GO6983", dec); 0.0116128152::p_fc("ABL1(S718)", "GO6983", inc) :- phosphosite("ABL1(S718)").
+0.1999071486::p_fc("ABL1(S718)", "GSK2334470", dec); 0.1999071486::p_fc("ABL1(S718)", "GSK2334470", inc) :- phosphosite("ABL1(S718)").
+0.3975340512::p_fc("ABL1(S718)", "GSK690693", dec); 0.3975340512::p_fc("ABL1(S718)", "GSK690693", inc) :- phosphosite("ABL1(S718)").
+0.3758192387::p_fc("ABL1(S718)", "Go6976", dec); 0.3758192387::p_fc("ABL1(S718)", "Go6976", inc) :- phosphosite("ABL1(S718)").
+0.3385921594::p_fc("ABL1(S718)", "H89", dec); 0.3385921594::p_fc("ABL1(S718)", "H89", inc) :- phosphosite("ABL1(S718)").
+0.4656677952::p_fc("ABL1(S718)", "HS173", dec); 0.4656677952::p_fc("ABL1(S718)", "HS173", inc) :- phosphosite("ABL1(S718)").
+0.1861751362::p_fc("ABL1(S718)", "Ipatasertib", dec); 0.1861751362::p_fc("ABL1(S718)", "Ipatasertib", inc) :- phosphosite("ABL1(S718)").
+0.4869096009::p_fc("ABL1(S718)", "JNJ", dec); 0.4869096009::p_fc("ABL1(S718)", "JNJ", inc) :- phosphosite("ABL1(S718)").
+0.1832779945::p_fc("ABL1(S718)", "JNK", dec); 0.1832779945::p_fc("ABL1(S718)", "JNK", inc) :- phosphosite("ABL1(S718)").
+0.4408162506::p_fc("ABL1(S718)", "KD025", dec); 0.4408162506::p_fc("ABL1(S718)", "KD025", inc) :- phosphosite("ABL1(S718)").
+0.4933229656::p_fc("ABL1(S718)", "KN62", dec); 0.4933229656::p_fc("ABL1(S718)", "KN62", inc) :- phosphosite("ABL1(S718)").
+0.4814403323::p_fc("ABL1(S718)", "KN93", dec); 0.4814403323::p_fc("ABL1(S718)", "KN93", inc) :- phosphosite("ABL1(S718)").
+0.4842084341::p_fc("ABL1(S718)", "Ku0063794", dec); 0.4842084341::p_fc("ABL1(S718)", "Ku0063794", inc) :- phosphosite("ABL1(S718)").
+0.1708041527::p_fc("ABL1(S718)", "LY2090314", dec); 0.1708041527::p_fc("ABL1(S718)", "LY2090314", inc) :- phosphosite("ABL1(S718)").
+0.1418757646::p_fc("ABL1(S718)", "LY2584702", dec); 0.1418757646::p_fc("ABL1(S718)", "LY2584702", inc) :- phosphosite("ABL1(S718)").
+0.4893183118::p_fc("ABL1(S718)", "LY2835219", dec); 0.4893183118::p_fc("ABL1(S718)", "LY2835219", inc) :- phosphosite("ABL1(S718)").
+0.2778043106::p_fc("ABL1(S718)", "Linsitinib", dec); 0.2778043106::p_fc("ABL1(S718)", "Linsitinib", inc) :- phosphosite("ABL1(S718)").
+0.4009195747::p_fc("ABL1(S718)", "MK2206", dec); 0.4009195747::p_fc("ABL1(S718)", "MK2206", inc) :- phosphosite("ABL1(S718)").
+0.3757124857::p_fc("ABL1(S718)", "NU7441", dec); 0.3757124857::p_fc("ABL1(S718)", "NU7441", inc) :- phosphosite("ABL1(S718)").
+0.3898412502::p_fc("ABL1(S718)", "PD153035", dec); 0.3898412502::p_fc("ABL1(S718)", "PD153035", inc) :- phosphosite("ABL1(S718)").
+0.0692935744::p_fc("ABL1(S718)", "PF3758309", dec); 0.0692935744::p_fc("ABL1(S718)", "PF3758309", inc) :- phosphosite("ABL1(S718)").
+0.3648191353::p_fc("ABL1(S718)", "PF4708671", dec); 0.3648191353::p_fc("ABL1(S718)", "PF4708671", inc) :- phosphosite("ABL1(S718)").
+0.1140653984::p_fc("ABL1(S718)", "PH797804", dec); 0.1140653984::p_fc("ABL1(S718)", "PH797804", inc) :- phosphosite("ABL1(S718)").
+0.4419808864::p_fc("ABL1(S718)", "PIK294", dec); 0.4419808864::p_fc("ABL1(S718)", "PIK294", inc) :- phosphosite("ABL1(S718)").
+0.4965692812::p_fc("ABL1(S718)", "Ribociclib", dec); 0.4965692812::p_fc("ABL1(S718)", "Ribociclib", inc) :- phosphosite("ABL1(S718)").
+0.2535729174::p_fc("ABL1(S718)", "Ripasudil", dec); 0.2535729174::p_fc("ABL1(S718)", "Ripasudil", inc) :- phosphosite("ABL1(S718)").
+0.424072785::p_fc("ABL1(S718)", "SP600125", dec); 0.424072785::p_fc("ABL1(S718)", "SP600125", inc) :- phosphosite("ABL1(S718)").
+0.4330209973::p_fc("ABL1(S718)", "Selumetinib", dec); 0.4330209973::p_fc("ABL1(S718)", "Selumetinib", inc) :- phosphosite("ABL1(S718)").
+0.1117650159::p_fc("ABL1(S718)", "TAK715", dec); 0.1117650159::p_fc("ABL1(S718)", "TAK715", inc) :- phosphosite("ABL1(S718)").
+0.3995119914::p_fc("ABL1(S718)", "TBCA", dec); 0.3995119914::p_fc("ABL1(S718)", "TBCA", inc) :- phosphosite("ABL1(S718)").
+0.3942496438::p_fc("ABL1(S718)", "TGX221", dec); 0.3942496438::p_fc("ABL1(S718)", "TGX221", inc) :- phosphosite("ABL1(S718)").
+0.2687657585::p_fc("ABL1(S718)", "Tofacitinib", dec); 0.2687657585::p_fc("ABL1(S718)", "Tofacitinib", inc) :- phosphosite("ABL1(S718)").
+0.0636425735::p_fc("ABL1(S718)", "Torin", dec); 0.0636425735::p_fc("ABL1(S718)", "Torin", inc) :- phosphosite("ABL1(S718)").
+0.2112502455::p_fc("ABL1(S718)", "Trametinib", dec); 0.2112502455::p_fc("ABL1(S718)", "Trametinib", inc) :- phosphosite("ABL1(S718)").
+0.1323956433::p_fc("ABL1(S718)", "U73122", dec); 0.1323956433::p_fc("ABL1(S718)", "U73122", inc) :- phosphosite("ABL1(S718)").
+0.0032791478::p_fc("ABL1(S718)", "Ulixertinib", dec); 0.0032791478::p_fc("ABL1(S718)", "Ulixertinib", inc) :- phosphosite("ABL1(S718)").
+0.4591835851::p_fc("ABL1(S718)", "Vemurafenib", dec); 0.4591835851::p_fc("ABL1(S718)", "Vemurafenib", inc) :- phosphosite("ABL1(S718)").
+0.2857890186::p_fc("ABL1(T735)", "AC220", dec); 0.2857890186::p_fc("ABL1(T735)", "AC220", inc) :- phosphosite("ABL1(T735)").
+0.0238785134::p_fc("ABL1(T735)", "AT13148", dec); 0.0238785134::p_fc("ABL1(T735)", "AT13148", inc) :- phosphosite("ABL1(T735)").
+0.333130495::p_fc("ABL1(T735)", "AZ20", dec); 0.333130495::p_fc("ABL1(T735)", "AZ20", inc) :- phosphosite("ABL1(T735)").
+0.0025636813::p_fc("ABL1(T735)", "AZD1480", dec); 0.0025636813::p_fc("ABL1(T735)", "AZD1480", inc) :- phosphosite("ABL1(T735)").
+0.3782639415::p_fc("ABL1(T735)", "AZD3759", dec); 0.3782639415::p_fc("ABL1(T735)", "AZD3759", inc) :- phosphosite("ABL1(T735)").
+0.000997006::p_fc("ABL1(T735)", "AZD5363", dec); 0.000997006::p_fc("ABL1(T735)", "AZD5363", inc) :- phosphosite("ABL1(T735)").
+0.0009970324::p_fc("ABL1(T735)", "AZD5438", dec); 0.0009970324::p_fc("ABL1(T735)", "AZD5438", inc) :- phosphosite("ABL1(T735)").
+0.2661398594::p_fc("ABL1(T735)", "AZD6482", dec); 0.2661398594::p_fc("ABL1(T735)", "AZD6482", inc) :- phosphosite("ABL1(T735)").
+0.4779607715::p_fc("ABL1(T735)", "AZD6738", dec); 0.4779607715::p_fc("ABL1(T735)", "AZD6738", inc) :- phosphosite("ABL1(T735)").
+0.2003091942::p_fc("ABL1(T735)", "AZD8055", dec); 0.2003091942::p_fc("ABL1(T735)", "AZD8055", inc) :- phosphosite("ABL1(T735)").
+0.0714934157::p_fc("ABL1(T735)", "Amuvatinib", dec); 0.0714934157::p_fc("ABL1(T735)", "Amuvatinib", inc) :- phosphosite("ABL1(T735)").
+0.000997006::p_fc("ABL1(T735)", "BX912", dec); 0.000997006::p_fc("ABL1(T735)", "BX912", inc) :- phosphosite("ABL1(T735)").
+0.4028935375::p_fc("ABL1(T735)", "Bosutinib", dec); 0.4028935375::p_fc("ABL1(T735)", "Bosutinib", inc) :- phosphosite("ABL1(T735)").
+0.0034282785::p_fc("ABL1(T735)", "CAL101", dec); 0.0034282785::p_fc("ABL1(T735)", "CAL101", inc) :- phosphosite("ABL1(T735)").
+0.0010166506::p_fc("ABL1(T735)", "CHIR99021", dec); 0.0010166506::p_fc("ABL1(T735)", "CHIR99021", inc) :- phosphosite("ABL1(T735)").
+0.0196725935::p_fc("ABL1(T735)", "CX4945", dec); 0.0196725935::p_fc("ABL1(T735)", "CX4945", inc) :- phosphosite("ABL1(T735)").
+0.3424163244::p_fc("ABL1(T735)", "DNAPK", dec); 0.3424163244::p_fc("ABL1(T735)", "DNAPK", inc) :- phosphosite("ABL1(T735)").
+0.4385956616::p_fc("ABL1(T735)", "Dabrafenib", dec); 0.4385956616::p_fc("ABL1(T735)", "Dabrafenib", inc) :- phosphosite("ABL1(T735)").
+0.0609550952::p_fc("ABL1(T735)", "Dasatinib", dec); 0.0609550952::p_fc("ABL1(T735)", "Dasatinib", inc) :- phosphosite("ABL1(T735)").
+0.3371823772::p_fc("ABL1(T735)", "Edelfosine", dec); 0.3371823772::p_fc("ABL1(T735)", "Edelfosine", inc) :- phosphosite("ABL1(T735)").
+0.0699929895::p_fc("ABL1(T735)", "FRAX486", dec); 0.0699929895::p_fc("ABL1(T735)", "FRAX486", inc) :- phosphosite("ABL1(T735)").
+0.1035110027::p_fc("ABL1(T735)", "GDC0941", dec); 0.1035110027::p_fc("ABL1(T735)", "GDC0941", inc) :- phosphosite("ABL1(T735)").
+0.438926318::p_fc("ABL1(T735)", "GDC0994", dec); 0.438926318::p_fc("ABL1(T735)", "GDC0994", inc) :- phosphosite("ABL1(T735)").
+0.4337855981::p_fc("ABL1(T735)", "GF109203X", dec); 0.4337855981::p_fc("ABL1(T735)", "GF109203X", inc) :- phosphosite("ABL1(T735)").
+0.0576471315::p_fc("ABL1(T735)", "GO6983", dec); 0.0576471315::p_fc("ABL1(T735)", "GO6983", inc) :- phosphosite("ABL1(T735)").
+0.000997006::p_fc("ABL1(T735)", "GSK2334470", dec); 0.000997006::p_fc("ABL1(T735)", "GSK2334470", inc) :- phosphosite("ABL1(T735)").
+0.3876352323::p_fc("ABL1(T735)", "GSK690693", dec); 0.3876352323::p_fc("ABL1(T735)", "GSK690693", inc) :- phosphosite("ABL1(T735)").
+0.0993381868::p_fc("ABL1(T735)", "Go6976", dec); 0.0993381868::p_fc("ABL1(T735)", "Go6976", inc) :- phosphosite("ABL1(T735)").
+0.3752944988::p_fc("ABL1(T735)", "H89", dec); 0.3752944988::p_fc("ABL1(T735)", "H89", inc) :- phosphosite("ABL1(T735)").
+0.3524962574::p_fc("ABL1(T735)", "HS173", dec); 0.3524962574::p_fc("ABL1(T735)", "HS173", inc) :- phosphosite("ABL1(T735)").
+0.0009978468::p_fc("ABL1(T735)", "Ipatasertib", dec); 0.0009978468::p_fc("ABL1(T735)", "Ipatasertib", inc) :- phosphosite("ABL1(T735)").
+0.216475304::p_fc("ABL1(T735)", "JNJ", dec); 0.216475304::p_fc("ABL1(T735)", "JNJ", inc) :- phosphosite("ABL1(T735)").
+0.3131209627::p_fc("ABL1(T735)", "JNK", dec); 0.3131209627::p_fc("ABL1(T735)", "JNK", inc) :- phosphosite("ABL1(T735)").
+0.3124525031::p_fc("ABL1(T735)", "KD025", dec); 0.3124525031::p_fc("ABL1(T735)", "KD025", inc) :- phosphosite("ABL1(T735)").
+0.1292034495::p_fc("ABL1(T735)", "KN62", dec); 0.1292034495::p_fc("ABL1(T735)", "KN62", inc) :- phosphosite("ABL1(T735)").
+0.0019869243::p_fc("ABL1(T735)", "KN93", dec); 0.0019869243::p_fc("ABL1(T735)", "KN93", inc) :- phosphosite("ABL1(T735)").
+0.0017158652::p_fc("ABL1(T735)", "Ku0063794", dec); 0.0017158652::p_fc("ABL1(T735)", "Ku0063794", inc) :- phosphosite("ABL1(T735)").
+0.0142886356::p_fc("ABL1(T735)", "LY2090314", dec); 0.0142886356::p_fc("ABL1(T735)", "LY2090314", inc) :- phosphosite("ABL1(T735)").
+0.2684479014::p_fc("ABL1(T735)", "LY2584702", dec); 0.2684479014::p_fc("ABL1(T735)", "LY2584702", inc) :- phosphosite("ABL1(T735)").
+0.3798087435::p_fc("ABL1(T735)", "LY2835219", dec); 0.3798087435::p_fc("ABL1(T735)", "LY2835219", inc) :- phosphosite("ABL1(T735)").
+0.3803806922::p_fc("ABL1(T735)", "Linsitinib", dec); 0.3803806922::p_fc("ABL1(T735)", "Linsitinib", inc) :- phosphosite("ABL1(T735)").
+0.1254271863::p_fc("ABL1(T735)", "MK2206", dec); 0.1254271863::p_fc("ABL1(T735)", "MK2206", inc) :- phosphosite("ABL1(T735)").
+0.1116330748::p_fc("ABL1(T735)", "NU7441", dec); 0.1116330748::p_fc("ABL1(T735)", "NU7441", inc) :- phosphosite("ABL1(T735)").
+0.3454287187::p_fc("ABL1(T735)", "PD153035", dec); 0.3454287187::p_fc("ABL1(T735)", "PD153035", inc) :- phosphosite("ABL1(T735)").
+0.436703804::p_fc("ABL1(T735)", "PF3758309", dec); 0.436703804::p_fc("ABL1(T735)", "PF3758309", inc) :- phosphosite("ABL1(T735)").
+0.3594167335::p_fc("ABL1(T735)", "PF4708671", dec); 0.3594167335::p_fc("ABL1(T735)", "PF4708671", inc) :- phosphosite("ABL1(T735)").
+0.0589466344::p_fc("ABL1(T735)", "PH797804", dec); 0.0589466344::p_fc("ABL1(T735)", "PH797804", inc) :- phosphosite("ABL1(T735)").
+0.0012258713::p_fc("ABL1(T735)", "PIK294", dec); 0.0012258713::p_fc("ABL1(T735)", "PIK294", inc) :- phosphosite("ABL1(T735)").
+0.2730683397::p_fc("ABL1(T735)", "Ribociclib", dec); 0.2730683397::p_fc("ABL1(T735)", "Ribociclib", inc) :- phosphosite("ABL1(T735)").
+0.4753176716::p_fc("ABL1(T735)", "Ripasudil", dec); 0.4753176716::p_fc("ABL1(T735)", "Ripasudil", inc) :- phosphosite("ABL1(T735)").
+0.430278132::p_fc("ABL1(T735)", "SP600125", dec); 0.430278132::p_fc("ABL1(T735)", "SP600125", inc) :- phosphosite("ABL1(T735)").
+0.110859077::p_fc("ABL1(T735)", "Selumetinib", dec); 0.110859077::p_fc("ABL1(T735)", "Selumetinib", inc) :- phosphosite("ABL1(T735)").
+0.3927908656::p_fc("ABL1(T735)", "TAK715", dec); 0.3927908656::p_fc("ABL1(T735)", "TAK715", inc) :- phosphosite("ABL1(T735)").
+0.2713112754::p_fc("ABL1(T735)", "TBCA", dec); 0.2713112754::p_fc("ABL1(T735)", "TBCA", inc) :- phosphosite("ABL1(T735)").
+0.4300813184::p_fc("ABL1(T735)", "TGX221", dec); 0.4300813184::p_fc("ABL1(T735)", "TGX221", inc) :- phosphosite("ABL1(T735)").
+0.0010191413::p_fc("ABL1(T735)", "Tofacitinib", dec); 0.0010191413::p_fc("ABL1(T735)", "Tofacitinib", inc) :- phosphosite("ABL1(T735)").
+0.0852754459::p_fc("ABL1(T735)", "Torin", dec); 0.0852754459::p_fc("ABL1(T735)", "Torin", inc) :- phosphosite("ABL1(T735)").
+0.0543639075::p_fc("ABL1(T735)", "Trametinib", dec); 0.0543639075::p_fc("ABL1(T735)", "Trametinib", inc) :- phosphosite("ABL1(T735)").
+0.2626218177::p_fc("ABL1(T735)", "U73122", dec); 0.2626218177::p_fc("ABL1(T735)", "U73122", inc) :- phosphosite("ABL1(T735)").
+0.3508213513::p_fc("ABL1(T735)", "Ulixertinib", dec); 0.3508213513::p_fc("ABL1(T735)", "Ulixertinib", inc) :- phosphosite("ABL1(T735)").
+0.3308448559::p_fc("ABL1(T735)", "Vemurafenib", dec); 0.3308448559::p_fc("ABL1(T735)", "Vemurafenib", inc) :- phosphosite("ABL1(T735)").
+0.1699283955::p_fc("HIPK2(Y361)", "AC220", dec); 0.1699283955::p_fc("HIPK2(Y361)", "AC220", inc) :- phosphosite("HIPK2(Y361)").
+0.4729563144::p_fc("HIPK2(Y361)", "AT13148", dec); 0.4729563144::p_fc("HIPK2(Y361)", "AT13148", inc) :- phosphosite("HIPK2(Y361)").
+0.0502044621::p_fc("HIPK2(Y361)", "AZ20", dec); 0.0502044621::p_fc("HIPK2(Y361)", "AZ20", inc) :- phosphosite("HIPK2(Y361)").
+0.3266331976::p_fc("HIPK2(Y361)", "AZD1480", dec); 0.3266331976::p_fc("HIPK2(Y361)", "AZD1480", inc) :- phosphosite("HIPK2(Y361)").
+0.0038628026::p_fc("HIPK2(Y361)", "AZD3759", dec); 0.0038628026::p_fc("HIPK2(Y361)", "AZD3759", inc) :- phosphosite("HIPK2(Y361)").
+0.1271423723::p_fc("HIPK2(Y361)", "AZD5363", dec); 0.1271423723::p_fc("HIPK2(Y361)", "AZD5363", inc) :- phosphosite("HIPK2(Y361)").
+0.2709498634::p_fc("HIPK2(Y361)", "AZD5438", dec); 0.2709498634::p_fc("HIPK2(Y361)", "AZD5438", inc) :- phosphosite("HIPK2(Y361)").
+0.3929905615::p_fc("HIPK2(Y361)", "AZD6482", dec); 0.3929905615::p_fc("HIPK2(Y361)", "AZD6482", inc) :- phosphosite("HIPK2(Y361)").
+0.28014346::p_fc("HIPK2(Y361)", "AZD6738", dec); 0.28014346::p_fc("HIPK2(Y361)", "AZD6738", inc) :- phosphosite("HIPK2(Y361)").
+0.0010991321::p_fc("HIPK2(Y361)", "AZD8055", dec); 0.0010991321::p_fc("HIPK2(Y361)", "AZD8055", inc) :- phosphosite("HIPK2(Y361)").
+0.0057683408::p_fc("HIPK2(Y361)", "Amuvatinib", dec); 0.0057683408::p_fc("HIPK2(Y361)", "Amuvatinib", inc) :- phosphosite("HIPK2(Y361)").
+0.1858081996::p_fc("HIPK2(Y361)", "BX912", dec); 0.1858081996::p_fc("HIPK2(Y361)", "BX912", inc) :- phosphosite("HIPK2(Y361)").
+0.1941303646::p_fc("HIPK2(Y361)", "Bosutinib", dec); 0.1941303646::p_fc("HIPK2(Y361)", "Bosutinib", inc) :- phosphosite("HIPK2(Y361)").
+0.3458795105::p_fc("HIPK2(Y361)", "CAL101", dec); 0.3458795105::p_fc("HIPK2(Y361)", "CAL101", inc) :- phosphosite("HIPK2(Y361)").
+0.1277767391::p_fc("HIPK2(Y361)", "CHIR99021", dec); 0.1277767391::p_fc("HIPK2(Y361)", "CHIR99021", inc) :- phosphosite("HIPK2(Y361)").
+0.1268695539::p_fc("HIPK2(Y361)", "CX4945", dec); 0.1268695539::p_fc("HIPK2(Y361)", "CX4945", inc) :- phosphosite("HIPK2(Y361)").
+0.4117952792::p_fc("HIPK2(Y361)", "DNAPK", dec); 0.4117952792::p_fc("HIPK2(Y361)", "DNAPK", inc) :- phosphosite("HIPK2(Y361)").
+0.3086537518::p_fc("HIPK2(Y361)", "Dabrafenib", dec); 0.3086537518::p_fc("HIPK2(Y361)", "Dabrafenib", inc) :- phosphosite("HIPK2(Y361)").
+0.4866994567::p_fc("HIPK2(Y361)", "Dasatinib", dec); 0.4866994567::p_fc("HIPK2(Y361)", "Dasatinib", inc) :- phosphosite("HIPK2(Y361)").
+0.139017085::p_fc("HIPK2(Y361)", "Edelfosine", dec); 0.139017085::p_fc("HIPK2(Y361)", "Edelfosine", inc) :- phosphosite("HIPK2(Y361)").
+0.2550333308::p_fc("HIPK2(Y361)", "FRAX486", dec); 0.2550333308::p_fc("HIPK2(Y361)", "FRAX486", inc) :- phosphosite("HIPK2(Y361)").
+0.1012311719::p_fc("HIPK2(Y361)", "GDC0941", dec); 0.1012311719::p_fc("HIPK2(Y361)", "GDC0941", inc) :- phosphosite("HIPK2(Y361)").
+0.1219101702::p_fc("HIPK2(Y361)", "GDC0994", dec); 0.1219101702::p_fc("HIPK2(Y361)", "GDC0994", inc) :- phosphosite("HIPK2(Y361)").
+0.055759321::p_fc("HIPK2(Y361)", "GF109203X", dec); 0.055759321::p_fc("HIPK2(Y361)", "GF109203X", inc) :- phosphosite("HIPK2(Y361)").
+0.1380298636::p_fc("HIPK2(Y361)", "GO6983", dec); 0.1380298636::p_fc("HIPK2(Y361)", "GO6983", inc) :- phosphosite("HIPK2(Y361)").
+0.0011002467::p_fc("HIPK2(Y361)", "GSK2334470", dec); 0.0011002467::p_fc("HIPK2(Y361)", "GSK2334470", inc) :- phosphosite("HIPK2(Y361)").
+0.1317615467::p_fc("HIPK2(Y361)", "GSK690693", dec); 0.1317615467::p_fc("HIPK2(Y361)", "GSK690693", inc) :- phosphosite("HIPK2(Y361)").
+0.4016273093::p_fc("HIPK2(Y361)", "Go6976", dec); 0.4016273093::p_fc("HIPK2(Y361)", "Go6976", inc) :- phosphosite("HIPK2(Y361)").
+0.3887712387::p_fc("HIPK2(Y361)", "H89", dec); 0.3887712387::p_fc("HIPK2(Y361)", "H89", inc) :- phosphosite("HIPK2(Y361)").
+0.1213997886::p_fc("HIPK2(Y361)", "HS173", dec); 0.1213997886::p_fc("HIPK2(Y361)", "HS173", inc) :- phosphosite("HIPK2(Y361)").
+0.1958130757::p_fc("HIPK2(Y361)", "Ipatasertib", dec); 0.1958130757::p_fc("HIPK2(Y361)", "Ipatasertib", inc) :- phosphosite("HIPK2(Y361)").
+0.2702799082::p_fc("HIPK2(Y361)", "JNJ", dec); 0.2702799082::p_fc("HIPK2(Y361)", "JNJ", inc) :- phosphosite("HIPK2(Y361)").
+0.1316174182::p_fc("HIPK2(Y361)", "JNK", dec); 0.1316174182::p_fc("HIPK2(Y361)", "JNK", inc) :- phosphosite("HIPK2(Y361)").
+0.1443212178::p_fc("HIPK2(Y361)", "KD025", dec); 0.1443212178::p_fc("HIPK2(Y361)", "KD025", inc) :- phosphosite("HIPK2(Y361)").
+0.1310786691::p_fc("HIPK2(Y361)", "KN62", dec); 0.1310786691::p_fc("HIPK2(Y361)", "KN62", inc) :- phosphosite("HIPK2(Y361)").
+0.171251796::p_fc("HIPK2(Y361)", "KN93", dec); 0.171251796::p_fc("HIPK2(Y361)", "KN93", inc) :- phosphosite("HIPK2(Y361)").
+0.0753870048::p_fc("HIPK2(Y361)", "Ku0063794", dec); 0.0753870048::p_fc("HIPK2(Y361)", "Ku0063794", inc) :- phosphosite("HIPK2(Y361)").
+0.2607276552::p_fc("HIPK2(Y361)", "LY2090314", dec); 0.2607276552::p_fc("HIPK2(Y361)", "LY2090314", inc) :- phosphosite("HIPK2(Y361)").
+0.2037083711::p_fc("HIPK2(Y361)", "LY2584702", dec); 0.2037083711::p_fc("HIPK2(Y361)", "LY2584702", inc) :- phosphosite("HIPK2(Y361)").
+0.3646075255::p_fc("HIPK2(Y361)", "LY2835219", dec); 0.3646075255::p_fc("HIPK2(Y361)", "LY2835219", inc) :- phosphosite("HIPK2(Y361)").
+0.0968929894::p_fc("HIPK2(Y361)", "Linsitinib", dec); 0.0968929894::p_fc("HIPK2(Y361)", "Linsitinib", inc) :- phosphosite("HIPK2(Y361)").
+0.4151495937::p_fc("HIPK2(Y361)", "MK2206", dec); 0.4151495937::p_fc("HIPK2(Y361)", "MK2206", inc) :- phosphosite("HIPK2(Y361)").
+0.2600103626::p_fc("HIPK2(Y361)", "NU7441", dec); 0.2600103626::p_fc("HIPK2(Y361)", "NU7441", inc) :- phosphosite("HIPK2(Y361)").
+0.4173977632::p_fc("HIPK2(Y361)", "PD153035", dec); 0.4173977632::p_fc("HIPK2(Y361)", "PD153035", inc) :- phosphosite("HIPK2(Y361)").
+0.0009970165::p_fc("HIPK2(Y361)", "PF3758309", dec); 0.0009970165::p_fc("HIPK2(Y361)", "PF3758309", inc) :- phosphosite("HIPK2(Y361)").
+0.0744016783::p_fc("HIPK2(Y361)", "PF4708671", dec); 0.0744016783::p_fc("HIPK2(Y361)", "PF4708671", inc) :- phosphosite("HIPK2(Y361)").
+0.2118009287::p_fc("HIPK2(Y361)", "PH797804", dec); 0.2118009287::p_fc("HIPK2(Y361)", "PH797804", inc) :- phosphosite("HIPK2(Y361)").
+0.2528351715::p_fc("HIPK2(Y361)", "PIK294", dec); 0.2528351715::p_fc("HIPK2(Y361)", "PIK294", inc) :- phosphosite("HIPK2(Y361)").
+0.1221467776::p_fc("HIPK2(Y361)", "Ribociclib", dec); 0.1221467776::p_fc("HIPK2(Y361)", "Ribociclib", inc) :- phosphosite("HIPK2(Y361)").
+0.4292137637::p_fc("HIPK2(Y361)", "Ripasudil", dec); 0.4292137637::p_fc("HIPK2(Y361)", "Ripasudil", inc) :- phosphosite("HIPK2(Y361)").
+0.1039648536::p_fc("HIPK2(Y361)", "SP600125", dec); 0.1039648536::p_fc("HIPK2(Y361)", "SP600125", inc) :- phosphosite("HIPK2(Y361)").
+0.3849076628::p_fc("HIPK2(Y361)", "Selumetinib", dec); 0.3849076628::p_fc("HIPK2(Y361)", "Selumetinib", inc) :- phosphosite("HIPK2(Y361)").
+0.2746554649::p_fc("HIPK2(Y361)", "TAK715", dec); 0.2746554649::p_fc("HIPK2(Y361)", "TAK715", inc) :- phosphosite("HIPK2(Y361)").
+0.2510725087::p_fc("HIPK2(Y361)", "TBCA", dec); 0.2510725087::p_fc("HIPK2(Y361)", "TBCA", inc) :- phosphosite("HIPK2(Y361)").
+0.3373226123::p_fc("HIPK2(Y361)", "TGX221", dec); 0.3373226123::p_fc("HIPK2(Y361)", "TGX221", inc) :- phosphosite("HIPK2(Y361)").
+0.2317336631::p_fc("HIPK2(Y361)", "Tofacitinib", dec); 0.2317336631::p_fc("HIPK2(Y361)", "Tofacitinib", inc) :- phosphosite("HIPK2(Y361)").
+0.03557954::p_fc("HIPK2(Y361)", "Torin", dec); 0.03557954::p_fc("HIPK2(Y361)", "Torin", inc) :- phosphosite("HIPK2(Y361)").
+0.3224363949::p_fc("HIPK2(Y361)", "Trametinib", dec); 0.3224363949::p_fc("HIPK2(Y361)", "Trametinib", inc) :- phosphosite("HIPK2(Y361)").
+0.0799767414::p_fc("HIPK2(Y361)", "U73122", dec); 0.0799767414::p_fc("HIPK2(Y361)", "U73122", inc) :- phosphosite("HIPK2(Y361)").
+0.1209978642::p_fc("HIPK2(Y361)", "Ulixertinib", dec); 0.1209978642::p_fc("HIPK2(Y361)", "Ulixertinib", inc) :- phosphosite("HIPK2(Y361)").
+0.491930401::p_fc("HIPK2(Y361)", "Vemurafenib", dec); 0.491930401::p_fc("HIPK2(Y361)", "Vemurafenib", inc) :- phosphosite("HIPK2(Y361)").
+0.1408490663::p_fc("PTK2(S29)", "AC220", dec); 0.1408490663::p_fc("PTK2(S29)", "AC220", inc) :- phosphosite("PTK2(S29)").
+0.2560317109::p_fc("PTK2(S29)", "AT13148", dec); 0.2560317109::p_fc("PTK2(S29)", "AT13148", inc) :- phosphosite("PTK2(S29)").
+0.3170543674::p_fc("PTK2(S29)", "AZ20", dec); 0.3170543674::p_fc("PTK2(S29)", "AZ20", inc) :- phosphosite("PTK2(S29)").
+0.064165125::p_fc("PTK2(S29)", "AZD1480", dec); 0.064165125::p_fc("PTK2(S29)", "AZD1480", inc) :- phosphosite("PTK2(S29)").
+0.2607203754::p_fc("PTK2(S29)", "AZD3759", dec); 0.2607203754::p_fc("PTK2(S29)", "AZD3759", inc) :- phosphosite("PTK2(S29)").
+0.1732709245::p_fc("PTK2(S29)", "AZD5363", dec); 0.1732709245::p_fc("PTK2(S29)", "AZD5363", inc) :- phosphosite("PTK2(S29)").
+0.2743098681::p_fc("PTK2(S29)", "AZD5438", dec); 0.2743098681::p_fc("PTK2(S29)", "AZD5438", inc) :- phosphosite("PTK2(S29)").
+0.4016809264::p_fc("PTK2(S29)", "AZD6482", dec); 0.4016809264::p_fc("PTK2(S29)", "AZD6482", inc) :- phosphosite("PTK2(S29)").
+0.4905418513::p_fc("PTK2(S29)", "AZD6738", dec); 0.4905418513::p_fc("PTK2(S29)", "AZD6738", inc) :- phosphosite("PTK2(S29)").
+0.0519489839::p_fc("PTK2(S29)", "AZD8055", dec); 0.0519489839::p_fc("PTK2(S29)", "AZD8055", inc) :- phosphosite("PTK2(S29)").
+0.0032985748::p_fc("PTK2(S29)", "Amuvatinib", dec); 0.0032985748::p_fc("PTK2(S29)", "Amuvatinib", inc) :- phosphosite("PTK2(S29)").
+0.0936370741::p_fc("PTK2(S29)", "BX912", dec); 0.0936370741::p_fc("PTK2(S29)", "BX912", inc) :- phosphosite("PTK2(S29)").
+0.2154825812::p_fc("PTK2(S29)", "Bosutinib", dec); 0.2154825812::p_fc("PTK2(S29)", "Bosutinib", inc) :- phosphosite("PTK2(S29)").
+0.4369091902::p_fc("PTK2(S29)", "CAL101", dec); 0.4369091902::p_fc("PTK2(S29)", "CAL101", inc) :- phosphosite("PTK2(S29)").
+0.0017852407::p_fc("PTK2(S29)", "CHIR99021", dec); 0.0017852407::p_fc("PTK2(S29)", "CHIR99021", inc) :- phosphosite("PTK2(S29)").
+0.0048909065::p_fc("PTK2(S29)", "CX4945", dec); 0.0048909065::p_fc("PTK2(S29)", "CX4945", inc) :- phosphosite("PTK2(S29)").
+0.4457749481::p_fc("PTK2(S29)", "DNAPK", dec); 0.4457749481::p_fc("PTK2(S29)", "DNAPK", inc) :- phosphosite("PTK2(S29)").
+0.2275395711::p_fc("PTK2(S29)", "Dabrafenib", dec); 0.2275395711::p_fc("PTK2(S29)", "Dabrafenib", inc) :- phosphosite("PTK2(S29)").
+0.3147155016::p_fc("PTK2(S29)", "Dasatinib", dec); 0.3147155016::p_fc("PTK2(S29)", "Dasatinib", inc) :- phosphosite("PTK2(S29)").
+0.1549088521::p_fc("PTK2(S29)", "Edelfosine", dec); 0.1549088521::p_fc("PTK2(S29)", "Edelfosine", inc) :- phosphosite("PTK2(S29)").
+0.3697674594::p_fc("PTK2(S29)", "FRAX486", dec); 0.3697674594::p_fc("PTK2(S29)", "FRAX486", inc) :- phosphosite("PTK2(S29)").
+0.4421998677::p_fc("PTK2(S29)", "GDC0941", dec); 0.4421998677::p_fc("PTK2(S29)", "GDC0941", inc) :- phosphosite("PTK2(S29)").
+0.0614594601::p_fc("PTK2(S29)", "GDC0994", dec); 0.0614594601::p_fc("PTK2(S29)", "GDC0994", inc) :- phosphosite("PTK2(S29)").
+0.2645268519::p_fc("PTK2(S29)", "GF109203X", dec); 0.2645268519::p_fc("PTK2(S29)", "GF109203X", inc) :- phosphosite("PTK2(S29)").
+0.487534815::p_fc("PTK2(S29)", "GO6983", dec); 0.487534815::p_fc("PTK2(S29)", "GO6983", inc) :- phosphosite("PTK2(S29)").
+0.0739177479::p_fc("PTK2(S29)", "GSK2334470", dec); 0.0739177479::p_fc("PTK2(S29)", "GSK2334470", inc) :- phosphosite("PTK2(S29)").
+0.1782059756::p_fc("PTK2(S29)", "GSK690693", dec); 0.1782059756::p_fc("PTK2(S29)", "GSK690693", inc) :- phosphosite("PTK2(S29)").
+0.2914682917::p_fc("PTK2(S29)", "Go6976", dec); 0.2914682917::p_fc("PTK2(S29)", "Go6976", inc) :- phosphosite("PTK2(S29)").
+0.1134808192::p_fc("PTK2(S29)", "H89", dec); 0.1134808192::p_fc("PTK2(S29)", "H89", inc) :- phosphosite("PTK2(S29)").
+0.3264066975::p_fc("PTK2(S29)", "HS173", dec); 0.3264066975::p_fc("PTK2(S29)", "HS173", inc) :- phosphosite("PTK2(S29)").
+0.1331704296::p_fc("PTK2(S29)", "Ipatasertib", dec); 0.1331704296::p_fc("PTK2(S29)", "Ipatasertib", inc) :- phosphosite("PTK2(S29)").
+0.0220074666::p_fc("PTK2(S29)", "JNJ", dec); 0.0220074666::p_fc("PTK2(S29)", "JNJ", inc) :- phosphosite("PTK2(S29)").
+0.3170111727::p_fc("PTK2(S29)", "JNK", dec); 0.3170111727::p_fc("PTK2(S29)", "JNK", inc) :- phosphosite("PTK2(S29)").
+0.0944602992::p_fc("PTK2(S29)", "KD025", dec); 0.0944602992::p_fc("PTK2(S29)", "KD025", inc) :- phosphosite("PTK2(S29)").
+0.1782059756::p_fc("PTK2(S29)", "KN62", dec); 0.1782059756::p_fc("PTK2(S29)", "KN62", inc) :- phosphosite("PTK2(S29)").
+0.0848536646::p_fc("PTK2(S29)", "KN93", dec); 0.0848536646::p_fc("PTK2(S29)", "KN93", inc) :- phosphosite("PTK2(S29)").
+0.1650228245::p_fc("PTK2(S29)", "Ku0063794", dec); 0.1650228245::p_fc("PTK2(S29)", "Ku0063794", inc) :- phosphosite("PTK2(S29)").
+0.1015608119::p_fc("PTK2(S29)", "LY2090314", dec); 0.1015608119::p_fc("PTK2(S29)", "LY2090314", inc) :- phosphosite("PTK2(S29)").
+0.2594352635::p_fc("PTK2(S29)", "LY2584702", dec); 0.2594352635::p_fc("PTK2(S29)", "LY2584702", inc) :- phosphosite("PTK2(S29)").
+0.000997006::p_fc("PTK2(S29)", "LY2835219", dec); 0.000997006::p_fc("PTK2(S29)", "LY2835219", inc) :- phosphosite("PTK2(S29)").
+0.0058082384::p_fc("PTK2(S29)", "Linsitinib", dec); 0.0058082384::p_fc("PTK2(S29)", "Linsitinib", inc) :- phosphosite("PTK2(S29)").
+0.1389241234::p_fc("PTK2(S29)", "MK2206", dec); 0.1389241234::p_fc("PTK2(S29)", "MK2206", inc) :- phosphosite("PTK2(S29)").
+0.4585369448::p_fc("PTK2(S29)", "NU7441", dec); 0.4585369448::p_fc("PTK2(S29)", "NU7441", inc) :- phosphosite("PTK2(S29)").
+0.0299916853::p_fc("PTK2(S29)", "PD153035", dec); 0.0299916853::p_fc("PTK2(S29)", "PD153035", inc) :- phosphosite("PTK2(S29)").
+0.3115963013::p_fc("PTK2(S29)", "PF3758309", dec); 0.3115963013::p_fc("PTK2(S29)", "PF3758309", inc) :- phosphosite("PTK2(S29)").
+0.2560069361::p_fc("PTK2(S29)", "PF4708671", dec); 0.2560069361::p_fc("PTK2(S29)", "PF4708671", inc) :- phosphosite("PTK2(S29)").
+0.2371820696::p_fc("PTK2(S29)", "PH797804", dec); 0.2371820696::p_fc("PTK2(S29)", "PH797804", inc) :- phosphosite("PTK2(S29)").
+0.4806347308::p_fc("PTK2(S29)", "PIK294", dec); 0.4806347308::p_fc("PTK2(S29)", "PIK294", inc) :- phosphosite("PTK2(S29)").
+0.1782059756::p_fc("PTK2(S29)", "Ribociclib", dec); 0.1782059756::p_fc("PTK2(S29)", "Ribociclib", inc) :- phosphosite("PTK2(S29)").
+0.4384552499::p_fc("PTK2(S29)", "Ripasudil", dec); 0.4384552499::p_fc("PTK2(S29)", "Ripasudil", inc) :- phosphosite("PTK2(S29)").
+0.2954068283::p_fc("PTK2(S29)", "SP600125", dec); 0.2954068283::p_fc("PTK2(S29)", "SP600125", inc) :- phosphosite("PTK2(S29)").
+0.0657849747::p_fc("PTK2(S29)", "Selumetinib", dec); 0.0657849747::p_fc("PTK2(S29)", "Selumetinib", inc) :- phosphosite("PTK2(S29)").
+0.3142872541::p_fc("PTK2(S29)", "TAK715", dec); 0.3142872541::p_fc("PTK2(S29)", "TAK715", inc) :- phosphosite("PTK2(S29)").
+0.1550813801::p_fc("PTK2(S29)", "TBCA", dec); 0.1550813801::p_fc("PTK2(S29)", "TBCA", inc) :- phosphosite("PTK2(S29)").
+0.2953212284::p_fc("PTK2(S29)", "TGX221", dec); 0.2953212284::p_fc("PTK2(S29)", "TGX221", inc) :- phosphosite("PTK2(S29)").
+0.2667322053::p_fc("PTK2(S29)", "Tofacitinib", dec); 0.2667322053::p_fc("PTK2(S29)", "Tofacitinib", inc) :- phosphosite("PTK2(S29)").
+0.4006531574::p_fc("PTK2(S29)", "Torin", dec); 0.4006531574::p_fc("PTK2(S29)", "Torin", inc) :- phosphosite("PTK2(S29)").
+0.3175473601::p_fc("PTK2(S29)", "Trametinib", dec); 0.3175473601::p_fc("PTK2(S29)", "Trametinib", inc) :- phosphosite("PTK2(S29)").
+0.1556440703::p_fc("PTK2(S29)", "U73122", dec); 0.1556440703::p_fc("PTK2(S29)", "U73122", inc) :- phosphosite("PTK2(S29)").
+0.145726276::p_fc("PTK2(S29)", "Ulixertinib", dec); 0.145726276::p_fc("PTK2(S29)", "Ulixertinib", inc) :- phosphosite("PTK2(S29)").
+0.3894049738::p_fc("PTK2(S29)", "Vemurafenib", dec); 0.3894049738::p_fc("PTK2(S29)", "Vemurafenib", inc) :- phosphosite("PTK2(S29)").
+0.0110318413::p_fc("PTK2(S722)", "AC220", dec); 0.0110318413::p_fc("PTK2(S722)", "AC220", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "AT13148", dec); 0.0899071163::p_fc("PTK2(S722)", "AT13148", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "AZ20", dec); 0.0899071163::p_fc("PTK2(S722)", "AZ20", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "AZD1480", dec); 0.0899071163::p_fc("PTK2(S722)", "AZD1480", inc) :- phosphosite("PTK2(S722)").
+0.0274992279::p_fc("PTK2(S722)", "AZD3759", dec); 0.0274992279::p_fc("PTK2(S722)", "AZD3759", inc) :- phosphosite("PTK2(S722)").
+0.1041628275::p_fc("PTK2(S722)", "AZD5363", dec); 0.1041628275::p_fc("PTK2(S722)", "AZD5363", inc) :- phosphosite("PTK2(S722)").
+0.414809563::p_fc("PTK2(S722)", "AZD5438", dec); 0.414809563::p_fc("PTK2(S722)", "AZD5438", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "AZD6482", dec); 0.0899071163::p_fc("PTK2(S722)", "AZD6482", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "AZD6738", dec); 0.0899071163::p_fc("PTK2(S722)", "AZD6738", inc) :- phosphosite("PTK2(S722)").
+0.0787487851::p_fc("PTK2(S722)", "AZD8055", dec); 0.0787487851::p_fc("PTK2(S722)", "AZD8055", inc) :- phosphosite("PTK2(S722)").
+0.3952130492::p_fc("PTK2(S722)", "Amuvatinib", dec); 0.3952130492::p_fc("PTK2(S722)", "Amuvatinib", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "BX912", dec); 0.0899071163::p_fc("PTK2(S722)", "BX912", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "Bosutinib", dec); 0.0899071163::p_fc("PTK2(S722)", "Bosutinib", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "CAL101", dec); 0.0899071163::p_fc("PTK2(S722)", "CAL101", inc) :- phosphosite("PTK2(S722)").
+0.1183193257::p_fc("PTK2(S722)", "CHIR99021", dec); 0.1183193257::p_fc("PTK2(S722)", "CHIR99021", inc) :- phosphosite("PTK2(S722)").
+0.0228442275::p_fc("PTK2(S722)", "CX4945", dec); 0.0228442275::p_fc("PTK2(S722)", "CX4945", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "DNAPK", dec); 0.0899071163::p_fc("PTK2(S722)", "DNAPK", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "Dabrafenib", dec); 0.0899071163::p_fc("PTK2(S722)", "Dabrafenib", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "Dasatinib", dec); 0.0899071163::p_fc("PTK2(S722)", "Dasatinib", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "Edelfosine", dec); 0.0899071163::p_fc("PTK2(S722)", "Edelfosine", inc) :- phosphosite("PTK2(S722)").
+0.3553092005::p_fc("PTK2(S722)", "FRAX486", dec); 0.3553092005::p_fc("PTK2(S722)", "FRAX486", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "GDC0941", dec); 0.0899071163::p_fc("PTK2(S722)", "GDC0941", inc) :- phosphosite("PTK2(S722)").
+0.2635912966::p_fc("PTK2(S722)", "GDC0994", dec); 0.2635912966::p_fc("PTK2(S722)", "GDC0994", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "GF109203X", dec); 0.0899071163::p_fc("PTK2(S722)", "GF109203X", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "GO6983", dec); 0.0899071163::p_fc("PTK2(S722)", "GO6983", inc) :- phosphosite("PTK2(S722)").
+0.013725487::p_fc("PTK2(S722)", "GSK2334470", dec); 0.013725487::p_fc("PTK2(S722)", "GSK2334470", inc) :- phosphosite("PTK2(S722)").
+0.4333267324::p_fc("PTK2(S722)", "GSK690693", dec); 0.4333267324::p_fc("PTK2(S722)", "GSK690693", inc) :- phosphosite("PTK2(S722)").
+0.0078758164::p_fc("PTK2(S722)", "Go6976", dec); 0.0078758164::p_fc("PTK2(S722)", "Go6976", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "H89", dec); 0.0899071163::p_fc("PTK2(S722)", "H89", inc) :- phosphosite("PTK2(S722)").
+0.0081563648::p_fc("PTK2(S722)", "HS173", dec); 0.0081563648::p_fc("PTK2(S722)", "HS173", inc) :- phosphosite("PTK2(S722)").
+0.0147701302::p_fc("PTK2(S722)", "Ipatasertib", dec); 0.0147701302::p_fc("PTK2(S722)", "Ipatasertib", inc) :- phosphosite("PTK2(S722)").
+0.0028177064::p_fc("PTK2(S722)", "JNJ", dec); 0.0028177064::p_fc("PTK2(S722)", "JNJ", inc) :- phosphosite("PTK2(S722)").
+0.0039199237::p_fc("PTK2(S722)", "JNK", dec); 0.0039199237::p_fc("PTK2(S722)", "JNK", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "KD025", dec); 0.0899071163::p_fc("PTK2(S722)", "KD025", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "KN62", dec); 0.0899071163::p_fc("PTK2(S722)", "KN62", inc) :- phosphosite("PTK2(S722)").
+0.0287976422::p_fc("PTK2(S722)", "KN93", dec); 0.0287976422::p_fc("PTK2(S722)", "KN93", inc) :- phosphosite("PTK2(S722)").
+0.3632008193::p_fc("PTK2(S722)", "Ku0063794", dec); 0.3632008193::p_fc("PTK2(S722)", "Ku0063794", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "LY2090314", dec); 0.0899071163::p_fc("PTK2(S722)", "LY2090314", inc) :- phosphosite("PTK2(S722)").
+0.4374343903::p_fc("PTK2(S722)", "LY2584702", dec); 0.4374343903::p_fc("PTK2(S722)", "LY2584702", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "LY2835219", dec); 0.0899071163::p_fc("PTK2(S722)", "LY2835219", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "Linsitinib", dec); 0.0899071163::p_fc("PTK2(S722)", "Linsitinib", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "MK2206", dec); 0.0899071163::p_fc("PTK2(S722)", "MK2206", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "NU7441", dec); 0.0899071163::p_fc("PTK2(S722)", "NU7441", inc) :- phosphosite("PTK2(S722)").
+0.3166379535::p_fc("PTK2(S722)", "PD153035", dec); 0.3166379535::p_fc("PTK2(S722)", "PD153035", inc) :- phosphosite("PTK2(S722)").
+0.343001385::p_fc("PTK2(S722)", "PF3758309", dec); 0.343001385::p_fc("PTK2(S722)", "PF3758309", inc) :- phosphosite("PTK2(S722)").
+0.0168749364::p_fc("PTK2(S722)", "PF4708671", dec); 0.0168749364::p_fc("PTK2(S722)", "PF4708671", inc) :- phosphosite("PTK2(S722)").
+0.2570426264::p_fc("PTK2(S722)", "PH797804", dec); 0.2570426264::p_fc("PTK2(S722)", "PH797804", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "PIK294", dec); 0.0899071163::p_fc("PTK2(S722)", "PIK294", inc) :- phosphosite("PTK2(S722)").
+0.347257524::p_fc("PTK2(S722)", "Ribociclib", dec); 0.347257524::p_fc("PTK2(S722)", "Ribociclib", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "Ripasudil", dec); 0.0899071163::p_fc("PTK2(S722)", "Ripasudil", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "SP600125", dec); 0.0899071163::p_fc("PTK2(S722)", "SP600125", inc) :- phosphosite("PTK2(S722)").
+0.1231698396::p_fc("PTK2(S722)", "Selumetinib", dec); 0.1231698396::p_fc("PTK2(S722)", "Selumetinib", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "TAK715", dec); 0.0899071163::p_fc("PTK2(S722)", "TAK715", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "TBCA", dec); 0.0899071163::p_fc("PTK2(S722)", "TBCA", inc) :- phosphosite("PTK2(S722)").
+0.0017875354::p_fc("PTK2(S722)", "TGX221", dec); 0.0017875354::p_fc("PTK2(S722)", "TGX221", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "Tofacitinib", dec); 0.0899071163::p_fc("PTK2(S722)", "Tofacitinib", inc) :- phosphosite("PTK2(S722)").
+0.1820249321::p_fc("PTK2(S722)", "Torin", dec); 0.1820249321::p_fc("PTK2(S722)", "Torin", inc) :- phosphosite("PTK2(S722)").
+0.2267181067::p_fc("PTK2(S722)", "Trametinib", dec); 0.2267181067::p_fc("PTK2(S722)", "Trametinib", inc) :- phosphosite("PTK2(S722)").
+0.4629808244::p_fc("PTK2(S722)", "U73122", dec); 0.4629808244::p_fc("PTK2(S722)", "U73122", inc) :- phosphosite("PTK2(S722)").
+0.3680335518::p_fc("PTK2(S722)", "Ulixertinib", dec); 0.3680335518::p_fc("PTK2(S722)", "Ulixertinib", inc) :- phosphosite("PTK2(S722)").
+0.0899071163::p_fc("PTK2(S722)", "Vemurafenib", dec); 0.0899071163::p_fc("PTK2(S722)", "Vemurafenib", inc) :- phosphosite("PTK2(S722)").
+0.4995::p_fc("PTK2(S843)", "AC220", dec); 0.4995::p_fc("PTK2(S843)", "AC220", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "AT13148", dec); 0.4995::p_fc("PTK2(S843)", "AT13148", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "AZ20", dec); 0.4995::p_fc("PTK2(S843)", "AZ20", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "AZD1480", dec); 0.4995::p_fc("PTK2(S843)", "AZD1480", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "AZD3759", dec); 0.4995::p_fc("PTK2(S843)", "AZD3759", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "AZD5363", dec); 0.4995::p_fc("PTK2(S843)", "AZD5363", inc) :- phosphosite("PTK2(S843)").
+0.0033646675::p_fc("PTK2(S843)", "AZD5438", dec); 0.0033646675::p_fc("PTK2(S843)", "AZD5438", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "AZD6482", dec); 0.4995::p_fc("PTK2(S843)", "AZD6482", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "AZD6738", dec); 0.4995::p_fc("PTK2(S843)", "AZD6738", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "AZD8055", dec); 0.4995::p_fc("PTK2(S843)", "AZD8055", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Amuvatinib", dec); 0.4995::p_fc("PTK2(S843)", "Amuvatinib", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "BX912", dec); 0.4995::p_fc("PTK2(S843)", "BX912", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Bosutinib", dec); 0.4995::p_fc("PTK2(S843)", "Bosutinib", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "CAL101", dec); 0.4995::p_fc("PTK2(S843)", "CAL101", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "CHIR99021", dec); 0.4995::p_fc("PTK2(S843)", "CHIR99021", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "CX4945", dec); 0.4995::p_fc("PTK2(S843)", "CX4945", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "DNAPK", dec); 0.4995::p_fc("PTK2(S843)", "DNAPK", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Dabrafenib", dec); 0.4995::p_fc("PTK2(S843)", "Dabrafenib", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Dasatinib", dec); 0.4995::p_fc("PTK2(S843)", "Dasatinib", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Edelfosine", dec); 0.4995::p_fc("PTK2(S843)", "Edelfosine", inc) :- phosphosite("PTK2(S843)").
+0.0011164584::p_fc("PTK2(S843)", "FRAX486", dec); 0.0011164584::p_fc("PTK2(S843)", "FRAX486", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "GDC0941", dec); 0.4995::p_fc("PTK2(S843)", "GDC0941", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "GDC0994", dec); 0.4995::p_fc("PTK2(S843)", "GDC0994", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "GF109203X", dec); 0.4995::p_fc("PTK2(S843)", "GF109203X", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "GO6983", dec); 0.4995::p_fc("PTK2(S843)", "GO6983", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "GSK2334470", dec); 0.4995::p_fc("PTK2(S843)", "GSK2334470", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "GSK690693", dec); 0.4995::p_fc("PTK2(S843)", "GSK690693", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Go6976", dec); 0.4995::p_fc("PTK2(S843)", "Go6976", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "H89", dec); 0.4995::p_fc("PTK2(S843)", "H89", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "HS173", dec); 0.4995::p_fc("PTK2(S843)", "HS173", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Ipatasertib", dec); 0.4995::p_fc("PTK2(S843)", "Ipatasertib", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "JNJ", dec); 0.4995::p_fc("PTK2(S843)", "JNJ", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "JNK", dec); 0.4995::p_fc("PTK2(S843)", "JNK", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "KD025", dec); 0.4995::p_fc("PTK2(S843)", "KD025", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "KN62", dec); 0.4995::p_fc("PTK2(S843)", "KN62", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "KN93", dec); 0.4995::p_fc("PTK2(S843)", "KN93", inc) :- phosphosite("PTK2(S843)").
+0.0010208937::p_fc("PTK2(S843)", "Ku0063794", dec); 0.0010208937::p_fc("PTK2(S843)", "Ku0063794", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "LY2090314", dec); 0.4995::p_fc("PTK2(S843)", "LY2090314", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "LY2584702", dec); 0.4995::p_fc("PTK2(S843)", "LY2584702", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "LY2835219", dec); 0.4995::p_fc("PTK2(S843)", "LY2835219", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Linsitinib", dec); 0.4995::p_fc("PTK2(S843)", "Linsitinib", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "MK2206", dec); 0.4995::p_fc("PTK2(S843)", "MK2206", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "NU7441", dec); 0.4995::p_fc("PTK2(S843)", "NU7441", inc) :- phosphosite("PTK2(S843)").
+0.0009992883::p_fc("PTK2(S843)", "PD153035", dec); 0.0009992883::p_fc("PTK2(S843)", "PD153035", inc) :- phosphosite("PTK2(S843)").
+0.0065424351::p_fc("PTK2(S843)", "PF3758309", dec); 0.0065424351::p_fc("PTK2(S843)", "PF3758309", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "PF4708671", dec); 0.4995::p_fc("PTK2(S843)", "PF4708671", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "PH797804", dec); 0.4995::p_fc("PTK2(S843)", "PH797804", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "PIK294", dec); 0.4995::p_fc("PTK2(S843)", "PIK294", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Ribociclib", dec); 0.4995::p_fc("PTK2(S843)", "Ribociclib", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Ripasudil", dec); 0.4995::p_fc("PTK2(S843)", "Ripasudil", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "SP600125", dec); 0.4995::p_fc("PTK2(S843)", "SP600125", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Selumetinib", dec); 0.4995::p_fc("PTK2(S843)", "Selumetinib", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "TAK715", dec); 0.4995::p_fc("PTK2(S843)", "TAK715", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "TBCA", dec); 0.4995::p_fc("PTK2(S843)", "TBCA", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "TGX221", dec); 0.4995::p_fc("PTK2(S843)", "TGX221", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Tofacitinib", dec); 0.4995::p_fc("PTK2(S843)", "Tofacitinib", inc) :- phosphosite("PTK2(S843)").
+0.001005746::p_fc("PTK2(S843)", "Torin", dec); 0.001005746::p_fc("PTK2(S843)", "Torin", inc) :- phosphosite("PTK2(S843)").
+0.0009978226::p_fc("PTK2(S843)", "Trametinib", dec); 0.0009978226::p_fc("PTK2(S843)", "Trametinib", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "U73122", dec); 0.4995::p_fc("PTK2(S843)", "U73122", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Ulixertinib", dec); 0.4995::p_fc("PTK2(S843)", "Ulixertinib", inc) :- phosphosite("PTK2(S843)").
+0.4995::p_fc("PTK2(S843)", "Vemurafenib", dec); 0.4995::p_fc("PTK2(S843)", "Vemurafenib", inc) :- phosphosite("PTK2(S843)").
+0.0024868458::p_fc("PTK2(S910)", "AC220", dec); 0.0024868458::p_fc("PTK2(S910)", "AC220", inc) :- phosphosite("PTK2(S910)").
+0.3391746969::p_fc("PTK2(S910)", "AT13148", dec); 0.3391746969::p_fc("PTK2(S910)", "AT13148", inc) :- phosphosite("PTK2(S910)").
+0.4675217701::p_fc("PTK2(S910)", "AZ20", dec); 0.4675217701::p_fc("PTK2(S910)", "AZ20", inc) :- phosphosite("PTK2(S910)").
+0.0830064659::p_fc("PTK2(S910)", "AZD1480", dec); 0.0830064659::p_fc("PTK2(S910)", "AZD1480", inc) :- phosphosite("PTK2(S910)").
+0.2363521195::p_fc("PTK2(S910)", "AZD3759", dec); 0.2363521195::p_fc("PTK2(S910)", "AZD3759", inc) :- phosphosite("PTK2(S910)").
+0.056242612::p_fc("PTK2(S910)", "AZD5363", dec); 0.056242612::p_fc("PTK2(S910)", "AZD5363", inc) :- phosphosite("PTK2(S910)").
+0.3552402148::p_fc("PTK2(S910)", "AZD5438", dec); 0.3552402148::p_fc("PTK2(S910)", "AZD5438", inc) :- phosphosite("PTK2(S910)").
+0.3970205959::p_fc("PTK2(S910)", "AZD6482", dec); 0.3970205959::p_fc("PTK2(S910)", "AZD6482", inc) :- phosphosite("PTK2(S910)").
+0.4953045248::p_fc("PTK2(S910)", "AZD6738", dec); 0.4953045248::p_fc("PTK2(S910)", "AZD6738", inc) :- phosphosite("PTK2(S910)").
+0.0051244135::p_fc("PTK2(S910)", "AZD8055", dec); 0.0051244135::p_fc("PTK2(S910)", "AZD8055", inc) :- phosphosite("PTK2(S910)").
+0.4036929156::p_fc("PTK2(S910)", "Amuvatinib", dec); 0.4036929156::p_fc("PTK2(S910)", "Amuvatinib", inc) :- phosphosite("PTK2(S910)").
+0.3251776928::p_fc("PTK2(S910)", "BX912", dec); 0.3251776928::p_fc("PTK2(S910)", "BX912", inc) :- phosphosite("PTK2(S910)").
+0.239115192::p_fc("PTK2(S910)", "Bosutinib", dec); 0.239115192::p_fc("PTK2(S910)", "Bosutinib", inc) :- phosphosite("PTK2(S910)").
+0.3242361719::p_fc("PTK2(S910)", "CAL101", dec); 0.3242361719::p_fc("PTK2(S910)", "CAL101", inc) :- phosphosite("PTK2(S910)").
+0.1605072395::p_fc("PTK2(S910)", "CHIR99021", dec); 0.1605072395::p_fc("PTK2(S910)", "CHIR99021", inc) :- phosphosite("PTK2(S910)").
+0.1347754751::p_fc("PTK2(S910)", "CX4945", dec); 0.1347754751::p_fc("PTK2(S910)", "CX4945", inc) :- phosphosite("PTK2(S910)").
+0.080031663::p_fc("PTK2(S910)", "DNAPK", dec); 0.080031663::p_fc("PTK2(S910)", "DNAPK", inc) :- phosphosite("PTK2(S910)").
+0.1203490076::p_fc("PTK2(S910)", "Dabrafenib", dec); 0.1203490076::p_fc("PTK2(S910)", "Dabrafenib", inc) :- phosphosite("PTK2(S910)").
+0.3195370289::p_fc("PTK2(S910)", "Dasatinib", dec); 0.3195370289::p_fc("PTK2(S910)", "Dasatinib", inc) :- phosphosite("PTK2(S910)").
+0.0220015626::p_fc("PTK2(S910)", "Edelfosine", dec); 0.0220015626::p_fc("PTK2(S910)", "Edelfosine", inc) :- phosphosite("PTK2(S910)").
+0.265290132::p_fc("PTK2(S910)", "FRAX486", dec); 0.265290132::p_fc("PTK2(S910)", "FRAX486", inc) :- phosphosite("PTK2(S910)").
+0.3915907145::p_fc("PTK2(S910)", "GDC0941", dec); 0.3915907145::p_fc("PTK2(S910)", "GDC0941", inc) :- phosphosite("PTK2(S910)").
+0.0091729672::p_fc("PTK2(S910)", "GDC0994", dec); 0.0091729672::p_fc("PTK2(S910)", "GDC0994", inc) :- phosphosite("PTK2(S910)").
+0.197657996::p_fc("PTK2(S910)", "GF109203X", dec); 0.197657996::p_fc("PTK2(S910)", "GF109203X", inc) :- phosphosite("PTK2(S910)").
+0.292452697::p_fc("PTK2(S910)", "GO6983", dec); 0.292452697::p_fc("PTK2(S910)", "GO6983", inc) :- phosphosite("PTK2(S910)").
+0.0331361759::p_fc("PTK2(S910)", "GSK2334470", dec); 0.0331361759::p_fc("PTK2(S910)", "GSK2334470", inc) :- phosphosite("PTK2(S910)").
+0.4965277066::p_fc("PTK2(S910)", "GSK690693", dec); 0.4965277066::p_fc("PTK2(S910)", "GSK690693", inc) :- phosphosite("PTK2(S910)").
+0.0203107386::p_fc("PTK2(S910)", "Go6976", dec); 0.0203107386::p_fc("PTK2(S910)", "Go6976", inc) :- phosphosite("PTK2(S910)").
+0.4844546381::p_fc("PTK2(S910)", "H89", dec); 0.4844546381::p_fc("PTK2(S910)", "H89", inc) :- phosphosite("PTK2(S910)").
+0.3420009457::p_fc("PTK2(S910)", "HS173", dec); 0.3420009457::p_fc("PTK2(S910)", "HS173", inc) :- phosphosite("PTK2(S910)").
+0.0357873718::p_fc("PTK2(S910)", "Ipatasertib", dec); 0.0357873718::p_fc("PTK2(S910)", "Ipatasertib", inc) :- phosphosite("PTK2(S910)").
+0.235541665::p_fc("PTK2(S910)", "JNJ", dec); 0.235541665::p_fc("PTK2(S910)", "JNJ", inc) :- phosphosite("PTK2(S910)").
+0.173287969::p_fc("PTK2(S910)", "JNK", dec); 0.173287969::p_fc("PTK2(S910)", "JNK", inc) :- phosphosite("PTK2(S910)").
+0.0144802912::p_fc("PTK2(S910)", "KD025", dec); 0.0144802912::p_fc("PTK2(S910)", "KD025", inc) :- phosphosite("PTK2(S910)").
+0.4911610081::p_fc("PTK2(S910)", "KN62", dec); 0.4911610081::p_fc("PTK2(S910)", "KN62", inc) :- phosphosite("PTK2(S910)").
+0.1760045514::p_fc("PTK2(S910)", "KN93", dec); 0.1760045514::p_fc("PTK2(S910)", "KN93", inc) :- phosphosite("PTK2(S910)").
+0.369894753::p_fc("PTK2(S910)", "Ku0063794", dec); 0.369894753::p_fc("PTK2(S910)", "Ku0063794", inc) :- phosphosite("PTK2(S910)").
+0.2612373424::p_fc("PTK2(S910)", "LY2090314", dec); 0.2612373424::p_fc("PTK2(S910)", "LY2090314", inc) :- phosphosite("PTK2(S910)").
+0.2600416709::p_fc("PTK2(S910)", "LY2584702", dec); 0.2600416709::p_fc("PTK2(S910)", "LY2584702", inc) :- phosphosite("PTK2(S910)").
+0.2504302223::p_fc("PTK2(S910)", "LY2835219", dec); 0.2504302223::p_fc("PTK2(S910)", "LY2835219", inc) :- phosphosite("PTK2(S910)").
+0.4450938924::p_fc("PTK2(S910)", "Linsitinib", dec); 0.4450938924::p_fc("PTK2(S910)", "Linsitinib", inc) :- phosphosite("PTK2(S910)").
+0.4529100791::p_fc("PTK2(S910)", "MK2206", dec); 0.4529100791::p_fc("PTK2(S910)", "MK2206", inc) :- phosphosite("PTK2(S910)").
+0.2248299565::p_fc("PTK2(S910)", "NU7441", dec); 0.2248299565::p_fc("PTK2(S910)", "NU7441", inc) :- phosphosite("PTK2(S910)").
+0.424351747::p_fc("PTK2(S910)", "PD153035", dec); 0.424351747::p_fc("PTK2(S910)", "PD153035", inc) :- phosphosite("PTK2(S910)").
+0.0696310686::p_fc("PTK2(S910)", "PF3758309", dec); 0.0696310686::p_fc("PTK2(S910)", "PF3758309", inc) :- phosphosite("PTK2(S910)").
+0.4012865022::p_fc("PTK2(S910)", "PF4708671", dec); 0.4012865022::p_fc("PTK2(S910)", "PF4708671", inc) :- phosphosite("PTK2(S910)").
+0.0564563055::p_fc("PTK2(S910)", "PH797804", dec); 0.0564563055::p_fc("PTK2(S910)", "PH797804", inc) :- phosphosite("PTK2(S910)").
+0.0315728722::p_fc("PTK2(S910)", "PIK294", dec); 0.0315728722::p_fc("PTK2(S910)", "PIK294", inc) :- phosphosite("PTK2(S910)").
+0.0803146681::p_fc("PTK2(S910)", "Ribociclib", dec); 0.0803146681::p_fc("PTK2(S910)", "Ribociclib", inc) :- phosphosite("PTK2(S910)").
+0.081877747::p_fc("PTK2(S910)", "Ripasudil", dec); 0.081877747::p_fc("PTK2(S910)", "Ripasudil", inc) :- phosphosite("PTK2(S910)").
+0.3760045152::p_fc("PTK2(S910)", "SP600125", dec); 0.3760045152::p_fc("PTK2(S910)", "SP600125", inc) :- phosphosite("PTK2(S910)").
+0.0053406065::p_fc("PTK2(S910)", "Selumetinib", dec); 0.0053406065::p_fc("PTK2(S910)", "Selumetinib", inc) :- phosphosite("PTK2(S910)").
+0.0304719592::p_fc("PTK2(S910)", "TAK715", dec); 0.0304719592::p_fc("PTK2(S910)", "TAK715", inc) :- phosphosite("PTK2(S910)").
+0.3848676818::p_fc("PTK2(S910)", "TBCA", dec); 0.3848676818::p_fc("PTK2(S910)", "TBCA", inc) :- phosphosite("PTK2(S910)").
+0.0706272961::p_fc("PTK2(S910)", "TGX221", dec); 0.0706272961::p_fc("PTK2(S910)", "TGX221", inc) :- phosphosite("PTK2(S910)").
+0.1597071392::p_fc("PTK2(S910)", "Tofacitinib", dec); 0.1597071392::p_fc("PTK2(S910)", "Tofacitinib", inc) :- phosphosite("PTK2(S910)").
+0.191741113::p_fc("PTK2(S910)", "Torin", dec); 0.191741113::p_fc("PTK2(S910)", "Torin", inc) :- phosphosite("PTK2(S910)").
+0.1470250591::p_fc("PTK2(S910)", "Trametinib", dec); 0.1470250591::p_fc("PTK2(S910)", "Trametinib", inc) :- phosphosite("PTK2(S910)").
+0.0115632389::p_fc("PTK2(S910)", "U73122", dec); 0.0115632389::p_fc("PTK2(S910)", "U73122", inc) :- phosphosite("PTK2(S910)").
+0.0214787951::p_fc("PTK2(S910)", "Ulixertinib", dec); 0.0214787951::p_fc("PTK2(S910)", "Ulixertinib", inc) :- phosphosite("PTK2(S910)").
+0.433303054::p_fc("PTK2(S910)", "Vemurafenib", dec); 0.433303054::p_fc("PTK2(S910)", "Vemurafenib", inc) :- phosphosite("PTK2(S910)").
+0.0085687505::p_fc("PTPRG(S995)", "AC220", dec); 0.0085687505::p_fc("PTPRG(S995)", "AC220", inc) :- phosphosite("PTPRG(S995)").
+0.3133261702::p_fc("PTPRG(S995)", "AT13148", dec); 0.3133261702::p_fc("PTPRG(S995)", "AT13148", inc) :- phosphosite("PTPRG(S995)").
+0.3571614124::p_fc("PTPRG(S995)", "AZ20", dec); 0.3571614124::p_fc("PTPRG(S995)", "AZ20", inc) :- phosphosite("PTPRG(S995)").
+0.4989628878::p_fc("PTPRG(S995)", "AZD1480", dec); 0.4989628878::p_fc("PTPRG(S995)", "AZD1480", inc) :- phosphosite("PTPRG(S995)").
+0.3156625257::p_fc("PTPRG(S995)", "AZD3759", dec); 0.3156625257::p_fc("PTPRG(S995)", "AZD3759", inc) :- phosphosite("PTPRG(S995)").
+0.3436735092::p_fc("PTPRG(S995)", "AZD5363", dec); 0.3436735092::p_fc("PTPRG(S995)", "AZD5363", inc) :- phosphosite("PTPRG(S995)").
+0.396561029::p_fc("PTPRG(S995)", "AZD5438", dec); 0.396561029::p_fc("PTPRG(S995)", "AZD5438", inc) :- phosphosite("PTPRG(S995)").
+0.4591222055::p_fc("PTPRG(S995)", "AZD6482", dec); 0.4591222055::p_fc("PTPRG(S995)", "AZD6482", inc) :- phosphosite("PTPRG(S995)").
+0.176566981::p_fc("PTPRG(S995)", "AZD6738", dec); 0.176566981::p_fc("PTPRG(S995)", "AZD6738", inc) :- phosphosite("PTPRG(S995)").
+0.4912496363::p_fc("PTPRG(S995)", "AZD8055", dec); 0.4912496363::p_fc("PTPRG(S995)", "AZD8055", inc) :- phosphosite("PTPRG(S995)").
+0.4095605514::p_fc("PTPRG(S995)", "Amuvatinib", dec); 0.4095605514::p_fc("PTPRG(S995)", "Amuvatinib", inc) :- phosphosite("PTPRG(S995)").
+0.4927185771::p_fc("PTPRG(S995)", "BX912", dec); 0.4927185771::p_fc("PTPRG(S995)", "BX912", inc) :- phosphosite("PTPRG(S995)").
+0.059390386::p_fc("PTPRG(S995)", "Bosutinib", dec); 0.059390386::p_fc("PTPRG(S995)", "Bosutinib", inc) :- phosphosite("PTPRG(S995)").
+0.0775770174::p_fc("PTPRG(S995)", "CAL101", dec); 0.0775770174::p_fc("PTPRG(S995)", "CAL101", inc) :- phosphosite("PTPRG(S995)").
+0.4958261139::p_fc("PTPRG(S995)", "CHIR99021", dec); 0.4958261139::p_fc("PTPRG(S995)", "CHIR99021", inc) :- phosphosite("PTPRG(S995)").
+0.4875273635::p_fc("PTPRG(S995)", "CX4945", dec); 0.4875273635::p_fc("PTPRG(S995)", "CX4945", inc) :- phosphosite("PTPRG(S995)").
+0.3242608983::p_fc("PTPRG(S995)", "DNAPK", dec); 0.3242608983::p_fc("PTPRG(S995)", "DNAPK", inc) :- phosphosite("PTPRG(S995)").
+0.2694398996::p_fc("PTPRG(S995)", "Dabrafenib", dec); 0.2694398996::p_fc("PTPRG(S995)", "Dabrafenib", inc) :- phosphosite("PTPRG(S995)").
+0.1813503521::p_fc("PTPRG(S995)", "Dasatinib", dec); 0.1813503521::p_fc("PTPRG(S995)", "Dasatinib", inc) :- phosphosite("PTPRG(S995)").
+0.3265990809::p_fc("PTPRG(S995)", "Edelfosine", dec); 0.3265990809::p_fc("PTPRG(S995)", "Edelfosine", inc) :- phosphosite("PTPRG(S995)").
+0.3373179038::p_fc("PTPRG(S995)", "FRAX486", dec); 0.3373179038::p_fc("PTPRG(S995)", "FRAX486", inc) :- phosphosite("PTPRG(S995)").
+0.4453909242::p_fc("PTPRG(S995)", "GDC0941", dec); 0.4453909242::p_fc("PTPRG(S995)", "GDC0941", inc) :- phosphosite("PTPRG(S995)").
+0.4006988719::p_fc("PTPRG(S995)", "GDC0994", dec); 0.4006988719::p_fc("PTPRG(S995)", "GDC0994", inc) :- phosphosite("PTPRG(S995)").
+0.2436636202::p_fc("PTPRG(S995)", "GF109203X", dec); 0.2436636202::p_fc("PTPRG(S995)", "GF109203X", inc) :- phosphosite("PTPRG(S995)").
+0.2053880985::p_fc("PTPRG(S995)", "GO6983", dec); 0.2053880985::p_fc("PTPRG(S995)", "GO6983", inc) :- phosphosite("PTPRG(S995)").
+0.4626421516::p_fc("PTPRG(S995)", "GSK2334470", dec); 0.4626421516::p_fc("PTPRG(S995)", "GSK2334470", inc) :- phosphosite("PTPRG(S995)").
+0.2553946259::p_fc("PTPRG(S995)", "GSK690693", dec); 0.2553946259::p_fc("PTPRG(S995)", "GSK690693", inc) :- phosphosite("PTPRG(S995)").
+0.0662388372::p_fc("PTPRG(S995)", "Go6976", dec); 0.0662388372::p_fc("PTPRG(S995)", "Go6976", inc) :- phosphosite("PTPRG(S995)").
+0.1987867685::p_fc("PTPRG(S995)", "H89", dec); 0.1987867685::p_fc("PTPRG(S995)", "H89", inc) :- phosphosite("PTPRG(S995)").
+0.3291488996::p_fc("PTPRG(S995)", "HS173", dec); 0.3291488996::p_fc("PTPRG(S995)", "HS173", inc) :- phosphosite("PTPRG(S995)").
+0.4988720029::p_fc("PTPRG(S995)", "Ipatasertib", dec); 0.4988720029::p_fc("PTPRG(S995)", "Ipatasertib", inc) :- phosphosite("PTPRG(S995)").
+0.0466293363::p_fc("PTPRG(S995)", "JNJ", dec); 0.0466293363::p_fc("PTPRG(S995)", "JNJ", inc) :- phosphosite("PTPRG(S995)").
+0.1284406431::p_fc("PTPRG(S995)", "JNK", dec); 0.1284406431::p_fc("PTPRG(S995)", "JNK", inc) :- phosphosite("PTPRG(S995)").
+0.1563474775::p_fc("PTPRG(S995)", "KD025", dec); 0.1563474775::p_fc("PTPRG(S995)", "KD025", inc) :- phosphosite("PTPRG(S995)").
+0.0985556375::p_fc("PTPRG(S995)", "KN62", dec); 0.0985556375::p_fc("PTPRG(S995)", "KN62", inc) :- phosphosite("PTPRG(S995)").
+0.2714447375::p_fc("PTPRG(S995)", "KN93", dec); 0.2714447375::p_fc("PTPRG(S995)", "KN93", inc) :- phosphosite("PTPRG(S995)").
+0.0305604749::p_fc("PTPRG(S995)", "Ku0063794", dec); 0.0305604749::p_fc("PTPRG(S995)", "Ku0063794", inc) :- phosphosite("PTPRG(S995)").
+0.3609749242::p_fc("PTPRG(S995)", "LY2090314", dec); 0.3609749242::p_fc("PTPRG(S995)", "LY2090314", inc) :- phosphosite("PTPRG(S995)").
+0.1145949262::p_fc("PTPRG(S995)", "LY2584702", dec); 0.1145949262::p_fc("PTPRG(S995)", "LY2584702", inc) :- phosphosite("PTPRG(S995)").
+0.2249404949::p_fc("PTPRG(S995)", "LY2835219", dec); 0.2249404949::p_fc("PTPRG(S995)", "LY2835219", inc) :- phosphosite("PTPRG(S995)").
+0.344002775::p_fc("PTPRG(S995)", "Linsitinib", dec); 0.344002775::p_fc("PTPRG(S995)", "Linsitinib", inc) :- phosphosite("PTPRG(S995)").
+0.2557877121::p_fc("PTPRG(S995)", "MK2206", dec); 0.2557877121::p_fc("PTPRG(S995)", "MK2206", inc) :- phosphosite("PTPRG(S995)").
+0.2079855816::p_fc("PTPRG(S995)", "NU7441", dec); 0.2079855816::p_fc("PTPRG(S995)", "NU7441", inc) :- phosphosite("PTPRG(S995)").
+0.0442739473::p_fc("PTPRG(S995)", "PD153035", dec); 0.0442739473::p_fc("PTPRG(S995)", "PD153035", inc) :- phosphosite("PTPRG(S995)").
+0.0032065951::p_fc("PTPRG(S995)", "PF3758309", dec); 0.0032065951::p_fc("PTPRG(S995)", "PF3758309", inc) :- phosphosite("PTPRG(S995)").
+0.3476406439::p_fc("PTPRG(S995)", "PF4708671", dec); 0.3476406439::p_fc("PTPRG(S995)", "PF4708671", inc) :- phosphosite("PTPRG(S995)").
+0.4673690653::p_fc("PTPRG(S995)", "PH797804", dec); 0.4673690653::p_fc("PTPRG(S995)", "PH797804", inc) :- phosphosite("PTPRG(S995)").
+0.479763999::p_fc("PTPRG(S995)", "PIK294", dec); 0.479763999::p_fc("PTPRG(S995)", "PIK294", inc) :- phosphosite("PTPRG(S995)").
+0.4440755305::p_fc("PTPRG(S995)", "Ribociclib", dec); 0.4440755305::p_fc("PTPRG(S995)", "Ribociclib", inc) :- phosphosite("PTPRG(S995)").
+0.2673744689::p_fc("PTPRG(S995)", "Ripasudil", dec); 0.2673744689::p_fc("PTPRG(S995)", "Ripasudil", inc) :- phosphosite("PTPRG(S995)").
+0.0764657398::p_fc("PTPRG(S995)", "SP600125", dec); 0.0764657398::p_fc("PTPRG(S995)", "SP600125", inc) :- phosphosite("PTPRG(S995)").
+0.005915724::p_fc("PTPRG(S995)", "Selumetinib", dec); 0.005915724::p_fc("PTPRG(S995)", "Selumetinib", inc) :- phosphosite("PTPRG(S995)").
+0.1347216318::p_fc("PTPRG(S995)", "TAK715", dec); 0.1347216318::p_fc("PTPRG(S995)", "TAK715", inc) :- phosphosite("PTPRG(S995)").
+0.0523443052::p_fc("PTPRG(S995)", "TBCA", dec); 0.0523443052::p_fc("PTPRG(S995)", "TBCA", inc) :- phosphosite("PTPRG(S995)").
+0.2121418603::p_fc("PTPRG(S995)", "TGX221", dec); 0.2121418603::p_fc("PTPRG(S995)", "TGX221", inc) :- phosphosite("PTPRG(S995)").
+0.4211528518::p_fc("PTPRG(S995)", "Tofacitinib", dec); 0.4211528518::p_fc("PTPRG(S995)", "Tofacitinib", inc) :- phosphosite("PTPRG(S995)").
+0.2269645156::p_fc("PTPRG(S995)", "Torin", dec); 0.2269645156::p_fc("PTPRG(S995)", "Torin", inc) :- phosphosite("PTPRG(S995)").
+0.0594319781::p_fc("PTPRG(S995)", "Trametinib", dec); 0.0594319781::p_fc("PTPRG(S995)", "Trametinib", inc) :- phosphosite("PTPRG(S995)").
+0.3099645053::p_fc("PTPRG(S995)", "U73122", dec); 0.3099645053::p_fc("PTPRG(S995)", "U73122", inc) :- phosphosite("PTPRG(S995)").
+0.1826573038::p_fc("PTPRG(S995)", "Ulixertinib", dec); 0.1826573038::p_fc("PTPRG(S995)", "Ulixertinib", inc) :- phosphosite("PTPRG(S995)").
+0.0054144948::p_fc("PTPRG(S995)", "Vemurafenib", dec); 0.0054144948::p_fc("PTPRG(S995)", "Vemurafenib", inc) :- phosphosite("PTPRG(S995)").
+0.119469693::p_fc("SRC(S17)", "AC220", dec); 0.119469693::p_fc("SRC(S17)", "AC220", inc) :- phosphosite("SRC(S17)").
+0.0011762258::p_fc("SRC(S17)", "AT13148", dec); 0.0011762258::p_fc("SRC(S17)", "AT13148", inc) :- phosphosite("SRC(S17)").
+0.0067457304::p_fc("SRC(S17)", "AZ20", dec); 0.0067457304::p_fc("SRC(S17)", "AZ20", inc) :- phosphosite("SRC(S17)").
+0.1879303704::p_fc("SRC(S17)", "AZD1480", dec); 0.1879303704::p_fc("SRC(S17)", "AZD1480", inc) :- phosphosite("SRC(S17)").
+0.069405269::p_fc("SRC(S17)", "AZD3759", dec); 0.069405269::p_fc("SRC(S17)", "AZD3759", inc) :- phosphosite("SRC(S17)").
+0.3797912318::p_fc("SRC(S17)", "AZD5363", dec); 0.3797912318::p_fc("SRC(S17)", "AZD5363", inc) :- phosphosite("SRC(S17)").
+0.3529924187::p_fc("SRC(S17)", "AZD5438", dec); 0.3529924187::p_fc("SRC(S17)", "AZD5438", inc) :- phosphosite("SRC(S17)").
+0.0512709734::p_fc("SRC(S17)", "AZD6482", dec); 0.0512709734::p_fc("SRC(S17)", "AZD6482", inc) :- phosphosite("SRC(S17)").
+0.1825208796::p_fc("SRC(S17)", "AZD6738", dec); 0.1825208796::p_fc("SRC(S17)", "AZD6738", inc) :- phosphosite("SRC(S17)").
+0.0010007565::p_fc("SRC(S17)", "AZD8055", dec); 0.0010007565::p_fc("SRC(S17)", "AZD8055", inc) :- phosphosite("SRC(S17)").
+0.4904848662::p_fc("SRC(S17)", "Amuvatinib", dec); 0.4904848662::p_fc("SRC(S17)", "Amuvatinib", inc) :- phosphosite("SRC(S17)").
+0.182907678::p_fc("SRC(S17)", "BX912", dec); 0.182907678::p_fc("SRC(S17)", "BX912", inc) :- phosphosite("SRC(S17)").
+0.1031565435::p_fc("SRC(S17)", "Bosutinib", dec); 0.1031565435::p_fc("SRC(S17)", "Bosutinib", inc) :- phosphosite("SRC(S17)").
+0.3583024746::p_fc("SRC(S17)", "CAL101", dec); 0.3583024746::p_fc("SRC(S17)", "CAL101", inc) :- phosphosite("SRC(S17)").
+0.0516913516::p_fc("SRC(S17)", "CHIR99021", dec); 0.0516913516::p_fc("SRC(S17)", "CHIR99021", inc) :- phosphosite("SRC(S17)").
+0.4024339894::p_fc("SRC(S17)", "CX4945", dec); 0.4024339894::p_fc("SRC(S17)", "CX4945", inc) :- phosphosite("SRC(S17)").
+0.0060746492::p_fc("SRC(S17)", "DNAPK", dec); 0.0060746492::p_fc("SRC(S17)", "DNAPK", inc) :- phosphosite("SRC(S17)").
+0.2844472421::p_fc("SRC(S17)", "Dabrafenib", dec); 0.2844472421::p_fc("SRC(S17)", "Dabrafenib", inc) :- phosphosite("SRC(S17)").
+0.0010161434::p_fc("SRC(S17)", "Dasatinib", dec); 0.0010161434::p_fc("SRC(S17)", "Dasatinib", inc) :- phosphosite("SRC(S17)").
+0.0556462729::p_fc("SRC(S17)", "Edelfosine", dec); 0.0556462729::p_fc("SRC(S17)", "Edelfosine", inc) :- phosphosite("SRC(S17)").
+0.2211923237::p_fc("SRC(S17)", "FRAX486", dec); 0.2211923237::p_fc("SRC(S17)", "FRAX486", inc) :- phosphosite("SRC(S17)").
+0.1656054686::p_fc("SRC(S17)", "GDC0941", dec); 0.1656054686::p_fc("SRC(S17)", "GDC0941", inc) :- phosphosite("SRC(S17)").
+0.0009993171::p_fc("SRC(S17)", "GDC0994", dec); 0.0009993171::p_fc("SRC(S17)", "GDC0994", inc) :- phosphosite("SRC(S17)").
+0.0266436134::p_fc("SRC(S17)", "GF109203X", dec); 0.0266436134::p_fc("SRC(S17)", "GF109203X", inc) :- phosphosite("SRC(S17)").
+0.0043070574::p_fc("SRC(S17)", "GO6983", dec); 0.0043070574::p_fc("SRC(S17)", "GO6983", inc) :- phosphosite("SRC(S17)").
+0.0278270433::p_fc("SRC(S17)", "GSK2334470", dec); 0.0278270433::p_fc("SRC(S17)", "GSK2334470", inc) :- phosphosite("SRC(S17)").
+0.080169398::p_fc("SRC(S17)", "GSK690693", dec); 0.080169398::p_fc("SRC(S17)", "GSK690693", inc) :- phosphosite("SRC(S17)").
+0.4366719615::p_fc("SRC(S17)", "Go6976", dec); 0.4366719615::p_fc("SRC(S17)", "Go6976", inc) :- phosphosite("SRC(S17)").
+0.2454603255::p_fc("SRC(S17)", "H89", dec); 0.2454603255::p_fc("SRC(S17)", "H89", inc) :- phosphosite("SRC(S17)").
+0.3347389706::p_fc("SRC(S17)", "HS173", dec); 0.3347389706::p_fc("SRC(S17)", "HS173", inc) :- phosphosite("SRC(S17)").
+0.1041438294::p_fc("SRC(S17)", "Ipatasertib", dec); 0.1041438294::p_fc("SRC(S17)", "Ipatasertib", inc) :- phosphosite("SRC(S17)").
+0.0205107105::p_fc("SRC(S17)", "JNJ", dec); 0.0205107105::p_fc("SRC(S17)", "JNJ", inc) :- phosphosite("SRC(S17)").
+0.227884751::p_fc("SRC(S17)", "JNK", dec); 0.227884751::p_fc("SRC(S17)", "JNK", inc) :- phosphosite("SRC(S17)").
+0.0608437479::p_fc("SRC(S17)", "KD025", dec); 0.0608437479::p_fc("SRC(S17)", "KD025", inc) :- phosphosite("SRC(S17)").
+0.435837445::p_fc("SRC(S17)", "KN62", dec); 0.435837445::p_fc("SRC(S17)", "KN62", inc) :- phosphosite("SRC(S17)").
+0.4873135437::p_fc("SRC(S17)", "KN93", dec); 0.4873135437::p_fc("SRC(S17)", "KN93", inc) :- phosphosite("SRC(S17)").
+0.0270826181::p_fc("SRC(S17)", "Ku0063794", dec); 0.0270826181::p_fc("SRC(S17)", "Ku0063794", inc) :- phosphosite("SRC(S17)").
+0.2067199233::p_fc("SRC(S17)", "LY2090314", dec); 0.2067199233::p_fc("SRC(S17)", "LY2090314", inc) :- phosphosite("SRC(S17)").
+0.0789593967::p_fc("SRC(S17)", "LY2584702", dec); 0.0789593967::p_fc("SRC(S17)", "LY2584702", inc) :- phosphosite("SRC(S17)").
+0.0898529011::p_fc("SRC(S17)", "LY2835219", dec); 0.0898529011::p_fc("SRC(S17)", "LY2835219", inc) :- phosphosite("SRC(S17)").
+0.1459253386::p_fc("SRC(S17)", "Linsitinib", dec); 0.1459253386::p_fc("SRC(S17)", "Linsitinib", inc) :- phosphosite("SRC(S17)").
+0.0562329612::p_fc("SRC(S17)", "MK2206", dec); 0.0562329612::p_fc("SRC(S17)", "MK2206", inc) :- phosphosite("SRC(S17)").
+0.0341977402::p_fc("SRC(S17)", "NU7441", dec); 0.0341977402::p_fc("SRC(S17)", "NU7441", inc) :- phosphosite("SRC(S17)").
+0.1120545354::p_fc("SRC(S17)", "PD153035", dec); 0.1120545354::p_fc("SRC(S17)", "PD153035", inc) :- phosphosite("SRC(S17)").
+0.3252797192::p_fc("SRC(S17)", "PF3758309", dec); 0.3252797192::p_fc("SRC(S17)", "PF3758309", inc) :- phosphosite("SRC(S17)").
+0.0015619313::p_fc("SRC(S17)", "PF4708671", dec); 0.0015619313::p_fc("SRC(S17)", "PF4708671", inc) :- phosphosite("SRC(S17)").
+0.0861582284::p_fc("SRC(S17)", "PH797804", dec); 0.0861582284::p_fc("SRC(S17)", "PH797804", inc) :- phosphosite("SRC(S17)").
+0.1326405795::p_fc("SRC(S17)", "PIK294", dec); 0.1326405795::p_fc("SRC(S17)", "PIK294", inc) :- phosphosite("SRC(S17)").
+0.473434143::p_fc("SRC(S17)", "Ribociclib", dec); 0.473434143::p_fc("SRC(S17)", "Ribociclib", inc) :- phosphosite("SRC(S17)").
+0.1126524383::p_fc("SRC(S17)", "Ripasudil", dec); 0.1126524383::p_fc("SRC(S17)", "Ripasudil", inc) :- phosphosite("SRC(S17)").
+0.1045802433::p_fc("SRC(S17)", "SP600125", dec); 0.1045802433::p_fc("SRC(S17)", "SP600125", inc) :- phosphosite("SRC(S17)").
+0.0017782563::p_fc("SRC(S17)", "Selumetinib", dec); 0.0017782563::p_fc("SRC(S17)", "Selumetinib", inc) :- phosphosite("SRC(S17)").
+0.1168809286::p_fc("SRC(S17)", "TAK715", dec); 0.1168809286::p_fc("SRC(S17)", "TAK715", inc) :- phosphosite("SRC(S17)").
+0.0570725258::p_fc("SRC(S17)", "TBCA", dec); 0.0570725258::p_fc("SRC(S17)", "TBCA", inc) :- phosphosite("SRC(S17)").
+0.026503809::p_fc("SRC(S17)", "TGX221", dec); 0.026503809::p_fc("SRC(S17)", "TGX221", inc) :- phosphosite("SRC(S17)").
+0.4105854846::p_fc("SRC(S17)", "Tofacitinib", dec); 0.4105854846::p_fc("SRC(S17)", "Tofacitinib", inc) :- phosphosite("SRC(S17)").
+0.0666885729::p_fc("SRC(S17)", "Torin", dec); 0.0666885729::p_fc("SRC(S17)", "Torin", inc) :- phosphosite("SRC(S17)").
+0.036646163::p_fc("SRC(S17)", "Trametinib", dec); 0.036646163::p_fc("SRC(S17)", "Trametinib", inc) :- phosphosite("SRC(S17)").
+0.0079348108::p_fc("SRC(S17)", "U73122", dec); 0.0079348108::p_fc("SRC(S17)", "U73122", inc) :- phosphosite("SRC(S17)").
+0.000997006::p_fc("SRC(S17)", "Ulixertinib", dec); 0.000997006::p_fc("SRC(S17)", "Ulixertinib", inc) :- phosphosite("SRC(S17)").
+0.0072762439::p_fc("SRC(S17)", "Vemurafenib", dec); 0.0072762439::p_fc("SRC(S17)", "Vemurafenib", inc) :- phosphosite("SRC(S17)").
+0.0564702281::p_fc("SRC(S75)", "AC220", dec); 0.0564702281::p_fc("SRC(S75)", "AC220", inc) :- phosphosite("SRC(S75)").
+0.0444756129::p_fc("SRC(S75)", "AT13148", dec); 0.0444756129::p_fc("SRC(S75)", "AT13148", inc) :- phosphosite("SRC(S75)").
+0.2920409403::p_fc("SRC(S75)", "AZ20", dec); 0.2920409403::p_fc("SRC(S75)", "AZ20", inc) :- phosphosite("SRC(S75)").
+0.3955545178::p_fc("SRC(S75)", "AZD1480", dec); 0.3955545178::p_fc("SRC(S75)", "AZD1480", inc) :- phosphosite("SRC(S75)").
+0.0995489459::p_fc("SRC(S75)", "AZD3759", dec); 0.0995489459::p_fc("SRC(S75)", "AZD3759", inc) :- phosphosite("SRC(S75)").
+0.2021862446::p_fc("SRC(S75)", "AZD5363", dec); 0.2021862446::p_fc("SRC(S75)", "AZD5363", inc) :- phosphosite("SRC(S75)").
+0.2530529744::p_fc("SRC(S75)", "AZD5438", dec); 0.2530529744::p_fc("SRC(S75)", "AZD5438", inc) :- phosphosite("SRC(S75)").
+0.0978999802::p_fc("SRC(S75)", "AZD6482", dec); 0.0978999802::p_fc("SRC(S75)", "AZD6482", inc) :- phosphosite("SRC(S75)").
+0.2965259128::p_fc("SRC(S75)", "AZD6738", dec); 0.2965259128::p_fc("SRC(S75)", "AZD6738", inc) :- phosphosite("SRC(S75)").
+0.1991506482::p_fc("SRC(S75)", "AZD8055", dec); 0.1991506482::p_fc("SRC(S75)", "AZD8055", inc) :- phosphosite("SRC(S75)").
+0.3416552488::p_fc("SRC(S75)", "Amuvatinib", dec); 0.3416552488::p_fc("SRC(S75)", "Amuvatinib", inc) :- phosphosite("SRC(S75)").
+0.4633361398::p_fc("SRC(S75)", "BX912", dec); 0.4633361398::p_fc("SRC(S75)", "BX912", inc) :- phosphosite("SRC(S75)").
+0.3291314525::p_fc("SRC(S75)", "Bosutinib", dec); 0.3291314525::p_fc("SRC(S75)", "Bosutinib", inc) :- phosphosite("SRC(S75)").
+0.162139245::p_fc("SRC(S75)", "CAL101", dec); 0.162139245::p_fc("SRC(S75)", "CAL101", inc) :- phosphosite("SRC(S75)").
+0.1079802685::p_fc("SRC(S75)", "CHIR99021", dec); 0.1079802685::p_fc("SRC(S75)", "CHIR99021", inc) :- phosphosite("SRC(S75)").
+0.2663902098::p_fc("SRC(S75)", "CX4945", dec); 0.2663902098::p_fc("SRC(S75)", "CX4945", inc) :- phosphosite("SRC(S75)").
+0.3321194623::p_fc("SRC(S75)", "DNAPK", dec); 0.3321194623::p_fc("SRC(S75)", "DNAPK", inc) :- phosphosite("SRC(S75)").
+0.2833547349::p_fc("SRC(S75)", "Dabrafenib", dec); 0.2833547349::p_fc("SRC(S75)", "Dabrafenib", inc) :- phosphosite("SRC(S75)").
+0.1513627593::p_fc("SRC(S75)", "Dasatinib", dec); 0.1513627593::p_fc("SRC(S75)", "Dasatinib", inc) :- phosphosite("SRC(S75)").
+0.4146011306::p_fc("SRC(S75)", "Edelfosine", dec); 0.4146011306::p_fc("SRC(S75)", "Edelfosine", inc) :- phosphosite("SRC(S75)").
+0.182289618::p_fc("SRC(S75)", "FRAX486", dec); 0.182289618::p_fc("SRC(S75)", "FRAX486", inc) :- phosphosite("SRC(S75)").
+0.439710377::p_fc("SRC(S75)", "GDC0941", dec); 0.439710377::p_fc("SRC(S75)", "GDC0941", inc) :- phosphosite("SRC(S75)").
+0.0373736576::p_fc("SRC(S75)", "GDC0994", dec); 0.0373736576::p_fc("SRC(S75)", "GDC0994", inc) :- phosphosite("SRC(S75)").
+0.1660423091::p_fc("SRC(S75)", "GF109203X", dec); 0.1660423091::p_fc("SRC(S75)", "GF109203X", inc) :- phosphosite("SRC(S75)").
+0.0722409785::p_fc("SRC(S75)", "GO6983", dec); 0.0722409785::p_fc("SRC(S75)", "GO6983", inc) :- phosphosite("SRC(S75)").
+0.0603154343::p_fc("SRC(S75)", "GSK2334470", dec); 0.0603154343::p_fc("SRC(S75)", "GSK2334470", inc) :- phosphosite("SRC(S75)").
+0.1709840278::p_fc("SRC(S75)", "GSK690693", dec); 0.1709840278::p_fc("SRC(S75)", "GSK690693", inc) :- phosphosite("SRC(S75)").
+0.4391066382::p_fc("SRC(S75)", "Go6976", dec); 0.4391066382::p_fc("SRC(S75)", "Go6976", inc) :- phosphosite("SRC(S75)").
+0.335190918::p_fc("SRC(S75)", "H89", dec); 0.335190918::p_fc("SRC(S75)", "H89", inc) :- phosphosite("SRC(S75)").
+0.394463883::p_fc("SRC(S75)", "HS173", dec); 0.394463883::p_fc("SRC(S75)", "HS173", inc) :- phosphosite("SRC(S75)").
+0.4552987677::p_fc("SRC(S75)", "Ipatasertib", dec); 0.4552987677::p_fc("SRC(S75)", "Ipatasertib", inc) :- phosphosite("SRC(S75)").
+0.0233154303::p_fc("SRC(S75)", "JNJ", dec); 0.0233154303::p_fc("SRC(S75)", "JNJ", inc) :- phosphosite("SRC(S75)").
+0.3500184999::p_fc("SRC(S75)", "JNK", dec); 0.3500184999::p_fc("SRC(S75)", "JNK", inc) :- phosphosite("SRC(S75)").
+0.2749298469::p_fc("SRC(S75)", "KD025", dec); 0.2749298469::p_fc("SRC(S75)", "KD025", inc) :- phosphosite("SRC(S75)").
+0.2370715542::p_fc("SRC(S75)", "KN62", dec); 0.2370715542::p_fc("SRC(S75)", "KN62", inc) :- phosphosite("SRC(S75)").
+0.0722409785::p_fc("SRC(S75)", "KN93", dec); 0.0722409785::p_fc("SRC(S75)", "KN93", inc) :- phosphosite("SRC(S75)").
+0.273412136::p_fc("SRC(S75)", "Ku0063794", dec); 0.273412136::p_fc("SRC(S75)", "Ku0063794", inc) :- phosphosite("SRC(S75)").
+0.2928869045::p_fc("SRC(S75)", "LY2090314", dec); 0.2928869045::p_fc("SRC(S75)", "LY2090314", inc) :- phosphosite("SRC(S75)").
+0.2180222577::p_fc("SRC(S75)", "LY2584702", dec); 0.2180222577::p_fc("SRC(S75)", "LY2584702", inc) :- phosphosite("SRC(S75)").
+0.2781909231::p_fc("SRC(S75)", "LY2835219", dec); 0.2781909231::p_fc("SRC(S75)", "LY2835219", inc) :- phosphosite("SRC(S75)").
+0.0589690162::p_fc("SRC(S75)", "Linsitinib", dec); 0.0589690162::p_fc("SRC(S75)", "Linsitinib", inc) :- phosphosite("SRC(S75)").
+0.131392319::p_fc("SRC(S75)", "MK2206", dec); 0.131392319::p_fc("SRC(S75)", "MK2206", inc) :- phosphosite("SRC(S75)").
+0.3434066377::p_fc("SRC(S75)", "NU7441", dec); 0.3434066377::p_fc("SRC(S75)", "NU7441", inc) :- phosphosite("SRC(S75)").
+0.1372437592::p_fc("SRC(S75)", "PD153035", dec); 0.1372437592::p_fc("SRC(S75)", "PD153035", inc) :- phosphosite("SRC(S75)").
+0.3886621332::p_fc("SRC(S75)", "PF3758309", dec); 0.3886621332::p_fc("SRC(S75)", "PF3758309", inc) :- phosphosite("SRC(S75)").
+0.2357921279::p_fc("SRC(S75)", "PF4708671", dec); 0.2357921279::p_fc("SRC(S75)", "PF4708671", inc) :- phosphosite("SRC(S75)").
+0.3491837612::p_fc("SRC(S75)", "PH797804", dec); 0.3491837612::p_fc("SRC(S75)", "PH797804", inc) :- phosphosite("SRC(S75)").
+0.1592143438::p_fc("SRC(S75)", "PIK294", dec); 0.1592143438::p_fc("SRC(S75)", "PIK294", inc) :- phosphosite("SRC(S75)").
+0.2164812901::p_fc("SRC(S75)", "Ribociclib", dec); 0.2164812901::p_fc("SRC(S75)", "Ribociclib", inc) :- phosphosite("SRC(S75)").
+0.0970013337::p_fc("SRC(S75)", "Ripasudil", dec); 0.0970013337::p_fc("SRC(S75)", "Ripasudil", inc) :- phosphosite("SRC(S75)").
+0.21106215::p_fc("SRC(S75)", "SP600125", dec); 0.21106215::p_fc("SRC(S75)", "SP600125", inc) :- phosphosite("SRC(S75)").
+0.2940818506::p_fc("SRC(S75)", "Selumetinib", dec); 0.2940818506::p_fc("SRC(S75)", "Selumetinib", inc) :- phosphosite("SRC(S75)").
+0.0441540829::p_fc("SRC(S75)", "TAK715", dec); 0.0441540829::p_fc("SRC(S75)", "TAK715", inc) :- phosphosite("SRC(S75)").
+0.0722409785::p_fc("SRC(S75)", "TBCA", dec); 0.0722409785::p_fc("SRC(S75)", "TBCA", inc) :- phosphosite("SRC(S75)").
+0.3367390187::p_fc("SRC(S75)", "TGX221", dec); 0.3367390187::p_fc("SRC(S75)", "TGX221", inc) :- phosphosite("SRC(S75)").
+0.0719996145::p_fc("SRC(S75)", "Tofacitinib", dec); 0.0719996145::p_fc("SRC(S75)", "Tofacitinib", inc) :- phosphosite("SRC(S75)").
+0.2610080585::p_fc("SRC(S75)", "Torin", dec); 0.2610080585::p_fc("SRC(S75)", "Torin", inc) :- phosphosite("SRC(S75)").
+0.1759639629::p_fc("SRC(S75)", "Trametinib", dec); 0.1759639629::p_fc("SRC(S75)", "Trametinib", inc) :- phosphosite("SRC(S75)").
+0.1232375577::p_fc("SRC(S75)", "U73122", dec); 0.1232375577::p_fc("SRC(S75)", "U73122", inc) :- phosphosite("SRC(S75)").
+0.2176857957::p_fc("SRC(S75)", "Ulixertinib", dec); 0.2176857957::p_fc("SRC(S75)", "Ulixertinib", inc) :- phosphosite("SRC(S75)").
+0.242487728::p_fc("SRC(S75)", "Vemurafenib", dec); 0.242487728::p_fc("SRC(S75)", "Vemurafenib", inc) :- phosphosite("SRC(S75)").
+
+0.1160382271::p_fc("ABL1(S718)", "PIK294", dec); 0.001::p_fc("ABL1(S718)", "PIK294", inc) :- p_occupancy("ABL1(S718)", "PIK294", dec).
+0.001::p_fc("ABL1(S718)", "PIK294", dec); 0.1160382271::p_fc("ABL1(S718)", "PIK294", inc) :- p_occupancy("ABL1(S718)", "PIK294", inc).
+
+%%% probabilistic attributes (unknown) %%%
+%%t(0.33)::p_function(P, p_dec); t(0.33)::p_function(P, p_inc).
+t(0.33)::p_function("PTK2(S722)", p_dec); t(0.33)::p_function("PTK2(S722)", p_inc).
+t(0.33)::p_function("ABL1(S718)", p_dec); t(0.33)::p_function("ABL1(S718)", p_inc).
+t(0.33)::p_function("PTPRG(S995)", p_dec); t(0.33)::p_function("PTPRG(S995)", p_inc).
+t(0.33)::p_function("PTK2(S29)", p_dec); t(0.33)::p_function("PTK2(S29)", p_inc).
+
+% occupancy
+t(0.33, P, S)::p_occupancy(P, S, dec); t(0.33, P, S)::p_occupancy(P, S, inc) :- phosphosite(P). % value = _dA = [dec | base | inc] (prior, E/S-level)
+
+%%% occupancy aggregation rule (cpd, P-level, E-level)
+% auxiliary variables (value = [true | false])
+0.001::act_dec(E, S) :- p_regulates(P, E).
+0.001::act_inc(E, S) :- p_regulates(P, E).
+0.001::act_inc(E, S) :- inhibits(S, E).
+t(0.9, E)::act_dec(E, S) :- inhibits(S, E).
+t(0.7, P, E)::act_dec(E, S) :- p_regulates(P, E), p_function(P, p_inc), p_occupancy(P, S, dec).
+t(0.7, P, E)::act_dec(E, S) :- p_regulates(P, E), p_function(P, p_dec), p_occupancy(P, S, inc).
+t(0.7, P, E)::act_inc(E, S) :- p_regulates(P, E), p_function(P, p_inc), p_occupancy(P, S, inc).
+t(0.7, P, E)::act_inc(E, S) :- p_regulates(P, E), p_function(P, p_dec), p_occupancy(P, S, dec).
+
+% aggregation (value = _dO = [dec | base | inc])
+t(1.0, E)::e_activity(E, S, dec); t(0.0, E)::e_activity(E, S, inc) :- act_dec(E, S), \+ act_inc(E, S).
+t(0.0, E)::e_activity(E, S, dec); t(1.0, E)::e_activity(E, S, inc) :- \+ act_dec(E, S), act_inc(E, S).
+t(0.5, E)::e_activity(E, S, dec); t(0.5, E)::e_activity(E, S, inc) :- act_dec(E, S), act_inc(E, S).
+t(0.0, E)::e_activity(E, S, dec); t(0.0, E)::e_activity(E, S, inc) :- \+ act_dec(E, S), \+ act_inc(E, S).

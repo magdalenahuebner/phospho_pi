@@ -1,0 +1,2 @@
+e_activity("SRC","Vemurafenib",dec):	0.94878268
+e_activity("SRC","Vemurafenib",inc):	0.037106819

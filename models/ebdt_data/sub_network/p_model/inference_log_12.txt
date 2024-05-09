@@ -1,0 +1,3 @@
+p_occupancy("RBM39(Y95)","MK2206",base):	0         
+ p_occupancy("RBM39(Y95)","MK2206",dec):	0.0025125189
+ p_occupancy("RBM39(Y95)","MK2206",inc):	0.99748748

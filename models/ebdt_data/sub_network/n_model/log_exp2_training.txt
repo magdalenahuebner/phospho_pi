@@ -1,0 +1,38 @@
+[INFO] Output level: INFO
+[INFO] Number of examples: 1056
+[ERROR] 
+[ERROR] Error encountered:	
+[ERROR] Traceback (most recent call last):
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/ddnnf_formula.py", line 307, in _compile_with_dsharp
+[ERROR]     result = _compile(cnf, cmd, cnf_file, nnf_file)
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/ddnnf_formula.py", line 360, in _compile
+[ERROR]     raise err
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/ddnnf_formula.py", line 355, in _compile
+[ERROR]     subprocess_check_call(cmd, stdout=OUT_NULL)
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/util.py", line 190, in subprocess_check_call
+[ERROR]     raise subprocess.CalledProcessError(retcode, cmd)
+[ERROR] subprocess.CalledProcessError: Command '['dsharp', '-Fnnf', '/tmp/tmpjt9fz4yh.nnf', '-smoothNNF', '-disableAllLits', '/tmp/tmpg8judtqw.cnf']' died with <Signals.SIGKILL: 9>.
+[ERROR] 
+[ERROR] During handling of the above exception, another exception occurred:
+[ERROR] 
+[ERROR] Traceback (most recent call last):
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/learning/lfi.py", line 1544, in main
+[ERROR]     results = run_lfi(program, examples, knowledge=knowledge, **options)
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/learning/lfi.py", line 1371, in run_lfi
+[ERROR]     score = lfi.run()
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/learning/lfi.py", line 965, in run
+[ERROR]     self.prepare()
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/learning/lfi.py", line 234, in prepare
+[ERROR]     self._compile_examples()
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/learning/lfi.py", line 495, in _compile_examples
+[ERROR]     example.compile(self, baseprogram)
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/learning/lfi.py", line 1134, in compile
+[ERROR]     self.compiled = lfi.knowledge.create_from(ground_program)
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/core.py", line 156, in create_from
+[ERROR]     return ProbLog.convert(obj, cls, **kwdargs)
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/core.py", line 121, in convert
+[ERROR]     next_obj = path[0](current_obj, path[1](**kwdargs), **kwdargs)
+[ERROR]   File "/home/mhuebner/anaconda3/lib/python3.9/site-packages/problog/ddnnf_formula.py", line 309, in _compile_with_dsharp
+[ERROR]     raise DSharpError()
+[ERROR] problog.ddnnf_formula.DSharpError: DSharp has encountered an error.
+[ERROR] 

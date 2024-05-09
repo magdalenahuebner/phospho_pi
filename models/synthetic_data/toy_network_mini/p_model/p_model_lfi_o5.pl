@@ -1,0 +1,469 @@
+%%% entity classes %%%
+%% enzyme(E).
+enzyme(e1).
+enzyme(e2).
+enzyme(e3).
+enzyme(e4).
+enzyme(e5).
+enzyme(e6).
+enzyme(e7).
+enzyme(e8).
+enzyme(e9).
+enzyme(e10).
+
+%% phosphosite(P).
+phosphosite(p0).
+
+%%% relationship classes %%%
+%% es_interaction(E,P).
+es_interaction(e1, p0).
+es_interaction(e2, p0).
+es_interaction(e3, p0).
+es_interaction(e4, p0).
+es_interaction(e5, p0).
+es_interaction(e6, p0).
+es_interaction(e7, p0).
+es_interaction(e8, p0).
+es_interaction(e9, p0).
+es_interaction(e10, p0).
+
+%%% fixed attributes %%%
+%% e_function(E, _function). % value = _function = [kinase | phosphatase]
+e_function(e1, kinase).
+e_function(e2, kinase).
+e_function(e3, phosphatase).
+e_function(e4, kinase).
+e_function(e5, kinase).
+e_function(e6, kinase).
+e_function(e7, kinase).
+e_function(e8, kinase).
+e_function(e9, kinase).
+e_function(e10, kinase).
+targets(E, P) :- es_interaction(E, P). % value = [true | false]; equivalent to 'es_interaction.exists'
+
+%%% probabilistic attributes (known) %%%
+% p::targets(E, P).
+%% p1::e_ksea(E, S, dec); p2::e_ksea(E, S, base); p3::e_ksea(E, S, inc) :- e_activity(E, S, _dA). % value = _ksea = [dec | base | inc] (cpd, E/S-level)
+0.6675::e_ksea(E, s1, dec); 0.001::e_ksea(E, s1, inc) :- e_activity(E, s1, dec).
+0.001::e_ksea(E, s1, dec); 0.6675::e_ksea(E, s1, inc) :- e_activity(E, s1, inc).
+0.8693::e_ksea(E, s10, dec); 0.001::e_ksea(E, s10, inc) :- e_activity(E, s10, dec).
+0.001::e_ksea(E, s10, dec); 0.8693::e_ksea(E, s10, inc) :- e_activity(E, s10, inc).
+0.9628::e_ksea(E, s100, dec); 0.001::e_ksea(E, s100, inc) :- e_activity(E, s100, dec).
+0.001::e_ksea(E, s100, dec); 0.9628::e_ksea(E, s100, inc) :- e_activity(E, s100, inc).
+0.8836::e_ksea(E, s11, dec); 0.001::e_ksea(E, s11, inc) :- e_activity(E, s11, dec).
+0.001::e_ksea(E, s11, dec); 0.8836::e_ksea(E, s11, inc) :- e_activity(E, s11, inc).
+0.7087::e_ksea(E, s12, dec); 0.001::e_ksea(E, s12, inc) :- e_activity(E, s12, dec).
+0.001::e_ksea(E, s12, dec); 0.7087::e_ksea(E, s12, inc) :- e_activity(E, s12, inc).
+0.9185::e_ksea(E, s13, dec); 0.001::e_ksea(E, s13, inc) :- e_activity(E, s13, dec).
+0.001::e_ksea(E, s13, dec); 0.9185::e_ksea(E, s13, inc) :- e_activity(E, s13, inc).
+0.741::e_ksea(E, s14, dec); 0.001::e_ksea(E, s14, inc) :- e_activity(E, s14, dec).
+0.001::e_ksea(E, s14, dec); 0.741::e_ksea(E, s14, inc) :- e_activity(E, s14, inc).
+0.9057::e_ksea(E, s15, dec); 0.001::e_ksea(E, s15, inc) :- e_activity(E, s15, dec).
+0.001::e_ksea(E, s15, dec); 0.9057::e_ksea(E, s15, inc) :- e_activity(E, s15, inc).
+0.8377::e_ksea(E, s16, dec); 0.001::e_ksea(E, s16, inc) :- e_activity(E, s16, dec).
+0.001::e_ksea(E, s16, dec); 0.8377::e_ksea(E, s16, inc) :- e_activity(E, s16, inc).
+0.8631::e_ksea(E, s17, dec); 0.001::e_ksea(E, s17, inc) :- e_activity(E, s17, dec).
+0.001::e_ksea(E, s17, dec); 0.8631::e_ksea(E, s17, inc) :- e_activity(E, s17, inc).
+0.6041::e_ksea(E, s18, dec); 0.001::e_ksea(E, s18, inc) :- e_activity(E, s18, dec).
+0.001::e_ksea(E, s18, dec); 0.6041::e_ksea(E, s18, inc) :- e_activity(E, s18, inc).
+0.7298::e_ksea(E, s19, dec); 0.001::e_ksea(E, s19, inc) :- e_activity(E, s19, dec).
+0.001::e_ksea(E, s19, dec); 0.7298::e_ksea(E, s19, inc) :- e_activity(E, s19, inc).
+0.6536::e_ksea(E, s2, dec); 0.001::e_ksea(E, s2, inc) :- e_activity(E, s2, dec).
+0.001::e_ksea(E, s2, dec); 0.6536::e_ksea(E, s2, inc) :- e_activity(E, s2, inc).
+0.5076::e_ksea(E, s20, dec); 0.001::e_ksea(E, s20, inc) :- e_activity(E, s20, dec).
+0.001::e_ksea(E, s20, dec); 0.5076::e_ksea(E, s20, inc) :- e_activity(E, s20, inc).
+0.7747::e_ksea(E, s21, dec); 0.001::e_ksea(E, s21, inc) :- e_activity(E, s21, dec).
+0.001::e_ksea(E, s21, dec); 0.7747::e_ksea(E, s21, inc) :- e_activity(E, s21, inc).
+0.9697::e_ksea(E, s22, dec); 0.001::e_ksea(E, s22, inc) :- e_activity(E, s22, dec).
+0.001::e_ksea(E, s22, dec); 0.9697::e_ksea(E, s22, inc) :- e_activity(E, s22, inc).
+0.8842::e_ksea(E, s23, dec); 0.001::e_ksea(E, s23, inc) :- e_activity(E, s23, dec).
+0.001::e_ksea(E, s23, dec); 0.8842::e_ksea(E, s23, inc) :- e_activity(E, s23, inc).
+0.5684::e_ksea(E, s24, dec); 0.001::e_ksea(E, s24, inc) :- e_activity(E, s24, dec).
+0.001::e_ksea(E, s24, dec); 0.5684::e_ksea(E, s24, inc) :- e_activity(E, s24, inc).
+0.5902::e_ksea(E, s25, dec); 0.001::e_ksea(E, s25, inc) :- e_activity(E, s25, dec).
+0.001::e_ksea(E, s25, dec); 0.5902::e_ksea(E, s25, inc) :- e_activity(E, s25, inc).
+0.7834::e_ksea(E, s26, dec); 0.001::e_ksea(E, s26, inc) :- e_activity(E, s26, dec).
+0.001::e_ksea(E, s26, dec); 0.7834::e_ksea(E, s26, inc) :- e_activity(E, s26, inc).
+0.5013::e_ksea(E, s27, dec); 0.001::e_ksea(E, s27, inc) :- e_activity(E, s27, dec).
+0.001::e_ksea(E, s27, dec); 0.5013::e_ksea(E, s27, inc) :- e_activity(E, s27, inc).
+0.6021::e_ksea(E, s28, dec); 0.001::e_ksea(E, s28, inc) :- e_activity(E, s28, dec).
+0.001::e_ksea(E, s28, dec); 0.6021::e_ksea(E, s28, inc) :- e_activity(E, s28, inc).
+0.5316::e_ksea(E, s29, dec); 0.001::e_ksea(E, s29, inc) :- e_activity(E, s29, dec).
+0.001::e_ksea(E, s29, dec); 0.5316::e_ksea(E, s29, inc) :- e_activity(E, s29, inc).
+0.8283::e_ksea(E, s3, dec); 0.001::e_ksea(E, s3, inc) :- e_activity(E, s3, dec).
+0.001::e_ksea(E, s3, dec); 0.8283::e_ksea(E, s3, inc) :- e_activity(E, s3, inc).
+0.7242::e_ksea(E, s30, dec); 0.001::e_ksea(E, s30, inc) :- e_activity(E, s30, dec).
+0.001::e_ksea(E, s30, dec); 0.7242::e_ksea(E, s30, inc) :- e_activity(E, s30, inc).
+0.9646::e_ksea(E, s31, dec); 0.001::e_ksea(E, s31, inc) :- e_activity(E, s31, dec).
+0.001::e_ksea(E, s31, dec); 0.9646::e_ksea(E, s31, inc) :- e_activity(E, s31, inc).
+0.769::e_ksea(E, s32, dec); 0.001::e_ksea(E, s32, inc) :- e_activity(E, s32, dec).
+0.001::e_ksea(E, s32, dec); 0.769::e_ksea(E, s32, inc) :- e_activity(E, s32, inc).
+0.6221::e_ksea(E, s33, dec); 0.001::e_ksea(E, s33, inc) :- e_activity(E, s33, dec).
+0.001::e_ksea(E, s33, dec); 0.6221::e_ksea(E, s33, inc) :- e_activity(E, s33, inc).
+0.8664::e_ksea(E, s34, dec); 0.001::e_ksea(E, s34, inc) :- e_activity(E, s34, dec).
+0.001::e_ksea(E, s34, dec); 0.8664::e_ksea(E, s34, inc) :- e_activity(E, s34, inc).
+0.6621::e_ksea(E, s35, dec); 0.001::e_ksea(E, s35, inc) :- e_activity(E, s35, dec).
+0.001::e_ksea(E, s35, dec); 0.6621::e_ksea(E, s35, inc) :- e_activity(E, s35, inc).
+0.9619::e_ksea(E, s36, dec); 0.001::e_ksea(E, s36, inc) :- e_activity(E, s36, dec).
+0.001::e_ksea(E, s36, dec); 0.9619::e_ksea(E, s36, inc) :- e_activity(E, s36, inc).
+0.8018::e_ksea(E, s37, dec); 0.001::e_ksea(E, s37, inc) :- e_activity(E, s37, dec).
+0.001::e_ksea(E, s37, dec); 0.8018::e_ksea(E, s37, inc) :- e_activity(E, s37, inc).
+0.7121::e_ksea(E, s38, dec); 0.001::e_ksea(E, s38, inc) :- e_activity(E, s38, dec).
+0.001::e_ksea(E, s38, dec); 0.7121::e_ksea(E, s38, inc) :- e_activity(E, s38, inc).
+0.8318::e_ksea(E, s39, dec); 0.001::e_ksea(E, s39, inc) :- e_activity(E, s39, dec).
+0.001::e_ksea(E, s39, dec); 0.8318::e_ksea(E, s39, inc) :- e_activity(E, s39, inc).
+0.5296::e_ksea(E, s4, dec); 0.001::e_ksea(E, s4, inc) :- e_activity(E, s4, dec).
+0.001::e_ksea(E, s4, dec); 0.5296::e_ksea(E, s4, inc) :- e_activity(E, s4, inc).
+0.8795::e_ksea(E, s40, dec); 0.001::e_ksea(E, s40, inc) :- e_activity(E, s40, dec).
+0.001::e_ksea(E, s40, dec); 0.8795::e_ksea(E, s40, inc) :- e_activity(E, s40, inc).
+0.7462::e_ksea(E, s41, dec); 0.001::e_ksea(E, s41, inc) :- e_activity(E, s41, dec).
+0.001::e_ksea(E, s41, dec); 0.7462::e_ksea(E, s41, inc) :- e_activity(E, s41, inc).
+0.8953::e_ksea(E, s42, dec); 0.001::e_ksea(E, s42, inc) :- e_activity(E, s42, dec).
+0.001::e_ksea(E, s42, dec); 0.8953::e_ksea(E, s42, inc) :- e_activity(E, s42, inc).
+0.9069::e_ksea(E, s43, dec); 0.001::e_ksea(E, s43, inc) :- e_activity(E, s43, dec).
+0.001::e_ksea(E, s43, dec); 0.9069::e_ksea(E, s43, inc) :- e_activity(E, s43, inc).
+0.7091::e_ksea(E, s44, dec); 0.001::e_ksea(E, s44, inc) :- e_activity(E, s44, dec).
+0.001::e_ksea(E, s44, dec); 0.7091::e_ksea(E, s44, inc) :- e_activity(E, s44, inc).
+0.9814::e_ksea(E, s45, dec); 0.001::e_ksea(E, s45, inc) :- e_activity(E, s45, dec).
+0.001::e_ksea(E, s45, dec); 0.9814::e_ksea(E, s45, inc) :- e_activity(E, s45, inc).
+0.8842::e_ksea(E, s46, dec); 0.001::e_ksea(E, s46, inc) :- e_activity(E, s46, dec).
+0.001::e_ksea(E, s46, dec); 0.8842::e_ksea(E, s46, inc) :- e_activity(E, s46, inc).
+0.5158::e_ksea(E, s47, dec); 0.001::e_ksea(E, s47, inc) :- e_activity(E, s47, dec).
+0.001::e_ksea(E, s47, dec); 0.5158::e_ksea(E, s47, inc) :- e_activity(E, s47, inc).
+0.936::e_ksea(E, s48, dec); 0.001::e_ksea(E, s48, inc) :- e_activity(E, s48, dec).
+0.001::e_ksea(E, s48, dec); 0.936::e_ksea(E, s48, inc) :- e_activity(E, s48, inc).
+0.5446::e_ksea(E, s49, dec); 0.001::e_ksea(E, s49, inc) :- e_activity(E, s49, dec).
+0.001::e_ksea(E, s49, dec); 0.5446::e_ksea(E, s49, inc) :- e_activity(E, s49, inc).
+0.6836::e_ksea(E, s5, dec); 0.001::e_ksea(E, s5, inc) :- e_activity(E, s5, dec).
+0.001::e_ksea(E, s5, dec); 0.6836::e_ksea(E, s5, inc) :- e_activity(E, s5, inc).
+0.6772::e_ksea(E, s50, dec); 0.001::e_ksea(E, s50, inc) :- e_activity(E, s50, dec).
+0.001::e_ksea(E, s50, dec); 0.6772::e_ksea(E, s50, inc) :- e_activity(E, s50, inc).
+0.9631::e_ksea(E, s51, dec); 0.001::e_ksea(E, s51, inc) :- e_activity(E, s51, dec).
+0.001::e_ksea(E, s51, dec); 0.9631::e_ksea(E, s51, inc) :- e_activity(E, s51, inc).
+0.5077::e_ksea(E, s52, dec); 0.001::e_ksea(E, s52, inc) :- e_activity(E, s52, dec).
+0.001::e_ksea(E, s52, dec); 0.5077::e_ksea(E, s52, inc) :- e_activity(E, s52, inc).
+0.9396::e_ksea(E, s53, dec); 0.001::e_ksea(E, s53, inc) :- e_activity(E, s53, dec).
+0.001::e_ksea(E, s53, dec); 0.9396::e_ksea(E, s53, inc) :- e_activity(E, s53, inc).
+0.7086::e_ksea(E, s54, dec); 0.001::e_ksea(E, s54, inc) :- e_activity(E, s54, dec).
+0.001::e_ksea(E, s54, dec); 0.7086::e_ksea(E, s54, inc) :- e_activity(E, s54, inc).
+0.6058::e_ksea(E, s55, dec); 0.001::e_ksea(E, s55, inc) :- e_activity(E, s55, dec).
+0.001::e_ksea(E, s55, dec); 0.6058::e_ksea(E, s55, inc) :- e_activity(E, s55, inc).
+0.7944::e_ksea(E, s56, dec); 0.001::e_ksea(E, s56, inc) :- e_activity(E, s56, dec).
+0.001::e_ksea(E, s56, dec); 0.7944::e_ksea(E, s56, inc) :- e_activity(E, s56, inc).
+0.8638::e_ksea(E, s57, dec); 0.001::e_ksea(E, s57, inc) :- e_activity(E, s57, dec).
+0.001::e_ksea(E, s57, dec); 0.8638::e_ksea(E, s57, inc) :- e_activity(E, s57, inc).
+0.6903::e_ksea(E, s58, dec); 0.001::e_ksea(E, s58, inc) :- e_activity(E, s58, dec).
+0.001::e_ksea(E, s58, dec); 0.6903::e_ksea(E, s58, inc) :- e_activity(E, s58, inc).
+0.7334::e_ksea(E, s59, dec); 0.001::e_ksea(E, s59, inc) :- e_activity(E, s59, dec).
+0.001::e_ksea(E, s59, dec); 0.7334::e_ksea(E, s59, inc) :- e_activity(E, s59, inc).
+0.8518::e_ksea(E, s6, dec); 0.001::e_ksea(E, s6, inc) :- e_activity(E, s6, dec).
+0.001::e_ksea(E, s6, dec); 0.8518::e_ksea(E, s6, inc) :- e_activity(E, s6, inc).
+0.7622::e_ksea(E, s60, dec); 0.001::e_ksea(E, s60, inc) :- e_activity(E, s60, dec).
+0.001::e_ksea(E, s60, dec); 0.7622::e_ksea(E, s60, inc) :- e_activity(E, s60, inc).
+0.8426::e_ksea(E, s61, dec); 0.001::e_ksea(E, s61, inc) :- e_activity(E, s61, dec).
+0.001::e_ksea(E, s61, dec); 0.8426::e_ksea(E, s61, inc) :- e_activity(E, s61, inc).
+0.5836::e_ksea(E, s62, dec); 0.001::e_ksea(E, s62, inc) :- e_activity(E, s62, dec).
+0.001::e_ksea(E, s62, dec); 0.5836::e_ksea(E, s62, inc) :- e_activity(E, s62, inc).
+0.5204::e_ksea(E, s63, dec); 0.001::e_ksea(E, s63, inc) :- e_activity(E, s63, dec).
+0.001::e_ksea(E, s63, dec); 0.5204::e_ksea(E, s63, inc) :- e_activity(E, s63, inc).
+0.8523::e_ksea(E, s64, dec); 0.001::e_ksea(E, s64, inc) :- e_activity(E, s64, dec).
+0.001::e_ksea(E, s64, dec); 0.8523::e_ksea(E, s64, inc) :- e_activity(E, s64, inc).
+0.7386::e_ksea(E, s65, dec); 0.001::e_ksea(E, s65, inc) :- e_activity(E, s65, dec).
+0.001::e_ksea(E, s65, dec); 0.7386::e_ksea(E, s65, inc) :- e_activity(E, s65, inc).
+0.8186::e_ksea(E, s66, dec); 0.001::e_ksea(E, s66, inc) :- e_activity(E, s66, dec).
+0.001::e_ksea(E, s66, dec); 0.8186::e_ksea(E, s66, inc) :- e_activity(E, s66, inc).
+0.8254::e_ksea(E, s67, dec); 0.001::e_ksea(E, s67, inc) :- e_activity(E, s67, dec).
+0.001::e_ksea(E, s67, dec); 0.8254::e_ksea(E, s67, inc) :- e_activity(E, s67, inc).
+0.8911::e_ksea(E, s68, dec); 0.001::e_ksea(E, s68, inc) :- e_activity(E, s68, dec).
+0.001::e_ksea(E, s68, dec); 0.8911::e_ksea(E, s68, inc) :- e_activity(E, s68, inc).
+0.5196::e_ksea(E, s69, dec); 0.001::e_ksea(E, s69, inc) :- e_activity(E, s69, dec).
+0.001::e_ksea(E, s69, dec); 0.5196::e_ksea(E, s69, inc) :- e_activity(E, s69, inc).
+0.9093::e_ksea(E, s7, dec); 0.001::e_ksea(E, s7, inc) :- e_activity(E, s7, dec).
+0.001::e_ksea(E, s7, dec); 0.9093::e_ksea(E, s7, inc) :- e_activity(E, s7, inc).
+0.9939::e_ksea(E, s70, dec); 0.001::e_ksea(E, s70, inc) :- e_activity(E, s70, dec).
+0.001::e_ksea(E, s70, dec); 0.9939::e_ksea(E, s70, inc) :- e_activity(E, s70, inc).
+0.968::e_ksea(E, s71, dec); 0.001::e_ksea(E, s71, inc) :- e_activity(E, s71, dec).
+0.001::e_ksea(E, s71, dec); 0.968::e_ksea(E, s71, inc) :- e_activity(E, s71, inc).
+0.9312::e_ksea(E, s72, dec); 0.001::e_ksea(E, s72, inc) :- e_activity(E, s72, dec).
+0.001::e_ksea(E, s72, dec); 0.9312::e_ksea(E, s72, inc) :- e_activity(E, s72, inc).
+0.9321::e_ksea(E, s73, dec); 0.001::e_ksea(E, s73, inc) :- e_activity(E, s73, dec).
+0.001::e_ksea(E, s73, dec); 0.9321::e_ksea(E, s73, inc) :- e_activity(E, s73, inc).
+0.5348::e_ksea(E, s74, dec); 0.001::e_ksea(E, s74, inc) :- e_activity(E, s74, dec).
+0.001::e_ksea(E, s74, dec); 0.5348::e_ksea(E, s74, inc) :- e_activity(E, s74, inc).
+0.9103::e_ksea(E, s75, dec); 0.001::e_ksea(E, s75, inc) :- e_activity(E, s75, dec).
+0.001::e_ksea(E, s75, dec); 0.9103::e_ksea(E, s75, inc) :- e_activity(E, s75, inc).
+0.8581::e_ksea(E, s76, dec); 0.001::e_ksea(E, s76, inc) :- e_activity(E, s76, dec).
+0.001::e_ksea(E, s76, dec); 0.8581::e_ksea(E, s76, inc) :- e_activity(E, s76, inc).
+0.7423::e_ksea(E, s77, dec); 0.001::e_ksea(E, s77, inc) :- e_activity(E, s77, dec).
+0.001::e_ksea(E, s77, dec); 0.7423::e_ksea(E, s77, inc) :- e_activity(E, s77, inc).
+0.8439::e_ksea(E, s78, dec); 0.001::e_ksea(E, s78, inc) :- e_activity(E, s78, dec).
+0.001::e_ksea(E, s78, dec); 0.8439::e_ksea(E, s78, inc) :- e_activity(E, s78, inc).
+0.5274::e_ksea(E, s79, dec); 0.001::e_ksea(E, s79, inc) :- e_activity(E, s79, dec).
+0.001::e_ksea(E, s79, dec); 0.5274::e_ksea(E, s79, inc) :- e_activity(E, s79, inc).
+0.6463::e_ksea(E, s8, dec); 0.001::e_ksea(E, s8, inc) :- e_activity(E, s8, dec).
+0.001::e_ksea(E, s8, dec); 0.6463::e_ksea(E, s8, inc) :- e_activity(E, s8, inc).
+0.9008::e_ksea(E, s80, dec); 0.001::e_ksea(E, s80, inc) :- e_activity(E, s80, dec).
+0.001::e_ksea(E, s80, dec); 0.9008::e_ksea(E, s80, inc) :- e_activity(E, s80, inc).
+0.878::e_ksea(E, s81, dec); 0.001::e_ksea(E, s81, inc) :- e_activity(E, s81, dec).
+0.001::e_ksea(E, s81, dec); 0.878::e_ksea(E, s81, inc) :- e_activity(E, s81, inc).
+0.594::e_ksea(E, s82, dec); 0.001::e_ksea(E, s82, inc) :- e_activity(E, s82, dec).
+0.001::e_ksea(E, s82, dec); 0.594::e_ksea(E, s82, inc) :- e_activity(E, s82, inc).
+0.7284::e_ksea(E, s83, dec); 0.001::e_ksea(E, s83, inc) :- e_activity(E, s83, dec).
+0.001::e_ksea(E, s83, dec); 0.7284::e_ksea(E, s83, inc) :- e_activity(E, s83, inc).
+0.9743::e_ksea(E, s84, dec); 0.001::e_ksea(E, s84, inc) :- e_activity(E, s84, dec).
+0.001::e_ksea(E, s84, dec); 0.9743::e_ksea(E, s84, inc) :- e_activity(E, s84, inc).
+0.7637::e_ksea(E, s85, dec); 0.001::e_ksea(E, s85, inc) :- e_activity(E, s85, dec).
+0.001::e_ksea(E, s85, dec); 0.7637::e_ksea(E, s85, inc) :- e_activity(E, s85, inc).
+0.8283::e_ksea(E, s86, dec); 0.001::e_ksea(E, s86, inc) :- e_activity(E, s86, dec).
+0.001::e_ksea(E, s86, dec); 0.8283::e_ksea(E, s86, inc) :- e_activity(E, s86, inc).
+0.6049::e_ksea(E, s87, dec); 0.001::e_ksea(E, s87, inc) :- e_activity(E, s87, dec).
+0.001::e_ksea(E, s87, dec); 0.6049::e_ksea(E, s87, inc) :- e_activity(E, s87, inc).
+0.89::e_ksea(E, s88, dec); 0.001::e_ksea(E, s88, inc) :- e_activity(E, s88, dec).
+0.001::e_ksea(E, s88, dec); 0.89::e_ksea(E, s88, inc) :- e_activity(E, s88, inc).
+0.9558::e_ksea(E, s89, dec); 0.001::e_ksea(E, s89, inc) :- e_activity(E, s89, dec).
+0.001::e_ksea(E, s89, dec); 0.9558::e_ksea(E, s89, inc) :- e_activity(E, s89, inc).
+0.7955::e_ksea(E, s9, dec); 0.001::e_ksea(E, s9, inc) :- e_activity(E, s9, dec).
+0.001::e_ksea(E, s9, dec); 0.7955::e_ksea(E, s9, inc) :- e_activity(E, s9, inc).
+0.6955::e_ksea(E, s90, dec); 0.001::e_ksea(E, s90, inc) :- e_activity(E, s90, dec).
+0.001::e_ksea(E, s90, dec); 0.6955::e_ksea(E, s90, inc) :- e_activity(E, s90, inc).
+0.7501::e_ksea(E, s91, dec); 0.001::e_ksea(E, s91, inc) :- e_activity(E, s91, dec).
+0.001::e_ksea(E, s91, dec); 0.7501::e_ksea(E, s91, inc) :- e_activity(E, s91, inc).
+0.6157::e_ksea(E, s92, dec); 0.001::e_ksea(E, s92, inc) :- e_activity(E, s92, dec).
+0.001::e_ksea(E, s92, dec); 0.6157::e_ksea(E, s92, inc) :- e_activity(E, s92, inc).
+0.9889::e_ksea(E, s93, dec); 0.001::e_ksea(E, s93, inc) :- e_activity(E, s93, dec).
+0.001::e_ksea(E, s93, dec); 0.9889::e_ksea(E, s93, inc) :- e_activity(E, s93, inc).
+0.8785::e_ksea(E, s94, dec); 0.001::e_ksea(E, s94, inc) :- e_activity(E, s94, dec).
+0.001::e_ksea(E, s94, dec); 0.8785::e_ksea(E, s94, inc) :- e_activity(E, s94, inc).
+0.9172::e_ksea(E, s95, dec); 0.001::e_ksea(E, s95, inc) :- e_activity(E, s95, dec).
+0.001::e_ksea(E, s95, dec); 0.9172::e_ksea(E, s95, inc) :- e_activity(E, s95, inc).
+0.8301::e_ksea(E, s96, dec); 0.001::e_ksea(E, s96, inc) :- e_activity(E, s96, dec).
+0.001::e_ksea(E, s96, dec); 0.8301::e_ksea(E, s96, inc) :- e_activity(E, s96, inc).
+0.5867::e_ksea(E, s97, dec); 0.001::e_ksea(E, s97, inc) :- e_activity(E, s97, dec).
+0.001::e_ksea(E, s97, dec); 0.5867::e_ksea(E, s97, inc) :- e_activity(E, s97, inc).
+0.8529::e_ksea(E, s98, dec); 0.001::e_ksea(E, s98, inc) :- e_activity(E, s98, dec).
+0.001::e_ksea(E, s98, dec); 0.8529::e_ksea(E, s98, inc) :- e_activity(E, s98, inc).
+0.7952::e_ksea(E, s99, dec); 0.001::e_ksea(E, s99, inc) :- e_activity(E, s99, dec).
+0.001::e_ksea(E, s99, dec); 0.7952::e_ksea(E, s99, inc) :- e_activity(E, s99, inc).
+%% p1::p_fc(P, S, dec); p2::p_fc(P, S, base); p3::p_fc(P, S, inc) :- p_occupancy(P, S, _dO). % value = _fc = [dec | base | inc] (cpd, P/S-level)
+0.7511::p_fc(p0, s1, dec); 0.001::p_fc(p0, s1, inc) :- p_occupancy(p0, s1, dec).
+0.001::p_fc(p0, s1, dec); 0.7511::p_fc(p0, s1, inc) :- p_occupancy(p0, s1, inc).
+0.8847::p_fc(p0, s10, dec); 0.001::p_fc(p0, s10, inc) :- p_occupancy(p0, s10, dec).
+0.001::p_fc(p0, s10, dec); 0.8847::p_fc(p0, s10, inc) :- p_occupancy(p0, s10, inc).
+0.8854::p_fc(p0, s100, dec); 0.001::p_fc(p0, s100, inc) :- p_occupancy(p0, s100, dec).
+0.001::p_fc(p0, s100, dec); 0.8854::p_fc(p0, s100, inc) :- p_occupancy(p0, s100, inc).
+0.7074::p_fc(p0, s11, dec); 0.001::p_fc(p0, s11, inc) :- p_occupancy(p0, s11, dec).
+0.001::p_fc(p0, s11, dec); 0.7074::p_fc(p0, s11, inc) :- p_occupancy(p0, s11, inc).
+0.8518::p_fc(p0, s12, dec); 0.001::p_fc(p0, s12, inc) :- p_occupancy(p0, s12, dec).
+0.001::p_fc(p0, s12, dec); 0.8518::p_fc(p0, s12, inc) :- p_occupancy(p0, s12, inc).
+0.5034::p_fc(p0, s13, dec); 0.001::p_fc(p0, s13, inc) :- p_occupancy(p0, s13, dec).
+0.001::p_fc(p0, s13, dec); 0.5034::p_fc(p0, s13, inc) :- p_occupancy(p0, s13, inc).
+0.8909::p_fc(p0, s14, dec); 0.001::p_fc(p0, s14, inc) :- p_occupancy(p0, s14, dec).
+0.001::p_fc(p0, s14, dec); 0.8909::p_fc(p0, s14, inc) :- p_occupancy(p0, s14, inc).
+0.8598::p_fc(p0, s15, dec); 0.001::p_fc(p0, s15, inc) :- p_occupancy(p0, s15, dec).
+0.001::p_fc(p0, s15, dec); 0.8598::p_fc(p0, s15, inc) :- p_occupancy(p0, s15, inc).
+0.5644::p_fc(p0, s16, dec); 0.001::p_fc(p0, s16, inc) :- p_occupancy(p0, s16, dec).
+0.001::p_fc(p0, s16, dec); 0.5644::p_fc(p0, s16, inc) :- p_occupancy(p0, s16, inc).
+0.5953::p_fc(p0, s17, dec); 0.001::p_fc(p0, s17, inc) :- p_occupancy(p0, s17, dec).
+0.001::p_fc(p0, s17, dec); 0.5953::p_fc(p0, s17, inc) :- p_occupancy(p0, s17, inc).
+0.8205::p_fc(p0, s18, dec); 0.001::p_fc(p0, s18, inc) :- p_occupancy(p0, s18, dec).
+0.001::p_fc(p0, s18, dec); 0.8205::p_fc(p0, s18, inc) :- p_occupancy(p0, s18, inc).
+0.6406::p_fc(p0, s19, dec); 0.001::p_fc(p0, s19, inc) :- p_occupancy(p0, s19, dec).
+0.001::p_fc(p0, s19, dec); 0.6406::p_fc(p0, s19, inc) :- p_occupancy(p0, s19, inc).
+0.6066::p_fc(p0, s2, dec); 0.001::p_fc(p0, s2, inc) :- p_occupancy(p0, s2, dec).
+0.001::p_fc(p0, s2, dec); 0.6066::p_fc(p0, s2, inc) :- p_occupancy(p0, s2, inc).
+0.9562::p_fc(p0, s20, dec); 0.001::p_fc(p0, s20, inc) :- p_occupancy(p0, s20, dec).
+0.001::p_fc(p0, s20, dec); 0.9562::p_fc(p0, s20, inc) :- p_occupancy(p0, s20, inc).
+0.736::p_fc(p0, s21, dec); 0.001::p_fc(p0, s21, inc) :- p_occupancy(p0, s21, dec).
+0.001::p_fc(p0, s21, dec); 0.736::p_fc(p0, s21, inc) :- p_occupancy(p0, s21, inc).
+0.8829::p_fc(p0, s22, dec); 0.001::p_fc(p0, s22, inc) :- p_occupancy(p0, s22, dec).
+0.001::p_fc(p0, s22, dec); 0.8829::p_fc(p0, s22, inc) :- p_occupancy(p0, s22, inc).
+0.5057::p_fc(p0, s23, dec); 0.001::p_fc(p0, s23, inc) :- p_occupancy(p0, s23, dec).
+0.001::p_fc(p0, s23, dec); 0.5057::p_fc(p0, s23, inc) :- p_occupancy(p0, s23, inc).
+0.875::p_fc(p0, s24, dec); 0.001::p_fc(p0, s24, inc) :- p_occupancy(p0, s24, dec).
+0.001::p_fc(p0, s24, dec); 0.875::p_fc(p0, s24, inc) :- p_occupancy(p0, s24, inc).
+0.9988::p_fc(p0, s25, dec); 0.001::p_fc(p0, s25, inc) :- p_occupancy(p0, s25, dec).
+0.001::p_fc(p0, s25, dec); 0.9988::p_fc(p0, s25, inc) :- p_occupancy(p0, s25, inc).
+0.9794::p_fc(p0, s26, dec); 0.001::p_fc(p0, s26, inc) :- p_occupancy(p0, s26, dec).
+0.001::p_fc(p0, s26, dec); 0.9794::p_fc(p0, s26, inc) :- p_occupancy(p0, s26, inc).
+0.5217::p_fc(p0, s27, dec); 0.001::p_fc(p0, s27, inc) :- p_occupancy(p0, s27, dec).
+0.001::p_fc(p0, s27, dec); 0.5217::p_fc(p0, s27, inc) :- p_occupancy(p0, s27, inc).
+0.7641::p_fc(p0, s28, dec); 0.001::p_fc(p0, s28, inc) :- p_occupancy(p0, s28, dec).
+0.001::p_fc(p0, s28, dec); 0.7641::p_fc(p0, s28, inc) :- p_occupancy(p0, s28, inc).
+0.9794::p_fc(p0, s29, dec); 0.001::p_fc(p0, s29, inc) :- p_occupancy(p0, s29, dec).
+0.001::p_fc(p0, s29, dec); 0.9794::p_fc(p0, s29, inc) :- p_occupancy(p0, s29, inc).
+0.5458::p_fc(p0, s3, dec); 0.001::p_fc(p0, s3, inc) :- p_occupancy(p0, s3, dec).
+0.001::p_fc(p0, s3, dec); 0.5458::p_fc(p0, s3, inc) :- p_occupancy(p0, s3, inc).
+0.6992::p_fc(p0, s30, dec); 0.001::p_fc(p0, s30, inc) :- p_occupancy(p0, s30, dec).
+0.001::p_fc(p0, s30, dec); 0.6992::p_fc(p0, s30, inc) :- p_occupancy(p0, s30, inc).
+0.5023::p_fc(p0, s31, dec); 0.001::p_fc(p0, s31, inc) :- p_occupancy(p0, s31, dec).
+0.001::p_fc(p0, s31, dec); 0.5023::p_fc(p0, s31, inc) :- p_occupancy(p0, s31, inc).
+0.8094::p_fc(p0, s32, dec); 0.001::p_fc(p0, s32, inc) :- p_occupancy(p0, s32, dec).
+0.001::p_fc(p0, s32, dec); 0.8094::p_fc(p0, s32, inc) :- p_occupancy(p0, s32, inc).
+0.5618::p_fc(p0, s33, dec); 0.001::p_fc(p0, s33, inc) :- p_occupancy(p0, s33, dec).
+0.001::p_fc(p0, s33, dec); 0.5618::p_fc(p0, s33, inc) :- p_occupancy(p0, s33, inc).
+0.7923::p_fc(p0, s34, dec); 0.001::p_fc(p0, s34, inc) :- p_occupancy(p0, s34, dec).
+0.001::p_fc(p0, s34, dec); 0.7923::p_fc(p0, s34, inc) :- p_occupancy(p0, s34, inc).
+0.7938::p_fc(p0, s35, dec); 0.001::p_fc(p0, s35, inc) :- p_occupancy(p0, s35, dec).
+0.001::p_fc(p0, s35, dec); 0.7938::p_fc(p0, s35, inc) :- p_occupancy(p0, s35, inc).
+0.7013::p_fc(p0, s36, dec); 0.001::p_fc(p0, s36, inc) :- p_occupancy(p0, s36, dec).
+0.001::p_fc(p0, s36, dec); 0.7013::p_fc(p0, s36, inc) :- p_occupancy(p0, s36, inc).
+0.8119::p_fc(p0, s37, dec); 0.001::p_fc(p0, s37, inc) :- p_occupancy(p0, s37, dec).
+0.001::p_fc(p0, s37, dec); 0.8119::p_fc(p0, s37, inc) :- p_occupancy(p0, s37, inc).
+0.8353::p_fc(p0, s38, dec); 0.001::p_fc(p0, s38, inc) :- p_occupancy(p0, s38, dec).
+0.001::p_fc(p0, s38, dec); 0.8353::p_fc(p0, s38, inc) :- p_occupancy(p0, s38, inc).
+0.7433::p_fc(p0, s39, dec); 0.001::p_fc(p0, s39, inc) :- p_occupancy(p0, s39, dec).
+0.001::p_fc(p0, s39, dec); 0.7433::p_fc(p0, s39, inc) :- p_occupancy(p0, s39, inc).
+0.686::p_fc(p0, s4, dec); 0.001::p_fc(p0, s4, inc) :- p_occupancy(p0, s4, dec).
+0.001::p_fc(p0, s4, dec); 0.686::p_fc(p0, s4, inc) :- p_occupancy(p0, s4, inc).
+0.5071::p_fc(p0, s40, dec); 0.001::p_fc(p0, s40, inc) :- p_occupancy(p0, s40, dec).
+0.001::p_fc(p0, s40, dec); 0.5071::p_fc(p0, s40, inc) :- p_occupancy(p0, s40, inc).
+0.7113::p_fc(p0, s41, dec); 0.001::p_fc(p0, s41, inc) :- p_occupancy(p0, s41, dec).
+0.001::p_fc(p0, s41, dec); 0.7113::p_fc(p0, s41, inc) :- p_occupancy(p0, s41, inc).
+0.9717::p_fc(p0, s42, dec); 0.001::p_fc(p0, s42, inc) :- p_occupancy(p0, s42, dec).
+0.001::p_fc(p0, s42, dec); 0.9717::p_fc(p0, s42, inc) :- p_occupancy(p0, s42, inc).
+0.5623::p_fc(p0, s43, dec); 0.001::p_fc(p0, s43, inc) :- p_occupancy(p0, s43, dec).
+0.001::p_fc(p0, s43, dec); 0.5623::p_fc(p0, s43, inc) :- p_occupancy(p0, s43, inc).
+0.7616::p_fc(p0, s44, dec); 0.001::p_fc(p0, s44, inc) :- p_occupancy(p0, s44, dec).
+0.001::p_fc(p0, s44, dec); 0.7616::p_fc(p0, s44, inc) :- p_occupancy(p0, s44, inc).
+0.7525::p_fc(p0, s45, dec); 0.001::p_fc(p0, s45, inc) :- p_occupancy(p0, s45, dec).
+0.001::p_fc(p0, s45, dec); 0.7525::p_fc(p0, s45, inc) :- p_occupancy(p0, s45, inc).
+0.5449::p_fc(p0, s46, dec); 0.001::p_fc(p0, s46, inc) :- p_occupancy(p0, s46, dec).
+0.001::p_fc(p0, s46, dec); 0.5449::p_fc(p0, s46, inc) :- p_occupancy(p0, s46, inc).
+0.9409::p_fc(p0, s47, dec); 0.001::p_fc(p0, s47, inc) :- p_occupancy(p0, s47, dec).
+0.001::p_fc(p0, s47, dec); 0.9409::p_fc(p0, s47, inc) :- p_occupancy(p0, s47, inc).
+0.9371::p_fc(p0, s48, dec); 0.001::p_fc(p0, s48, inc) :- p_occupancy(p0, s48, dec).
+0.001::p_fc(p0, s48, dec); 0.9371::p_fc(p0, s48, inc) :- p_occupancy(p0, s48, inc).
+0.6804::p_fc(p0, s49, dec); 0.001::p_fc(p0, s49, inc) :- p_occupancy(p0, s49, dec).
+0.001::p_fc(p0, s49, dec); 0.6804::p_fc(p0, s49, inc) :- p_occupancy(p0, s49, inc).
+0.881::p_fc(p0, s5, dec); 0.001::p_fc(p0, s5, inc) :- p_occupancy(p0, s5, dec).
+0.001::p_fc(p0, s5, dec); 0.881::p_fc(p0, s5, inc) :- p_occupancy(p0, s5, inc).
+0.8127::p_fc(p0, s50, dec); 0.001::p_fc(p0, s50, inc) :- p_occupancy(p0, s50, dec).
+0.001::p_fc(p0, s50, dec); 0.8127::p_fc(p0, s50, inc) :- p_occupancy(p0, s50, inc).
+0.6063::p_fc(p0, s51, dec); 0.001::p_fc(p0, s51, inc) :- p_occupancy(p0, s51, dec).
+0.001::p_fc(p0, s51, dec); 0.6063::p_fc(p0, s51, inc) :- p_occupancy(p0, s51, inc).
+0.7833::p_fc(p0, s52, dec); 0.001::p_fc(p0, s52, inc) :- p_occupancy(p0, s52, dec).
+0.001::p_fc(p0, s52, dec); 0.7833::p_fc(p0, s52, inc) :- p_occupancy(p0, s52, inc).
+0.9308::p_fc(p0, s53, dec); 0.001::p_fc(p0, s53, inc) :- p_occupancy(p0, s53, dec).
+0.001::p_fc(p0, s53, dec); 0.9308::p_fc(p0, s53, inc) :- p_occupancy(p0, s53, inc).
+0.8321::p_fc(p0, s54, dec); 0.001::p_fc(p0, s54, inc) :- p_occupancy(p0, s54, dec).
+0.001::p_fc(p0, s54, dec); 0.8321::p_fc(p0, s54, inc) :- p_occupancy(p0, s54, inc).
+0.8468::p_fc(p0, s55, dec); 0.001::p_fc(p0, s55, inc) :- p_occupancy(p0, s55, dec).
+0.001::p_fc(p0, s55, dec); 0.8468::p_fc(p0, s55, inc) :- p_occupancy(p0, s55, inc).
+0.7011::p_fc(p0, s56, dec); 0.001::p_fc(p0, s56, inc) :- p_occupancy(p0, s56, dec).
+0.001::p_fc(p0, s56, dec); 0.7011::p_fc(p0, s56, inc) :- p_occupancy(p0, s56, inc).
+0.584::p_fc(p0, s57, dec); 0.001::p_fc(p0, s57, inc) :- p_occupancy(p0, s57, dec).
+0.001::p_fc(p0, s57, dec); 0.584::p_fc(p0, s57, inc) :- p_occupancy(p0, s57, inc).
+0.5663::p_fc(p0, s58, dec); 0.001::p_fc(p0, s58, inc) :- p_occupancy(p0, s58, dec).
+0.001::p_fc(p0, s58, dec); 0.5663::p_fc(p0, s58, inc) :- p_occupancy(p0, s58, inc).
+0.729::p_fc(p0, s59, dec); 0.001::p_fc(p0, s59, inc) :- p_occupancy(p0, s59, dec).
+0.001::p_fc(p0, s59, dec); 0.729::p_fc(p0, s59, inc) :- p_occupancy(p0, s59, inc).
+0.712::p_fc(p0, s6, dec); 0.001::p_fc(p0, s6, inc) :- p_occupancy(p0, s6, dec).
+0.001::p_fc(p0, s6, dec); 0.712::p_fc(p0, s6, inc) :- p_occupancy(p0, s6, inc).
+0.5511::p_fc(p0, s60, dec); 0.001::p_fc(p0, s60, inc) :- p_occupancy(p0, s60, dec).
+0.001::p_fc(p0, s60, dec); 0.5511::p_fc(p0, s60, inc) :- p_occupancy(p0, s60, inc).
+0.8391::p_fc(p0, s61, dec); 0.001::p_fc(p0, s61, inc) :- p_occupancy(p0, s61, dec).
+0.001::p_fc(p0, s61, dec); 0.8391::p_fc(p0, s61, inc) :- p_occupancy(p0, s61, inc).
+0.8552::p_fc(p0, s62, dec); 0.001::p_fc(p0, s62, inc) :- p_occupancy(p0, s62, dec).
+0.001::p_fc(p0, s62, dec); 0.8552::p_fc(p0, s62, inc) :- p_occupancy(p0, s62, inc).
+0.5283::p_fc(p0, s63, dec); 0.001::p_fc(p0, s63, inc) :- p_occupancy(p0, s63, dec).
+0.001::p_fc(p0, s63, dec); 0.5283::p_fc(p0, s63, inc) :- p_occupancy(p0, s63, inc).
+0.7852::p_fc(p0, s64, dec); 0.001::p_fc(p0, s64, inc) :- p_occupancy(p0, s64, dec).
+0.001::p_fc(p0, s64, dec); 0.7852::p_fc(p0, s64, inc) :- p_occupancy(p0, s64, inc).
+0.6236::p_fc(p0, s65, dec); 0.001::p_fc(p0, s65, inc) :- p_occupancy(p0, s65, dec).
+0.001::p_fc(p0, s65, dec); 0.6236::p_fc(p0, s65, inc) :- p_occupancy(p0, s65, inc).
+0.9498::p_fc(p0, s66, dec); 0.001::p_fc(p0, s66, inc) :- p_occupancy(p0, s66, dec).
+0.001::p_fc(p0, s66, dec); 0.9498::p_fc(p0, s66, inc) :- p_occupancy(p0, s66, inc).
+0.5228::p_fc(p0, s67, dec); 0.001::p_fc(p0, s67, inc) :- p_occupancy(p0, s67, dec).
+0.001::p_fc(p0, s67, dec); 0.5228::p_fc(p0, s67, inc) :- p_occupancy(p0, s67, inc).
+0.6199::p_fc(p0, s68, dec); 0.001::p_fc(p0, s68, inc) :- p_occupancy(p0, s68, dec).
+0.001::p_fc(p0, s68, dec); 0.6199::p_fc(p0, s68, inc) :- p_occupancy(p0, s68, inc).
+0.9264::p_fc(p0, s69, dec); 0.001::p_fc(p0, s69, inc) :- p_occupancy(p0, s69, dec).
+0.001::p_fc(p0, s69, dec); 0.9264::p_fc(p0, s69, inc) :- p_occupancy(p0, s69, inc).
+0.7869::p_fc(p0, s7, dec); 0.001::p_fc(p0, s7, inc) :- p_occupancy(p0, s7, dec).
+0.001::p_fc(p0, s7, dec); 0.7869::p_fc(p0, s7, inc) :- p_occupancy(p0, s7, inc).
+0.7168::p_fc(p0, s70, dec); 0.001::p_fc(p0, s70, inc) :- p_occupancy(p0, s70, dec).
+0.001::p_fc(p0, s70, dec); 0.7168::p_fc(p0, s70, inc) :- p_occupancy(p0, s70, inc).
+0.9005::p_fc(p0, s71, dec); 0.001::p_fc(p0, s71, inc) :- p_occupancy(p0, s71, dec).
+0.001::p_fc(p0, s71, dec); 0.9005::p_fc(p0, s71, inc) :- p_occupancy(p0, s71, inc).
+0.8366::p_fc(p0, s72, dec); 0.001::p_fc(p0, s72, inc) :- p_occupancy(p0, s72, dec).
+0.001::p_fc(p0, s72, dec); 0.8366::p_fc(p0, s72, inc) :- p_occupancy(p0, s72, inc).
+0.9833::p_fc(p0, s73, dec); 0.001::p_fc(p0, s73, inc) :- p_occupancy(p0, s73, dec).
+0.001::p_fc(p0, s73, dec); 0.9833::p_fc(p0, s73, inc) :- p_occupancy(p0, s73, inc).
+0.6503::p_fc(p0, s74, dec); 0.001::p_fc(p0, s74, inc) :- p_occupancy(p0, s74, dec).
+0.001::p_fc(p0, s74, dec); 0.6503::p_fc(p0, s74, inc) :- p_occupancy(p0, s74, inc).
+0.9609::p_fc(p0, s75, dec); 0.001::p_fc(p0, s75, inc) :- p_occupancy(p0, s75, dec).
+0.001::p_fc(p0, s75, dec); 0.9609::p_fc(p0, s75, inc) :- p_occupancy(p0, s75, inc).
+0.5164::p_fc(p0, s76, dec); 0.001::p_fc(p0, s76, inc) :- p_occupancy(p0, s76, dec).
+0.001::p_fc(p0, s76, dec); 0.5164::p_fc(p0, s76, inc) :- p_occupancy(p0, s76, inc).
+0.5522::p_fc(p0, s77, dec); 0.001::p_fc(p0, s77, inc) :- p_occupancy(p0, s77, dec).
+0.001::p_fc(p0, s77, dec); 0.5522::p_fc(p0, s77, inc) :- p_occupancy(p0, s77, inc).
+0.5468::p_fc(p0, s78, dec); 0.001::p_fc(p0, s78, inc) :- p_occupancy(p0, s78, dec).
+0.001::p_fc(p0, s78, dec); 0.5468::p_fc(p0, s78, inc) :- p_occupancy(p0, s78, inc).
+0.8939::p_fc(p0, s79, dec); 0.001::p_fc(p0, s79, inc) :- p_occupancy(p0, s79, dec).
+0.001::p_fc(p0, s79, dec); 0.8939::p_fc(p0, s79, inc) :- p_occupancy(p0, s79, inc).
+0.5845::p_fc(p0, s8, dec); 0.001::p_fc(p0, s8, inc) :- p_occupancy(p0, s8, dec).
+0.001::p_fc(p0, s8, dec); 0.5845::p_fc(p0, s8, inc) :- p_occupancy(p0, s8, inc).
+0.7297::p_fc(p0, s80, dec); 0.001::p_fc(p0, s80, inc) :- p_occupancy(p0, s80, dec).
+0.001::p_fc(p0, s80, dec); 0.7297::p_fc(p0, s80, inc) :- p_occupancy(p0, s80, inc).
+0.8965::p_fc(p0, s81, dec); 0.001::p_fc(p0, s81, inc) :- p_occupancy(p0, s81, dec).
+0.001::p_fc(p0, s81, dec); 0.8965::p_fc(p0, s81, inc) :- p_occupancy(p0, s81, inc).
+0.8817::p_fc(p0, s82, dec); 0.001::p_fc(p0, s82, inc) :- p_occupancy(p0, s82, dec).
+0.001::p_fc(p0, s82, dec); 0.8817::p_fc(p0, s82, inc) :- p_occupancy(p0, s82, inc).
+0.8278::p_fc(p0, s83, dec); 0.001::p_fc(p0, s83, inc) :- p_occupancy(p0, s83, dec).
+0.001::p_fc(p0, s83, dec); 0.8278::p_fc(p0, s83, inc) :- p_occupancy(p0, s83, inc).
+0.5481::p_fc(p0, s84, dec); 0.001::p_fc(p0, s84, inc) :- p_occupancy(p0, s84, dec).
+0.001::p_fc(p0, s84, dec); 0.5481::p_fc(p0, s84, inc) :- p_occupancy(p0, s84, inc).
+0.5931::p_fc(p0, s85, dec); 0.001::p_fc(p0, s85, inc) :- p_occupancy(p0, s85, dec).
+0.001::p_fc(p0, s85, dec); 0.5931::p_fc(p0, s85, inc) :- p_occupancy(p0, s85, inc).
+0.9809::p_fc(p0, s86, dec); 0.001::p_fc(p0, s86, inc) :- p_occupancy(p0, s86, dec).
+0.001::p_fc(p0, s86, dec); 0.9809::p_fc(p0, s86, inc) :- p_occupancy(p0, s86, inc).
+0.8585::p_fc(p0, s87, dec); 0.001::p_fc(p0, s87, inc) :- p_occupancy(p0, s87, dec).
+0.001::p_fc(p0, s87, dec); 0.8585::p_fc(p0, s87, inc) :- p_occupancy(p0, s87, inc).
+0.8989::p_fc(p0, s88, dec); 0.001::p_fc(p0, s88, inc) :- p_occupancy(p0, s88, dec).
+0.001::p_fc(p0, s88, dec); 0.8989::p_fc(p0, s88, inc) :- p_occupancy(p0, s88, inc).
+0.8461::p_fc(p0, s89, dec); 0.001::p_fc(p0, s89, inc) :- p_occupancy(p0, s89, dec).
+0.001::p_fc(p0, s89, dec); 0.8461::p_fc(p0, s89, inc) :- p_occupancy(p0, s89, inc).
+0.5499::p_fc(p0, s9, dec); 0.001::p_fc(p0, s9, inc) :- p_occupancy(p0, s9, dec).
+0.001::p_fc(p0, s9, dec); 0.5499::p_fc(p0, s9, inc) :- p_occupancy(p0, s9, inc).
+0.7415::p_fc(p0, s90, dec); 0.001::p_fc(p0, s90, inc) :- p_occupancy(p0, s90, dec).
+0.001::p_fc(p0, s90, dec); 0.7415::p_fc(p0, s90, inc) :- p_occupancy(p0, s90, inc).
+0.9986::p_fc(p0, s91, dec); 0.001::p_fc(p0, s91, inc) :- p_occupancy(p0, s91, dec).
+0.001::p_fc(p0, s91, dec); 0.9986::p_fc(p0, s91, inc) :- p_occupancy(p0, s91, inc).
+0.9944::p_fc(p0, s92, dec); 0.001::p_fc(p0, s92, inc) :- p_occupancy(p0, s92, dec).
+0.001::p_fc(p0, s92, dec); 0.9944::p_fc(p0, s92, inc) :- p_occupancy(p0, s92, inc).
+0.622::p_fc(p0, s93, dec); 0.001::p_fc(p0, s93, inc) :- p_occupancy(p0, s93, dec).
+0.001::p_fc(p0, s93, dec); 0.622::p_fc(p0, s93, inc) :- p_occupancy(p0, s93, inc).
+0.9878::p_fc(p0, s94, dec); 0.001::p_fc(p0, s94, inc) :- p_occupancy(p0, s94, dec).
+0.001::p_fc(p0, s94, dec); 0.9878::p_fc(p0, s94, inc) :- p_occupancy(p0, s94, inc).
+0.7149::p_fc(p0, s95, dec); 0.001::p_fc(p0, s95, inc) :- p_occupancy(p0, s95, dec).
+0.001::p_fc(p0, s95, dec); 0.7149::p_fc(p0, s95, inc) :- p_occupancy(p0, s95, inc).
+0.5495::p_fc(p0, s96, dec); 0.001::p_fc(p0, s96, inc) :- p_occupancy(p0, s96, dec).
+0.001::p_fc(p0, s96, dec); 0.5495::p_fc(p0, s96, inc) :- p_occupancy(p0, s96, inc).
+0.8403::p_fc(p0, s97, dec); 0.001::p_fc(p0, s97, inc) :- p_occupancy(p0, s97, dec).
+0.001::p_fc(p0, s97, dec); 0.8403::p_fc(p0, s97, inc) :- p_occupancy(p0, s97, inc).
+0.7001::p_fc(p0, s98, dec); 0.001::p_fc(p0, s98, inc) :- p_occupancy(p0, s98, dec).
+0.001::p_fc(p0, s98, dec); 0.7001::p_fc(p0, s98, inc) :- p_occupancy(p0, s98, inc).
+0.5543::p_fc(p0, s99, dec); 0.001::p_fc(p0, s99, inc) :- p_occupancy(p0, s99, dec).
+0.001::p_fc(p0, s99, dec); 0.5543::p_fc(p0, s99, inc) :- p_occupancy(p0, s99, inc).
+
+e_ksea(E, S, base) :- \+ e_activity(E, S, _).
+p_fc(P, S, base) :- \+ p_occupancy(P, S, _).
+
+%%% probabilistic attributes (unknown) %%%
+% t(p1)targets(E, P). % initialise with specific probability (e.g. Cantley)
+% t(1/2)targets(E, P) :- es_interaction(E, P).
+% t(1/2)targets(E, P) :- enzyme(E), phosphosite(P).
+% t(_, _dO)::p_fc(P, S, dec); t(_, _dO)::p_fc(P, S, base); t(_, _dO)::p_fc(P, S, inc) :- p_occupancy(P, S, _dO). % value = _fc = [dec | base | inc] (cpd, P-level)
+t(0.33, E, S)::e_activity(E, S, dec); t(0.33, E, S)::e_activity(E, S, inc) :- enzyme(E). % value = _dA = [dec | base | inc] (prior, E/S-level)
+
+%%% occupancy aggregation rule (cpd, P-level, E-level)
+% auxiliary variables (value = [true | false])
+t(0.7, E, P)::occ_dec(P, S) :- targets(E, P), e_function(E, kinase), e_activity(E, S, dec).
+t(0.7, E, P)::occ_dec(P, S) :- targets(E, P), e_function(E, phosphatase), e_activity(E, S, inc).
+t(0.7, E, P)::occ_inc(P, S) :- targets(E, P), e_function(E, kinase), e_activity(E, S, inc).
+t(0.7, E, P)::occ_inc(P, S) :- targets(E, P), e_function(E, phosphatase), e_activity(E, S, dec).
+% aggregation (value = _dO = [dec | base | inc])
+t(1.0)::p_occupancy(P, S, dec); t(0.0)::p_occupancy(P, S, inc) :- occ_dec(P, S), \+ occ_inc(P, S).
+t(0.0)::p_occupancy(P, S, dec); t(1.0)::p_occupancy(P, S, inc) :- \+ occ_dec(P, S), occ_inc(P, S).
+t(0.5)::p_occupancy(P, S, dec); t(0.5)::p_occupancy(P, S, inc) :- occ_dec(P, S), occ_inc(P, S).
+t(0.0)::p_occupancy(P, S, dec); t(0.0)::p_occupancy(P, S, inc) :- \+ occ_dec(P, S), \+ occ_inc(P, S).
